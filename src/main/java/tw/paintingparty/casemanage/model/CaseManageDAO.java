@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.Orders;
+import tw.paintingparty.model.Product;
 
 
 @Repository("caseManageDao")
@@ -283,6 +284,27 @@ public class CaseManageDAO {
 		return headShotBean;
 		
 	}
+	
+	public void ProductUpload( Product productBean ) {
+//   成品上傳
+		
+		Session session = sessionfactory.getCurrentSession();
+				
+		String sql = "insert into product (order_id , product_name , product_path , painter_message )  "
+				+ "values( ? , ? , ? , ? )";
+    	
+    	NativeQuery addEntity = session.createSQLQuery(sql);
+    	addEntity.setParameter(1,productBean.getOrder_id());
+    	addEntity.setParameter(2, productBean.getProduct_name());
+    	addEntity.setParameter(3, productBean.getProduct_path());
+    	addEntity.setParameter(4, productBean.getPainter_message());
+
+    	addEntity.executeUpdate();
+		
+	
+		
+	}
+	
 	
 	
 	

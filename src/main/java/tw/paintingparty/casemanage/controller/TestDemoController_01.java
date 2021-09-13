@@ -1,6 +1,7 @@
 package tw.paintingparty.casemanage.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +43,8 @@ import tw.paintingparty.casemanage.model.PayInfoBean;
 import tw.paintingparty.casemanage.model.PayInfoIdBean;
 import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.Member;
+import tw.paintingparty.model.Product;
+import tw.teamUtil.Util01;
 
 
 
@@ -313,9 +316,31 @@ public class TestDemoController_01 {
 //			System.out.println("line="+line);
 //		}
 		
-		System.out.println(file);
-		System.out.println(orderid);
-		System.out.println(comments);
+		Util01 util01 = new Util01();
+		String fileName = util01.fileNameUtil( file.getOriginalFilename());
+		String savePath = "C:\\PaintingImg\\Product";
+		String finalPath = savePath + "\\" + fileName;
+		
+		
+		//儲存圖片至硬碟
+		File saveFile = new File(finalPath);
+//		System.out.println("savePath:" + finalPath);
+		if (fileName != null && fileName.length() != 0) { 
+			file.transferTo(saveFile);
+		 }
+		
+		Product product = new Product();
+		product.setOrder_id(orderid);
+		product.setProduct_name(fileName);
+		product.setProduct_path(savePath);
+		product.setPainter_message(comments);
+		
+		cmDao.ProductUpload(product);
+		
+//		System.out.println(fileName);
+//		System.out.println(file);
+//		System.out.println(orderid);
+//		System.out.println(comments);
 		
 		System.out.println("接收成功");
 		

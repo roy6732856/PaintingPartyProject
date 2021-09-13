@@ -409,13 +409,13 @@
         	   	  	
         	     }); // btn-25 click end
         	     
-        	     //代做
+        	     //-----上傳檔案的表單彈出框框
         	     $("#MyAppliedOrdersPage .u-btn-23").click(function () {
-        	    	 //console.log( $( "#MyAppliedOrdersPage .u-btn-23" ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //取的該筆訂單ID
-        	    	 
-        	    	 $( "#productorderid" ).val( $( "#MyAppliedOrdersPage .u-btn-23" ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //把此訂單的接案者ID抓出來
+        	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //取的該筆訂單ID
+
+        	    	 $( "#productorderid" ).val( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //把此訂單的ID抓出來
         	    	 $("#imgpreview").remove();//清空圖片預覽
-        	    	 var productfile = document.getElementById("productupload");//點進來就清空INPUT的內容
+        	    	 var productfile = document.getElementById("productupload");//點進來就清空INPUT檔案上傳的內容
         	    	 productfile.value = "";
         	    	 $( "#productcomments" ).val(""); //清空給案主的訊息
         	    	 
@@ -601,12 +601,11 @@
         
         
         
-			//檔案上傳表單驗證 代做3
+			//檔案上傳表單驗證 
 			function verificationproduct() {
-				console.log(123);
 				
 				if($("#productupload").val() == "" || $("#productupload").val() == null) {
-					alert('請上傳您的檔案');
+					alert('請選擇您的檔案');
 					return false;
 				}
 				
@@ -627,9 +626,13 @@
 					//dataType: 'text',
 					success : function() {
 						alert('上傳成功!');
+						$( "#dialog-productupload" ).dialog( "close" );
+						$('html,body').animate({ scrollTop: 0 }, 'slow'); 
 					},
 					error : function(data) {
 						alert('發生錯誤');
+						$( "#dialog-productupload" ).dialog( "close" );
+						
 					}
 				});
 				
@@ -661,7 +664,7 @@
          
          
          <script type="text/javascript">
-//上傳檔案 代做2
+//上傳檔案 
   $(function() {
 
     //當選檔變更時,立即預覽之前被選擇的照片
@@ -796,7 +799,7 @@
       </div>
         <br>
               <div class="centerblock" >
-        <input type="text" name="productorderid" id="productorderid"/>
+        <input type="text" name="productorderid" id="productorderid" style="display:none;" />
       </div>
 
         <div class="form-group">
