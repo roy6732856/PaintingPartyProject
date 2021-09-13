@@ -1,4 +1,4 @@
-<%@  page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
     
@@ -23,7 +23,8 @@
     <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-
+	<script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css"></link>
     <script type="application/ld+json">
         {
             "@context": "http://schema.org",
@@ -36,13 +37,21 @@
     <meta property="og:title" content="前台框架">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
+    
+    <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+   	</style>
 </head>
 
 <body class="u-body">
+
+
     <div class="container-fluid">
         <header class="u-clearfix u-header u-header" id="sec-4c0b">
             <div class="u-clearfix u-sheet u-sheet-1">
-                <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+                <a href="index.jsp" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                     data-image-height="410">
                     <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
                 </a>
@@ -102,20 +111,26 @@
                         <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
                     </div>
                 </nav>
-                <div class="u-container-style u-group u-white u-group-1">
-                    <div class="u-container-layout u-container-layout-1">
-                        <a href="139992805"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
-                        <a href="139992805"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
+                <div class="u-container-style u-group u-white u-group-2">
+                    <div class="u-container-layout u-container-layout-2">
+                        
                     </div>
                 </div>
                 <div class="u-container-style u-group u-white u-group-2">
                     <div class="u-container-layout u-container-layout-2">
-                        <a href="139992805"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                        <a href="139992805"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+                        <a href="/PaintPartyMvcProject/backend/accountmanager"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+                        <a href="/xxx"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></a>
+                        <a href="/PaintPartyMvcProject/backend"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="account_manager" style="display:none">帳號管理</a>
+                        <a 
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
+                        
+                        <a href="/PaintPartyMvcProject/login"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1" name="header_login" style="display:none">登入</a>
+                        <a href="/PaintPartyMvcProject/register"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2" name="header_register" style="display:none">註冊</a>
                     </div>
                 </div>
             </div>
@@ -131,7 +146,7 @@
                                         <a href="#">
                                             <div class="w-100 mw-200px my-2 mx-auto">
                                                 <div class=" propic text-center rounded-circle">
-                                                    <img src="resources/images/Patrick.png" class="rounded-circle">
+                                                    <img src="images/Patrick.png" class="rounded-circle">
                                                 </div>
                                             </div>
                                         </a>
@@ -188,26 +203,26 @@
                                                 <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
                                                     <section class="project-cell slideInUp delay-0">
                                                         <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
+                                                            <section class="project-cell-header">
                                                                 <h4 class="project-cell-title">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">案件 : 案件標題</span>
                                                                 </h4>
                                                                 <br />
-                                                            </div>
-                                                            <div class="project-date">
+                                                            </section>
+                                                            <section class="project-cell-date">
                                                                 <h4 class="project-cell-date">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">發布日期 : </span>
                                                                 </h4>
                                                                 <br />
-                                                                </div>
-                                                                <div class="project-label">
+                                                                <section class="project-cell-label">
                                                                     <h4 class="project-cell-label">
                                                                         <span class="project-cell-name"
                                                                             style="color: black;">案件標籤 : </span>
                                                                     </h4>
-                                                                </div>
+                                                                </section>
+                                                            </section>
                                                         </a>
                                                     </section>
                                                 </div>
@@ -216,54 +231,26 @@
                                                 <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
                                                     <section class="project-cell slideInUp delay-0">
                                                         <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
+                                                            <section class="project-cell-header">
                                                                 <h4 class="project-cell-title">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">案件 : 案件標題</span>
                                                                 </h4>
                                                                 <br />
-                                                            </div>
-                                                            <div class="project-date">
+                                                            </section>
+                                                            <section class="project-cell-date">
                                                                 <h4 class="project-cell-date">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">發布日期 : </span>
                                                                 </h4>
                                                                 <br />
-                                                                </div>
-                                                                <div class="project-label">
+                                                                <section class="project-cell-label">
                                                                     <h4 class="project-cell-label">
                                                                         <span class="project-cell-name"
                                                                             style="color: black;">案件標籤 : </span>
                                                                     </h4>
-                                                                </div>
-                                                        </a>
-                                                    </section>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-6 mb-4">
-                                                <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
-                                                      <section class="project-cell slideInUp delay-0">
-                                                        <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
-                                                                <h4 class="project-cell-title">
-                                                                    <span class="project-cell-name"
-                                                                        style="color: black;">案件 : 案件標題</span>
-                                                                </h4>
-                                                                <br />
-                                                            </div>
-                                                            <div class="project-date">
-                                                                <h4 class="project-cell-date">
-                                                                    <span class="project-cell-name"
-                                                                        style="color: black;">發布日期 : </span>
-                                                                </h4>
-                                                                <br />
-                                                                </div>
-                                                                <div class="project-label">
-                                                                    <h4 class="project-cell-label">
-                                                                        <span class="project-cell-name"
-                                                                            style="color: black;">案件標籤 : </span>
-                                                                    </h4>
-                                                                </div>
+                                                                </section>
+                                                            </section>
                                                         </a>
                                                     </section>
                                                 </div>
@@ -272,54 +259,26 @@
                                                 <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
                                                     <section class="project-cell slideInUp delay-0">
                                                         <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
+                                                            <section class="project-cell-header">
                                                                 <h4 class="project-cell-title">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">案件 : 案件標題</span>
                                                                 </h4>
                                                                 <br />
-                                                            </div>
-                                                            <div class="project-date">
+                                                            </section>
+                                                            <section class="project-cell-date">
                                                                 <h4 class="project-cell-date">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">發布日期 : </span>
                                                                 </h4>
                                                                 <br />
-                                                                </div>
-                                                                <div class="project-label">
+                                                                <section class="project-cell-label">
                                                                     <h4 class="project-cell-label">
                                                                         <span class="project-cell-name"
                                                                             style="color: black;">案件標籤 : </span>
                                                                     </h4>
-                                                                </div>
-                                                        </a>
-                                                    </section>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-6 mb-4">
-                                                <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
-                                                     <section class="project-cell slideInUp delay-0">
-                                                        <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
-                                                                <h4 class="project-cell-title">
-                                                                    <span class="project-cell-name"
-                                                                        style="color: black;">案件 : 案件標題</span>
-                                                                </h4>
-                                                                <br />
-                                                            </div>
-                                                            <div class="project-date">
-                                                                <h4 class="project-cell-date">
-                                                                    <span class="project-cell-name"
-                                                                        style="color: black;">發布日期 : </span>
-                                                                </h4>
-                                                                <br />
-                                                                </div>
-                                                                <div class="project-label">
-                                                                    <h4 class="project-cell-label">
-                                                                        <span class="project-cell-name"
-                                                                            style="color: black;">案件標籤 : </span>
-                                                                    </h4>
-                                                                </div>
+                                                                </section>
+                                                            </section>
                                                         </a>
                                                     </section>
                                                 </div>
@@ -328,26 +287,82 @@
                                                 <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
                                                     <section class="project-cell slideInUp delay-0">
                                                         <a href="#" class="project-cell_container" target="_blank">
-                                                            <div class="project-header">
+                                                            <section class="project-cell-header">
                                                                 <h4 class="project-cell-title">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">案件 : 案件標題</span>
-                                                                </h4>
-                                                                <br />
-                                                            </div>
-                                                            <div class="project-date">
+                                                                    </h3>
+                                                                    <br />
+                                                            </section>
+                                                            <section class="project-cell-date">
                                                                 <h4 class="project-cell-date">
                                                                     <span class="project-cell-name"
                                                                         style="color: black;">發布日期 : </span>
                                                                 </h4>
                                                                 <br />
-                                                                </div>
-                                                                <div class="project-label">
+                                                                <section class="project-cell-label">
                                                                     <h4 class="project-cell-label">
                                                                         <span class="project-cell-name"
                                                                             style="color: black;">案件標籤 : </span>
                                                                     </h4>
-                                                                </div>
+                                                                </section>
+                                                            </section>
+                                                        </a>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-6 mb-4">
+                                                <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
+                                                    <section class="project-cell slideInUp delay-0">
+                                                        <a href="#" class="project-cell_container" target="_blank">
+                                                            <section class="project-cell-header">
+                                                                <h4 class="project-cell-title">
+                                                                    <span class="project-cell-name"
+                                                                        style="color: black;">案件 : 案件標題</span>
+                                                                    </h3>
+                                                                    <br />
+                                                            </section>
+                                                            <section class="project-cell-date">
+                                                                <h4 class="project-cell-date">
+                                                                    <span class="project-cell-name"
+                                                                        style="color: black;">發布日期 : </span>
+                                                                </h4>
+                                                                <br />
+                                                                <section class="project-cell-label">
+                                                                    <h4 class="project-cell-label">
+                                                                        <span class="project-cell-name"
+                                                                            style="color: black;">案件標籤 : </span>
+                                                                    </h4>
+                                                                </section>
+                                                            </section>
+                                                        </a>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-6 mb-4">
+                                                <div class="projects-list shadow-sm p-3 bg-white rounded-1g h-100">
+                                                    <section class="project-cell slideInUp delay-0">
+                                                        <a href="#" class="project-cell_container" target="_blank">
+                                                            <section class="project-cell-header">
+                                                                <h4 class="project-cell-title">
+                                                                    <span class="project-cell-name"
+                                                                        style="color: black;">案件 : 案件標題</span>
+                                                                    </h3>
+                                                                    <br />
+                                                            </section>
+                                                            <section class="project-cell-date">
+                                                                <h4 class="project-cell-date">
+                                                                    <span class="project-cell-name"
+                                                                        style="color: black;">發布日期 : </span>
+                                                                </h4>
+                                                                <br />
+                                                                <section class="project-cell-label">
+                                                                    <h4 class="project-cell-label">
+                                                                        <span class="project-cell-name"
+                                                                            style="color: black;">案件標籤 : </span>
+                                                                    </h4>
+                                                                </section>
+                                                            </section>
                                                         </a>
                                                     </section>
                                                 </div>
@@ -509,7 +524,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
+                                                                            <img src="images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -552,7 +567,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
+                                                                            <img src="images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -595,7 +610,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
+                                                                            <img src="images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -666,9 +681,8 @@
                     </div>
                 </div>
             </div>
-       </section>
     </div>
-
+    </section>
     <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8">
         <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -719,6 +733,30 @@
             </div>
         </nav>
     </footer>
+    
+    
+    <script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+    //登出
+    function logout(){
+    	
+    	window.location.href = '/PaintPartyMvcProject/logout'
+    }
+    
+    </script>
+   	
 </body>
 
 </html>
