@@ -408,8 +408,17 @@
         	   	  	
         	   	  	
         	     }); // btn-25 click end
-               
-               
+        	     
+        	     
+        	     $("#MyAppliedOrdersPage .u-btn-23").click(function () {
+        	    	 //console.log(  ); //做到這裡
+        	    	 //$( "#dialog-evaluationb2a #evaluationb_orderid" ).val( $(this).attr("href").split("/")[$(this).attr("href").split("/").length-3] ); //把此訂單的接案者ID抓出來
+        	    	 
+        	    	 return false;
+        	    	 
+        	    	 
+        	     }); //u-btn-23 click end
+        	     
                
                }// seccuss end
            }); //ajax end
