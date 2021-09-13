@@ -304,4 +304,35 @@ public class CaseManageDAO {
 	}
 	
 	
+	
+public void InsertDemo( ) {
+		
+		Session session = sessionfactory.getCurrentSession();
+		
+		
+		String sql = "insert into case_apply (member_id , case_id , price_expected , case_time , apply_date )  "
+				+ "values( ? , ? , ? , ? , ? )";
+    	
+    	NativeQuery addEntity = session.createSQLQuery(sql);
+    	addEntity.setParameter(1,1);
+    	addEntity.setParameter(2, 2);
+    	addEntity.setParameter(3, 400);
+    	addEntity.setParameter(4, 6);
+    	addEntity.setParameter(5, "2021-10-11");
+
+    	addEntity.executeUpdate();
+		
+		
+//		String hql = "update Orders as o set o.evaluation_status_a2b = :evaa2b where o.order_id = :orderid";
+//		Query query = session.createQuery(hql);
+//		query.setParameter("evaa2b", "已評價").setParameter("orderid", evaa2b.getOrder_id());
+//		
+//		query.executeUpdate();
+//		
+		
+	}
+	
+	
+	
+	
 }

@@ -45,6 +45,8 @@ public class CaseApply implements Serializable{
 	private String apply_status;
 	
 	
+
+
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name ="member_id") //應徵人ID
 	private Member applymemberbean; 
@@ -54,6 +56,26 @@ public class CaseApply implements Serializable{
 	@JoinColumn(name ="case_id") //應徵的案件
 	private Cases applycasesbean;
 
+	
+	
+	public Integer getMember_id() {
+		return member_id;
+	}
+	
+	
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
+	
+	
+	public Integer getCase_id() {
+		return case_id;
+	}
+	
+	
+	public void setCase_id(Integer case_id) {
+		this.case_id = case_id;
+	}
 
 	
 	public Integer getApply_id() {

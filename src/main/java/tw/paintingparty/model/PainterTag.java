@@ -41,6 +41,26 @@ public class PainterTag implements Serializable{
 	@JoinColumn(name ="member_id") 
 	private Member memberbean;
 
+	
+	
+	
+	
+	public Integer getTag_id() {
+		return tag_id;
+	}
+
+	public void setTag_id(Integer tag_id) {
+		this.tag_id = tag_id;
+	}
+
+	public Integer getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
+
 	public Integer getPainter_tag_id() {
 		return painter_tag_id;
 	}

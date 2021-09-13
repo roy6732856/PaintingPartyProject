@@ -54,8 +54,30 @@ public class Orders implements Serializable{
 	@JoinColumn(name ="member_id") //接案者資訊(乙方為b表示)
 	private Member bmemberbean;
 
+	
+	
 
 	
+	public Integer getCase_id() {
+		return case_id;
+	}
+
+
+	public void setCase_id(Integer case_id) {
+		this.case_id = case_id;
+	}
+
+
+	public Integer getMember_id() {
+		return member_id;
+	}
+
+
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
+
+
 	public Integer getOrder_id() {
 		return order_id;
 	}

@@ -67,10 +67,20 @@ public class Cases implements Serializable{
 //	public void setAllordersbean(Set<Orders> allordersbean) {
 //		this.allordersbean = allordersbean;
 //	}
+	
+	
+	public Integer getMember_id() {
+		return member_id;
+	}
+	
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
 
 	public Member getPostedmemberbean() {
 		return postedmemberbean;
 	}
+
 
 	public void setPostedmemberbean(Member postedmemberbean) {
 		this.postedmemberbean = postedmemberbean;

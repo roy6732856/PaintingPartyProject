@@ -48,6 +48,14 @@ public class OrderNotice implements Serializable{
 	
 	
 	
+	public Integer getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
+
 	public Integer getOrder_notice_id() {
 		return order_notice_id;
 	}

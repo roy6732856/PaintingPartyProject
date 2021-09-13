@@ -371,6 +371,14 @@ public class TestDemoController_01 {
 	}
 	
 	
+	@GetMapping(path = "/backend/testinsert")
+	@ResponseBody
+	public String test16( Model m) {
+		
+		cmDao.InsertDemo();
+		return "success!" ;
+	}
+	
 	
 	
 
