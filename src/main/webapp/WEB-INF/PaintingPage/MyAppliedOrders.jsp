@@ -16,7 +16,7 @@
   
   $(function() {
     $( "#dialog-productupload" ).dialog({
-      autoOpen: true,
+      autoOpen: false,
       width: 480,
       modal: true
     });
@@ -409,10 +409,18 @@
         	   	  	
         	     }); // btn-25 click end
         	     
-        	     
+        	     //代做
         	     $("#MyAppliedOrdersPage .u-btn-23").click(function () {
-        	    	 //console.log(  ); //做到這裡
-        	    	 //$( "#dialog-evaluationb2a #evaluationb_orderid" ).val( $(this).attr("href").split("/")[$(this).attr("href").split("/").length-3] ); //把此訂單的接案者ID抓出來
+        	    	 //console.log( $( "#MyAppliedOrdersPage .u-btn-23" ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //取的該筆訂單ID
+        	    	 
+        	    	 $( "#productorderid" ).val( $( "#MyAppliedOrdersPage .u-btn-23" ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); //把此訂單的接案者ID抓出來
+        	    	 $("#imgpreview").remove();//清空圖片預覽
+        	    	 var productfile = document.getElementById("productupload");//點進來就清空INPUT的內容
+        	    	 productfile.value = "";
+        	    	 $( "#productcomments" ).val(""); //清空給案主的訊息
+        	    	 
+        	    	 
+        	    	 $( "#dialog-productupload" ).dialog( "open" );
         	    	 
         	    	 return false;
         	    	 
@@ -588,6 +596,57 @@
 				
 				return false;
 			}
+        
+        
+        
+        
+        
+			//檔案上傳表單驗證 代做3
+			function verificationproduct() {
+				console.log(123);
+				
+				if($("#productupload").val() == "" || $("#productupload").val() == null) {
+					alert('請上傳您的檔案');
+					return false;
+				}
+				
+				//若有東西，就執行上傳的動作
+				var productformData = new FormData($("#productform")[0]);
+				 var proorderid=$("#productorderid").val();
+				 var procomment=$("#productcomments").val();
+				 productformData.append("proorderid",proorderid);
+				 productformData.append("procomment",procomment);				
+				
+				$.ajax({
+					type : "POST",
+					url : `<%= request.getContextPath() %>/backend/productuploader`,
+					data : productformData,
+					cache : false, // 不需要cache
+					processData : false, // jQuery預設會把data轉為query String, 所以要停用
+					contentType : false, // jQuery預設contentType為'application/x-www-form-urlencoded; charset=UTF-8', 且不用自己設定為'multipart/form-data'
+					//dataType: 'text',
+					success : function() {
+						alert('上傳成功!');
+					},
+					error : function(data) {
+						alert('發生錯誤');
+					}
+				});
+				
+				
+				//檔案上傳表單發送資料
+				
+				
+				
+				
+				
+				
+				
+				return false;
+			}
+        
+        
+        
 		</script>
          
          
@@ -602,12 +661,8 @@
          
          
          <script type="text/javascript">
-//上傳檔案
+//上傳檔案 代做2
   $(function() {
-    $("#productform").submit(function(){
-      return false;
-    });
-
 
     //當選檔變更時,立即預覽之前被選擇的照片
     $("#productupload").change(function() {
@@ -726,27 +781,28 @@
   <div>
 
 
-    <form  action="uploadfile.controller" method="post" enctype="multipart/form-data" id="productform">
+    <form method="post" enctype="multipart/form-data" id="productform" name="productform" onsubmit="return verificationproduct()">
 
-      <div class="centerblock" >
-        <input type="text" name="productorderid" id="productorderid"/>
-      </div>
+
       <br>
       <div id="img-container" style="width:250px;" >
       </div>
     
       <div>
-        <input type="file" name="myFiles" accept="image/*" id="productupload" />
+        <input type="file" name="productupload" accept="image/*" id="productupload" />
       </div>
       <div>
         <b style="color: red;">※檔案上傳限制為圖片類，禁止上傳與訂單無關之檔案。</b>
       </div>
         <br>
+              <div class="centerblock" >
+        <input type="text" name="productorderid" id="productorderid"/>
+      </div>
 
         <div class="form-group">
           <label class="centerblock" style="font-size: medium;"><b>給案主的訊息：</b></label>
           <div class="centerblock">
-            <textarea class="centerblock" cols="40" rows="5" id="comments" name="comments" style="resize:none;width: 450px ;" ></textarea>
+            <textarea class="centerblock" cols="40" rows="5" id="productcomments" name="comments" style="resize:none;width: 450px ;" ></textarea>
   
           </div>
         </div>

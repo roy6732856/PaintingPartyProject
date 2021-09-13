@@ -1,8 +1,10 @@
 package tw.paintingparty.casemanage.controller;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -294,6 +298,32 @@ public class TestDemoController_01 {
 		cmDao.EvaluationB2A(evab2a);
 		
 	}
+	
+	
+	
+	@PostMapping(path = "/backend/productuploader") //給評價A給B
+	@ResponseBody
+	public void test13_5(@RequestParam(value="productupload") MultipartFile file,@RequestParam(value="proorderid") Integer orderid,@RequestParam(value="procomment") String comments) throws IOException {
+//		BufferedReader br;
+//		String line;
+//		InputStream is = multipart.getInputStream();
+//		br = new BufferedReader(new InputStreamReader(is));
+//		//讀取檔案並印出
+//		while ((line = br.readLine()) != null) {
+//			System.out.println("line="+line);
+//		}
+		
+		System.out.println(file);
+		System.out.println(orderid);
+		System.out.println(comments);
+		
+		System.out.println("接收成功");
+		
+		
+		
+	}
+	
+	
 	
 	
 	
