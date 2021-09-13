@@ -36,13 +36,17 @@ public class OrderNotice implements Serializable{
 	
 	private String notice_content;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date notice_date;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="member_id") 
 	private Member notifiedmemberbean; //被通知人的資訊
+	
+	private String notice_sort;
 
+	
+	
 	
 	public Integer getOrder_notice_id() {
 		return order_notice_id;
@@ -83,6 +87,18 @@ public class OrderNotice implements Serializable{
 	public void setNotifiedmemberbean(Member notifiedmemberbean) {
 		this.notifiedmemberbean = notifiedmemberbean;
 	}
+
+	public String getNotice_sort() {
+		return notice_sort;
+	}
+
+	public void setNotice_sort(String notice_sort) {
+		this.notice_sort = notice_sort;
+	}
+	
+
+	
+	
 
 
 	

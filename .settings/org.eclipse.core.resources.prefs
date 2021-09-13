@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/java/tw/paintingparty/controller/LoginController_forWang.java=UTF-8
 encoding//src/main/java/tw/paintingparty/controller/TestDemoController.java=UTF-8
 encoding/<project>=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/PaintingPage/CaseManage.jsp=UTF-8
+>>>>>>> feature01_test

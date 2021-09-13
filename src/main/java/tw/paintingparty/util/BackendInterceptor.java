@@ -11,7 +11,7 @@ public class BackendInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("=============Passed BackendInterceptor!!===============");
-		Object loginid = request.getSession().getAttribute("login");
+		Object loginid = request.getSession().getAttribute("session_member_id");
 		
 		if(loginid==null) {
 			

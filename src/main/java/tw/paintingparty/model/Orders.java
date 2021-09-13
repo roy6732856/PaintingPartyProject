@@ -36,18 +36,14 @@ public class Orders implements Serializable{
 	
 	private String order_status;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date order_date;
 
 	private Integer price;
-	
-	public Integer getPrice() {
-		return price;
-	}
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+	private String evaluation_status_a2b;
+	
+	private String evaluation_status_b2a;
 
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name ="case_id") //本訂單的案件
@@ -58,12 +54,82 @@ public class Orders implements Serializable{
 	@JoinColumn(name ="member_id") //接案者資訊(乙方為b表示)
 	private Member bmemberbean;
 
+
 	
+	public Integer getOrder_id() {
+		return order_id;
+	}
+
+
+	public void setOrder_id(Integer order_id) {
+		this.order_id = order_id;
+	}
+
+
+	public String getOrder_status() {
+		return order_status;
+	}
+
+
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+
+
+	public Date getOrder_date() {
+		return order_date;
+	}
+
+
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+
+
+	public Integer getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+
+	public String getEvaluation_status_a2b() {
+		return evaluation_status_a2b;
+	}
+
+
+	public void setEvaluation_status_a2b(String evaluation_status_a2b) {
+		this.evaluation_status_a2b = evaluation_status_a2b;
+	}
+
+
+	public String getEvaluation_status_b2a() {
+		return evaluation_status_b2a;
+	}
+
+
+	public void setEvaluation_status_b2a(String evaluation_status_b2a) {
+		this.evaluation_status_b2a = evaluation_status_b2a;
+	}
+
+
+	public Cases getOcasesbean() {
+		return ocasesbean;
+	}
+
+
+	public void setOcasesbean(Cases ocasesbean) {
+		this.ocasesbean = ocasesbean;
+	}
 
 
 	public Member getBmemberbean() {
 		return bmemberbean;
 	}
+
 
 	public void setBmemberbean(Member bmemberbean) {
 		this.bmemberbean = bmemberbean;
@@ -71,40 +137,10 @@ public class Orders implements Serializable{
 
 
 
-
-	public Cases getOcasesbean() {
-		return ocasesbean;
-	}
-
-	public void setOcasesbean(Cases ocasesbean) {
-		this.ocasesbean = ocasesbean;
-	}
-
-	public Integer getOrder_id() {
-		return order_id;
-	}
-
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
-	}
+	
 
 
-
-	public String getOrder_status() {
-		return order_status;
-	}
-
-	public void setOrder_status(String order_status) {
-		this.order_status = order_status;
-	}
-
-	public Date getOrder_date() {
-		return order_date;
-	}
-
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
-	}
+	
 	
 	
 	
