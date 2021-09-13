@@ -23,7 +23,7 @@ public class AllPatternFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("=============Passed AllPatternFilter!!===============");
 		HttpServletRequest req = (HttpServletRequest)request;  
-		req.getSession().setAttribute("login", 1); //DEMO用，模擬1號會員登入中，沒登入就註解
+//		req.getSession().setAttribute("session_member_id", 5); //DEMO用，模擬1號會員登入中，沒登入就註解
 		
 		chain.doFilter(request, response);
 	

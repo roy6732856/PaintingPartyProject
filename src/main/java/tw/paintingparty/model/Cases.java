@@ -35,7 +35,7 @@ public class Cases implements Serializable{
 	
 	private String case_title;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date upload_date;
 	
 	private Integer price_min;

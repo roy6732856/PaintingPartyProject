@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
- 
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
 <head>
@@ -10,7 +9,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>CaseManage2</title>
+    <title>CaseManage</title>
    
     <script class="u-script" type="text/javascript" src="../resources/js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../resources/js/nicepage.js" defer=""></script>
