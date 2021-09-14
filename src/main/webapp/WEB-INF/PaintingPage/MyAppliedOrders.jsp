@@ -440,7 +440,7 @@
         	     
         	     
         	     
-        	     //-----檔案內容的表單彈出框框 代做2
+        	     //-----檔案內容的表單彈出框框
         	     $("#MyAppliedOrdersPage .u-btn-24").click(function () {
         	    	 
         	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); 
@@ -477,6 +477,7 @@
      						
      						
      						//---------
+     						
      						
 							for( let j = 0 ; j<data.length ; j++ ){
      							
@@ -921,7 +922,6 @@
 
 
 <!-------檔案內容--------->
-<!-- 代做 -->
 
 <div id="dialog-filecontentb" title="檔案內容">
 
@@ -936,7 +936,7 @@
           <div style="background-color: brown; border-radius:50%; text-align: center; color: white; font-size: medium;">
             <b>草稿</b>
           </div>
-          <div style="text-align: center;" class="pricestage1">100NT</div>
+          <div style="text-align: center;" class="pricestage1"></div>
         </div>
         
         
@@ -946,7 +946,7 @@
           <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
             <b>線稿</b>
           </div>
-          <div style="text-align: center;" class="pricestage2">200NT</div>
+          <div style="text-align: center;" class="pricestage2"></div>
         </div>
         
         <div>
@@ -954,7 +954,7 @@
           <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
             <b>上色</b>
           </div>
-          <div style="text-align: center;" class="pricestage3">300NT</div>
+          <div style="text-align: center;" class="pricestage3"></div>
         </div>
         
         
@@ -995,8 +995,7 @@
 
 
 </div>
-
-
-
+</div>
+<!-- 以上檔案內容 -->
 </body>
 </html>

@@ -26,6 +26,14 @@
 	    });
 	  });
    
+     //檔案內容
+     $(function() {
+	    $( "#dialog-filecontenta" ).dialog({
+	      autoOpen: false,
+	      width: 540,
+	      modal: true
+	    });
+	  });
    
   
   </script>
@@ -348,7 +356,7 @@ function ajaxreq (){
                                class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-14">終止交易</a>
                            <a href="../../\${ data[i].order_id}/\${ data[i].case_id }/\${ data[i].bmember_id }"
                                class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-15" id="evaluation_a2b">給評價</a>
-                           <a href="<%= request.getContextPath() %>/backend/filecontent/\${ data[i].order_id }"
+                           <a href="/\${ data[i].order_id }/\${ data[i].bmember_name }/\${ data[i].price }"
                                class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-16">檔案內容</a>
                        
                                <span class="u-icon u-icon-circle u-text-palette-1-base u-icon-6" data-href="../../\${ data[i].bmember_id }" title="匯款資訊">
@@ -526,7 +534,7 @@ function ajaxreq (){
        	 paybmemberid =JSON.stringify({"pmemid":$(this).attr("data-href").split("/")[$(this).attr("data-href").split("/").length-1]}); //得到BMEMBER的ID
        	 console.log( paybmemberid ); 
        	 
-       	 	//代做
+       	 	
        	 	$.ajax({
 	             url: "<%= request.getContextPath() %>/backend/payInfo",                        // url位置
 	             type: 'post',                   // post/get
@@ -557,9 +565,101 @@ function ajaxreq (){
        	 
        	 
            return false;//把預設行為取消，若沒這行，按下上面的按鈕，會被捲到最上面，因為預設行為是超連結
-       }); //end click
+       }); //u-icon-6 end click
 	     
 	     
+       
+       
+     //------檔案內容彈出框框------代做2
+       
+       $("#MyPostedOrdersPage .u-btn-16").click(function () {
+    	   
+
+    	   
+    	   //-------------------------
+    	   
+	           	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); 
+    	    	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); 
+    	    	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3] ); 
+ 	    	 	
+    	    	 var filecontentaorderid = $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3];//取該筆訂單的ID
+    	    	 var filecontentamymemid = <%= request.getSession().getAttribute("session_member_id") %>; //取得自己ID
+     	    	 var filecontentaprice = $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1]; //取總稿酬
+     	    	 var filecontentastage1and2 = Math.floor(filecontentaprice/3); //算出階段稿酬
+    	    	 var filecontentastage3 = filecontentaprice - (filecontentastage1and2 * 2);
+    	   
+     	    	 
+    	    	 //設置欄位初始值
+    	    	 $("#demofilecontenta").remove(); //清掉DEMO資料
+    	    	 $("#dialog-filecontenta .filecontentamembername").html( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); //重新給接案者名字
+    	    	 $("#filecontentblocka").html(""); //清掉檔案內容
+    	    	 $("#dialog-filecontenta .pricestage1").html(filecontentastage1and2+"(NTD)");//設置階段稿酬
+    	    	 $("#dialog-filecontenta .pricestage2").html(filecontentastage1and2+"(NTD)");
+    	    	 $("#dialog-filecontenta .pricestage3").html(filecontentastage3+"(NTD)");
+    	    	 
+    	    	 filecontentajstr = JSON.stringify({"order_id":filecontentaorderid,"bmember_id":filecontentamymemid}); //這裡的CONTROLLER，用跟B一樣的CONTROLL，所以參數應該是AMEM，改用B
+  				 console.log(filecontentajstr);
+  				 
+  				//執行AJAX 代做
+  				//這裡的CONTROLLER，用跟B一樣的CONTROLL，所以參數應該是AMEM，改用B
+  				$.ajax({
+  					url: "<%= request.getContextPath() %>/backend/filecontentb", 
+  					type: 'post',
+  					contentType:'application/json',
+  					dataType: 'json',
+  					data:filecontentajstr,
+  					success: function(data) {
+  						//alert("連線成功!!");
+  						$("#dialog-filecontenta").prepend(`<div id="demofilecontenta">\${JSON.stringify(data)}</div>`); //DEMO用資料
+  						
+  						
+  						//---------
+  						
+ 						for( let j = 0 ; j<data.length ; j++ ){
+  							
+  							
+  							$("#filecontentblocka").append(`  <div style="background-color: gainsboro; width:500px;border-radius:5px;padding: 10px;margin-top:20px;" class="filecontentb">
+  								    <div>
+  								      <b style="font-size: medium;">已收到成品\${j+1}：</b>
+  								    </div>
+  								    <div id="filecontentimga">
+  								   <a href="productimg/\${data[j].product_name}" download="\${data[j].product_name}" title="請點擊下載">
+  								   		<img src="productimg/\${data[j].product_name}" style="display:block; margin:auto; width:150px;" />
+  								    </a>
+  								   		</div>
+  								   		<br>
+  								    <b style="font-size: medium;">來自畫師的留言：</b>
+  								      <textarea class="filecontentcommentsa" cols="" rows="4px" readonly style="resize:none;width:470px; ">\${data[j].painter_message}</textarea>
+  								  </div>`); //append end
+  							
+  							
+  							
+  						}//for end
+  
+  						
+  					},
+  					error: function(XMLHttpRequest, textStatus, errorThrown) {
+  						alert("發生錯誤");
+  						$( "#dialog-filecontenta" ).dialog( "close" );
+  						ajaxreqb();
+ 						$('html,body').animate({ scrollTop: 0 }, 'slow'); 
+  						
+  					}
+  				}); //ajax end
+    	   
+    	   //-----------------------
+    	   
+    	   
+    	   
+    	   
+    	   $( "#dialog-filecontenta" ).dialog( "open" );
+    	   
+    	   
+          return false;//把預設行為取消
+      }); //u-btn-16 end click
+       
+      
+       
         
         }// seccess end
       
@@ -835,7 +935,8 @@ $("#evaluation_orderid").attr("style","display:none");
 	        <a href="####" id="payINFO_headshot" target="_blank"> 
 	          <img src="" style="display:block; margin:auto; width:150px;" id="payheadshot" />
 	        
-	          <div style="text-align: center;"><b style="font-size:large;" id="paymembername"></b></div>
+	          <div style="text-align: center">
+	          <b style="font-size:large;" id="paymembername"></b></div>
 	        </a>
 	        <div style="text-align: center;">(接案方)</div>
 	
@@ -858,6 +959,77 @@ $("#evaluation_orderid").attr("style","display:none");
 	
 	</div>
  </div>
+ 
+ <!-- 以下檔案內容 代做-->
+ 
+ <div id="dialog-filecontenta" title="檔案內容">
+
+<div style="width: 500px;" id="">
+  <div class="centerblock">
+    <div>
+
+      <div class="centerblock" style="display:flex;justify-content:space-between;width:480px;">
+        
+        <div>
+          <div style="text-align: center; font-size: medium;">第一階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center; color: white; font-size: medium;">
+            <b>草稿</b>
+          </div>
+          <div style="text-align: center;" class="pricestage1">100NT</div>
+        </div>
+        
+        
+        
+        <div>
+          <div style="text-align: center;font-size: medium;">第二階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
+            <b>線稿</b>
+          </div>
+          <div style="text-align: center;" class="pricestage2">200NT</div>
+        </div>
+        
+        <div>
+          <div style="text-align: center;font-size: medium;">第三階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
+            <b>上色</b>
+          </div>
+          <div style="text-align: center;" class="pricestage3">300NT</div>
+        </div>
+        
+        
+      </div>
+    </div>
+    
+
+
+  </div>
+<br>
+
+
+  <div style="width:480px;">
+    
+    <div style="font-size: medium; display:flex" class="filecontentamember">
+      <div>
+      	<b>畫師：</b>
+      </div>
+      <div class="filecontentamembername">
+      </div>
+      
+      
+    </div>
+<br>
+
+<hr>
+<div id="filecontentblocka">
+
+</div>
+
+ </div>
+
+</div>
+</div>
+ 
+ 
  
 
 </body>
