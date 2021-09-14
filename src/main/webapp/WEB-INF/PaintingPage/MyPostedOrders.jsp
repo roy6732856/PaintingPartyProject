@@ -590,7 +590,7 @@ function ajaxreq (){
     	   
      	    	 
     	    	 //設置欄位初始值
-    	    	 $("#demofilecontenta").remove(); //清掉DEMO資料
+    	    	 //$("#demofilecontenta").remove(); //清掉DEMO資料
     	    	 $("#dialog-filecontenta .filecontentamembername").html( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); //重新給接案者名字
     	    	 $("#filecontentblocka").html(""); //清掉檔案內容
     	    	 $("#dialog-filecontenta .pricestage1").html(filecontentastage1and2+"(NTD)");//設置階段稿酬
@@ -610,7 +610,7 @@ function ajaxreq (){
   					data:filecontentajstr,
   					success: function(data) {
   						//alert("連線成功!!");
-  						$("#dialog-filecontenta").prepend(`<div id="demofilecontenta">\${JSON.stringify(data)}</div>`); //DEMO用資料
+  						//$("#dialog-filecontenta").prepend(`<div id="demofilecontenta">\${JSON.stringify(data)}</div>`); //DEMO用資料
   						
   						
   						//---------
