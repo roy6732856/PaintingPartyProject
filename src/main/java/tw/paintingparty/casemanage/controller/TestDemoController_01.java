@@ -352,7 +352,7 @@ public class TestDemoController_01 {
 	}
 	
 	
-	@PostMapping(path = "/backend/filecontentb") //檔案內容(B)
+	@PostMapping(path = "/backend/filecontentb") //檔案內容(AB共用)
 	@ResponseBody
 	public List<FileContentSendBeanB> test13_6(@RequestBody FileContentReceiveBeanB fcrbb) {
 		
@@ -367,7 +367,7 @@ public class TestDemoController_01 {
 	
 	//**************************
 	
-	@GetMapping(path = "/backend/productimg/{imgfilename}") //檔案內容的圖片(B)
+	@GetMapping(path = "/backend/productimg/{imgfilename}") //檔案內容的圖片(AB共用)
 	@ResponseBody
 	public void test13_7(@PathVariable("imgfilename") String imgFileName , HttpServletRequest request, HttpServletResponse response ) throws IOException {
 		
