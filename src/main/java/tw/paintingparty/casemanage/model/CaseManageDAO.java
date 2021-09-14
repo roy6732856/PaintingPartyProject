@@ -3,6 +3,7 @@ package tw.paintingparty.casemanage.model;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,6 +17,7 @@ import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.Orders;
 import tw.paintingparty.model.Product;
+import tw.teamUtil.Util01;
 
 
 @Repository("caseManageDao")
@@ -305,6 +307,54 @@ public class CaseManageDAO {
 		
 	}
 	
+	public List<FileContentSendBeanB> FileContentB( FileContentReceiveBeanB fcrbb ) {
+//   檔案內容B
+		
+		Session session = sessionfactory.getCurrentSession();
+		
+		//FileContentSendBeanB fileContentSendBeanB = new FileContentSendBeanB();
+		Util01 util01 = new Util01();
+		
+		String hql = "from Member as m where m.member_id=:bmemid ";
+		Query<Member> query = session.createQuery(hql,Member.class).setParameter("bmemid", fcrbb.getBmember_id());
+		Member bmember = query.getSingleResult();
+//		fileContentSendBeanB.setBmember_name( bmember.getMember_name() );
+		
+		String hql2 = "from Orders as o where o.order_id=:orderid ";
+		Query<Orders> qurey2 = session.createQuery(hql2,Orders.class).setParameter("orderid", fcrbb.getOrder_id());
+		Orders order = qurey2.getSingleResult();
+		Map priceDivideByThree = util01.PriceDivideByThree( order.getPrice() );
+//		fileContentSendBeanB.setPrice_stage1( (Integer)priceDivideByThree.get("Stage1") );
+//		fileContentSendBeanB.setPrice_stage2( (Integer)priceDivideByThree.get("Stage2") );
+//		fileContentSendBeanB.setPrice_stage3( (Integer)priceDivideByThree.get("Stage3") );
+		
+		String hql3 = "from Product as p where p.ordersbean.order_id = :orderid ";
+//		Query<Product> qurey3 = session.createQuery(hql3,Product.class).setParameter("orderid", fcrbb.getOrder_id());
+		Query query3 = session.createQuery(hql3).setParameter("orderid", fcrbb.getOrder_id());
+		List<Product> list = query3.list();
+		
+		
+    	List<FileContentSendBeanB> fcsbbList = new ArrayList<FileContentSendBeanB>();
+
+    	//以下手動封裝(因為是用createSQLQuery)
+    	for( Product p : list ) {
+    		FileContentSendBeanB fileContentSendBeanB = new FileContentSendBeanB();
+    		fileContentSendBeanB.setBmember_name( bmember.getMember_name() );
+    		fileContentSendBeanB.setPrice_stage1( (Integer)priceDivideByThree.get("Stage1") );
+    		fileContentSendBeanB.setPrice_stage2( (Integer)priceDivideByThree.get("Stage2") );
+    		fileContentSendBeanB.setPrice_stage3( (Integer)priceDivideByThree.get("Stage3") );
+    		fileContentSendBeanB.setProduct_name(p.getProduct_name());
+    		fileContentSendBeanB.setProduct_path(p.getProduct_path());
+    		fileContentSendBeanB.setPainter_message(p.getPainter_message());
+    		
+    		fcsbbList.add(fileContentSendBeanB);
+    	}
+		
+		
+		
+		return fcsbbList;
+		
+	}
 	
 	
 	

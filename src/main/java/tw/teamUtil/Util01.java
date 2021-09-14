@@ -1,7 +1,6 @@
 package tw.teamUtil;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -29,17 +28,6 @@ public class Util01 {
     	System.out.println(nowTimeing);
 	}
 	
-	
-	private void saveFile(String safeFilePath) throws IOException {
-		
-		FileInputStream is = new FileInputStream(safeFilePath); 
-		byte[] b = new byte[is.available()];
-		is.read(b);//把檔案讀進暫存B
-		is.close();
-//		p1.setPicture(b); //把暫存B SET進照片物件
-//		
-//		pService.insert(p1);
-	}
 	
 	
 	public String fileNameUtil( String originalFileName ) { 

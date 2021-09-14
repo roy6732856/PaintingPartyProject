@@ -3,6 +3,7 @@ package tw.paintingparty.casemanage.controller;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -34,6 +35,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import tw.paintingparty.casemanage.model.CaseManageDAO;
 import tw.paintingparty.casemanage.model.EvaluationA2BBean;
 import tw.paintingparty.casemanage.model.EvaluationB2ABean;
+import tw.paintingparty.casemanage.model.FileContentReceiveBeanB;
+import tw.paintingparty.casemanage.model.FileContentSendBeanB;
 import tw.paintingparty.casemanage.model.HeadShotBean;
 import tw.paintingparty.casemanage.model.MyAppliedAllCasesBean;
 import tw.paintingparty.casemanage.model.MyAppliedOrdersBean;
@@ -348,6 +351,33 @@ public class TestDemoController_01 {
 		
 	}
 	
+	
+	@PostMapping(path = "/backend/filecontentb") //檔案內容(B)
+	@ResponseBody
+	public List<FileContentSendBeanB> test13_6(@RequestBody FileContentReceiveBeanB fcrbb) {
+		
+		System.out.println("接收成功");
+		System.out.println(fcrbb.getOrder_id());
+		System.out.println(fcrbb.getBmember_id());
+		List<FileContentSendBeanB> fileContentB = cmDao.FileContentB(fcrbb);
+		
+		return fileContentB;
+	}
+	
+	
+	//**************************
+	
+	@GetMapping(path = "/backend/productimg/{imgfilename}") //檔案內容的圖片(B)
+	@ResponseBody
+	public void test13_7(@PathVariable("imgfilename") String imgFileName , HttpServletRequest request, HttpServletResponse response ) throws IOException {
+		
+		System.out.println(imgFileName);
+		String filePath = "C:\\PaintingImg\\Product" + "\\" + imgFileName;
+	
+		FileInputStream fis = new FileInputStream(filePath);
+		IOUtils.copy(fis, response.getOutputStream()); //由IOUtils來幫我們讀寫，會自己幫我們用暫存、關串流，但檔案超出2G還5G似乎會出事(?)
+		
+	}
 	
 	
 	

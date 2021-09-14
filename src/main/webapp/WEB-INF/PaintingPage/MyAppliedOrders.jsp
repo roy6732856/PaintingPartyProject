@@ -22,6 +22,16 @@
     });
   });
   
+  $(function() {
+    $( "#dialog-filecontentb" ).dialog({
+      autoOpen: false,
+      width: 540,
+      modal: true
+    });
+  });
+  
+  
+  
   </script>
 
 
@@ -324,7 +334,7 @@
                                            
                                            </div>
                                        </div>
-                                       <a href="<%= request.getContextPath() %>/backend/filecontent/\${ data[i].order_id }"
+                                       <a href="/\${ data[i].order_id }/\${ data[i].amember_name }/\${ data[i].price }"
                                            class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-24">檔案內容</a>
                                        <a href="../../\${ data[i].order_id}/\${ data[i].case_id }/\${ data[i].amember_id }"
                                            class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-25"
@@ -426,6 +436,94 @@
         	    	 
         	    	 
         	     }); //u-btn-23 click end
+        	     
+        	     
+        	     
+        	     
+        	     //-----檔案內容的表單彈出框框 代做2
+        	     $("#MyAppliedOrdersPage .u-btn-24").click(function () {
+        	    	 
+        	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); 
+        	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); 
+     	    	 	var filecontentborderid = $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3];//取該筆訂單的ID
+        	    	var filecontentbmymemid = <%= request.getSession().getAttribute("session_member_id") %>; //取得自己ID
+        	    	var filecontentbprice = $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1]; //取總稿酬
+        	    	var filecontentbstage1and2 = Math.floor(filecontentbprice/3); //算出階段稿酬
+        	    	var filecontentbstage3 = filecontentbprice - (filecontentbstage1and2 * 2);
+        	    	
+        	    	//設置欄位初始值
+        	    	 //$("#demofilecontent").remove(); //清掉DEMO資料
+        	    	 $("#dialog-filecontentb .filecontentamembername").html( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); //重新給案主名字
+        	    	 $("#filecontentblockb").html(""); //清掉檔案內容
+        	    	 $("#dialog-filecontentb .pricestage1").html(filecontentbstage1and2+"(NTD)");//設置階段稿酬
+        	    	 $("#dialog-filecontentb .pricestage2").html(filecontentbstage1and2+"(NTD)");
+        	    	 $("#dialog-filecontentb .pricestage3").html(filecontentbstage3+"(NTD)");
+        	    	 
+     				filecontentbjstr = JSON.stringify({"order_id":filecontentborderid,"bmember_id":filecontentbmymemid});
+     				console.log(filecontentbjstr);
+     				
+     				
+     				//執行AJAX 代做
+     				
+     				$.ajax({
+     					url: "<%= request.getContextPath() %>/backend/filecontentb",
+     					type: 'post',
+     					contentType:'application/json',
+     					dataType: 'json',
+     					data:filecontentbjstr,
+     					success: function(data) {
+     						//alert("連線成功!!");
+     						//$("#dialog-filecontentb").prepend(`<div id="demofilecontent">\${JSON.stringify(data)}</div>`); //DEMO用資料
+     						
+     						
+     						//---------
+     						
+							for( let j = 0 ; j<data.length ; j++ ){
+     							
+     							
+     							$("#filecontentblockb").append(`  <div style="background-color: gainsboro; width:500px;border-radius:5px;padding: 10px;margin-top:20px;" class="filecontentb">
+     								    <div>
+     								      <b style="font-size: medium;">已交付成品\${j+1}：</b>
+     								    </div>
+     								    <div id="filecontentimgb">
+     								   <a href="productimg/\${data[j].product_name}" download="\${data[j].product_name}" title="請點擊下載">
+     								   		<img src="productimg/\${data[j].product_name}" style="display:block; margin:auto; width:150px;" />
+     								    </a>
+     								   		</div>
+     								   		<br>
+     								    <b style="font-size: medium;">我給案主的留言：</b>
+     								      <textarea class="filecontentcommentsb" cols="" rows="4px" readonly style="resize:none;width:470px; ">\${data[j].painter_message}</textarea>
+     								  </div>`); //append end
+     							
+     							
+     							
+     						}//for end
+     
+     						
+     					},
+     					error: function(XMLHttpRequest, textStatus, errorThrown) {
+     						alert("發生錯誤");
+     						$( "#dialog-filecontentb" ).dialog( "close" );
+     						ajaxreqb();
+    						$('html,body').animate({ scrollTop: 0 }, 'slow'); 
+     						
+     					}
+     				}); //ajax end
+     				
+     				
+        	    	
+        	    	 
+        	    	 
+					 $( "#dialog-filecontentb" ).dialog( "open" );
+        	    	 
+        	    	 return false;
+        	    	 
+        	    	 
+        	     }); //u-btn-24 click end
+        	     
+        	     
+        	     
+        	     
         	     
                
                }// seccuss end
@@ -636,15 +734,6 @@
 					}
 				});
 				
-				
-				//檔案上傳表單發送資料
-				
-				
-				
-				
-				
-				
-				
 				return false;
 			}
         
@@ -831,6 +920,81 @@
 </div>
 
 
+<!-------檔案內容--------->
+<!-- 代做 -->
+
+<div id="dialog-filecontentb" title="檔案內容">
+
+<div style="width: 500px;" id="">
+  <div class="centerblock">
+    <div>
+
+      <div class="centerblock" style="display:flex;justify-content:space-between;width:480px;">
+        
+        <div>
+          <div style="text-align: center; font-size: medium;">第一階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center; color: white; font-size: medium;">
+            <b>草稿</b>
+          </div>
+          <div style="text-align: center;" class="pricestage1">100NT</div>
+        </div>
+        
+        
+        
+        <div>
+          <div style="text-align: center;font-size: medium;">第二階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
+            <b>線稿</b>
+          </div>
+          <div style="text-align: center;" class="pricestage2">200NT</div>
+        </div>
+        
+        <div>
+          <div style="text-align: center;font-size: medium;">第三階段</div>
+          <div style="background-color: brown; border-radius:50%; text-align: center;color: white;font-size: medium;">
+            <b>上色</b>
+          </div>
+          <div style="text-align: center;" class="pricestage3">300NT</div>
+        </div>
+        
+        
+      </div>
+    </div>
+    
+
+
+  </div>
+<br>
+
+
+  <div style="width:480px;">
+    
+    <div style="font-size: medium; display:flex" class="filecontentamember">
+      <div>
+      	<b>案主：</b>
+      </div>
+      <div class="filecontentamembername">
+      </div>
+      
+      
+    </div>
+<br>
+
+<hr>
+<div id="filecontentblockb">
+
+
+
+
+</div>
+
+
+
+ </div>
+
+
+
+</div>
 
 
 
