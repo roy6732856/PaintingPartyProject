@@ -33,20 +33,20 @@ public class TestDemoController {
 	}
 	
 	
-	@RequestMapping(path = "/test2", method = RequestMethod.GET)
-	//皜祈岫���������
-	public String test2(Model m) {
-		Member mem1 = mService.showLoginUsername();
-		m.addAttribute("member_name", mem1.getMember_name());
-		return "MemberPage";
-	}
+//	@RequestMapping(path = "/test2", method = RequestMethod.GET)
+//	//皜祈岫���������
+//	public String test2(Model m) {
+//		Member mem1 = mService.showLoginUsername();
+//		m.addAttribute("member_name", mem1.getMember_name());
+//		return "MemberPage";
+//	}
 
-	@RequestMapping(path = "/test3", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/test3", method = RequestMethod.GET)
 	//皜祈岫敺�������
 	public String test3(Model m) {
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
-		return "PainterList";
+		return "CaseManage";
 	}
 	
 	

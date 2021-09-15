@@ -63,7 +63,7 @@ public class AllPatternFilter extends HttpFilter {
 		if(cookies!=null){
 			
 			for(int i=0;i<cookies.length;i++) {
-				if("member_id".equals(cookies[i].getName())) {
+				if("session_member_id".equals(cookies[i].getName())) {
 					request.getSession().setAttribute("login", "1");
 				}
 				

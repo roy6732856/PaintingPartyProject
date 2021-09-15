@@ -35,7 +35,7 @@ public class Cases implements Serializable{
 	
 	private String case_title;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date upload_date;
 	
 	private Integer price_min;
@@ -67,10 +67,20 @@ public class Cases implements Serializable{
 //	public void setAllordersbean(Set<Orders> allordersbean) {
 //		this.allordersbean = allordersbean;
 //	}
+	
+	
+	public Integer getMember_id() {
+		return member_id;
+	}
+	
+	public void setMember_id(Integer member_id) {
+		this.member_id = member_id;
+	}
 
 	public Member getPostedmemberbean() {
 		return postedmemberbean;
 	}
+
 
 	public void setPostedmemberbean(Member postedmemberbean) {
 		this.postedmemberbean = postedmemberbean;

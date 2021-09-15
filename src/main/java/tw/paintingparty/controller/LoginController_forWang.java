@@ -26,9 +26,9 @@ import tw.paintingparty.util.Jdbc;
 
 @Controller
 public class LoginController_forWang {
-	@RequestMapping(path="login")
+	@RequestMapping(path="login2")
 	public String processlogin() {
-		return "/login";
+		return "/login2";
 		
 	}
 	
@@ -58,18 +58,22 @@ public class LoginController_forWang {
 				prepareStatement.close();
 				result.put("success", false);
 				result.put("msg", "��甇斤�");
+//				result.put("msg", "白癡");
 //				response.setStatus(500); //自己模擬ajax 回傳到error
+				con.close();
 				return result;
 			}
 			else {
 				
 					//store member_id in session, so need to get member_id  from sql
 					String member_id = rs.getString(1);
+//					String member_status = rs.getString(7);
 					
 					
 					request.getSession().setAttribute("username", request.getParameter("username"));
 					request.getSession().setAttribute("password", request.getParameter("password"));
 					request.getSession().setAttribute("session_member_id", member_id);
+//					request.getSession().setAttribute("session_member_status", member_status);
 					
 					
 				
@@ -96,6 +100,7 @@ public class LoginController_forWang {
 						rs.close();
 						prepareStatement.close();
 						result.put("success", true);
+						con.close();
 						return result;
 					}
 //					response.sendRedirect("welcome.jsp?uname="+u+"&password="+p);
@@ -104,6 +109,7 @@ public class LoginController_forWang {
 						rs.close();
 						prepareStatement.close();
 						result.put("success", true);
+						con.close();
 						return result;
 					}
 				}

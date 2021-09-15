@@ -12,13 +12,13 @@
 <title>login</title>
 <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
 <link rel="stylesheet" href="resources/css/login.css" media="screen">
-<!--     <script class="u-script" type="text/javascript" src="js/jquery.js" defer=""></script> -->
-<!--     <script class="u-script" type="text/javascript" src="js/nicepage.js" defer=""></script> -->
+<script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script>
+<script class="u-script" type="text/javascript" src="resources/js/nicepage.js" defer=""></script>
 
 <!--     <link href="resources/js/jquery-3.6.0.min.js" rel="stylesheet" /> -->
 <!--     <link href="resources/js/jquery-ui.min.css" rel="stylesheet" /> -->
 <script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
-<script src="/PaintPartyMvcProject/resources/js/jquery-ui.min.css"></script>
+<link rel="stylesheet" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css" media="screen">
 
 
 
@@ -39,8 +39,19 @@
 <meta property="og:title" content="login">
 <meta property="og:description" content="">
 <meta property="og:type" content="website">
+
+    <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+    	.u-header .u-group-2 {
+    		width: 390px;
+    	}
+   	</style>
 </head>
 <body class="u-body">
+	<div class="container-fluid">
+
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
@@ -103,22 +114,29 @@
 				</div>
 			</nav>
 			<div class="u-container-style u-group u-white u-group-1">
-				<div class="u-container-layout u-container-layout-1">
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
-				</div>
+
 			</div>
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
-				</div>
+					<div>
+	                        <a href="/PaintPartyMvcProject/backend/accountmanager"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+	                        <a href="/PaintPartyMvcProject/backend"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
+                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
+                        </div>
+                        <div>
+	                        <a href="/PaintPartyMvcProject/login"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
+	                        <a href="/PaintPartyMvcProject/register"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
+                    	</div>
+                    </div>
+                    <div>
+                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
+                    </div>
+				</div>	
 			</div>
-		</div>
 	</header>
 	<section class="u-align-center u-clearfix u-grey-10 u-section-1"
 		id="sec-84b8">
@@ -158,7 +176,7 @@
 							<!--  <input type="hidden" value="" name="recaptchaResponse">-->
 						</form>
 					</div>
-					<a href="https://nicepage.com/c/team-html-templates"
+					<a href="/PaintPartyMvcProject/register"
 						class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-17 u-btn-2">註冊</a>
 					<a href=""
 						class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-3">Forgot
@@ -166,6 +184,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</section>
 
 
@@ -223,6 +242,21 @@
 	</footer>
 
 	<script type="text/javascript">
+	
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+	
 // 	$(function(){
 // 	    $("#username-error").hide();                    // 把div提示框隱藏起來
 // 	})
@@ -240,7 +274,22 @@
         	dataType:"json",
        		success:function(data,status,xhr){
         		if(data.success){
-       				window.location.href = "./test2";
+        			
+       		 	var prevLink = document.referrer;
+       		 	console.log(prevLink.indexOf('register')!=-1)
+       		 	if($.trim(prevLink)==''){  //來自空白頁
+       		 	    location.href = 'Index';  
+       		 	}else{  
+       		 	    if(prevLink.indexOf('PaintPartyMvcProject')==-1){    //來自其它站點  
+       		 	        location.href = 'PaintPartyMvcProject/Index';  
+       		 	    } else if (prevLink.indexOf('register')!=-1){      //來自注冊頁面  
+       		 	        location.href = 'Index';  
+       		 	    } else {
+      		 	    	location.href = prevLink;  //來自站內
+       		 	    }
+       		 	} 
+        			
+//        				window.location.href = "./Index";  //登入成功跳轉的頁面,未定
         		}else{
         			$("#username-error").show()
         		}
@@ -251,6 +300,19 @@
         	}
         })
 	}
+	
+// 	var prevLink = document.referrer;  
+// 	if($.trim(prevLink)==''){  
+// 	    location.href = 'www.example.com/index.html';  
+// 	}else{  
+// 	    if(prevLink.indexOf('PaintPartyMvcProject')==-1){    //來自其它站點  
+// 	        location.href = 'PaintPartyMvcProject/Index.jsp';  
+// 	    }  
+// 	    if(prevLink.indexOf('register.html')!=-1){      //來自注冊頁面  
+// 	        location.href = 'www.example.com/index.html';  
+// 	    }  
+// 	    location.href = prevLink;  
+// 	} 
 	</script>
 
 
