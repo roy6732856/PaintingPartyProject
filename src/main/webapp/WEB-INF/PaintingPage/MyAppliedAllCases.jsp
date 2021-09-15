@@ -177,9 +177,6 @@
 	                 url: `<%= request.getContextPath() %>/backend/myappliedallcases2`,                        // url位置
 	                 type: 'post',                   // post/get
 	                 error: function (xhr) { $("#MyAppliedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
-	                 success: function (data) { $("#MyAppliedAllCasesPage").html(JSON.stringify(data)); }// 成功後要執行的函數
-	             });
-=======
 	                 success: function (data) { 
 	                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));
 	                 
@@ -250,7 +247,6 @@
 	                 
 	                 }// end success
 	             });//end ajax
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
                     
          </script>
         

@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
-<<<<<<< HEAD
-=======
 
 <head>
 
@@ -23,7 +21,6 @@ $(function() {
 </head>
 
 
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 <html>
 
 
@@ -254,23 +251,6 @@ $(function() {
         class="u-container-layout u-container-layout-8" id="MyPostedAllCasesPage">  <!-- 新增的元素，放在此區塊裡面 -->
         
         
-<<<<<<< HEAD
-        
-        
-        
-        
-                    <script>
-                
-                    
-                    $.ajax({
-                        url: `<%= request.getContextPath() %>/backend/mypostedallcases2`,                        // url位置
-                        type: 'post',                   // post/get
-                        error: function (xhr) { $("#MyPostedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
-                        success: function (data) {
-                        //----------------------------------
-	                    var i;
-	  
-=======
                <script>
                
                $(document).ready(ajaxreqc);
@@ -291,7 +271,6 @@ $(function() {
   					
                        if(data[0]!=null){
                        	
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 	                    for(i=0;i<data.length;i++){
 	                    	
 	                    	$("#MyPostedAllCasesPage").append(`                                                                        
@@ -311,11 +290,7 @@ $(function() {
                                             
                                             <div class="u-container-layout u-container-layout-10" >
                                                 
-<<<<<<< HEAD
-                                                <div style="padding-left:30px"><b>稿酬預算：</b>\${ data[i].price_min }~\${ data[i].price_max }元</div>
-=======
                                                 <div style="padding-left:10px"><b>稿酬預算：</b>\${ data[i].price_min }~\${ data[i].price_max } (NTD)</div>
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
                                                 
                                                 
                                             </div>
@@ -331,20 +306,12 @@ $(function() {
                                         <a href="<%= request.getContextPath() %>/backend/casebackstage/\${ data[i].case_id }"
                                             data-page-id="823408358"
                                             class="u-active-palette-1-light-1 u-border-0 u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-9"
-<<<<<<< HEAD
-                                            target="_self">編輯案件</a>
-=======
                                             target="_self">管理案件</a>
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
                                         <div
                                             class="u-container-style u-group u-shape-rectangle u-group-6">
                                             <div
                                                 class="u-container-layout u-container-layout-12">
-<<<<<<< HEAD
-                                            	<div><b>案件狀態：</b>\${ data[i].case_status }</div>
-=======
                                             	<div style="margin-left:-20px;"><b>案件狀態：</b>\${ data[i].case_status }</div>
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
                                                 
                                             </div>
                                         </div>
@@ -357,16 +324,6 @@ $(function() {
 	                    	
 	                    	
 	                    }//for end
-<<<<<<< HEAD
-                        //----------------------------------
-	                    
-                        }// seccess end
-                    
-                    }); // ajax end
-                    
-                    
-                </script>
-=======
                        }else{
                        	
                        	$("#MyPostedAllCasesPage").html("暫無資料"); 
@@ -452,7 +409,6 @@ $(function() {
                
                
            </script>
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
         
 
     </div>
@@ -478,8 +434,6 @@ $(function() {
  <!-------結束--------->
 
 
-<<<<<<< HEAD
-=======
 
  <!----------------以下管理案件 代做----------->
  <div id="dialog-casemanagepage" title="管理案件">
@@ -593,7 +547,6 @@ $(function() {
           <!--------------------------->
 
 
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 </body>
 
 </html>

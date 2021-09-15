@@ -71,19 +71,19 @@ public class PainterListController {
 	
 	}
 	
-	@RequestMapping(path ="/queryByPage/{pageNo}",method = RequestMethod.POST)
-	@ResponseBody
-	public List<Member> processQueryAllPages(@PathVariable("pageNo")int pageNo){
-		
-		return plpService.QueryByPage(pageNo-1);
-				
-	}
+//	@RequestMapping(path ="/queryByPage/{pageNo}",method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Member> processQueryAllPages(@PathVariable("pageNo")int pageNo){
+//		
+//		return plpService.QueryByPage(pageNo-1);
+//				
+//	}
 	
 	@RequestMapping(path="/painterimage", method = RequestMethod.GET)
 	//畫師照片顯示
 	public void prosessPainterImgById(HttpServletRequest request, HttpServletResponse response, Model m) throws IOException {
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 
 		Member oneMem = plService.selectOne(memOneId);	
 	//	m.addAttribute("member_id", oneMem.getMember_id());

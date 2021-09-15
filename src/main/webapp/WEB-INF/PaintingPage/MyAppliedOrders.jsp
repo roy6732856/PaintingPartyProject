@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
-=======
 
 
 <head>
@@ -41,18 +39,14 @@
 
 
 
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 <html>
 
 <body>
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 <div class="u-list u-list-2">
 	<div class="u-repeater u-repeater-2">
     <div
@@ -301,17 +295,6 @@
         
        <script>
                 
-<<<<<<< HEAD
-                    
-         $.ajax({
-             url: `<%= request.getContextPath() %>/backend/myappliedorders2`,                        // url位置
-             type: 'post',                   // post/get
-             error: function (xhr) { $("#MyAppliedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
-             success: function (data) { $("#MyAppliedOrdersPage").html(JSON.stringify(data)); }// 成功後要執行的函數
-         });
-                    
-         </script>
-=======
        $(document).ready(ajaxreqb);
 
        function ajaxreqb (){    
@@ -809,7 +792,6 @@
 </script>
          
          
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 
     </div>
 </div>
@@ -832,12 +814,6 @@
  </div>
 
  <!-------結束--------->
-<<<<<<< HEAD
-
-
-
-
-=======
  
   <!-------以下評價表單--------->
  
@@ -1021,6 +997,5 @@
 </div>
 </div>
 <!-- 以上檔案內容 -->
->>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
 </body>
 </html>
