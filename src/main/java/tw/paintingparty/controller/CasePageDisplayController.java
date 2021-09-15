@@ -127,8 +127,9 @@ public class CasePageDisplayController {
 			
 			InputStream in = new FileInputStream(new File(exImgPath));
 			IOUtils.copy(in, response.getOutputStream());
+		
 		}else {
-			InputStream in = new FileInputStream(new File("C:\\PaintingImg\\HeadShot\\default.jpg"));
+			InputStream in = new FileInputStream(new File("C:\\PaintingImg\\Example\\noimage.jpg"));
 			IOUtils.copy(in, response.getOutputStream());
 		}
 		

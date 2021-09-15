@@ -44,7 +44,7 @@
       "logo": "images/LOGO-TEST-22.png"
     }
   </script>
-  
+
 
 <meta name="theme-color" content="#478ac9">
 <meta property="og:title" content="CasePage">
@@ -215,9 +215,9 @@
 											<p style="color: darkblue; font-weight: bold;">發案者圖案圖例</p>
 											<div
 												class="u-container-layout u-container-layout-21 ">
-												<div class="u-image u-image-circle u-image-2" alt=""
-													data-image-width="1500" data-image-height="1000"><img src="<%= request.getContextPath() %>/casepagedisplayexImg" class="u-image u-image-2" /></div> 
-												<!-- <div class="u-container-style u-group u-group-20">
+												<div class="container"  
+													><img src="<%= request.getContextPath() %>/casepagedisplayexImg" class="img-thumbnail img-polaroid" style="display: block;max-width: 100%;height: 300px;"/></div> 
+												<!-- data-image-width="1500" data-image-height="1000"<div class="u-container-style u-group u-group-20">
 													<div class="u-container-layout u-container-layout-22"></div>
 												</div>
 												 <p class="u-text u-text-default u-text-19">畫師暱稱</p>-->
