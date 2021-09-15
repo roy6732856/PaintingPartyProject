@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
   <head>
@@ -9,7 +8,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>AccoutManager</title>
+    <title>AccountManager</title>
 	<link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
     <link rel="stylesheet" href="../resources/css/AccoutManager.css" media="screen">
 
@@ -98,8 +97,8 @@
                       </a>
                       <div class="u-accordion-pane u-container-style u-shape-rectangle u-white u-accordion-pane-1" id="accordion-0781" aria-labelledby="link-accordion-0781">
                         <div class="u-container-layout u-container-layout-2">
-                          <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
-                          <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
+                          <a href="accountmanager" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
+                          <a href="personcontent" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
                           <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-3">案件管理</a>
                           <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-4">畫作管理</a>
                         </div>
@@ -115,45 +114,48 @@
                 <div class="u-container-layout u-container-layout-5">
                   <div class="u-align-left u-container-style u-group u-radius-25 u-shape-round u-white u-group-1">
                     <div class="u-clearfix u-custom-html u-custom-html-1">
-                    <div class="u-container-layout u-container-layout-4"><span class="u-align-left u-icon u-icon-circle u-icon-5"></span>
+<!--                     <h5 class="u-text u-text-default u-text-1">帳號設定</h5> -->
+                    <div class="u-container-layout u-container-layout-4" style="padding: 20px"><span class="u-align-left u-icon u-icon-circle u-icon-5"></span>
                       <h5 class="u-text u-text-default u-text-1">帳號設定</h5>
-                      <div class="u-form u-form-1">
-                        <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+                      <div class="u-form u-form-1" style="padding: 20px">
+<!--                         <form action="accountmanagerchange" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;"> -->
+                       <form action="accountmanagerchange" method="post"  style="padding: 10px;">   
                           <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">編輯信箱</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1">
-                        </div>
+                            <input type="text" class="form-control" id="exampleFormControlInput1" name="oneMemEmail">
+                          </div>
                           <div class="mb-3">
                               <label for="exampleFormControlInput2" class="form-label">銀行帳號</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput2">
+                              <input type="text" class="form-control" id="exampleFormControlInput2" name="oneMenBank_account">
                           </div>
                           <div class="mb-3">
                               <label for="exampleFormControlInput3" class="form-label">PIVIX網址</label>
-                              <input type="text" class="form-control" id="exampleFormControlInput3">
+                              <input type="text" class="form-control" id="exampleFormControlInput3" name="oneMemPixiv">
                           </div>
                           <div class="col-6">
+<!--                               <button type="submit" value="send" class="btn btn-primary">submit</button> -->
                               <button type="submit" class="btn btn-primary">submit</button>
-                        </div>
+                          </div>
                         </form>
-                      </div>
+                       </div>
                       <div class="u-container-style u-group u-white u-group-2">
-                        <div class="u-container-layout u-container-layout-5">
+                        <div class="u-container-layout u-container-layout-5"style="padding-Top 30px">
                           <h5 class="u-text u-text-body-color u-text-2">信箱</h5>
                           <div class="u-container-style u-group u-white u-group-3">
                             <div class="u-container-layout u-container-layout-6">
-                              <p class="u-text u-text-default u-text-grey-40 u-text-3">JohnLee@gmail.com</p>
+                              <p class="u-text u-text-default u-text-grey-40 u-text-3">${oneMemEmail}</p>
                             </div>
                           </div>
                           <h5 class="u-text u-text-body-color u-text-4">銀行帳號 </h5>
                           <div class="u-container-style u-group u-white u-group-4">
                             <div class="u-container-layout u-container-layout-7">
-                              <p class="u-text u-text-default u-text-grey-40 u-text-5">銀行帳號hweoiurhfoiwnfiwhfij</p>
+                              <p class="u-text u-text-default u-text-grey-40 u-text-5">${oneMenBank_account}</p>
                             </div>
                           </div>
                           <h5 class="u-text u-text-body-color u-text-6">PIXIV網址</h5>
                           <div class="u-container-style u-group u-white u-group-5">
                             <div class="u-container-layout u-container-layout-8">
-                              <p class="u-align-left u-text u-text-default u-text-grey-40 u-text-7">PIXIV網址jfwpiefjpwfjw</p>
+                              <p class="u-align-left u-text u-text-default u-text-grey-40 u-text-7">${oneMemPixiv}</p>
                             </div>
                           </div>
                         </div>
