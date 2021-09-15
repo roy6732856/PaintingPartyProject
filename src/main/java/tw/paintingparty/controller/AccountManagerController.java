@@ -22,7 +22,7 @@ public class AccountManagerController {
 	public String processAccountManager(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 		System.out.println("login="+memOneId);
 
 		Member oneMem = accountManagerService.selectOne(memOneId);
@@ -37,7 +37,7 @@ public class AccountManagerController {
 	public String processAccountManagerChange(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 		
 		System.out.println("login="+memOneId);
 		
@@ -47,20 +47,14 @@ public class AccountManagerController {
 		
 		System.out.println(oneMemEmail+":"+oneMenBank_account+":"+oneMemPixiv);
 		
-
-		Member oneMem = accountManagerService.updateOne(memOneId, oneMemEmail, oneMenBank_account, oneMemPixiv);
+		String result = accountManagerService.updateOne(memOneId, oneMemEmail, oneMenBank_account, oneMemPixiv);		
+		System.out.println(result);
 		
-		System.out.println("update");
-		System.out.println(oneMem.getEmail()+":"+oneMem.getBank_account()+":"+oneMem.getPixiv());
+		m.addAttribute("oneMemEmail", oneMemEmail);
+		m.addAttribute("oneMenBank_account", oneMenBank_account);
+		m.addAttribute("oneMemPixiv", oneMemPixiv);
 		
-		m.addAttribute("oneMemEmail", oneMem.getEmail());
-		m.addAttribute("oneMenBank_account", oneMem.getBank_account());
-		m.addAttribute("oneMemPixiv", oneMem.getPixiv());
-		
-		System.out.println("update2");
-		System.out.println(m.getAttribute("oneMemEmail")+":"+m.getAttribute("oneMenBank_account")+":"+m.getAttribute("oneMemPixiv"));
-		
-		return "TestResponse";
+		return "AccountManager";
 	}
 	
 	

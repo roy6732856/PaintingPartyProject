@@ -20,10 +20,11 @@ public class AccountManagerService {
 		return oneMem;
 	}
 	
-	public Member updateOne(int oneMemId, String oneMemEmail, String oneMenBank_account, String oneMemPixiv) {
+	public String updateOne(int oneMemId, String oneMemEmail, String oneMenBank_account, String oneMemPixiv) {
 		
-		Member oneMem = accountManagerDao.UpdateOne(oneMemId, oneMemEmail, oneMenBank_account, oneMemPixiv);
-		return oneMem;
+		String Result = accountManagerDao.UpdateOne(oneMemId, oneMemEmail, oneMenBank_account, oneMemPixiv);
+
+		return Result;
 	}
 	
 }

@@ -106,11 +106,25 @@
                 <label for="inputLowBudget">酬勞預算</label>
                 <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)" name="expectedBudget">
               </div>
+<<<<<<< HEAD
+              <div class="form-group col-md-6">
+                <label for="inputHighBudget">最高預算</label>
+                <input type="text"  class="form-control" id="inputHighBudget" placeholder="(必填)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>詳細描述</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" id="succ" class="btn btn-warning btn-lg btn-block">送出</button>
+=======
               
             </div>
 
 
             <button type="submit" class="btn btn-warning btn-lg btn-block">送出</button>
+>>>>>>> dd487363df99d1b56dfe65fd2306281738b0c0e1
 
           </form>
         </div>
