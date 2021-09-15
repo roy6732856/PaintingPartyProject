@@ -1,0 +1,9 @@
+diff a/target/m2e-wtp/web-resources/META-INF/maven/PaintPartyMvcProject/PaintPartyMvcProject/pom.properties b/target/m2e-wtp/web-resources/META-INF/maven/PaintPartyMvcProject/PaintPartyMvcProject/pom.properties	(rejected hunks)
+@@ -4,6 +4,7 @@
+ m2e.projectLocation=C\:\\Painting_SpringMVC\\PaintPartyMvcProject
+ =======
+ #Wed Sep 15 14:10:47 CST 2021
++>>>>>>> 8ddf187ca2a5dd6a826ab67448b3d6dff27464b3
+ m2e.projectName=PaintPartyMvcProject
+ groupId=PaintPartyMvcProject
+ artifactId=PaintPartyMvcProject
