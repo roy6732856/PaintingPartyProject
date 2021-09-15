@@ -45,7 +45,7 @@ public class Member implements Serializable {
 	
 	private String profile_content;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date register_date;
 	
 	private String tag_personal;
