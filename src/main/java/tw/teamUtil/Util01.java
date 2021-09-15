@@ -17,17 +17,44 @@ public class Util01 {
 
 	public static void main(String[] args) {
 //		測試區
-//		Util01 util01 = new Util01();
+		Util01 util01 = new Util01();
 //		Map priceStage = util01.PriceDivideByThree(259);
 //		System.out.println(priceStage.get("Stage1"));
 //		System.out.println(priceStage.get("Stage2"));
 //		System.out.println(priceStage.get("Stage3"));
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    	String nowTimeing = formatter.format( LocalDateTime.now() ).toString();
-    	System.out.println(nowTimeing);
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//    	String nowTimeing = formatter.format( LocalDateTime.now() ).toString();
+//    	System.out.println(nowTimeing);
+    	
+//		String[] caseTagSplit = util01.CaseTagSplit("1,2,3");
+//		String selectStr = "where ";
+//		
+//		String hql2 = "from Tag as t ";
+//		
+//		for(int i=0;i<caseTagSplit.length;i++) {
+//			selectStr += "t.tag_id = " + caseTagSplit[i] + " " ;
+//			
+//			if( i != caseTagSplit.length-1 ) {
+//				selectStr += "or ";
+//			}
+//			
+//		}
+//		String finalhql2 = hql2 + selectStr;
+//		System.out.println(finalhql2);
+    	
 	}
 	
+	
+	
+	public String[] CaseTagSplit( String CaseTag ) { 
+		//把案件的TAG欄位，以,為切割點，得出數字的陣列，去搜尋標籤表
+		
+		String[] SplitList = CaseTag.split(",");
+		
+		
+		return SplitList;
+	}
 	
 	
 	public String fileNameUtil( String originalFileName ) { 

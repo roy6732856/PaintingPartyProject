@@ -14,9 +14,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.paintingparty.model.CaseApply;
+import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.Orders;
 import tw.paintingparty.model.Product;
+import tw.paintingparty.model.Tag;
 import tw.teamUtil.Util01;
 
 
@@ -358,6 +360,95 @@ public class CaseManageDAO {
 	
 	
 	
+	
+	public List<CaseBackStageBean> CaseBackStageManage( Integer caseid ) {
+	//   管理案件
+			
+			Session session = sessionfactory.getCurrentSession();
+					
+			Util01 util01 = new Util01();
+			
+			String hql = "from Cases as c where c.case_id = :caseid ";
+			Query<Cases> query = session.createQuery(hql,Cases.class).setParameter("caseid",caseid );
+			Cases thisCase = query.getSingleResult();
+			
+			//----------------設置TAG名稱
+			String case_tag = thisCase.getCase_tag();
+			String[] caseTagSplit = util01.CaseTagSplit(case_tag); //得出切割好的數字(字串型態)
+			String selectStr = "where ";
+			
+			String hql2 = "from Tag as t ";
+			
+			for(int i=0;i<caseTagSplit.length;i++) { //設置搜尋語句
+				selectStr += "t.tag_id = " + caseTagSplit[i] + " " ;
+				
+				if( i != caseTagSplit.length-1 ) {
+					selectStr += "or ";
+				}
+				
+			}
+			String finalhql2 = hql2 + selectStr; //最終搜尋語句
+			
+			Query<Tag> query2 = session.createQuery(finalhql2,Tag.class);
+			List<Tag> tagList = query2.list();
+			String tagname = ""; //要傳到前端去的標籤名稱
+			
+			int count = 0;
+			for( Tag tag : tagList ) { //設置標籤名稱進字串物件
+				
+				tagname+= tag.getTag_content();
+				
+				if( count != tagList.size()-1 ) {
+					tagname += "、";
+				}
+				
+				count++;
+				
+			}
+			
+			//----------------以上設置TAG名稱
+			
+			String hql3 = "from CaseApply as ca where ca.applycasesbean.case_id = :caseid ";
+			Query<CaseApply> query3 = session.createQuery(hql3,CaseApply.class).setParameter("caseid",caseid );
+			List<CaseApply> caseApplyList = query3.getResultList();
+			
+			List<CaseBackStageBean> cbsbList = new ArrayList<CaseBackStageBean>();
+			CaseBackStageBean cbsb = new CaseBackStageBean();
+			cbsb.setCase_id( thisCase.getCase_id() );
+			cbsb.setCase_title( thisCase.getCase_title() );
+			cbsb.setUpload_date( thisCase.getUpload_date() );
+			cbsb.setPrice_min(thisCase.getPrice_min());
+			cbsb.setPrice_max(thisCase.getPrice_max());
+			cbsb.setCase_tag(tagname); //轉中文
+			cbsbList.add(cbsb); //一定會有第一筆資料，萬一沒人應徵，也可以得到此案件的資訊，顯示在上方，但後面要記得取資料時，要I+1
+			
+			for( CaseApply ca : caseApplyList ) {
+				CaseBackStageBean cbsb2 = new CaseBackStageBean();
+				cbsb2.setCase_id( thisCase.getCase_id() );
+				cbsb2.setCase_title( thisCase.getCase_title() );
+				cbsb2.setUpload_date( thisCase.getUpload_date() );
+				cbsb2.setPrice_min(thisCase.getPrice_min());
+				cbsb2.setPrice_max(thisCase.getPrice_max());
+				cbsb2.setCase_tag(tagname); //轉中文
+				cbsb2.setBmember_id( ca.getApplymemberbean().getMember_id() );
+				cbsb2.setBmember_name( ca.getApplymemberbean().getMember_name() );
+				cbsb2.setProfile_pic( ca.getApplymemberbean().getProfile_pic() );
+				cbsb2.setPrice_expected(ca.getPrice_expected());
+				cbsb2.setCase_time(ca.getCase_time());
+				cbsb2.setApply_date(ca.getApply_date());
+				cbsb2.setApply_status(ca.getApply_status());
+				
+				cbsbList.add(cbsb2);
+				
+			}
+			
+			return cbsbList;
+			
+		}
+	
+	
+	
+	
 	//--------------------------------------------
 	
 	public String UpdateDemo( ) {
@@ -377,7 +468,7 @@ public class CaseManageDAO {
 	
 	
 	
-public void InsertDemo( ) {
+	public void InsertDemo( ) {
 		
 		Session session = sessionfactory.getCurrentSession();
 		

@@ -641,7 +641,7 @@ function ajaxreq (){
   					error: function(XMLHttpRequest, textStatus, errorThrown) {
   						alert("發生錯誤");
   						$( "#dialog-filecontenta" ).dialog( "close" );
-  						ajaxreqb();
+  						ajaxreq();
  						$('html,body').animate({ scrollTop: 0 }, 'slow'); 
   						
   					}
@@ -935,8 +935,9 @@ $("#evaluation_orderid").attr("style","display:none");
 	        <a href="####" id="payINFO_headshot" target="_blank"> 
 	          <img src="" style="display:block; margin:auto; width:150px;" id="payheadshot" />
 	        
-	          <div style="text-align: center">
-	          <b style="font-size:large;" id="paymembername"></b></div>
+	          <div style="text-align: center;">
+	          	<b style="font-size:large;" id="paymembername"></b>
+	          </div>
 	        </a>
 	        <div style="text-align: center;">(接案方)</div>
 	

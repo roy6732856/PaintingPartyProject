@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import tw.paintingparty.casemanage.model.CaseBackStageBean;
 import tw.paintingparty.casemanage.model.CaseManageDAO;
 import tw.paintingparty.casemanage.model.EvaluationA2BBean;
 import tw.paintingparty.casemanage.model.EvaluationB2ABean;
@@ -119,13 +120,16 @@ public class TestDemoController_01 {
 	
 	
 	
-	
 	@GetMapping(path = "/backend/casebackstage/{caseid}") //案件管理頁面
 	@ResponseBody
-	public String test10_3(@PathVariable("caseid") String caseid , HttpServletRequest request ) {
-		String welcom = "casebackstage: " + caseid;
+	public List<CaseBackStageBean> test10_3(@PathVariable("caseid") Integer caseid , HttpServletRequest request ) {
+		System.out.println("接收成功!");
+//		String welcom = "casebackstage: " + caseid;
+//		System.out.println(welcom);
+		List<CaseBackStageBean> caseBackStageManage = cmDao.CaseBackStageManage( caseid );
 		
-		return welcom ;
+		return caseBackStageManage;
+		
 	}
 	
 	
