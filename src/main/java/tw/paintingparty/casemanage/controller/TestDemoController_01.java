@@ -81,7 +81,7 @@ public class TestDemoController_01 {
 	
 	//--------------------------------------------------------
 	
-	@RequestMapping(path = "/backend/casemanage2", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/casemanage", method = RequestMethod.GET)
 	//測試CASEMANAGE的靜態資源成功與否
 	public String test9(Model m) {
 		return "CaseManage2";
