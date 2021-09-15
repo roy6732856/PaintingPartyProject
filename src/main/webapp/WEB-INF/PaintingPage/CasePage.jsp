@@ -44,7 +44,9 @@
       "logo": "images/LOGO-TEST-22.png"
     }
   </script>
-
+<style>
+	
+</style>
 
 <meta name="theme-color" content="#478ac9">
 <meta property="og:title" content="CasePage">
@@ -139,25 +141,25 @@
 							class="u-container-style u-layout-cell u-size-18 u-layout-cell-1">
 							<div class="u-container-layout u-container-layout-1">
 								<div
-									class="u-container-style u-group u-radius-20 u-shape-round u-white u-group-1">
+									class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-1">
 									<div class="u-container-layout u-container-layout-2">
-										<div class="u-align-left u-container-style u-group u-group-2">
-											<div class="u-container-layout u-container-layout-3">
+										<div class="u-align-left u-container-style u-group u-group-2" style="min-height:auto;">
+											<div class="u-container-layout u-container-layout-2">
 												
-												<div class="u-container-style u-group u-group-3">
-													<div class="u-container-layout u-container-layout-3"><img src="<%= request.getContextPath() %>/casepagedisplaymemId" class="u-absolute-hcenter u-expanded-height u-image u-image-circle "></div>
+												<div class="">
+													<a href="####"><img src="<%= request.getContextPath() %>/casepagedisplaymemId" class="rounded-3 border border-2 mx-auto d-block" style="display: block;max-width: 100%;height: 120px;"></a>
 												</div>
 											</div>
 										</div>
-										<h3 class="u-align-center" style="margin-top:20px;">${caseOwner}</h3>
+										<h3 class="u-align-center" style="margin-top:20px;color: #4a4a4a;">${caseOwner}</h3>
 									</div>
 								</div>
 								<div
-									class="u-container-style u-group u-radius-20 u-shape-round u-white u-group-4">
+									class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-4">
 									<div
 										class="u-container-layout u-valign-top u-container-layout-5">
 										<div
-											class="u-border-1 u-border-white u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-group-5">
+											class="u-border-1 u-border-white u-container-style u-expanded-width u-group u-radius-10 u-shape-round u-group-5">
 											<div class="u-container-layout u-container-layout-6">
 
 												<div class="form-row d-flex">

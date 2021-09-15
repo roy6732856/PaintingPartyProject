@@ -79,12 +79,16 @@
 														\${data[j].case_title}</div>
 									</div>
 									<section class="input-group mb-3"></section>
-									<section class="input-group mb-3" >
-										<div id="uDate" style="color: #4a4a4a; font-size: 15px;">\${data[j].upload_date}</div>
-										<div id="caseTag" style="color: burlywood; font-size: 20px;margin-left: 100px;">
+									<section class="mb-3" >
+									<div id="uDate" style="color: #4a4a4a; font-size: 15px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+									  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+										  <i class="bi bi-calendar"></i>
+									</svg>\${data[j].upload_date}</div>
+										<div id="caseTag" style="color: burlywood; font-size: 20px;text-align:right;">
 														\${data[j].price_min}~\${data[j].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
 									</section>
-									<a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[j].case_id }>前往案件</a>
+									<hr>
+									<div  style="text-align:right"><a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[j].case_id }><button type="button" class="btn btn-warning" >前往案件</button></a></div>
 								</div>
 							</div>`
 							)	
@@ -99,12 +103,16 @@
 														\${data[y].case_title}</div>
 									</div>
 									<section class="input-group mb-3"></section>
-									<section class="input-group mb-3" >
-										<div id="uDate" style="color: #4a4a4a; font-size: 15px;">\${data[y].upload_date}</div>
-										<div id="caseTag" style="color: burlywood; font-size: 20px;margin-left: 100px;">
+									<section class="mb-3" >
+									<div id="uDate" style="color: #4a4a4a; font-size: 15px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+									  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+										  <i class="bi bi-calendar"></i>
+									</svg>\${data[y].upload_date}</div>
+										<div id="caseTag" style="color: burlywood; font-size: 20px;text-align:right;">
 														\${data[y].price_min}~\${data[y].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
 									</section>
-									<a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[y].case_id }>前往案件</a>
+									<hr>
+									<div  style="text-align:right"><a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[y].case_id }><button type="button" class="btn btn-warning" >前往案件</button></a></div>
 								</div>
 							</div>`
 							)	
@@ -262,7 +270,7 @@
 										</select>
 										<hr>
 										<button type="submit" class="btn btn-warning col-md-12"
-											style="left: 17%;">查詢</button>
+											style="left: 17%;">清除所有條件</button>
 									</div>
 								</form>
 							</div>

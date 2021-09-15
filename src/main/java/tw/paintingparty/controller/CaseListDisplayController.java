@@ -65,23 +65,24 @@ public class CaseListDisplayController {
 				
 	}
 	
-	@RequestMapping(path ="/queryByTags/{Tags}",method = RequestMethod.POST)
-	@ResponseBody
-	public List<Cases> processQueryByTags(@PathVariable("Tags")int Tags){
-		
-		return clpService.QueryByTags(Tags);
-				
-	}
+//	@RequestMapping(path ="/queryByTags/{Tags}",method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Cases> processQueryByTags(@PathVariable("Tags")int Tags){
+//		
+//		return clpService.QueryByTags(Tags);
+//				
+//	}
 	
 	@ResponseBody
 	@RequestMapping(path = "/ajaxRequest",method = RequestMethod.POST)
-	public Cases ajaxRequest(@RequestBody Cases cases) {
-		System.out.println("CaseTag:"+cases.getCase_tag());
-		System.out.println("Min_Price:" + cases.getPrice_min());
-		System.out.println("Max_Price:" + cases.getPrice_max());
-		return cases;
+	public List<Cases> ajaxRequest(@RequestBody Cases cases) {
+//		System.out.println("CaseTag:"+cases.getCase_tag());
+//		System.out.println("Min_Price:" + cases.getPrice_min());
+//		System.out.println("Max_Price:" + cases.getPrice_max());
+		
+		return clpService.QueryByComplexReq(cases);
 		
 	}
-	
+	 
 	
 }

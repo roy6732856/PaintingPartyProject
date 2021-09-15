@@ -88,4 +88,59 @@ public class CaseListPageDAO {
 //		
 //		return list;
 //	}
+	
+	public List<Cases> QueryByComplexReq(Cases cases){
+		
+		Session session = factory.getCurrentSession();
+		
+		String tagAry = cases.getCase_tag();
+		
+
+		String[] ary = tagAry.split(",");
+		
+		int size = ary.length;
+	    int [] arr = new int [size];
+	    for(int i=0; i<size; i++) {
+	         arr[i] = Integer.parseInt(ary[i]);
+	    }
+		int typeTag = arr[0];
+		int styleTag = arr[1];
+		String hql1 = "from Cases c where c.case_tag like '%"+ typeTag +"%'";
+		
+		String hql2 = "from Cases c where c.case_tag like '%"+ styleTag +"%'";
+		
+		String hql3 = "from Cases c where c.case_tag like '%"+ typeTag +"%'"+ " and c.case_tag like " + "'%"+ styleTag +"%'";
+		
+//		Query<Cases> query = session.createQuery(hql1);
+//
+//		List<Cases> list = query.setMaxResults(8).getResultList();
+//		return list;
+		
+	    if(typeTag==0 && styleTag>0) {
+	    	System.out.println(styleTag);
+	    	
+	    	Query<Cases> query = session.createQuery(hql1,Cases.class);
+	    	
+	    	List<Cases> list = query.setMaxResults(8).getResultList();
+	    	return list;
+	    }else  if(typeTag>0 && styleTag==0){ 
+	    	System.out.println(typeTag);
+	    	Query<Cases> query = session.createQuery(hql2,Cases.class);
+	    	
+	    	List<Cases> list = query.setMaxResults(8).getResultList();
+	    	return list;
+	    }
+	    else {
+	    	System.out.println(typeTag+styleTag);
+	    	Query<Cases> query = session.createQuery(hql3,Cases.class);
+	    	
+	    	List<Cases> list = (List<Cases>) query.setMaxResults(8).getResultList();
+	    	return list;
+	    }
+		
+		
+		
+
+		
+	}
 }

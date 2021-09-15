@@ -34,5 +34,9 @@ public class CaseListPageService {
 //		return clpDAO.QueryByTags(pram);
 //		
 //	}
+	
+	public List<Cases> QueryByComplexReq(Cases cases) {
+		return clpDAO.QueryByComplexReq(cases);
+	}
  
 }

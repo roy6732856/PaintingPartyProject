@@ -47,14 +47,13 @@
 	var newOld = "new";
 	
 	$(document).ready(function() {
-		load(indexPage);
+		
 		
 		$('#type').change(function(){
 			var s = $('#type').val();
-			tagAry.push(s);
-			if(tagAry.length>2){
-				tagAry.shift();
-			}
+			
+			tagAry[0] = s;
+			
 			sort();
 			
 		})
@@ -62,10 +61,9 @@
 		
 		$('#style').change(function(){
 			var s = $('#style').val();
-			tagAry.push(s);
-			if(tagAry.length>2){
-				tagAry.shift();
-			}
+			
+			tagAry[1] = s;
+			
 			sort();
 			
 		})
@@ -100,7 +98,6 @@
 	
 	function change(page){
 		indexPage = page;
-		load(indexPage);
 	}
 	
 	function tag(tagAry){
@@ -130,7 +127,44 @@
 			contentType : 'application/json',
 			data: JSON.stringify({"case_tag":tags,"price_min":priceRan[0],"price_max":priceRan[1]}),
 			success : function(data) {
-				alert("case_tag:"+data.case_tag+"minPrice:"+data.price_min+"maxPrice:"+data.price_max);
+				var tjson = JSON.stringify(data);
+				$('#row1').empty();
+				$('#row2').empty();
+				if(data.length==0){
+					$('#row1').append("<tr><td colspan='2'>暫無資料</td></tr>");
+				}else{
+					var k;
+					var j=0;
+					if(data.length<=4){
+						k = data.length;
+					}else{
+						k = 4;
+					}
+					for(var j=0;j<k;j++){
+						$('#row1').append(
+								`<div class="u-container u-white mb-3"
+								style="border-radius: 10px; padding: 10px;">
+								<div class="u-container-layout u-container-layout-4" >
+									<div class="input-group mb-3">
+										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
+														\${data[j].case_title}</div>
+									</div>
+									<section class="input-group mb-3"></section>
+									<section class="mb-3" >
+									<div id="uDate" style="color: #4a4a4a; font-size: 15px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+									  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+										  <i class="bi bi-calendar"></i>
+									</svg>\${data[j].upload_date}</div>
+										<div id="caseTag" style="color: burlywood; font-size: 20px;text-align:right;">
+														\${data[j].price_min}~\${data[j].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
+									</section>
+									<hr>
+									<div  style="text-align:right"><a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[j].case_id }><button type="button" class="btn btn-warning" >前往案件</button></a></div>
+								</div>
+							</div>`
+							)	
+					}
+				}
 			},
 			error:function(){
 				alert("請求失敗");
@@ -138,72 +172,7 @@
 		})
 	}
 	
-	function load(indexPage){
-		$.ajax({
-			type : 'post',
-			url : "/PaintPartyMvcProject/queryByPage/" + indexPage,
-			dataType : 'JSON',
-			contentType : 'application/json',
-			success : function(data) {
-				var json = JSON.stringify(data);
-				$('#row1').empty("");
-				$('#row2').empty("");
-				//取得頁數1 2 3   假設目前在地1頁(i=1)的狀況  總共的頁數如何取得data.length/8 取整數
-				//for(var i=indexPage;i<=totalPages;i++){
-					
-				//console.log(data.length);
-				//console.log(totalPages);
-				var j=((0+1))-1;
-				var y=j+4;   
-
-					for(var j=0;j<4;j++){
-						$('#row1').append(
-								`<div class="u-container u-white mb-3"
-								style="border-radius: 20px; padding: 10px;">
-								<div class="u-container-layout u-container-layout-4" >
-									<div class="input-group mb-3">
-										<span class="m-1">案件名稱:</span> <div id="caseName" style="color: burlywood; font-size: 20px">
-														\${data[j].case_title}</div>
-									</div>
-									<div class="input-group mb-3">
-										<span class="m-1">發布日期:</span> <div id="uDate" style="color: burlywood; font-size: 20px">
-														\${data[j].upload_date}</div>
-									</div>
-									<div class="input-group mb-3">
-										<span class="m-1">案件標籤:</span> <div id="caseTag" style="color: burlywood; font-size: 20px">
-														\${data[j].case_tag}</div>
-									</div>
-									<a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[j].case_id }>前往案件</a>
-								</div>
-							</div>`
-							)	
-					}
-					for(var y;y<8;y++){
-						$('#row2').append(
-								`<div class="u-container u-white mb-3"
-								style="border-radius: 20px; padding: 10px;">
-								<div class="u-container-layout u-container-layout-4" >
-									<div class="input-group mb-3">
-										<span class="m-1">案件名稱:</span> <div id="caseName" style="color: burlywood; font-size: 20px">
-														\${data[y].case_title}</div>
-									</div>
-									<div class="input-group mb-3">
-										<span class="m-1">發布日期:</span> <div id="uDate" style="color: burlywood; font-size: 20px">
-														\${data[y].upload_date}</div>
-									</div>
-									<div class="input-group mb-3">
-										<span class="m-1">案件標籤:</span> <div id="caseTag" style="color: burlywood; font-size: 20px">
-														\${data[y].case_tag}</div>
-									</div>
-									<a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[y].case_id }>前往案件</a>
-								</div>
-							</div>`
-							)	
-					}
-					
-			}
-		})
-	};
+	
 		
 	
 </script>
@@ -215,6 +184,7 @@
 </div>
 
 <body class="u-body">
+
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
@@ -348,8 +318,8 @@
 											<option value="old">由舊到新</option>
 										</select>
 										<hr>
-										<button type="submit" class="btn btn-warning col-md-12"
-											style="left: 17%;">清除所有條件</button>
+										<button onclick="load(indexPage)" class="btn btn-warning col-md-12"
+											style="left: 17%;">清除查詢條件</button>
 									</div>
 								</form>
 							</div>
