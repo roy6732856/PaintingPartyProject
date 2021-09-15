@@ -15,7 +15,6 @@ public class AccountManagerDao {
 	@Autowired
 	private SessionFactory factory;
 	
-<<<<<<< HEAD
 	
 	public Member selectOne(int oneMemId) {
 		Session session = factory.getCurrentSession();
@@ -41,39 +40,6 @@ public class AccountManagerDao {
 		query3.executeUpdate();
 		
 		return "Success";
-=======
-	@Transactional
-	public Member selectOne(int oneMemId) {
-		Session session = factory.openSession();
-		Member oneMem = session.get(Member.class, oneMemId);
-		session.close();
-		return oneMem;		
-	}
-	@Transactional
-	public Member UpdateOne(int oneMemId, String oneMemEmail, String oneMenBank_account, String oneMemPixiv) {
-
-		Session session = factory.openSession();
-//		Member oneMem = session.get(Member.class, oneMemId);
-		
-//		oneMem.setEmail(oneMemEmail);
-//		oneMem.setBank_account(oneMenBank_account);
-//		oneMem.setPixiv(oneMemPixiv);
-//		session.save(oneMem);
-		
-		String hql = "from Member where member_id=1 ";
-		Query<Member> query = session.createQuery(hql, Member.class);
-		query.setParameter("pixiv", "pixiv");
-		query.executeUpdate();
-		Member result = query.uniqueResult();
-		
-		
-//		String hql = "from Member where member_id=1 ";
-//		Query<Member> query = session.createQuery(hql, Member.class);
-//		query.setParameter("pixiv", "pixiv");
-//		query.executeUpdate();
-//		Member result = query.uniqueResult();		
-		return result;		
->>>>>>> 4ae3bdb1b74598cec010cc2f96a6e4d52729f866
 	}
 	
 	

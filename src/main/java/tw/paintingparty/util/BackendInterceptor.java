@@ -17,7 +17,7 @@ public class BackendInterceptor implements HandlerInterceptor {
 			
 			System.out.println("登入失敗，轉到登入頁面。");
 
-			response.sendRedirect( request.getContextPath() + "/login.message");
+			response.sendRedirect( request.getContextPath() + "/login");
 			
 			return false;
 		}
