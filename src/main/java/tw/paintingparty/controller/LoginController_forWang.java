@@ -69,22 +69,22 @@ public class LoginController_forWang {
 					
 				
 					String member_id = rs.getString(1);
-<<<<<<< HEAD
+
 					String member_status = rs.getString(7);
-=======
+
 //					String member_status = rs.getString(7);
->>>>>>> 8ddf187ca2a5dd6a826ab67448b3d6dff27464b3
+
 					
 					
 					request.getSession().setAttribute("username", request.getParameter("username"));
 					request.getSession().setAttribute("password", request.getParameter("password"));
 					request.getSession().setAttribute("session_member_id", member_id);
-<<<<<<< HEAD
+
 					request.getSession().setAttribute("session_member_status", member_status);
-=======
+
 //					request.getSession().setAttribute("session_member_status", member_status);
 					
->>>>>>> 8ddf187ca2a5dd6a826ab67448b3d6dff27464b3
+
 					
 				
 					String keep =request.getParameter("keep");
