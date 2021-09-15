@@ -34,7 +34,7 @@
 }</script>
 
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function() {
 		$.ajax({
 			url : "/PaintPartyMvcProject/backend/systemnotice",
@@ -44,16 +44,16 @@
 
 			},
 			success : function(sus) {
-// 				for (var i = 0; i < data.length; i++) {
+ 				for (var i = 0; i < data.length; i++) {
 
-// 				}
+ 				}
 			},
 			error : function(err) {
 				console.log(err)
 			},
 		})
 	});
-</script>
+</script> -->
 
 
 

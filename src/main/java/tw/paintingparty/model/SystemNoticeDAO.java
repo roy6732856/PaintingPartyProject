@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
   Session session = sessionfactory.getCurrentSession();
   
   
-  String hql = "from SystemNotice where system_notice_id >= 1";
+  String hql = "from SystemNotice where system_notice_id=:snid >= 1";
   Query<SystemNotice> query = session.createQuery(hql, SystemNotice.class);
   
   
