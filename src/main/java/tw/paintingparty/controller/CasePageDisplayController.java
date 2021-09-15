@@ -70,9 +70,6 @@ public class CasePageDisplayController {
 		Member m1 = capdService.getMemberByCaseId(caseid);
 		m.addAttribute("caseOwner", m1.getMember_name());//m1[0]
 		
-		
-		
-		
 		//抓取tag數字  透過CaseByTags 轉換成中文回傳並印在螢幕上
 		String[] tags = c1.getCase_tag().split(",");
 		CaseByTags cTag = new CaseByTags();

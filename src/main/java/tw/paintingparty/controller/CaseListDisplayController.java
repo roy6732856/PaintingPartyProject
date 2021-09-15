@@ -47,7 +47,7 @@ public class CaseListDisplayController {
 		m.addAttribute("totalCases",cases);
 		m.addAttribute("totalPages",totalPages);
 		
-		return "CaseList3";
+		return "CaseList2";
 	}
 	
 	@RequestMapping(path = "/findAll",method = RequestMethod.POST)
@@ -80,7 +80,11 @@ public class CaseListDisplayController {
 //		System.out.println("Min_Price:" + cases.getPrice_min());
 //		System.out.println("Max_Price:" + cases.getPrice_max());
 		
-		return clpService.QueryByComplexReq(cases);
+		
+			return clpService.QueryByComplexReq(cases);
+		
+		
+		
 		
 	}
 	 

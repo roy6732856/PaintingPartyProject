@@ -105,11 +105,13 @@ public class CaseListPageDAO {
 	    }
 		int typeTag = arr[0];
 		int styleTag = arr[1];
-		String hql1 = "from Cases c where c.case_tag like '%"+ typeTag +"%'";
+		String hql = "from Cases";
 		
-		String hql2 = "from Cases c where c.case_tag like '%"+ styleTag +"%'";
+		String hql1 = "from Cases c where c.case_tag like '"+ typeTag +",%'";
 		
-		String hql3 = "from Cases c where c.case_tag like '%"+ typeTag +"%'"+ " and c.case_tag like " + "'%"+ styleTag +"%'";
+		String hql2 = "from Cases c where c.case_tag like '%,"+ styleTag +"'";
+		
+		String hql3 = "from Cases c where c.case_tag like '"+ typeTag +",%'"+ " and c.case_tag like " + "'%,"+ styleTag +"'";
 		
 //		Query<Cases> query = session.createQuery(hql1);
 //
@@ -119,22 +121,26 @@ public class CaseListPageDAO {
 	    if(typeTag==0 && styleTag>0) {
 	    	System.out.println(styleTag);
 	    	
-	    	Query<Cases> query = session.createQuery(hql1,Cases.class);
+	    	Query<Cases> query = session.createQuery(hql2,Cases.class);
 	    	
 	    	List<Cases> list = query.setMaxResults(8).getResultList();
 	    	return list;
 	    }else  if(typeTag>0 && styleTag==0){ 
 	    	System.out.println(typeTag);
-	    	Query<Cases> query = session.createQuery(hql2,Cases.class);
+	    	Query<Cases> query = session.createQuery(hql1,Cases.class);
 	    	
 	    	List<Cases> list = query.setMaxResults(8).getResultList();
 	    	return list;
-	    }
-	    else {
+	    
+	    }else if(typeTag!=0 && styleTag!=0){
 	    	System.out.println(typeTag+styleTag);
 	    	Query<Cases> query = session.createQuery(hql3,Cases.class);
 	    	
-	    	List<Cases> list = (List<Cases>) query.setMaxResults(8).getResultList();
+	    	List<Cases> list = query.setMaxResults(8).getResultList();
+	    	return list;
+	    }else {
+	    	Query<Cases> query = session.createQuery(hql,Cases.class);
+	    	List<Cases> list = query.setMaxResults(8).getResultList();
 	    	return list;
 	    }
 		

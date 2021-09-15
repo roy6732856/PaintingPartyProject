@@ -108,7 +108,7 @@
 		priceRan = priceRan;
 	}
 	
-	function sort(){
+	function sort(indexPage){
 		
 		function tag(tagAry){
 			tagAry = tagAry;
@@ -164,6 +164,7 @@
 							</div>`
 							)	
 					}
+					
 				}
 			},
 			error:function(){
@@ -276,6 +277,7 @@
 										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: rgba(176, 50, 41, 0.7); border-radius: 4px; color: white" >創作類型</label>
 										<select class="form-control col-md-12" style="left: 5%;" id="type" >
+											<option selected>請選擇創作類型</option>
 											<option value="1">插畫類型</option>
 											<option value="2">貼圖類型</option>
 											<option value="3">頭貼類型</option>
@@ -290,6 +292,7 @@
 										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: darkcyan; border-radius: 4px; color: white">畫作風格</label>
 										<select class="form-control col-md-12" style="left: 5%;" id="style" title="">
+										 	<option selected>請選擇創作風格</option>
 											<option value="8">日系風格</option>
 											<option value="9">歐美風格</option>
 											<option value="10">武俠風格</option>
