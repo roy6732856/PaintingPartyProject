@@ -66,15 +66,25 @@ public class LoginController_forWang {
 			else {
 				
 					//store member_id in session, so need to get member_id  from sql
+					
+				
 					String member_id = rs.getString(1);
+
+					String member_status = rs.getString(7);
+
 //					String member_status = rs.getString(7);
+
 					
 					
 					request.getSession().setAttribute("username", request.getParameter("username"));
 					request.getSession().setAttribute("password", request.getParameter("password"));
 					request.getSession().setAttribute("session_member_id", member_id);
+
+					request.getSession().setAttribute("session_member_status", member_status);
+
 //					request.getSession().setAttribute("session_member_status", member_status);
 					
+
 					
 				
 					String keep =request.getParameter("keep");

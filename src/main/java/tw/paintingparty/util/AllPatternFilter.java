@@ -25,6 +25,7 @@ public class AllPatternFilter extends HttpFilter {
 
 	public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("=============Passed AllPatternFilter!!===============");
+
 //		HttpServletRequest req = (HttpServletRequest)request;  
 //		request.getSession().setAttribute("login", 0); //DEMO用，模擬1號會員登入中，沒登入就註解
 		
