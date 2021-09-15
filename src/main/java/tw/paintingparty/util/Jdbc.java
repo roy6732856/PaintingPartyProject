@@ -8,7 +8,7 @@ public class Jdbc {
 	public Connection Jdbc_connection() {
 		String connectionUrl = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
 		String user="sa";
-		String password="as";
+		String password="123456789";
 		Connection con=null;
 		try {
 			con = DriverManager.getConnection(connectionUrl,user,password);
