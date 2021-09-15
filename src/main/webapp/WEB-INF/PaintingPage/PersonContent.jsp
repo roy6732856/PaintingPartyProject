@@ -48,7 +48,7 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="javascript::" style="padding: 10px 20px;">畫師列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a>
+</li><li class="u-nav-item"><a href="caselistpage.controller" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a>
 </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a>
 </li></ul>
           </div>
@@ -93,8 +93,8 @@
                       </a>
                       <div class="u-accordion-pane u-container-style u-shape-rectangle u-white u-accordion-pane-1" id="accordion-0781" aria-labelledby="link-accordion-0781">
                         <div class="u-container-layout u-container-layout-2">
-                          <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
-                          <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
+                          <a href="accountmanager" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
+                          <a href="personcontent" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
                           <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-3">案件管理</a>
                           <a href="#" class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-4">畫作管理</a>
                         </div>
@@ -104,6 +104,7 @@
                   <a href="https://nicepage.com/c/shapes-website-templates" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp; 系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2" data-href="https://nicepage.com/k/competition-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use></svg><svg class="u-svg-content" viewBox="-43 0 512 512" id="svg-c580"><path d="m413.417969 360.8125c-32.253907-27.265625-50.75-67.117188-50.75-109.335938v-59.476562c0-75.070312-55.765625-137.214844-128-147.625v-23.042969c0-11.796875-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.535156-21.332031 21.332031v23.042969c-72.257812 10.410156-128 72.554688-128 147.625v59.476562c0 42.21875-18.496094 82.070313-50.945312 109.503907-8.296876 7.105469-13.054688 17.429687-13.054688 28.351562 0 20.589844 16.746094 37.335938 37.332031 37.335938h352c20.589844 0 37.335938-16.746094 37.335938-37.335938 0-10.921875-4.757813-21.246093-13.25-28.519531zm0 0"></path><path d="m213.332031 512c38.636719 0 70.957031-27.542969 78.378907-64h-156.757813c7.425781 36.457031 39.746094 64 78.378906 64zm0 0"></path></svg></span>
                   <a href="https://nicepage.com/c/shapes-website-templates" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-6">訊息</a><span class="u-icon u-icon-circle u-icon-3" data-href="https://nicepage.com/c/fashion-beauty-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 -67 380 380" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-de85"></use></svg><svg class="u-svg-content" viewBox="0 -67 380 380" id="svg-de85"><path d="m30 0h320c14.402344.0390625 26.761719 10.261719 29.5 24.398438l-189.5 105.601562-189.5-105.601562c2.738281-14.136719 15.097656-24.3593755 29.5-24.398438zm320 246.601562h-320c-16.546875-.050781-29.953125-13.453124-30-30v-169.601562l185.101562 103.199219c1.5.824219 3.183594 1.273437 4.898438 1.300781 1.722656.019531 3.414062-.429688 4.898438-1.300781l185.101562-103.199219v169.601562c-.011719 16.5625-13.4375 29.984376-30 30zm0 0"></path></svg></span>
                   <a href="https://nicepage.com/c/shapes-website-templates" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span class="u-icon u-icon-circle u-icon-4" data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 511 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5881"></use></svg><svg class="u-svg-content" viewBox="0 0 511 512" id="svg-5881"><path d="m361.5 392v40c0 44.113281-35.886719 80-80 80h-201c-44.113281 0-80-35.886719-80-80v-352c0-44.113281 35.886719-80 80-80h201c44.113281 0 80 35.886719 80 80v40c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-40c0-22.054688-17.945312-40-40-40h-201c-22.054688 0-40 17.945312-40 40v352c0 22.054688 17.945312 40 40 40h201c22.054688 0 40-17.945312 40-40v-40c0-11.046875 8.953125-20 20-20s20 8.953125 20 20zm136.355469-170.355469-44.785157-44.785156c-7.8125-7.8125-20.476562-7.8125-28.285156 0-7.8125 7.808594-7.8125 20.472656 0 28.28125l31.855469 31.859375h-240.140625c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h240.140625l-31.855469 31.859375c-7.8125 7.808594-7.8125 20.472656 0 28.28125 3.90625 3.90625 9.023438 5.859375 14.140625 5.859375 5.121094 0 10.238281-1.953125 14.144531-5.859375l44.785157-44.785156c19.496093-19.496094 19.496093-51.214844 0-70.710938zm0 0"></path></svg></span>
+<!--                   <a href="https://nicepage.com/c/shapes-website-templates" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span class="u-icon u-icon-circle u-icon-4" data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 511 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5881"></use></svg><svg class="u-svg-content" viewBox="0 0 511 512" id="svg-5881"><path d="m361.5 392v40c0 44.113281-35.886719 80-80 80h-201c-44.113281 0-80-35.886719-80-80v-352c0-44.113281 35.886719-80 80-80h201c44.113281 0 80 35.886719 80 80v40c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-40c0-22.054688-17.945312-40-40-40h-201c-22.054688 0-40 17.945312-40 40v352c0 22.054688 17.945312 40 40 40h201c22.054688 0 40-17.945312 40-40v-40c0-11.046875 8.953125-20 20-20s20 8.953125 20 20zm136.355469-170.355469-44.785157-44.785156c-7.8125-7.8125-20.476562-7.8125-28.285156 0-7.8125 7.808594-7.8125 20.472656 0 28.28125l31.855469 31.859375h-240.140625c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h240.140625l-31.855469 31.859375c-7.8125 7.808594-7.8125 20.472656 0 28.28125 3.90625 3.90625 9.023438 5.859375 14.140625 5.859375 5.121094 0 10.238281-1.953125 14.144531-5.859375l44.785157-44.785156c19.496093-19.496094 19.496093-51.214844 0-70.710938zm0 0"></path></svg></span> -->
                 </div>
               </div>
               <div class="u-container-style u-layout-cell u-size-48 u-layout-cell-2">
@@ -120,28 +121,34 @@
                         <div class="container col-12">
                           <div class="mb-3">
                               <h6>身分設定</h6>
-                              <h6 style="display: inline-block;">委託者</h6>
-                              <button type="submit" class="btn btn-primary">切換畫家</button>
+                              <form action="personcontentpainterchange">
+                              <h6 style="display: inline-block;" id="painter0">${memberStatusName }</h6>
+                              	<button type="submit" class="btn btn-primary" id="painter1" onclick="changePainter()">成為畫師</button>
+                              </form>
+<!--                               <h6 style="display: inline-block;">委託者</h6> -->
+<!--                               <button type="submit" class="btn btn-primary">成為畫師</button> -->
                           </div>
-                            <form action="">
+							<form action="personcontentchange" method="post" enctype="multipart/form-data">
                               <div class="mb-3">
                                   <label for="exampleFormControlInput1" class="form-label">大頭貼設定</label>
-                                  <input type="file" class="form-control" id="exampleFormControlInput1">
+                                  <input type="file" class="form-control" id="exampleFormControlInput1" name="headShot">
+                                  <img src="personcontentpersoncontentimage" class="img-thumbnail" style="width:200px; margin-top:10px;">
                               </div>
 <!--                               <div class="mb-3"> -->
 <!--                                   <label for="exampleFormControlInput2" class="form-label">暱稱設定</label> -->
 <!--                                   <input type="text" class="form-control" id="exampleFormControlInput2"> -->
 <!--                               </div> -->
+<!-- 							<form action="personcontentchange" method="post" > -->
                               <div class="mb-3">
                                   <label for="exampleFormControlTextarea3" class="form-label">自我介紹</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+                                  <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" name="oneMemProfile_content" >${oneMemProfile_content }</textarea>
                               </div>
                               <div class="col-6">
-                                  <button type="submit" class="btn btn-primary">submit</button>
+                                  <button type="submit" class="btn btn-primary" >submit</button>
                               </div>
                             </form>
-                        </div>
-                        </form>
+                           </div>
+<!--                         </form> -->
                       </div>
                       <a href="https://nicepage.com/k/love-html-templates" class="u-border-2 u-border-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-9">Demo</a>
                     </div>
@@ -181,5 +188,15 @@
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
         </div>
       </nav></footer>
+      <script type="text/javascript">
+
+          let painter0=document.getElementById("painter0").innerText;
+          console.log(painter0);
+          if(painter0=="畫師"){
+            painter1.style.display="none";
+          }	          
+	
+    
+      </script>
   </body>
 </html>

@@ -4,14 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 @Controller
-public class CaseManageController {
+public class CaseFormApplyController {
 	
-	@RequestMapping(path = "/backend/casemanage", method = RequestMethod.GET)
-	public String backendcasemanage() {
-		return "CaseManage";
+	@RequestMapping(path = "/CaseFormApplyPage",method = RequestMethod.GET)
+	public String processCaseFromPage() {
+		return "CaseForm";
 	}
-	
-	
 }

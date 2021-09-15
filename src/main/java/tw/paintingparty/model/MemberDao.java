@@ -1,0 +1,89 @@
+package tw.paintingparty.model;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+@Repository("memberDao")
+@Transactional
+public class MemberDao {
+	@Autowired
+	public SessionFactory sessionfactory;
+	
+	public Member showLoginUsername(HttpServletRequest request) {
+		Session session = sessionfactory.openSession();
+		//先從session獲得username
+//		String username = (String) request.getSession().getAttribute("username");
+//		System.out.println(username);
+//		//再由username去抓資料庫的member_id
+//		String hql_username="from Member where member_account=:member_account";
+//		
+//		
+////		String hql_username="from Member where member_account= 'aa01'";
+//		Query<Member> query = session.createQuery(hql_username,Member.class).setParameter("member_account", username);
+////		Query<Member> query = session.createQuery(hql_username,Member.class);
+//		Member result = query.uniqueResult();
+////		System.out.println("aaaaaaa"+result.getMember_id());
+//		System.out.println(result.getMember_id());
+//		Integer member_id = result.getMember_id();
+		
+		//改良版,直接從session拿member_id, 因為41行 setParameter 只能讀取int所以要強轉
+//		Integer member_id=null;
+//		try {
+//			if(request.getSession().getAttribute("member_id")!=null){
+//				member_id=Integer.parseInt( (String) request.getSession().getAttribute("member_id"));
+//				
+//			}else { //如果session沒有member_id, 則從cookies讀member_id
+//				Cookie[] cookies=request.getCookies();
+//				if(cookies!=null) {
+//					
+//					for(int i=0;i<cookies.length;i++) {
+//						if("member_id".equals(cookies[i].getName())) {
+//							member_id=Integer.parseInt(cookies[i].getValue());
+//						}
+//						
+//					}
+//				}else {
+//					member_id=null;
+//					
+//				}
+//				
+//			}
+//			
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("沒有session,所以要讀cookie");
+//		}`
+
+//		Integer member_id = Integer.parseInt((String) request.getSession().getAttribute("member_id"));
+		Object member_id = request.getSession().getAttribute("session_member_id");
+		if(member_id!=null) { 
+			
+			String hql="from Member where member_id=:member_id ";
+			Query<Member> query_formember_id = session.createQuery(hql,Member.class).setParameter("member_id", member_id);
+			Member result_formember_id = query_formember_id.uniqueResult();
+			session.close();
+			return result_formember_id;
+			
+		}else {
+			session.close();
+			return new Member();
+			
+		}
+//		String member_name = result_formember_id.getMember_name();
+		
+//		model.addAttribute("member_name",member_name);
+
+	}
+	
+	
+	
+	
+
+}
