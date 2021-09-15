@@ -47,7 +47,7 @@ public class CaseListDisplayController {
 		m.addAttribute("totalCases",cases);
 		m.addAttribute("totalPages",totalPages);
 		
-		return "CaseList2";
+		return "CaseList3";
 	}
 	
 	@RequestMapping(path = "/findAll",method = RequestMethod.POST)
@@ -80,13 +80,20 @@ public class CaseListDisplayController {
 //		System.out.println("Min_Price:" + cases.getPrice_min());
 //		System.out.println("Max_Price:" + cases.getPrice_max());
 		
-		
 			return clpService.QueryByComplexReq(cases);
 		
-		
-		
-		
 	}
+	
+//	@ResponseBody
+//	@RequestMapping(path = "/ajaxRequestDflex",method = RequestMethod.POST)
+//	public List<Cases> ajaxRequestDflex(@RequestBody Cases cases) {
+//		System.out.println("CaseTag:"+cases.getCase_tag());
+//		System.out.println("Min_Price:" + cases.getPrice_min());
+//		System.out.println("Max_Price:" + cases.getPrice_max());
+//		
+//			return clpService.QueryByComplexReq(cases);
+//		
+//	}
 	 
 	
 }

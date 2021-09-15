@@ -1,4 +1,5 @@
-	<%@ page language="java" contentType="text/html; charset=BIG5"
+
+<%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -48,6 +49,8 @@
 	
 	$(document).ready(function() {
 		
+		sort();
+		
 		
 		$('#type').change(function(){
 			var s = $('#type').val();
@@ -55,6 +58,7 @@
 			tagAry[0] = s;
 			
 			sort();
+			
 			
 		})
 		
@@ -89,7 +93,8 @@
 		//$('#sort').change(function(){
 		//	var s = $(this).val();
 		//	newOld = s;
-		//	sort();
+		//	console.log(newOld);
+			
 		//})
 		
 	});
@@ -130,15 +135,32 @@
 				var tjson = JSON.stringify(data);
 				$('#row1').empty();
 				$('#row2').empty();
+				$('#page').empty();
 				if(data.length==0){
 					$('#row1').append("<tr><td colspan='2'>暫無資料</td></tr>");
 				}else{
 					var k;
 					var j=0;
+					var h;
+					var totalPages ;
+					
+					if(totalPages%8==0){
+						totalPages = (data.length / 8);
+					}else{
+						totalPages = (data.length / 8)+1;
+					}
+					
 					if(data.length<=4){
 						k = data.length;
 					}else{
 						k = 4;
+						y = 4;
+						if(data.length%8 ==0){
+							h = 8
+						}else{
+							h = data.length%8
+						}
+						
 					}
 					for(var j=0;j<k;j++){
 						$('#row1').append(
@@ -164,6 +186,33 @@
 							</div>`
 							)	
 					}
+					for(var y;y<h;y++){
+						$('#row2').append(
+								`<div class="u-container u-white mb-3"
+								style="border-radius: 10px; padding: 10px;">
+								<div class="u-container-layout u-container-layout-4" >
+									<div class="input-group mb-3">
+										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
+														\${data[y].case_title}</div>
+									</div>
+									<section class="input-group mb-3"></section>
+									<section class="mb-3" >
+									<div id="uDate" style="color: #4a4a4a; font-size: 15px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+									  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+										  <i class="bi bi-calendar"></i>
+									</svg>\${data[y].upload_date}</div>
+										<div id="caseTag" style="color: burlywood; font-size: 20px;text-align:right;">
+														\${data[y].price_min}~\${data[j].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
+									</section>
+									<hr>
+									<div  style="text-align:right"><a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[y].case_id }><button type="button" class="btn btn-warning" >前往案件</button></a></div>
+								</div>
+							</div>`
+							)	
+					}
+					for(var p=1;p<=totalPages;p++){
+						$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})">\${p}</button>`);
+					}
 					
 				}
 			},
@@ -173,6 +222,7 @@
 		})
 	}
 	
+
 	
 		
 	
@@ -275,8 +325,9 @@
 								<form>
 									<div class="form-group">
 										<label class="mb-3 col-md-12"
-											style="border-width: 3px; padding: 5px; text-align: center; background-color: rgba(176, 50, 41, 0.7); border-radius: 4px; color: white" >創作類型</label>
-										<select class="form-control col-md-12" style="left: 5%;" id="type" >
+											style="border-width: 3px; padding: 5px; text-align: center; background-color: rgba(176, 50, 41, 0.7); border-radius: 4px; color: white">創作類型</label>
+										<select class="form-control col-md-12" style="left: 5%;"
+											id="type">
 											<option selected>請選擇創作類型</option>
 											<option value="1">插畫類型</option>
 											<option value="2">貼圖類型</option>
@@ -291,8 +342,9 @@
 									<div class="form-group">
 										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: darkcyan; border-radius: 4px; color: white">畫作風格</label>
-										<select class="form-control col-md-12" style="left: 5%;" id="style" title="">
-										 	<option selected>請選擇創作風格</option>
+										<select class="form-control col-md-12" style="left: 5%;"
+											id="style" title="">
+											<option selected>請選擇創作風格</option>
 											<option value="8">日系風格</option>
 											<option value="9">歐美風格</option>
 											<option value="10">武俠風格</option>
@@ -306,23 +358,24 @@
 									</div>
 									<hr>
 									<div class="form-group">
-										<label class="mb-3 col-md-12"
+										<!--  <label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: darkseagreen; border-radius: 4px; color: white">酬勞區間</label>
 
 										<input class="form-control mb-2" type="text" id="minP" 
 											placeholder="最低價格"> 
 										<input class="form-control"
 											type="text" id="maxP"  placeholder="最高價格">
-										<hr>
+										<hr>-->
 										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: rgb(200, 199, 199); border-radius: 4px; color: white">排列方式</label>
-										<select class="form-control col-md-12" style="left: 5%;" id="sort">
+										<select class="form-control col-md-12" style="left: 5%;"
+											id="sort">
 											<option value="new">由新到舊</option>
-											<option value="old">由舊到新</option>
+											
 										</select>
 										<hr>
-										<button onclick="load(indexPage)" class="btn btn-warning col-md-12"
-											style="left: 17%;">清除查詢條件</button>
+										<button onclick="load(indexPage)"
+											class="btn btn-warning col-md-12" style="left: 17%;">清除查詢條件</button>
 									</div>
 								</form>
 							</div>
@@ -354,11 +407,11 @@
 			</div>
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center" id="page">
-					<c:forEach var="i" begin="1" end="${totalPages}" step="1">
+					<!--<c:forEach var="i" begin="1" end="${totalPages}" step="1">
 						<button class="page-item page-link" id="pageBtn" value="${i}"
 							onclick="change(${i})">${i}</button>
 					</c:forEach>
-					<!--<li class="page-item disabled"><a class="page-link" href="#"
+					<li class="page-item disabled"><a class="page-link" href="#"
 						tabindex="-1">上一頁</a></li>
 					<c:forEach var="i" begin="1" end="${totalPages}" step="1">
 						<button class="page-item page-link" id="pageBtn" value="${i}" onclick="change(${i})">
