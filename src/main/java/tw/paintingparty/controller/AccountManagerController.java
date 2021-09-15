@@ -47,6 +47,7 @@ public class AccountManagerController {
 		
 		System.out.println(oneMemEmail+":"+oneMenBank_account+":"+oneMemPixiv);
 		
+<<<<<<< HEAD
 		String result = accountManagerService.updateOne(memOneId, oneMemEmail, oneMenBank_account, oneMemPixiv);		
 		System.out.println(result);
 		
@@ -55,6 +56,22 @@ public class AccountManagerController {
 		m.addAttribute("oneMemPixiv", oneMemPixiv);
 		
 		return "AccountManager";
+=======
+
+		Member oneMem = accountManagerService.updateOne(memOneId, oneMemEmail, oneMenBank_account, oneMemPixiv);
+		
+		System.out.println("update");
+		System.out.println(oneMem.getEmail()+":"+oneMem.getBank_account()+":"+oneMem.getPixiv());
+		
+		m.addAttribute("oneMemEmail", oneMem.getEmail());
+		m.addAttribute("oneMenBank_account", oneMem.getBank_account());
+		m.addAttribute("oneMemPixiv", oneMem.getPixiv());
+		
+		System.out.println("update2");
+		System.out.println(m.getAttribute("oneMemEmail")+":"+m.getAttribute("oneMenBank_account")+":"+m.getAttribute("oneMemPixiv"));
+		
+		return "TestResponse";
+>>>>>>> 4ae3bdb1b74598cec010cc2f96a6e4d52729f866
 	}
 	
 	

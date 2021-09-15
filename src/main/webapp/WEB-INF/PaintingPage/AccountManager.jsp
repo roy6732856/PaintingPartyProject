@@ -117,7 +117,11 @@
 <!--                     <h5 class="u-text u-text-default u-text-1">帳號設定</h5> -->
                     <div class="u-container-layout u-container-layout-4" style="padding: 20px"><span class="u-align-left u-icon u-icon-circle u-icon-5"></span>
                       <h5 class="u-text u-text-default u-text-1">帳號設定</h5>
+<<<<<<< HEAD
                       <div class="u-form u-form-1" style="padding: 20px">
+=======
+                      <div class="u-form u-form-1">
+>>>>>>> 4ae3bdb1b74598cec010cc2f96a6e4d52729f866
 <!--                         <form action="accountmanagerchange" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;"> -->
                        <form action="accountmanagerchange" method="post"  style="padding: 10px;">   
                           <div class="mb-3">

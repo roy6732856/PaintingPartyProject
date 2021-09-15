@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
@@ -10,10 +10,11 @@
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
   <title>Quotation</title>
-  <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
-  <link rel="stylesheet" href="resources/css/Quotation.css" media="screen">
-  <script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script>
-  <script class="u-script" type="text/javascript" src="resources/js/nicepage.js" defer=""></script>
+  <link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
+  <link rel="stylesheet" href="../resources/css/Quotation.css" media="screen">
+  <script class="u-script" type="text/javascript" src="../resources/js/jquery.js" defer=""></script>
+  <script class="u-script" type="text/javascript" src="../resources/js/nicepage.js" defer=""></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
   <link id="u-theme-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
@@ -42,7 +43,7 @@
 </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570" data-image-height="410">
-          <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
+          <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-size: 1.125rem; letter-spacing: 0px;">
@@ -93,27 +94,21 @@
         class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1">DEMO</a>
       </h2>
       
-      <div class="u-align-left  u-radius-10 u-shape-round u-white u-group-1 ">
+      <div class="u-align-left  u-radius-10 u-shape-round u-white u-group-2 ">
         <div class=" u-container-layout-1 " style="font-family: Arial, Helvetica, sans-serif;">
-          <form>
+          <form action="<%= request.getContextPath() %>/addapply.controller" method="post">
             <div class="form-group">
               <label>花費天數</label>
-              <input type="input" class="form-control" placeholder="請輸入預計花費天數">
+              <input type="input" class="form-control" placeholder="請輸入預計花費天數" name="spendDay">
             </div>
             <div class="form-row d-flex">
-              <div class="form-group col-md-6">
-                <label for="inputLowBudget">最低預算</label>
-                <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)">
+              <div class="form-group col-md-12">
+                <label for="inputLowBudget">酬勞預算</label>
+                <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)" name="expectedBudget">
               </div>
-              <div class="form-group col-md-6">
-                <label for="inputHighBudget">最高預算</label>
-                <input type="text" class="form-control" id="inputHighBudget" placeholder="(必填)">
-              </div>
+              
             </div>
-            <div class="form-group">
-              <label>詳細描述</label>
-              <textarea class="form-control" rows="3"></textarea>
-            </div>
+
 
             <button type="submit" class="btn btn-warning btn-lg btn-block">送出</button>
 
@@ -150,5 +145,17 @@
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
         </div>
       </nav></footer>
+  
+  
+  <script>
+  
+  var url = location.href;
+  console.log(url);
+  
+  </script>
+  
+  
+  
+  
   </body>
 </html>
