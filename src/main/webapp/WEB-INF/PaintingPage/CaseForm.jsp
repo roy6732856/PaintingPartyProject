@@ -9,7 +9,7 @@
   <meta name="keywords" content="">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
-  <title>CaseForm(DataEntry)</title>
+  <title>發布案件</title>
   <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
   <link rel="stylesheet" href="resources/css/CaseForm(DataEntry).css" media="screen">
   <script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script>
@@ -19,8 +19,8 @@
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
   <link id="u-page-google-font" rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
-  <!--<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-  <script src="resources/js/bootstrap.min.js"></script>-->
+  <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+  <script src="resources/js/bootstrap.min.js"></script>
 
 
   <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
@@ -122,11 +122,11 @@
             <!-- <div class="form-group col-md-6">
               <label for="selectDate">預計截稿日期</label>
               <input type="text" id="inputDate" class="form-control" placeholder="請選擇日期">
-            </div> -->
+            </div> 
             <div class="form-group">
               <label for="inputDate">截稿日期</label>
               <input type="text" class="form-control" id="inputDate" placeholder="請選擇日期">
-            </div>
+            </div>-->
             <div class="form-group">
               <label for="CategorySelect">作品類別</label>
               <select class="form-control" id="CategorySelect">
@@ -153,14 +153,14 @@
                 <option>3D風格</option>
               </select>
             </div>
-            <div class="form-group">
+            <!--  <div class="form-group">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="AccPub" id="AccPub" value="option2">
                 <label class="form-check-label" for="AccPub">
                   同意公開(選填)
                 </label>
               </div>
-            </div>
+            </div>-->
             <div class="form-group">
               <label for="CommissionExplain">委託說明(必填)</label>
               <textarea class="form-control" id="CommissionExplain" rows="4" placeholder="請詳細描述需求"></textarea>

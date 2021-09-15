@@ -179,6 +179,78 @@
 	                 error: function (xhr) { $("#MyAppliedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
 	                 success: function (data) { $("#MyAppliedAllCasesPage").html(JSON.stringify(data)); }// 成功後要執行的函數
 	             });
+=======
+	                 success: function (data) { 
+	                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));
+	                 
+	                 var i;
+	  					
+                     if(data[0]!=null){
+                    	 for(i=0;i<data.length;i++){
+                    		 
+                    		 $("#MyAppliedAllCasesPage").append(`                                                                        
+                    				 <div class="u-container-style u-group u-palette-5-light-2 u-group-17" >
+                                     
+                                     <div class="u-container-layout u-container-layout-26" >
+                                     
+                                     
+                                         
+                                         <h5 class="u-text u-text-default u-text-font u-text-16">
+                                             
+                                             <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-19"
+                                                 href="####">\${ data[i].case_title }</a>
+                                         </h5>
+                                         
+                                         
+                                         <div
+                                             class="u-container-style u-group u-shape-rectangle u-group-18">
+                                             <div
+                                                 class="u-container-layout u-container-layout-27" >
+                                                     
+                                                     <div><b>應徵日期：</b>\${ data[i].apply_date }</div>
+                                                     
+                                             </div>
+                                         </div>
+                                         <div
+                                             class="u-container-style u-group u-shape-rectangle u-group-19">
+                                             <div
+                                                 class="u-container-layout u-container-layout-28" >
+                                             	<div style="padding-left:30px"><b>期望稿酬：</b>\${ data[i].price_expected } (NTD)</div>
+                                             </div>
+                                         </div>
+                                         <div
+                                             class="u-container-style u-group u-shape-rectangle u-group-20">
+                                             <div
+                                                 class="u-container-layout u-container-layout-29" >
+                                             	<div><b>預估需時：</b>\${ data[i].case_time }天</div>
+                                             </div>
+                                         </div>
+                                         
+                                         <div style="display:flex;margin-left:50px;margin-top:-50px;"><b>發案者：</b><a href="####" target="_blank">\${ data[i].amember_name }</a></div>
+                                         
+                                      
+                                     </div>
+                                 </div>
+`); //append end
+                    		 
+                    		 
+                    	 }//end for
+                    	 
+                    	 
+                    	 
+                     }else{
+                    	 
+                    	 $("#MyAppliedAllCasesPage").html("暫無資料"); 
+                    	 
+                     }//end if
+	                 
+	                 
+	                 
+	                 
+	                 
+	                 }// end success
+	             });//end ajax
+>>>>>>> a2971d36c547dd5e37fb1db6ad7d4bba311377d9
                     
          </script>
         

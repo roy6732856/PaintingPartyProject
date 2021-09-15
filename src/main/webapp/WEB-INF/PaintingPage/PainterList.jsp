@@ -26,6 +26,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script
 	src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+    <script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css"></link>
     <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
@@ -182,18 +184,24 @@
             </nav>
             <div class="u-container-style u-group u-white u-group-1">
                 <div class="u-container-layout u-container-layout-1">
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
+                   
                 </div>
             </div>
             <div class="u-container-style u-group u-white u-group-2">
                 <div class="u-container-layout u-container-layout-2">
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+                    	<a href="/PaintPartyMvcProject/backend/accountmanager"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+                        <a href="/xxx"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></a>
+                        <a href="/PaintPartyMvcProject/backend"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="account_manager" style="display:none">帳號管理</a>
+                        <a 
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
+                        
+                        <a href="/PaintPartyMvcProject/login"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1" name="header_login" style="display:none">登入</a>
+                        <a href="/PaintPartyMvcProject/register"
+                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2" name="header_register" style="display:none">註冊</a>
                 </div>
             </div>
         </div>
@@ -514,5 +522,27 @@
             </div>
         </nav>
     </footer>
+    
+    <script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+    //登出
+    function logout(){
+    	
+    	window.location.href = '/PaintPartyMvcProject/logout'
+    }
+    
+    </script>
 </body>
 </html>

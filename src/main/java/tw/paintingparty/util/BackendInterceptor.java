@@ -11,13 +11,13 @@ public class BackendInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("=============Passed BackendInterceptor!!===============");
-		Object loginid = request.getSession().getAttribute("login");
+		Object loginid = request.getSession().getAttribute("session_member_id");
 		
 		if(loginid==null) {
 			
 			System.out.println("登入失敗，轉到登入頁面。");
 
-			response.sendRedirect( request.getContextPath() + "/login.message");
+			response.sendRedirect( request.getContextPath() + "/login");
 			
 			return false;
 		}
