@@ -107,7 +107,7 @@
               </div>
               <div class="form-group col-md-6">
                 <label for="inputHighBudget">最高預算</label>
-                <input type="text" class="form-control" id="inputHighBudget" placeholder="(必填)">
+                <input type="text"  class="form-control" id="inputHighBudget" placeholder="(必填)">
               </div>
             </div>
             <div class="form-group">
@@ -115,7 +115,7 @@
               <textarea class="form-control" rows="3"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-warning btn-lg btn-block">送出</button>
+            <button type="submit" id="succ" class="btn btn-warning btn-lg btn-block">送出</button>
 
           </form>
         </div>
