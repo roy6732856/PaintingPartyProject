@@ -17,7 +17,4 @@ public class LoginController {
 		return "loginmessage";
 	}
 	
-	
-	
-
 }

@@ -120,28 +120,34 @@
                         <div class="container col-12">
                           <div class="mb-3">
                               <h6>身分設定</h6>
-                              <h6 style="display: inline-block;">委託者</h6>
-                              <button type="submit" class="btn btn-primary">切換畫家</button>
+                              <form action="personcontentpainterchange">
+                              <h6 style="display: inline-block;" id="painter0">${memberStatusName }</h6>
+                              	<button type="submit" class="btn btn-primary" id="painter1" onclick="changePainter()">成為畫師</button>
+                              </form>
+<!--                               <h6 style="display: inline-block;">委託者</h6> -->
+<!--                               <button type="submit" class="btn btn-primary">成為畫師</button> -->
                           </div>
-                            <form action="">
+							<form action="personcontentchange" method="post" enctype="multipart/form-data">
                               <div class="mb-3">
                                   <label for="exampleFormControlInput1" class="form-label">大頭貼設定</label>
-                                  <input type="file" class="form-control" id="exampleFormControlInput1">
+                                  <input type="file" class="form-control" id="exampleFormControlInput1" name="headShot">
+                                  <img src="personcontentpersoncontentimage" class="img-thumbnail" style="width:200px; margin-top:10px;">
                               </div>
 <!--                               <div class="mb-3"> -->
 <!--                                   <label for="exampleFormControlInput2" class="form-label">暱稱設定</label> -->
 <!--                                   <input type="text" class="form-control" id="exampleFormControlInput2"> -->
 <!--                               </div> -->
+<!-- 							<form action="personcontentchange" method="post" > -->
                               <div class="mb-3">
                                   <label for="exampleFormControlTextarea3" class="form-label">自我介紹</label>
-                                  <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+                                  <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" name="oneMemProfile_content" >${oneMemProfile_content }</textarea>
                               </div>
                               <div class="col-6">
-                                  <button type="submit" class="btn btn-primary">submit</button>
+                                  <button type="submit" class="btn btn-primary" >submit</button>
                               </div>
                             </form>
-                        </div>
-                        </form>
+                           </div>
+<!--                         </form> -->
                       </div>
                       <a href="https://nicepage.com/k/love-html-templates" class="u-border-2 u-border-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-9">Demo</a>
                     </div>
@@ -181,5 +187,21 @@
           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
         </div>
       </nav></footer>
+      <script type="text/javascript">
+
+          let painter0=document.getElementById("painter0").innerText;
+          console.log(painter0);
+          if(painter0=="畫師"){
+            painter1.style.display="none";
+          }	          
+	
+// 	      function changePainter(){
+// 	          let painter0=document.getElementById("painter0").innerText;
+// 	          console.log(painter0);
+// 	          if(painter0=="畫師"){
+// 	            painter1.style.display="none";
+// 	          }	          
+// 	        }      
+      </script>
   </body>
 </html>
