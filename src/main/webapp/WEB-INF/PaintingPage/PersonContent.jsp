@@ -196,7 +196,13 @@
             painter1.style.display="none";
           }	          
 	
-    
+// 	      function changePainter(){
+// 	          let painter0=document.getElementById("painter0").innerText;
+// 	          console.log(painter0);
+// 	          if(painter0=="畫師"){
+// 	            painter1.style.display="none";
+// 	          }	          
+// 	        }      
       </script>
   </body>
 </html>
