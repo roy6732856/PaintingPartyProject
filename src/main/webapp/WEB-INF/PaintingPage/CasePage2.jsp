@@ -230,7 +230,28 @@
 								<div
 									class="u-container-style u-group u-radius-20 u-shape-round u-white "
 									style="margin-top: 20px;">
-									
+									<div class="u-container-layout u-container-layout-20">
+										<p class="u-text u-text-default u-text-18">畫師應徵列表(擇)：</p>
+										<div
+											class="u-border-2 u-border-grey-10 u-container-style u-group u-radius-20 u-shape-round u-group-19">
+											<div class="u-container-layout u-container-layout-21">
+												<div class="u-image u-image-circle u-image-2" alt=""
+													data-image-width="1500" data-image-height="1000"></div>
+												<div class="u-container-style u-group u-group-20">
+													<div class="u-container-layout u-container-layout-22"></div>
+												</div>
+												<p class="u-text u-text-default u-text-19">畫師暱稱</p>
+											</div>
+										</div>
+										<div
+											class="u-border-2 u-border-grey-10 u-container-style u-group u-radius-20 u-shape-round u-group-21">
+											<div class="u-container-layout u-container-layout-23"></div>
+										</div>
+										<div
+											class="u-border-2 u-border-grey-10 u-container-style u-group u-radius-20 u-shape-round u-group-22">
+											<div class="u-container-layout u-container-layout-24"></div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
