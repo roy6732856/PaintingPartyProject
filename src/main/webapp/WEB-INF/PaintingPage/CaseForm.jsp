@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
 
@@ -91,6 +92,65 @@
 							<rect y="13" width="16" height="2"></rect>
 </symbol>
 </defs></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="javascript::" style="padding: 10px 20px;">畫師列表</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::" style="padding: 10px 20px;">畫師列表</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">案件列表</a>
+</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">公開畫廊</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+        <div class="u-container-style u-group u-white u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
+            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
+          </div>
+        </div>
+        <div class="u-container-style u-group u-white u-group-2">
+          <div class="u-container-layout u-container-layout-2">
+            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
+            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+          </div>
+        </div>
+      </div></header>
+     <section class="u-align-center u-clearfix u-grey-5 u-section-1" id="sec-3a5b">
+    <div class="u-align-left u-clearfix u-sheet u-sheet-1">
+      <h1 class="u-custom-font u-font-oswald u-text u-text-black u-text-default u-text-1">刊登委託</h1>
+      <a href="####"
+        class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1">DEMO</a>
+      <div class="u-border-4 u-border-palette-3-light-1 u-line u-line-horizontal u-line-1"></div>
+      <div class="u-align-left u-container-style u-group u-radius-30 u-shape-round u-white u-group-1 form-group" >
+        <div class="u-container-layout u-container-layout-1 font-weight-bold"
+          style="font-family: Arial, Helvetica, sans-serif;">
+          <form action="<%= request.getContextPath() %>/addform.controller" method="post">
+            <div class="form-group">
+              <label for="inputCaseName">案件名稱</label>
+              <input type="text" class="form-control" id="inputCaseName" placeholder="(必填)" name="inputCaseName">
+            </div>
+            <div class="form-row d-flex">
+              <div class="form-group col-md-6">
+                <label for="inputLowBudget">最低預算</label>
+                <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)" name="inputLowBudget">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputHighBudget">最高預算</label>
+                <input type="text" class="form-control" id="inputHighBudget" placeholder="(必填)" name="inputHighBudget">
+              </div>
+            </div>
+            <!-- <div class="form-group col-md-6">
 					</a>
 				</div>
 				<div class="u-custom-menu u-nav-container">
@@ -232,6 +292,38 @@
                 </label>
               </div>
             </div>-->
+            <div class="form-group">
+              <label for="CommissionExplain">委託說明(必填)</label>
+              <textarea class="form-control" id="CommissionExplain" rows="4" placeholder="請詳細描述需求" name="commissionExplain"></textarea>
+            </div>
+            <div class="col form-group" style="width: 200px;">
+              <label class="btn btn-info ">
+                <input id="upload_img" style="display:none;" type="file">
+                <i class="fa fa-photo"></i> 上傳圖片
+              </label>
+              <img id="preview_progressbarTW_img" class="img-thumbnail"
+                src="https://th.bing.com/th/id/OIP.Dl3J0Zt1TOsgg9TxNa9AQQHaHa?pid=ImgDet&w=480&h=480&rs=1"
+                style="max-height:inherit;" />
+            </div>
+            <button type="submit" id="success" class="btn btn-warning btn-lg btn-block">送出</button>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <style class="u-overlap-style">
+    .u-overlap:not(.u-sticky-scroll) .u-header {
+      background-color: #ffffff !important
+    }
+  </style>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8"><p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+        <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+          <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+            <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
 						<div class="form-group">
 							<label for="CommissionExplain">委託說明(必填)</label>
 							<textarea class="form-control" id="CommissionExplain" rows="4"
