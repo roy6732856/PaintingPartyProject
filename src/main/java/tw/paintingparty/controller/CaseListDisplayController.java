@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.model.CaseListPageDAO;
 import tw.paintingparty.model.Cases;
+import tw.paintingparty.model.Member;
 import tw.paintingparty.service.CaseListPageService;
 import tw.paintingparty.service.CasePageDisplayService;
+import tw.paintingparty.service.MemberService;
 
 @Controller
 public class CaseListDisplayController {
@@ -26,6 +28,9 @@ public class CaseListDisplayController {
 	
 	@Autowired
 	private CaseListPageService clpService;
+	
+	@Autowired
+	private MemberService mService;
 	
 	@RequestMapping(path = "/caselistpage.controller",method = RequestMethod.GET)
 	public String processCaseListDisplayAction(Model m) {
@@ -42,7 +47,8 @@ public class CaseListDisplayController {
 			Long total = (cases/8)+1;
 			totalPages = total;
 		}
-		
+		Member mem1 = mService.showLoginUsername();
+		m.addAttribute("member_name", mem1.getMember_name());
 		
 		m.addAttribute("totalCases",cases);
 		m.addAttribute("totalPages",totalPages);
@@ -50,20 +56,20 @@ public class CaseListDisplayController {
 		return "CaseList3";
 	}
 	
-	@RequestMapping(path = "/findAll",method = RequestMethod.POST)
-	@ResponseBody
-	public List<Cases> processFildAllCasesAction() {
-		
-		return capdService.findAll();
-	}
+//	@RequestMapping(path = "/findAll",method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Cases> processFildAllCasesAction() {
+//		
+//		return capdService.findAll();
+//	}
 	
-	@RequestMapping(path ="/queryByPage/{pageNo}",method = RequestMethod.POST)
-	@ResponseBody
-	public List<Cases> processQueryAllPages(@PathVariable("pageNo")int pageNo){
-		
-		return clpService.QueryByPage(pageNo-1);
-				
-	}
+//	@RequestMapping(path ="/queryByPage/{pageNo}",method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Cases> processQueryAllPages(@PathVariable("pageNo")int pageNo){
+//		
+//		return clpService.QueryByPage(pageNo-1);
+//				
+//	}
 	
 //	@RequestMapping(path ="/queryByTags/{Tags}",method = RequestMethod.POST)
 //	@ResponseBody

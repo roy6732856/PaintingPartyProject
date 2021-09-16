@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,17 +18,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.paintingparty.model.CaseApply;
-
+import tw.paintingparty.model.Member;
 import tw.paintingparty.service.CaseApplyQuotationService;
+import tw.paintingparty.service.MemberService;
 
 @Controller
 public class CaseApplyQuotationController {
 	
+	 @Autowired
+	 private MemberService mService;
+	
 	@RequestMapping(path = "/caseapplymainpage.controller/{caseid}",method = RequestMethod.GET)
-	public String processCaseApplyQuotationMainPage(HttpSession session,@PathVariable("caseid")int caseid) {
+	public String processCaseApplyQuotationMainPage(HttpSession session,@PathVariable("caseid")int caseid,Model m) {
 		//把收到的caseid 放進"caseid"這個參數中
 		session.setAttribute("caseid", caseid);
 		System.out.println("顯示報價單時的caseid:" + caseid);
+		
+		Member mem1 = mService.showLoginUsername();
+		m.addAttribute("member_name", mem1.getMember_name());
 		
 		return "Quotation";
 	}

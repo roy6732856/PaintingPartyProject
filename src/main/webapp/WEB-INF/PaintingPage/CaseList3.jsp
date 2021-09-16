@@ -40,8 +40,21 @@
         "name": "TestDemo",
         "logo": "images/LOGO-TEST-22.png"
       }
-    </script>
+</script>
+<style type="text/css">
+.fix-padding {
+	padding: 10px 46px;
+}
+
+.u-header .u-group-2 {
+	width: 390px;
+}
+</style>
+
 <script type="text/javascript">
+	
+	
+	
 	var indexPage = 1;
 	var tagAry = [0,0];
 	var priceRan = [0,0];
@@ -137,7 +150,13 @@
 				$('#row2').empty();
 				$('#page').empty();
 				if(data.length==0){
-					$('#row1').append("<tr><td colspan='2'>暫無資料</td></tr>");
+					$('#row1').append(`<div class="u-container u-white mb-5"
+							style="border-radius: 10px; padding: 10px;">
+							<div class="u-container-layout u-container-layout-4" style="text-align:center;">
+								
+								<h3>暫無資料</h3>
+							</div>
+						</div>`);
 				}else{
 					var k;
 					var j=0;
@@ -162,6 +181,8 @@
 						}
 						
 					}
+					
+					
 					for(var j=0;j<k;j++){
 						$('#row1').append(
 								`<div class="u-container u-white mb-3"
@@ -267,10 +288,10 @@
 					<ul class="u-nav u-unstyled u-nav-1">
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
+							href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a></li>
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">案件列表</a></li>
+							href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a></li>
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							style="padding: 10px 20px;">公開畫廊</a></li>
@@ -284,8 +305,10 @@
 							<ul
 								class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
-									href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
+									href="<%=request.getContextPath()%>/painterlist"
+									style="padding: 10px 20px;">畫師列表</a></li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
+									href="<%=request.getContextPath()%>/caselistpage.controller"
 									style="padding: 10px 20px;">案件列表</a></li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
 									style="padding: 10px 20px;">公開畫廊</a></li>
@@ -295,22 +318,35 @@
 					<div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
 				</div>
 			</nav>
-			<div class="u-container-style u-group u-white u-group-1">
-				<div class="u-container-layout u-container-layout-1">
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
-				</div>
-			</div>
+			<div class="u-container-style u-group u-white u-group-1"></div>
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-					<a href="139992805"
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+					<div>
+						<a href="<%= request.getContextPath() %>/caseformapplypage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> <a
+							href="<%= request.getContextPath() %>/backend/accountmanager"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
+							name="account_manager" style="display: none">帳號管理</a> <span
+							class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4"
+							name="member_name" style="display: none"><%=request.getAttribute("member_name")%></span>
+					</div>
+					<div>
+						<a href="/PaintPartyMvcProject/login"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="header_login" style="display: none">登入</a> <a
+							href="/PaintPartyMvcProject/register"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
+							name="header_register" style="display: none">註冊</a>
+					</div>
+				</div>
+				<div>
+					<a
+						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding"
+						name="logout" onclick="logout()">登出</a>
 				</div>
 			</div>
+		</div>
 		</div>
 	</header>
 	<section class="u-clearfix u-grey-10 u-section-3" id="sec-8425">
@@ -371,7 +407,7 @@
 										<select class="form-control col-md-12" style="left: 5%;"
 											id="sort">
 											<option value="new">由新到舊</option>
-											
+
 										</select>
 										<hr>
 										<button onclick="load(indexPage)"
@@ -482,5 +518,28 @@
 			</div>
 		</nav>
 	</footer>
+	<script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    	console.log($("[name=abs]").val());
+    	
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+    //登出
+    function logout(){
+    	
+    	window.location.href = '/PaintPartyMvcProject/logout'
+    }
+    
+	</script>
 </body>
 </html>
