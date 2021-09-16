@@ -221,7 +221,7 @@
                             </div>
                           </div>
                           
-                          <p class="u-large-text u-text u-text-default u-text-variant u-text-3"><%= request.getAttribute("noticesort") %></p>
+                          <p class="u-large-text u-text u-text-default u-text-variant u-text-3">公告</p>
                           
                           <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-8">
                             <div class="u-container-layout u-container-layout-11">
