@@ -165,8 +165,8 @@
                                                 </a>
                                             </div>
                                             <div class="my-2 text-center">
-                                            	<c:forEach var="i" begin="0" end="3">
-                                            		<span class="badge badge-light">${tag_content+"i"}</span>
+                                            	<c:forEach var="i" begin="0" end="${tagIdSize }">
+                                            		<span class="badge badge-light">${map.get(i)}</span>
                                             	
                                             	</c:forEach>
 <%--                                                 <span class="badge badge-light">${tag_content+i}</span> --%>

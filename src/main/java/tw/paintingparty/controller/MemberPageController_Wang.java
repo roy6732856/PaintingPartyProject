@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,20 +40,22 @@ public class MemberPageController_Wang {
 		m.addAttribute("member_name", mem1.getMember_name());
 		
 		//有可能我登入a帳號, 但拜訪b帳號的memberpage
-		m.addAttribute("member_id",memberId ); //這是url傳送過來的id,for 讀取大頭貼
-		Member memberForVisited = mService.SelectMemberById(memberId);
+		m.addAttribute("member_id",memberId ); //這是url傳送過來的id
+		Member memberForVisited = mService.SelectMemberById(memberId); // 拜訪的member
 		String member_name = memberForVisited.getMember_name();
 		
 		List<PainterTag> tagId = mService.selectTagIdByMemberId(memberId);
+		Map<Integer,String > map = new HashMap<Integer,String>(); //將結果存入map
 		for(int i=0;i<tagId.size();i++) {
 			PainterTag painterTag=tagId.get(i);
 			String tag_content = painterTag.getTagbean().getTag_content();
-//			String x = "tag_content"+i;
-//			Map<K, V> map = new HashMap<K, V>();
-			m.addAttribute("tag_content"+i, tag_content);
+			map.put(i, tag_content);
 		}
-		m.addAttribute("tagIdSize", tagId.size());
-//		PainterTag painterTag = tagId.get(2);
+		m.addAttribute("map",map);
+		m.addAttribute("tagIdSize", tagId.size());//for jsp 讀取長度
+		
+		
+		//讀取空閒狀態
 		
 		
 		
