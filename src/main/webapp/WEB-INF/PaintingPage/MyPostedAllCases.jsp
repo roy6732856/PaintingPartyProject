@@ -371,6 +371,8 @@ $(function() {
      						
      						//變動區塊APPEND
      						if(data2.length>1){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
+     							
+     							
      							for( let x=1 ; x<data2.length ; x++ ){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
      								$("#whoapply").append(`
      										
@@ -419,7 +421,9 @@ $(function() {
      						  
      						                  
      						                  <div style="width: 20%;">
+     						                  <a href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
      						                    <button id="caseoff" style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
+     						                  </a>
      						                  </div>
 
 
@@ -432,14 +436,16 @@ $(function() {
      										`);//append end
      								
      								
+     										
+     										
+     								
+     										
+     										
      							}// for end
      							
      							
      							
      						}//if end
-     						
-     						
-     						
      						
      						
      						
