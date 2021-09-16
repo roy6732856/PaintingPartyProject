@@ -48,6 +48,15 @@
     <meta property="og:title" content="前台框架">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
+    
+        <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+    	.u-header .u-group-2 {
+    		width: 390px;
+    	}
+   	</style>
 </head>
 
 <body class="u-body">
@@ -119,19 +128,24 @@
             </div>
             <div class="u-container-style u-group u-white u-group-2">
                 <div class="u-container-layout u-container-layout-2">
-                    	<a href="/PaintPartyMvcProject/backend/accountmanager"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
-                        <a href="/xxx"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></a>
-                        <a href="/PaintPartyMvcProject/backend"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="account_manager" style="display:none">帳號管理</a>
-                        <a 
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                        
-                        <a href="/PaintPartyMvcProject/login"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1" name="header_login" style="display:none">登入</a>
-                        <a href="/PaintPartyMvcProject/register"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2" name="header_register" style="display:none">註冊</a>
+                    	<div>
+	                        <a href="/PaintPartyMvcProject/backend/accountmanager"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+	                        <a href="/PaintPartyMvcProject/backend"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
+                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
+                        </div>
+                        <div>
+	                        <a href="/PaintPartyMvcProject/login"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
+	                        <a href="/PaintPartyMvcProject/register"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
+                    	</div>
+                    </div>
+                    <div>
+                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
+                    </div>
+                    	
                 </div>
             </div>
         </div>
@@ -500,7 +514,7 @@
 					                                    <a href="#" target="_blank">
 					                                        <div
 					                                            class="text-center rounded-1g d-flex justify-content-center overflow-hidden">
-					                                            <img src= "resources/images/PaintingImg/HeadShot/\${data[i].profile_pic}"    alt="avator" class="comisstion-cover">
+					                                            <img src= "resources/images/HeadShot/\${data[i].profile_pic}"    alt="avator" class="comisstion-cover">
 					                                        </div>
 					                                    </a>
 					                                    <div class="portfolio-caption text-center">
@@ -630,6 +644,28 @@
 	
 	
 	
+    
+    </script>
+    
+     <script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+    //登出
+    function logout(){
+    	
+    	window.location.href = '/PaintPartyMvcProject/logout'
+    }
     
     </script>
 
