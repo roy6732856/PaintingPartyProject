@@ -354,7 +354,11 @@ $(function() {
                     	let casemanage_caseid = $("#casemanage_caseid").val(); 
         	   	  		
         	   	  		//代做
-        	   	  	    
+        	   	  	  //~~~~~~~~~ 
+        	   	  	  
+        	   	  	  
+        	   	  	  
+        	   	  	  
         	   	  	$.ajax({
      					url: `<%= request.getContextPath() %>/backend/casebackstage/\${casemanage_caseid}`,
      					type: 'get',
@@ -422,7 +426,7 @@ $(function() {
      						                  
      						                  <div style="width: 20%;">
      						                  <a class="hire" href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
-     						                    <button style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
+     						                    <button style="margin-top:50px;margin-left:10px ;" class="btn btn-primary btn-hire">錄用畫師</button>
      						                  </a>
      						                  </div>
 
@@ -435,7 +439,12 @@ $(function() {
      										
      										`);//append end
      								
-     								
+     								if(data2[x].apply_status === "是"){
+     									
+     		           					$("#whoapply .hire ").eq(x-1).attr("href","javascript:");
+     		           				 	$("#whoapply .btn-hire ").eq(x-1).attr("disabled","disabled").attr("style","background-color:gray;margin-top:50px;margin-left:10px ;").html("已錄用")//代做3  
+     		           				
+     		           				}
      										
      										
      								
@@ -446,35 +455,34 @@ $(function() {
      							
      	        	     		//錄用畫師按鈕預設行為取消 代做2
      		           			$("#whoapply .hire").click(function(){
+     		           			
+     		           			let hireinfolist = $(this).attr("href").split("/");
+     		           			console.log(hireinfolist.length);
+     							let hirebmemid = hireinfolist[hireinfolist.length-3];
+     							let hirecase_id = hireinfolist[hireinfolist.length-2];
+     							let hireexpected = hireinfolist[hireinfolist.length-1];
      		           				
      		           				
-     		           				
-     		           				//-------做到這裡
-     		           				
-     		           				
-     		           				
-     		   			$.ajax({
-     					url: "<%= request.getContextPath() %>/backend/filecontentb",
-     					type: 'post',
-     					contentType:'application/json',
-     					dataType: 'json',
-     					data:filecontentbjstr,
-     					success: function(data) {
-     						//alert("連線成功!!");
-     						//$("#dialog-filecontentb").prepend(`<div id="demofilecontent">\${JSON.stringify(data)}</div>`); //DEMO用資料
-     						
-     						
-     						//---------
-     					
-     
-     						
-     					}, //錄用畫師 success end
-     					error: function(XMLHttpRequest, textStatus, errorThrown) {
-     						alert("發生錯誤");
-     						
-     					} //錄用畫師 error end
-     				}); //錄用畫師 ajax end
-     		           				
+     							$.ajax({
+     		     					url: `<%= request.getContextPath() %>/backend/hire/\${ hirecase_id }/\${ hirebmemid }/\${ hireexpected }`,
+     		     					type: 'post',
+     		     					success: function(data) {
+     		     						alert("成功錄用!");
+     		     						
+     		     						
+     		     						
+     		     						//---------
+     		     					
+     		     
+     		     						
+     		     					}, //錄用畫師 success end
+     		     					error: function(XMLHttpRequest, textStatus, errorThrown) {
+     		     						alert("發生錯誤");
+     		     						
+     		     					} //錄用畫師 error end
+     		     				}); //錄用畫師 ajax end
+     							
+     							
      		           				
      		           				//---------
      		           				
@@ -498,7 +506,7 @@ $(function() {
      					}
      				}); //ajax end
         	   	  			
-        	   	  		
+        	   	  //~~~~~~		
         	   	  		
         	   	  		
         	   	  		

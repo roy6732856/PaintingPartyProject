@@ -448,6 +448,38 @@ public class CaseManageDAO {
 	
 	
 	
+	public void hirePainter( int caseid , int bmemid , int expected ) {
+		//錄用畫師
+		
+		Util01 util01 = new Util01();
+		
+		Session session = sessionfactory.getCurrentSession();
+		
+		//新增一張訂單進訂單表
+		String sql = "insert into orders ( case_id , member_id ,order_date ,price ) "
+				+ "values( ? , ? , ? , ? )";
+ 
+		String orderdate = util01.getCurrentDate();//得到現在時間
+    	NativeQuery addEntity = session.createSQLQuery(sql);
+    	addEntity.setParameter(1, caseid);
+    	addEntity.setParameter(2, bmemid);
+    	addEntity.setParameter(3, orderdate);
+    	addEntity.setParameter(4, expected);
+    	addEntity.executeUpdate();
+		
+    	//改應徵表的選定狀態
+		String hql = "update CaseApply as ca set ca.apply_status = '是' where ca.applycasesbean.case_id = :caseid and ca.applymemberbean.member_id = :bmemid";
+		Query query = session.createQuery(hql).setParameter("caseid", caseid).setParameter("bmemid", bmemid);
+		
+		query.executeUpdate();
+		
+	
+	}
+	
+	
+	
+	
+	
 	
 	//--------------------------------------------
 	

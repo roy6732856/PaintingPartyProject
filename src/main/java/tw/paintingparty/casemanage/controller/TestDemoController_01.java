@@ -136,13 +136,16 @@ public class TestDemoController_01 {
 	
 	//代做
 	@PostMapping(path = "/backend/hire/{case_id}/{bmember_id}/{price_expected}") //錄取畫師
-	public List<CaseBackStageBean> test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
-		System.out.println("接收成功!");
-//		String welcom = "casebackstage: " + caseid;
-//		System.out.println(welcom);
-		List<CaseBackStageBean> caseBackStageManage = cmDao.CaseBackStageManage( caseid );
+	@ResponseBody
+	public String test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
+//		System.out.println("接收成功!");
+//		System.out.println("case:" + caseid);
+//		System.out.println("bmemid:" + bmemberid);
+//		System.out.println("price_expected:" + expected);
+
+		cmDao.hirePainter(caseid, bmemberid, expected);
 		
-		return caseBackStageManage;
+		return "OK";
 		
 	}
 	
