@@ -220,10 +220,8 @@ public class TestDemoController_01 {
 	@GetMapping(path = "/backend/headshotdownloader/{memid}")
 	public void test11_8(@PathVariable("memid") Integer memberid , HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println(memberid);
-		
 		HeadShotBean headShotDownloader = cmDao.HeadShotDownloader(memberid);
 		String filePath = headShotDownloader.getProfile_pic_path() + "\\" + headShotDownloader.getProfile_pic();
-		
 		FileInputStream fis = new FileInputStream(filePath);
 		IOUtils.copy(fis, response.getOutputStream()); //由IOUtils來幫我們讀寫，會自己幫我們用暫存、關串流，但檔案超出2G還5G似乎會出事(?)
 		
