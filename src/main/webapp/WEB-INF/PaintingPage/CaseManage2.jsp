@@ -265,10 +265,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="https://nicepage.com/c/shapes-website-templates"
+                                <a href="<%= request.getContextPath() %>/backend/systemnotice"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
-                                    data-href="https://nicepage.com/k/competition-website-templates"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use>
