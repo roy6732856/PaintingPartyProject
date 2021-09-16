@@ -180,7 +180,7 @@
 	                 success: function (data) { 
 	                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));
 	                 
-	                 var i;
+	                 let i; //修好另一頁面檔案上傳的預覽問題
 	  					
                      if(data[0]!=null){
                     	 for(i=0;i<data.length;i++){
