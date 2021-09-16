@@ -36,7 +36,7 @@ public class PersonContentController {
 	public String processPersonContent(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 		System.out.println("login="+memOneId);
 
 		Member oneMem = personContentService.selectOne(memOneId);
@@ -60,7 +60,7 @@ public class PersonContentController {
 	public String processPersonContentPainterChange(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 //		Member oneMem = personContentService.selectOne(memOneId);
 		
 		personContentService.updateOneMemberStatus(memOneId);
@@ -89,7 +89,7 @@ public class PersonContentController {
 		
 		//取得連線與JavaBean
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 		Member oneMem = personContentService.selectOne(memOneId);
 		
 		//判斷身分
@@ -136,7 +136,7 @@ public class PersonContentController {
 	@RequestMapping(path="/backend/personcontentpersoncontentimage", method = RequestMethod.GET)
 	public void processResponseImg(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("login");
+		int memOneId=(int) session.getAttribute("session_member_id");
 		
 		Member oneMem = personContentService.selectOne(memOneId);
 		String profilePicPath=oneMem.getProfile_pic_path();
