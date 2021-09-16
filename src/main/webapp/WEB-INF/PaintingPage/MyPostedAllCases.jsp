@@ -332,7 +332,7 @@ $(function() {
                        }//if end
                        
                        
-                       //------------------打開管理案件的框框---------------- 代做
+                       //------------------打開管理案件的框框---------------- 
                        
                        
                        
@@ -353,7 +353,7 @@ $(function() {
         	   	  		$( "#whoapply .applymember" ).remove(); //清空變動區塊
                     	let casemanage_caseid = $("#casemanage_caseid").val(); 
         	   	  		
-        	   	  		
+        	   	  		//代做
         	   	  	    
         	   	  	$.ajax({
      					url: `<%= request.getContextPath() %>/backend/casebackstage/\${casemanage_caseid}`,
@@ -421,8 +421,8 @@ $(function() {
      						  
      						                  
      						                  <div style="width: 20%;">
-     						                  <a href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
-     						                    <button id="caseoff" style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
+     						                  <a class="hire" href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
+     						                    <button style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
      						                  </a>
      						                  </div>
 
@@ -442,6 +442,47 @@ $(function() {
      										
      										
      							}// for end
+     							
+     							
+     	        	     		//錄用畫師按鈕預設行為取消 代做2
+     		           			$("#whoapply .hire").click(function(){
+     		           				
+     		           				
+     		           				
+     		           				//-------做到這裡
+     		           				
+     		           				
+     		           				
+     		   			$.ajax({
+     					url: "<%= request.getContextPath() %>/backend/filecontentb",
+     					type: 'post',
+     					contentType:'application/json',
+     					dataType: 'json',
+     					data:filecontentbjstr,
+     					success: function(data) {
+     						//alert("連線成功!!");
+     						//$("#dialog-filecontentb").prepend(`<div id="demofilecontent">\${JSON.stringify(data)}</div>`); //DEMO用資料
+     						
+     						
+     						//---------
+     					
+     
+     						
+     					}, //錄用畫師 success end
+     					error: function(XMLHttpRequest, textStatus, errorThrown) {
+     						alert("發生錯誤");
+     						
+     					} //錄用畫師 error end
+     				}); //錄用畫師 ajax end
+     		           				
+     		           				
+     		           				//---------
+     		           				
+     		           	return false; //取消錄用畫師這顆按鈕的預設行為
+     		           				
+     		           				
+     		           	});
+     							
      							
      							
      							
@@ -468,12 +509,7 @@ $(function() {
         	   	  		
         	   	  	
         	   	  	
-        	   	  	
         	     		}); // u-btn-9 click end
-                       
-                       
-        	     
-        	     
                        
                     
                        }// seccess end
@@ -493,6 +529,12 @@ $(function() {
 
     </div>
 </div>
+
+
+
+
+
+
 
 
      <!-- 以上空白區塊，以下頁數  -->
