@@ -251,16 +251,15 @@
                                                 </svg></span>
                                         </a>
                                         <div class="u-accordion-pane u-container-style u-shape-rectangle u-white u-accordion-pane-1"
-                                            id="accordion-0781" aria-labelledby="link-accordion-0781">
+                                            id="accordion-0781" aria-labelledby="link-accordion-0781" style="min-height:auto;" >
                                             <div class="u-container-layout u-container-layout-2">
                                                 <a href="<%= request.getContextPath() %>/backend/accountmanager"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
                                                 <a href="<%= request.getContextPath() %>/backend/personcontent"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
-                                                <a href="#"
+                                                <a href="<%= request.getContextPath() %>/backend/casemanage"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-3">案件管理</a>
-                                                <a href="#"
-                                                    class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-4">畫作管理</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
