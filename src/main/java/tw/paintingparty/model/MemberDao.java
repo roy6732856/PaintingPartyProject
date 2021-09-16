@@ -1,5 +1,7 @@
 package tw.paintingparty.model;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -80,6 +82,28 @@ public class MemberDao {
 		
 //		model.addAttribute("member_name",member_name);
 
+	}
+	
+	public Member selectMemberById(int memberId) {
+		Session session = sessionfactory.getCurrentSession();
+		Member member = session.get(Member.class, memberId);
+		return member;
+	}
+	
+	public List<PainterTag> selectTagIdByMemberId(int memberId) {
+		Session session = sessionfactory.getCurrentSession();
+		String hql="from PainterTag where member_id=:member_id";
+		Query<PainterTag> query = session.createQuery(hql,PainterTag.class).setParameter("member_id", memberId);
+		List<PainterTag> resultList = query.getResultList();
+		return resultList;
+	}
+	public Tag selectTagContentByTagId(int tagId) {
+		Session session = sessionfactory.getCurrentSession();
+		String hql="select tag_content from tag where tag_id=:tag_id";
+		Query<Tag> query = session.createQuery(hql, Tag.class).setParameter("tag_id", tagId);
+		Tag singleResult = query.getSingleResult();
+//		Tag singleResult = query.uniqueResult()
+		return singleResult;
 	}
 	
 	
