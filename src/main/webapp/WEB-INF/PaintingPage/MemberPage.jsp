@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     
 <!DOCTYPE html>
@@ -12,19 +13,19 @@
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
     <title>會員個人頁面</title>
-    <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
-    <script src="resources/js/popper.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="resources/css/MemberPage.css">
-    <link rel="stylesheet" href="resources/css/前台框架.css" media="screen">
-    <script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="resources/js/nicepage.js" defer=""></script>
+    <link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css">
+    <script src="../resources/js/popper.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/css/MemberPage.css">
+    <link rel="stylesheet" href="../resources/css/前台框架.css" media="screen">
+    <script class="u-script" type="text/javascript" src="../resources/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="../resources/js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-	<script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css"></link>
+	<script src="../resources/js/jquery-3.5.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui.min.css"></link>
     <script type="application/ld+json">
         {
             "@context": "http://schema.org",
@@ -56,7 +57,7 @@
             <div class="u-clearfix u-sheet u-sheet-1">
                 <a href="index.jsp" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                     data-image-height="410">
-                    <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
+                    <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
                 </a>
                 <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
                     <div class="menu-collapse" style="font-size: 1.125rem; letter-spacing: 0px;">
@@ -152,7 +153,8 @@
                                         <a href="#">
                                             <div class="w-100 mw-200px my-2 mx-auto">
                                                 <div class=" propic text-center rounded-circle">
-                                                    <img src="images/Patrick.png" class="rounded-circle">
+<!--                                                     <img src="../resources/images/Patrick.png" class="rounded-circle"> -->
+                                                    <img src="/PaintPartyMvcProject/memberpageshowpic/${member_id}" class="rounded-circle">
                                                 </div>
                                             </div>
                                         </a>
@@ -163,7 +165,13 @@
                                                 </a>
                                             </div>
                                             <div class="my-2 text-center">
-                                                <span class="badge badge-light">繪圖</span>
+                                            	<c:forEach var="i" begin="0" end="3">
+                                            		<span class="badge badge-light">${tag_content+"i"}</span>
+                                            	
+                                            	</c:forEach>
+<%--                                                 <span class="badge badge-light">${tag_content+i}</span> --%>
+<%--                                                 <span class="badge badge-light">${tag_content+i}</span> --%>
+<%--                                                 <span class="badge badge-light">${tag_content+i}</span> --%>
                                             </div>
                                             <div class="text-center d-flex align-items-center justify-content-center">
                                                 <a href="#">
@@ -412,8 +420,9 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text-center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
                                                                         </div>
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
+<!--                                                                             <img src="../resources/images/Patrick.png"> -->
                                                                     </div>
                                                                 </a>
                                                                 <div class="media-body">
@@ -441,7 +450,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -470,7 +479,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text-center rounded-circle square-cover">
-                                                                            <img src="resources/images/LOGO-TEST-22.png">
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -530,7 +539,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="images/LOGO-TEST-22.png">
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -573,7 +582,7 @@
                                                                     <div class="w-3 mr-3">
                                                                         <div
                                                                             class="text center rounded-circle square-cover">
-                                                                            <img src="images/LOGO-TEST-22.png">
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
@@ -615,8 +624,8 @@
                                                                 <a href="#" target="_blank">
                                                                     <div class="w-3 mr-3">
                                                                         <div
-                                                                            class="text center rounded-circle square-cover">
-                                                                            <img src="images/LOGO-TEST-22.png">
+                                                                            class="text center rounded-circle square-cover">                                                                          
+                                                                            <img src="../resources/images/LOGO-TEST-22.png">
                                                                         </div>
                                                                     </div>
                                                                 </a>
