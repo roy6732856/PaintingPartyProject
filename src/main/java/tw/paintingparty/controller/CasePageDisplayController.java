@@ -29,6 +29,7 @@ import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Example;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.CasePageDisplayService;
+import tw.paintingparty.service.MemberService;
 import tw.paintingparty.util.CaseByTags;
 
 @Controller
@@ -36,6 +37,9 @@ public class CasePageDisplayController {
 	
 	@Autowired
 	private CasePageDisplayService capdService;
+	
+	@Autowired
+	 private MemberService mService;
 	
 //	@RequestMapping(path="/casepagemainpage.controller",method = RequestMethod.GET)
 //	public String processDisplayCasePage(Model m) {
@@ -59,6 +63,8 @@ public class CasePageDisplayController {
 	@RequestMapping(path="/casepagemainpage.controller/{caseid}",method = RequestMethod.GET)
 	public String  processQueryCasesById(@PathVariable("caseid")int caseid,Model m,HttpSession session) throws IOException {
 		
+		String attr = (String) session.getAttribute("session_member_status");
+		m.addAttribute("attr",attr);
 		session.setAttribute("caseid", caseid);
 		Cases c1 = capdService.getCasesById(caseid);
 		m.addAttribute("lowBudget",c1.getPrice_min());
@@ -68,7 +74,9 @@ public class CasePageDisplayController {
 		
 		//由caseID 取得此member的資料
 		Member m1 = capdService.getMemberByCaseId(caseid);
+		int memId =(int)m1.getMember_id();
 		m.addAttribute("caseOwner", m1.getMember_name());//m1[0]
+		m.addAttribute("memId",memId);
 		
 		//抓取tag數字  透過CaseByTags 轉換成中文回傳並印在螢幕上
 		String[] tags = c1.getCase_tag().split(",");
@@ -86,6 +94,9 @@ public class CasePageDisplayController {
 		
 		m.addAttribute("uploadDate",datestr);
 		
+		
+		Member mem1 = mService.showLoginUsername();
+		m.addAttribute("member_name", mem1.getMember_name());
 		return "CasePage";
 		
 	}

@@ -38,5 +38,9 @@ public class CaseListPageService {
 	public List<Cases> QueryByComplexReq(Cases cases) {
 		return clpDAO.QueryByComplexReq(cases);
 	}
+	
+	public List<Cases> QueryByComplexReqDflex(Cases cases) {
+		return clpDAO.QueryByComplexReqDflex(cases);
+	}
  
 }
