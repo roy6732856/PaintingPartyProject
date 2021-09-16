@@ -58,11 +58,11 @@
 	var indexPage = 1;
 	var tagAry = [0,0];
 	var priceRan = [0,0];
-	var newOld = "new";
+	var newOld = "old";
 	
 	$(document).ready(function() {
 		
-		sort();
+		sort(indexPage);
 		
 		
 		$('#type').change(function(){
@@ -70,7 +70,7 @@
 			
 			tagAry[0] = s;
 			
-			sort();
+			sort(indexPage);
 			
 			
 		})
@@ -81,34 +81,37 @@
 			
 			tagAry[1] = s;
 			
-			sort();
+			sort(indexPage);
 			
 		})
 		
 		$('#minP').blur(function(){
-			var p = $(this).val();
-
-			priceRan[0] = p;
 			
-			sort();
-			
+				var p = $(this).val();
+				
+				priceRan[0] = p;
+				
+				sort(indexPage);
+				
 		})
 		
 		$('#maxP').blur(function(){
-			var p = $(this).val();
 			
-			priceRan[1] = p;
-			
-			sort();
-			
+				var p = $(this).val();
+				
+				priceRan[1] = p;
+				
+				sort(indexPage);
+				
 		})
 		
-		//$('#sort').change(function(){
-		//	var s = $(this).val();
-		//	newOld = s;
-		//	console.log(newOld);
+		$('#sort').change(function(){
+			var s = $(this).val();
+			newOld = s;
+			sort(indexPage);
+			console.log(newOld);
 			
-		//})
+		})
 		
 	});
 	
@@ -116,6 +119,7 @@
 	
 	function change(page){
 		indexPage = page;
+		sort(indexPage);
 	}
 	
 	function tag(tagAry){
@@ -124,6 +128,11 @@
 	
 	function price(priceRan){
 		priceRan = priceRan;
+		
+	}
+	
+	function newOr(newOld){
+		newOld = newOld;
 	}
 	
 	function sort(indexPage){
@@ -136,6 +145,12 @@
 			priceRan = priceRan;
 		}
 		
+		function newOr(newOld){
+			newOld = newOld;
+		}
+		
+		
+		
 		var tags = tagAry[0]+","+tagAry[1];
 		
 		$.ajax({
@@ -143,12 +158,15 @@
 			url : "<%= request.getContextPath() %>/ajaxRequest",
 			dataType : 'JSON',
 			contentType : 'application/json',
-			data: JSON.stringify({"case_tag":tags,"price_min":priceRan[0],"price_max":priceRan[1]}),
+			data: JSON.stringify({"case_tag":tags,"price_min":priceRan[0],"price_max":priceRan[1],"sort":newOld}),
 			success : function(data) {
-				var tjson = JSON.stringify(data);
+				
 				$('#row1').empty();
 				$('#row2').empty();
 				$('#page').empty();
+				
+				
+				
 				if(data.length==0){
 					$('#row1').append(`<div class="u-container u-white mb-5"
 							style="border-radius: 10px; padding: 10px;">
@@ -159,31 +177,44 @@
 						</div>`);
 				}else{
 					var k;
-					var j=0;
 					var h;
-					var totalPages ;
+					var totalPages=1 ;
+					var y;
+					var j = (indexPage*8)-8;
 					
-					if(totalPages%8==0){
-						totalPages = (data.length / 8);
+					if(data.length%8==0){
+						totalPages = parseInt(data.length/8);
 					}else{
-						totalPages = (data.length / 8)+1;
+						totalPages = parseInt(data.length/8)+1;
 					}
 					
-					if(data.length<=4){
-						k = data.length;
+					
+					for(var p=1;p<=totalPages;p++){
+						$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})" value="\${p}">\${p}</button>`);
+						
+					}
+					
+					
+					k = 4;
+					y = 4;
+					h = 8 ;
+					
+					
+					if(data.length%4 ==0){
+						k = (data.length%4);
 					}else{
-						k = 4;
-						y = 4;
+						k = 4+j;
+						y = 4+j;
 						if(data.length%8 ==0){
-							h = 8
+							h = (data.length%8)+4;							
 						}else{
-							h = data.length%8
+							h = 8+j;
 						}
 						
 					}
 					
 					
-					for(var j=0;j<k;j++){
+					for(var j;j<k;j++){
 						$('#row1').append(
 								`<div class="u-container u-white mb-3"
 								style="border-radius: 10px; padding: 10px;">
@@ -223,7 +254,7 @@
 										  <i class="bi bi-calendar"></i>
 									</svg>\${data[y].upload_date}</div>
 										<div id="caseTag" style="color: burlywood; font-size: 20px;text-align:right;">
-														\${data[y].price_min}~\${data[j].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
+														\${data[y].price_min}~\${data[y].price_max} <span class="m-1" style="color:grey;">NTD/張</span></div>
 									</section>
 									<hr>
 									<div  style="text-align:right"><a href=<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[y].case_id }><button type="button" class="btn btn-warning" >前往案件</button></a></div>
@@ -231,14 +262,12 @@
 							</div>`
 							)	
 					}
-					for(var p=1;p<=totalPages;p++){
-						$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})">\${p}</button>`);
-					}
+					
 					
 				}
 			},
 			error:function(){
-				alert("請求失敗");
+			 alert("請檢查輸入的條件是否有誤!!");
 			}
 		})
 	}
@@ -394,19 +423,20 @@
 									</div>
 									<hr>
 									<div class="form-group">
-										<!--  <label class="mb-3 col-md-12"
+										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: darkseagreen; border-radius: 4px; color: white">酬勞區間</label>
 
 										<input class="form-control mb-2" type="text" id="minP" 
 											placeholder="最低價格"> 
 										<input class="form-control"
 											type="text" id="maxP"  placeholder="最高價格">
-										<hr>-->
+										<hr>
 										<label class="mb-3 col-md-12"
 											style="border-width: 3px; padding: 5px; text-align: center; background-color: rgb(200, 199, 199); border-radius: 4px; color: white">排列方式</label>
 										<select class="form-control col-md-12" style="left: 5%;"
 											id="sort">
-											<option value="new">由舊到新</option>
+											<option value="old">由舊到新</option>
+											<option value="new">由新到舊</option>
 
 										</select>
 										<hr>
@@ -522,7 +552,7 @@
     //登入狀態與登出狀態功能列表
     //透過AllFilter 傳過來的session
 //     <h1>${sessionScope.login}</h1>
-    console.log(${sessionScope.login})
+    
     if(${sessionScope.login}==1){ //代表有登入狀態
     	$("[name=issue_case]").show()
     	$("[name=account_manager]").show()

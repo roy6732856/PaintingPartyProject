@@ -25,91 +25,86 @@ import tw.paintingparty.model.Member;
 import tw.paintingparty.painterlist.model.PainterListDAO;
 import tw.paintingparty.painterlist.service.PainterListPageService;
 import tw.paintingparty.painterlist.service.PainterListService;
-
+import tw.paintingparty.service.MemberService;
 
 @Controller
 public class PainterListController {
-	
+
 	@Autowired
 	private PainterListService plService;
 	
 	@Autowired
-	private PainterListPageService plpService;
+	private MemberService mService;
 	
 	@Autowired
-	private PainterListDAO painterListDAO;
-	
+	private PainterListPageService plpService;
+
 	@RequestMapping(path = "/painterlist", method = RequestMethod.GET)
 	public String painterListAction(Model m) {
 
-		Long Member = plpService.TotalPage();
-		
+		Long Member = plpService.Pagetotal();
+
 		Long totalPages;
-		
-		if(Member%8==0) {
-			Long total = (Member/8);
+
+		if (Member % 8 == 0) {
+			Long total = (Member / 8);
 			totalPages = total;
-		}else {
-			Long total = (Member/8)+1;
+		} else {
+			Long total = (Member / 8) + 1;
 			totalPages = total;
 		}
-		
-		
-		m.addAttribute("totalCases",Member);
-		m.addAttribute("totalPages",totalPages);
-		
-		
+
+		m.addAttribute("totalCases", Member);
+		m.addAttribute("totalPages", totalPages);
+
 		return "PainterList";
 	}
-	
-	@RequestMapping(path = "/FindAll",method = RequestMethod.POST)
+
+	@RequestMapping(path = "/SelectAll", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Member> processFildAllMemberAction() {
-		
-		return plService.FindAll();
-		
-	
+	public List<Member> SelectAllMember() {
+
+		return plService.SelectAllMember();
+
 	}
 	
-//	@RequestMapping(path ="/queryByPage/{pageNo}",method = RequestMethod.POST)
-//	@ResponseBody
-//	public List<Member> processQueryAllPages(@PathVariable("pageNo")int pageNo){
-//		
-//		return plpService.QueryByPage(pageNo-1);
-//				
-//	}
-	
-	@RequestMapping(path="/painterimage", method = RequestMethod.GET)
-	//畫師照片顯示
-	public void prosessPainterImgById(HttpServletRequest request, HttpServletResponse response, Model m) throws IOException {
-		HttpSession session = request.getSession();
-		int memOneId=(int) session.getAttribute("session_member_id");
 
-		Member oneMem = plService.selectOne(memOneId);	
-	//	m.addAttribute("member_id", oneMem.getMember_id());
-	//	m.addAttribute("Profile_pic_path", oneMem.getProfile_pic_path());
-		String profilePicPath=oneMem.getProfile_pic_path();
-		String profilePic=oneMem.getProfile_pic();		
-		String imagePath=profilePicPath+"\\"+profilePic;
-		
+
+	@RequestMapping(path = "/queryPage/{pageNo}", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Member> QueryPages(@PathVariable("pageNo") int pageNo) {
+
+		return plpService.QueryPage(pageNo - 1);
+
+	}
+
+	@RequestMapping(path = "/painterimage", method = RequestMethod.GET)
+	// 畫師照片顯示
+	public void prosessPainterImgById(HttpServletRequest request, HttpServletResponse response, Model m)
+			throws IOException {
+		HttpSession session = request.getSession();
+		int memOneId = (int) session.getAttribute("session_member_id");
+
+		Member oneMem = plService.selectId(memOneId);
+		// m.addAttribute("member_id", oneMem.getMember_id());
+		// m.addAttribute("Profile_pic_path", oneMem.getProfile_pic_path());
+		String profilePicPath = oneMem.getProfile_pic_path();
+		String profilePic = oneMem.getProfile_pic();
+		String imagePath = profilePicPath + "\\" + profilePic;
+
 		InputStream in = new FileInputStream(new File(imagePath));
 		IOUtils.copy(in, response.getOutputStream());
 	}
-	
+
 	@RequestMapping("search")
 	@ResponseBody
-	//具體方法
-	public   List<Member> getSearchResourcesProfiles(HttpServletRequest request) {
-	     
-	         String searchValue1 = request.getParameter("Select1");
-	         String searchValue2 = request.getParameter("Select2");
-	         
-		 List<Member> lstMember = painterListDAO.search("1" , "2");
-		 System.out.println("lstMember.size() => "+ lstMember.size());
-		 System.out.println("lstMember[0] => "+ lstMember.get(0).getMember_name());
-
-		 
-	         return lstMember;
+	// 具體方法
+	public List<Member> getSearchResourcesProfiles(HttpServletRequest request) {
+		String searchValue1 = request.getParameter("Select1");
+		String searchValue2 = request.getParameter("Select2");
+		List<Member> lstMember = plService.search(searchValue1, searchValue2);
+		System.out.println("lstMember.size() => " + lstMember.size());
+		System.out.println("lstMember[0] => " + lstMember.get(0).getMember_name());
+		return lstMember;
 	}
 }
-

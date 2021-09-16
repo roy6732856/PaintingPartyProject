@@ -216,7 +216,7 @@
                 <div class="u-container-layout u-container-layout-2">
                     <a href="139992805"
                         class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                    <a href="139992805"
+                    <a href="<%= request.getContextPath() %>/backend/accountmanager"
                         class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
                 </div>
             </div>
@@ -251,24 +251,23 @@
                                                 </svg></span>
                                         </a>
                                         <div class="u-accordion-pane u-container-style u-shape-rectangle u-white u-accordion-pane-1"
-                                            id="accordion-0781" aria-labelledby="link-accordion-0781">
+                                            id="accordion-0781" aria-labelledby="link-accordion-0781" style="min-height:auto;" >
                                             <div class="u-container-layout u-container-layout-2">
-                                                <a href="#"
+                                                <a href="<%= request.getContextPath() %>/backend/accountmanager"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-1">帳號設置</a>
-                                                <a href="#"
+                                                <a href="<%= request.getContextPath() %>/backend/personcontent"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-2">個人資料</a>
-                                                <a href="#"
+                                                <a href="<%= request.getContextPath() %>/backend/casemanage"
                                                     class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-3">案件管理</a>
-                                                <a href="#"
-                                                    class="u-align-left u-border-none u-btn u-btn-round u-button-style u-radius-6 u-text-hover-palette-1-light-1 u-white u-btn-4">畫作管理</a>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="https://nicepage.com/c/shapes-website-templates"
+                                <a href="<%= request.getContextPath() %>/backend/systemnotice"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
-                                    data-href="https://nicepage.com/k/competition-website-templates"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use>
@@ -292,7 +291,7 @@
                                             d="m30 0h320c14.402344.0390625 26.761719 10.261719 29.5 24.398438l-189.5 105.601562-189.5-105.601562c2.738281-14.136719 15.097656-24.3593755 29.5-24.398438zm320 246.601562h-320c-16.546875-.050781-29.953125-13.453124-30-30v-169.601562l185.101562 103.199219c1.5.824219 3.183594 1.273437 4.898438 1.300781 1.722656.019531 3.414062-.429688 4.898438-1.300781l185.101562-103.199219v169.601562c-.011719 16.5625-13.4375 29.984376-30 30zm0 0">
                                         </path>
                                     </svg></span>
-                                <a href="https://nicepage.com/c/shapes-website-templates"
+                                <a href="<%= request.getContextPath() %>/logout"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span
                                     class="u-icon u-icon-circle u-icon-4"
                                     data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link"

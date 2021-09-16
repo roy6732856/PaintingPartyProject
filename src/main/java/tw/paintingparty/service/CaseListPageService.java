@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.paintingparty.caselist.model.CaseSelectRequirementsBean;
 import tw.paintingparty.model.CaseListPageDAO;
 import tw.paintingparty.model.Cases;
 
@@ -37,6 +38,10 @@ public class CaseListPageService {
 	
 	public List<Cases> QueryByComplexReq(Cases cases) {
 		return clpDAO.QueryByComplexReq(cases);
+	}
+	
+	public List<Cases> QueryByComplexReqDflex(CaseSelectRequirementsBean bean) {
+		return clpDAO.QueryByComplexReqDflex(bean);
 	}
  
 }
