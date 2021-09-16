@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
 
@@ -104,19 +104,19 @@
       <div class="u-align-left u-container-style u-group u-radius-30 u-shape-round u-white u-group-1 form-group" >
         <div class="u-container-layout u-container-layout-1 font-weight-bold"
           style="font-family: Arial, Helvetica, sans-serif;">
-          <form>
+          <form action="<%= request.getContextPath() %>/addform.controller" method="post">
             <div class="form-group">
               <label for="inputCaseName">案件名稱</label>
-              <input type="text" class="form-control" id="inputCaseName" placeholder="(必填)">
+              <input type="text" class="form-control" id="inputCaseName" placeholder="(必填)" name="inputCaseName">
             </div>
             <div class="form-row d-flex">
               <div class="form-group col-md-6">
                 <label for="inputLowBudget">最低預算</label>
-                <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)">
+                <input type="text" class="form-control" id="inputLowBudget" placeholder="(必填)" name="inputLowBudget">
               </div>
               <div class="form-group col-md-6">
                 <label for="inputHighBudget">最高預算</label>
-                <input type="text" class="form-control" id="inputHighBudget" placeholder="(必填)">
+                <input type="text" class="form-control" id="inputHighBudget" placeholder="(必填)" name="inputHighBudget">
               </div>
             </div>
             <!-- <div class="form-group col-md-6">
@@ -163,7 +163,7 @@
             </div>-->
             <div class="form-group">
               <label for="CommissionExplain">委託說明(必填)</label>
-              <textarea class="form-control" id="CommissionExplain" rows="4" placeholder="請詳細描述需求"></textarea>
+              <textarea class="form-control" id="CommissionExplain" rows="4" placeholder="請詳細描述需求" name="commissionExplain"></textarea>
             </div>
             <div class="col form-group" style="width: 200px;">
               <label class="btn btn-info ">
@@ -174,7 +174,7 @@
                 src="https://th.bing.com/th/id/OIP.Dl3J0Zt1TOsgg9TxNa9AQQHaHa?pid=ImgDet&w=480&h=480&rs=1"
                 style="max-height:inherit;" />
             </div>
-            <button type="submit" class="btn btn-warning btn-lg btn-block">送出</button>
+            <button type="submit" id="success" class="btn btn-warning btn-lg btn-block">送出</button>
             
           </form>
         </div>
