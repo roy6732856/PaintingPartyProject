@@ -13,6 +13,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import tw.paintingparty.caselist.model.CaseSelectRequirementsBean;
+
 @Repository("castListDao")
 @Transactional
 public class CaseListPageDAO {
@@ -218,14 +220,18 @@ public class CaseListPageDAO {
 	}
 
 
-	public List<Cases> QueryByComplexReqDflex(Cases cases) {
+	public List<Cases> QueryByComplexReqDflex(CaseSelectRequirementsBean bean) {
 
 		Session session = factory.getCurrentSession();
 
-		String tagAry = cases.getCase_tag();
-		Integer minPrice = cases.getPrice_min();
-		Integer maxPrice = cases.getPrice_max();
-
+		String tagAry = bean.getCase_tag();
+		Integer minPrice = bean.getPrice_min();
+		Integer maxPrice = bean.getPrice_max();
+		String sort = bean.getSort();
+		
+		String ifItnew = " order by c.upload_date desc";
+		
+		
 		String[] ary = tagAry.split(",");
 
 		int size = ary.length;
@@ -236,39 +242,283 @@ public class CaseListPageDAO {
 		int typeTag = arr[0];
 		int styleTag = arr[1];
 		
-		String hql = "from Cases desc";
+		String hql = "from Cases c ";
 
-		String hql1 = "from Cases c where c.case_tag like '" + typeTag + ",%' desc";
+		String hql1 = "from Cases c where c.case_tag like '" + typeTag + ",%'";
 
-		String hql2 = "from Cases c where c.case_tag like '%," + styleTag + "' desc";
+		String hql2 = "from Cases c where c.case_tag like '%," + styleTag + "'";
 
 		String hql3 = "from Cases c where c.case_tag like '" + typeTag + ",%'" + " and c.case_tag like " + "'%,"
-				+ styleTag + "' desc";
+				+ styleTag + "'";
 
-		if (typeTag == 0 && styleTag > 0) {
-			System.out.println(styleTag);
-
-			Query<Cases> query = session.createQuery(hql2, Cases.class);
-
-			List<Cases> list = query.setMaxResults(8).getResultList();
-			return list;
-		} else if (typeTag > 0 && styleTag == 0) {
-			System.out.println(typeTag);
-			Query<Cases> query = session.createQuery(hql1, Cases.class);
-
-			List<Cases> list = query.setMaxResults(8).getResultList();
-			return list;
-
-		} else if (typeTag != 0 && styleTag != 0) {
-			System.out.println(typeTag + styleTag);
-			Query<Cases> query = session.createQuery(hql3, Cases.class);
-
-			List<Cases> list = query.setMaxResults(8).getResultList();
-			return list;
-		} else {
-			Query<Cases> query = session.createQuery(hql, Cases.class);
-			List<Cases> list = query.setMaxResults(8).getResultList();
-			return list;
+		
+		if(minPrice>0 && maxPrice>0) {
+			if (typeTag == 0 && styleTag > 0) {
+				if(sort.equals("new")) {
+					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else if(typeTag > 0 && styleTag == 0) {
+				if(sort.equals("new")) {
+					hql1 = hql1 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql1 = hql1 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else if(typeTag != 0 && styleTag != 0) {
+				if(sort.equals("new")) {
+					hql3 = hql3 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql3 = hql3 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else {
+				if(sort.equals("new")) {
+					hql = hql + " where c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql = hql + " where c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}
+			
+			
+			
+		}else if(minPrice>0 && maxPrice==0){
+			if (typeTag == 0 && styleTag > 0) {
+				if(sort.equals("new")) {
+					hql2 = hql2 + " and c.price_min >= "+ minPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql2 = hql2 + " and c.price_min >= "+ minPrice ;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+				
+			}else if(typeTag > 0 && styleTag == 0) {
+				if(sort.equals("new")) {
+					hql1 = hql1 + " and c.price_min >= "+ minPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql1 = hql1 + " and c.price_min >= "+ minPrice ;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else if(typeTag != 0 && styleTag != 0) {
+				if(sort.equals("new")) {
+					hql3 = hql3 + " and c.price_min >= "+ minPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql3 = hql3 + " and c.price_min >= "+ minPrice  ;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else {
+				if(sort.equals("new")) {
+					hql = hql + " where c.price_min >= "+ minPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql = hql + " where c.price_min >= "+ minPrice ;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}
+			
+			
+			
+		}else if(minPrice==0 && maxPrice>0) {
+			
+			if (typeTag == 0 && styleTag > 0) {
+				if(sort.equals("new")) {
+					hql2 = hql2 + " and c.price_max <= " + maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql2 = hql2 + " and c.price_max <= " + maxPrice ;
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+				
+			}else if(typeTag > 0 && styleTag == 0) {
+				if(sort.equals("new")) {
+					hql1 = hql1 + " and c.price_max <= " + maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql1 = hql1 + " and c.price_max <= " + maxPrice ;
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else if(typeTag != 0 && styleTag != 0) {
+				if(sort.equals("new")) {
+					hql3 = hql3 + " and c.price_max <= " + maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql3 = hql3 + " and c.price_max <= " + maxPrice ;
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}else {
+				if(sort.equals("new")) {
+					hql = hql + " where c.price_max <= " + maxPrice + ifItnew;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					hql = hql + " where c.price_max <= " + maxPrice ;
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}
+			
+		
+		}else {
+			
+			if (typeTag == 0 && styleTag > 0) {
+				if(sort.equals("new")) {
+					
+					hql2 = hql2 +  " order by c.upload_date desc";
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					Query<Cases> query = session.createQuery(hql2, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+				
+				
+			} else if (typeTag > 0 && styleTag == 0) {
+				if(sort.equals("new")) {
+					
+					hql1 = hql1 +  " order by c.upload_date desc";
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					Query<Cases> query = session.createQuery(hql1, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+				
+			} else if (typeTag != 0 && styleTag != 0) {
+				if(sort.equals("new")) {
+					
+					hql3 = hql3 +  " order by c.upload_date desc";
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					Query<Cases> query = session.createQuery(hql3, Cases.class);
+					
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			} else {
+				if(sort.equals("new")) {
+					
+					hql = hql +  " order by c.upload_date desc";
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}else {
+					Query<Cases> query = session.createQuery(hql, Cases.class);
+//					List<Cases> list = query.setMaxResults(8).getResultList();
+					List<Cases> list = query.getResultList();
+					return list;
+				}
+			}
 		}
 	}
 }
