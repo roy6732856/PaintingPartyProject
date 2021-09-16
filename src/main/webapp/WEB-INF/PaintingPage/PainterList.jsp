@@ -18,15 +18,18 @@
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <script src="resources/js/popper.min.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
-    <script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script>
+     <!--<script class="u-script" type="text/javascript" src="resources/js/jquery.js" defer=""></script> -->
     <script class="u-script" type="text/javascript" src="resources/js/nicepage.js" defer=""></script>
-    <link rel="stylesheet"
-	href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script
-	src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+
+	<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    
     <script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
+    
+    <script src="resources/plugin/datatable/datatables.min.js"></script>
+    <link rel="stylesheet"
+	href="resources/plugin/datatable/datatables.min.css">
+    <script src="resources/plugin/datatable/DataTableUtil.js"></script>
 	<link rel="stylesheet" type="text/css" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css"></link>
     <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
@@ -40,80 +43,7 @@
             "logo": "images/LOGO-TEST-22.png"
         }
     </script>
-    <script type="text/javascript">
-    
-   function search(){
-		$.ajax({
-			type : 'post',
-			url : "/PaintPartyMvcProject/search",
-			dataType : 'JSON',
-			data : {Select1:$('#Select1').val() , Select2:$('#Select2').val()},
-	//		contentType : 'application/json',
-			success : function(data) {	
-						console.log(data)
-			}			
-		})
-    }   
-    
-
-    
-	var indexPage = 1;
 	
-	$(document).ready(function() {
-		load(indexPage);
-	});
-	
-	function change(page){
-		indexPage = page;
-		load(indexPage);
-	}
-	
-	
-		function load(indexPage){
-		$.ajax({
-			type : 'post',
-			url : "/PaintPartyMvcProject/queryByPage/" + indexPage,
-			dataType : 'JSON',
-			contentType : 'application/json',
-			success : function(data) {
-				var json = JSON.stringify(data);
-				console.log(json);
-				
-				for (var i = 0 ; i<data.length; i++)
-				{  // var path=data[i].profile_pic_path + "/" + data[i].profile_pic ;
-						$('#row1').append(
-				                 `<div class="col-lg-3 col-4 mb-4">
-		                            <div class="creators-item shadow-sm p-3 bg-white rounded-1g h-100">
-		                                <div class="text-center pb-1">
-		                                    <a href="#" target="_blank">
-		                                        <div
-		                                            class="text-center rounded-1g d-flex justify-content-center overflow-hidden">
-		                                            <img src= "painterimage" alt="avator" class="comisstion-cover">
-		                                        </div>
-		                                    </a>
-		                                    <div class="portfolio-caption text-center">
-		                                        <div class="heading font-weight-bold text-truncate display-6 p-4" id="memberName">
-		                                        \${data[i].member_name}  
-		                                        </div>
-		                                        <div class="text-truncate">
-		                                            <a href="#">
-		                                                <button type="button" class="btn btn-light"
-		                                                    style="background-color: #D3D3D3 ">私人訊息</button>
-		                                            </a>
-		                                        </div>
-		                                        <div class="text-muted my-2" id="sc">
-		                                        \${data[i].schedule} 
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                            </div>
-		                        </div>`														
-					        	)
-				           }		    							
-		}
-	})
-};
-</script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="前台框架">
     <meta property="og:description" content="">
@@ -234,7 +164,7 @@
                     <option value="16">像素風格</option>
                 </select>
             </div>
-            <button class="select-btn" type="button" onclick="search()" >查詢</button>
+            <button id="btnSearch" class="select-btn" type="button">查詢</button>
             
             
         </form>
@@ -244,6 +174,7 @@
             <div class="row">
                 <div class="col-12 col-md-12">
                     <div class="row" id="row1">
+               
                      <!--  <div class="col-lg-3 col-4 mb-4">
                             <div class="creators-item shadow-sm p-3 bg-white rounded-1g h-100">
                                 <div class="text-center pb-1">
@@ -441,7 +372,7 @@
             </div>
             <div class="page-wrap">
                 <div class="page-wrap">
-                    <div class="pager">
+                    <div class="pager" style="display:none">
            <!--               <ul class="pages">
                             <li class="page-item">
                                 <button type="button" class="btn btn-outline-secondary"> 上一頁 </button>
@@ -524,25 +455,183 @@
     </footer>
     
     <script type="text/javascript">
-    //登入狀態與登出狀態功能列表
-    //透過AllFilter 傳過來的session
-//     <h1>${sessionScope.login}</h1>
-    console.log(${sessionScope.login})
-    if(${sessionScope.login}==1){ //代表有登入狀態
-    	$("[name=issue_case]").show()
-    	$("[name=account_manager]").show()
-    	$("[name=member_name]").show()
-    }else{
-    	$("[name=header_login]").show()
-    	$("[name=header_register]").show()
-    	
-    }
-    //登出
-    function logout(){
-    	
-    	window.location.href = '/PaintPartyMvcProject/logout'
-    }
+	$(document).ready(function() {
+		var $btnSearch = $('#btnSearch');
+		
+		var indexPage = 1;
+		//load(indexPage);
+		
+		//登入狀態與登出狀態功能列表
+	    //透過AllFilter 傳過來的session
+//	     <h1>${sessionScope.login}</h1>
+	    console.log(${sessionScope.login})
+	    if(${sessionScope.login}==1){ //代表有登入狀態
+	    	$("[name=issue_case]").show()
+	    	$("[name=account_manager]").show()
+	    	$("[name=member_name]").show()
+	    }else{
+	    	$("[name=header_login]").show()
+	    	$("[name=header_register]").show()
+	    	
+	    }
+	    //登出
+	    function logout(){
+	    	window.location.href = '/PaintPartyMvcProject/logout'
+	    }
+	    
+	    $btnSearch.off('click').on('click' , search)
+	    
+	    function search(){
+			$.ajax({
+				type : 'post',
+				url : "/PaintPartyMvcProject/search",
+				dataType : 'JSON',
+				data : {Select1:$('#Select1').val() , Select2:$('#Select2').val()},
+		//		contentType : 'application/json',
+				success : function(data) {	
+							console.log(data);
+							$('#row1').empty();
+							for (var i = 0 ; i<data.length; i++)
+							{  // var path=data[i].profile_pic_path + "/" + data[i].profile_pic ;
+									$('#row1').append(
+							                 `<div class="col-lg-3 col-4 mb-4">
+					                            <div class="creators-item shadow-sm p-3 bg-white rounded-1g h-100">
+					                                <div class="text-center pb-1">
+					                                    <a href="#" target="_blank">
+					                                        <div
+					                                            class="text-center rounded-1g d-flex justify-content-center overflow-hidden">
+					                                            <img src= "resources/images/PaintingImg/HeadShot/\${data[i].profile_pic}"    alt="avator" class="comisstion-cover">
+					                                        </div>
+					                                    </a>
+					                                    <div class="portfolio-caption text-center">
+					                                        <div class="heading font-weight-bold text-truncate display-6 p-4" id="memberName">
+					                                        \${data[i].member_name}  
+					                                        </div>
+					                                        <div class="text-truncate">
+					                                            <a href="#">
+					                                                <button type="button" class="btn btn-light"
+					                                                    style="background-color: #D3D3D3 ">私人訊息</button>
+					                                            </a>
+					                                        </div>
+					                                        <div class="text-muted my-2" id="sc">
+					                                        \${data[i].schedule} 
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>`														
+								        	)
+							           }
+				}			
+			})
+	    } 
+
+	    
+	    // 未完成 : Start
+	    $mTable = $('#mTable');
+
+	    var mTableColumns = [
+	        {
+	            title: '序號',
+	            width: '100px',
+	            render: function (data, type, row, meta) {
+	                return meta.row + 1;
+	            }
+	        },
+	        {
+	            title: '欄位A',
+	            data: 'typeA',
+	            render: function (data, type, row, meta) {
+	                let typeA = row.typeA;
+	                let text = '';
+	                if (typeA == 'typeA') {
+	                    text = 'typeA.1';
+	                } else {
+	                    text = 'typeA.2';
+	                }
+	                return text;
+	            }
+	        },
+	        {
+	            title: '欄位B',
+	            data: 'typeB',
+	            className: 'text-left'
+	        },
+	        {
+	            title: '欄位C',
+	            data: 'typeC',
+	            className: 'text-left'
+	        },
+	        {
+	            title: '執行<br/>動作',
+	            width: '100px',
+	            render: function (data, type, row, meta) {
+	                var showHtml = '';
+	                showHtml += '<button type="button" class="btn btn-primary" id="showBtn" >明細</button>&nbsp&nbsp';
+	                return showHtml;
+	            }
+	        }];
+
+	    var config = {
+	        searching: false,
+	        paging: false,
+	        info: false,
+	        ordering: false,
+	        data: []
+	    };
+
+	    TableUtil.DataTableInitByCustomConfig("#mTable", mTableColumns, config);
+
+	    var showTable = function () {
+	        var lstShow = [
+	            {
+	                typeA: 'typeA',
+	                typeB: 'typeB',
+	                typeC: 'typeC'
+	            },
+	            {
+	                typeA: 'typeA1',
+	                typeB: 'typeB1',
+	                typeC: 'typeC1'
+	            },
+	            {
+	                typeA: 'typeA2',
+	                typeB: 'typeB2',
+	                typeC: 'typeC3'
+	            }
+	        ];
+
+	        //TableUtil.DataTableClear('#mTable');
+	        //$mTable.DataTable().rows.add(lstShow).draw();
+	        //$mTable.DataTable().columns.adjust().draw();
+	    }
+
+	   // $mTable.find('tbody').on('click', '#showBtn', function (event) {
+	   //     var table = $mTable.DataTable();
+	   //     var row = table.row($(this).parents('tr')).data();
+	   //     alert('row : ' + row.typeA);
+	   // });
+
+	    //showTable();
+	    
+	    // 未完成 : End
+	    
+	    function change(page){
+			indexPage = page;
+			//load(indexPage);
+		}
+		
+	    
+	// DEL 
+	
+	search();
+
+	});
+	
+	
+	
     
     </script>
+
 </body>
 </html>

@@ -35,7 +35,7 @@ public class PainterListDAO {
 
 	//--------------------------------------------	
 	
-	public List<Member> FindAll(){
+	public List<Member> SelectAllMember(){
 		
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -70,7 +70,7 @@ public class PainterListDAO {
 	}
 	
 	
-	public Member selectOne(int memberid) {
+	public Member selectId(int memberid) {
 		Session session = sessionFactory.getCurrentSession();
 		Member oneMem = session.get(Member.class,memberid);
 		return oneMem;		
