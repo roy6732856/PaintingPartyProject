@@ -132,6 +132,19 @@ public class TestDemoController_01 {
 		
 	}
 	
+
+	
+	//代做
+	@PostMapping(path = "/backend/hire/{case_id}/{bmember_id}/{price_expected}") //錄取畫師
+	public List<CaseBackStageBean> test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
+		System.out.println("接收成功!");
+//		String welcom = "casebackstage: " + caseid;
+//		System.out.println(welcom);
+		List<CaseBackStageBean> caseBackStageManage = cmDao.CaseBackStageManage( caseid );
+		
+		return caseBackStageManage;
+		
+	}
 	
 	
 	//-----------------------------------------------
@@ -220,10 +233,8 @@ public class TestDemoController_01 {
 	@GetMapping(path = "/backend/headshotdownloader/{memid}")
 	public void test11_8(@PathVariable("memid") Integer memberid , HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println(memberid);
-		
 		HeadShotBean headShotDownloader = cmDao.HeadShotDownloader(memberid);
 		String filePath = headShotDownloader.getProfile_pic_path() + "\\" + headShotDownloader.getProfile_pic();
-		
 		FileInputStream fis = new FileInputStream(filePath);
 		IOUtils.copy(fis, response.getOutputStream()); //由IOUtils來幫我們讀寫，會自己幫我們用暫存、關串流，但檔案超出2G還5G似乎會出事(?)
 		

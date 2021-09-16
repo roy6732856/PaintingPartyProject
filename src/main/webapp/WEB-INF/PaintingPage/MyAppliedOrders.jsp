@@ -308,11 +308,10 @@
               	 $("#MyAppliedOrdersPage").html(JSON.stringify(data)); 
               	 
               	 
-              	 var i;
   					
                    if(data[0]!=null){
-                  	 for(i=0;i<data.length;i++){
-                  		 
+                  	 for(let i = 0;i<data.length;i++){
+                  		 console.log(i);
                   		 $("#MyAppliedOrdersPage").append(`                                                                        <div
                                    class="u-container-style u-group u-palette-5-light-2 u-group-24" style="margin-bottom:50px;">
                                    <div
@@ -547,10 +546,10 @@
     //待改進:在第五張圖片單擊後，假設在第三張圖片雙擊解除，那時候呈現的會有五個超賽，而不是三個，必須把滑鼠移出去觸發out重置。
     
     
-            let imageevab = document.querySelectorAll ("#idimgb"); //取得所有ID為IDIMG的所有元素，放進NodeList裡面，成為元素集
-            let msgb = document.getElementById("messageb");
-            let msgb2 = document.getElementById("messageb2");
-            let evtb = document.getElementById("evaluationb");
+            var imageevab = document.querySelectorAll ("#idimgb"); //取得所有ID為IDIMG的所有元素，放進NodeList裡面，成為元素集
+            var msgb = document.getElementById("messageb");
+            var msgb2 = document.getElementById("messageb2");
+            var evtb = document.getElementById("evaluationb");
             //let subb = document.getElementById("submit");
 
             
@@ -754,40 +753,54 @@
          
          
          <script type="text/javascript">
+         
 //上傳檔案 
   $(function() {
-
+	
     //當選檔變更時,立即預覽之前被選擇的照片
+    	
     $("#productupload").change(function() {
       $("#imgpreview").remove();
+      console.log(this.files);
         previewImg(this.files);			
     });
 
+    	
+
+
   });
 
+//圖片預覽
   function previewImg(files) {		
+
     var fileReaders = [];
-    for(let i=0;i<files.length;i++){			
-      fileReaders[i] = new FileReader();		
+    
+    if(files.length == 0){
+    	return;
+    } //若沒東西就不用預覽
+    	
+    	fileReaders[0] = new FileReader();		
 
-      //註冊當選檔被讀取完成後之事件處理器
-      fileReaders[i].onload = function() {
-    	  console.log(123);
-      var imgWrapperDiv = `
-          <div id="imgpreview">
-            <img src="\${fileReaders[i].result}" style="width:100%;height:100%;" />
-            <div id="productfilename" style="display:none; font-size:small;">\${files[i].name}</div>
-          </div>
-          `;			
-      $("#img-container").append(imgWrapperDiv);
+        //註冊當選檔被讀取完成後之事件處理器
+        fileReaders[0].onload = function() {
+      	  console.log("預覽");
+      	  
+      	  
+        let imgWrapperDiv = `
+            <div id="imgpreview">
+              <img src="\${fileReaders[0].result}" style="width:100%;height:100%;" />
+              <div id="productfilename" style="display:none; font-size:small;">\${files[0].name}</div>
+            </div>
+            `;			
 
-        
-      }; //file.onload func end
+		    $("#img-container").html(imgWrapperDiv);    	
+            
+          
+        }; //file.onload func end
 
-      fileReaders[i].readAsDataURL(files[i]);		
-
-    }//for end		
-
+        fileReaders[0].readAsDataURL(files[0]);		
+   
+    
   } //func(previewImg) end
 </script>
          

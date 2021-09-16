@@ -155,7 +155,7 @@
                               </a>
                             </div>
                             <div class="u-custom-menu u-nav-container">
-                              <ul class="u-nav u-spacing-20 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-border-1 u-border-palette-5-dark-2 u-button-style u-nav-link u-radius-5 u-text-active-palette-5-dark-2 u-text-hover-palette-2-base u-text-palette-5-dark-2 u-white" href=# style="padding: 10px 36px;">全部</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-palette-5-light-2 u-nav-link u-white" href="<%= request.getContextPath() %>/backend/ordernotice">系統通知</a>
+                              <ul class="u-nav u-spacing-20 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-active-white u-border-1 u-border-palette-5-dark-2 u-button-style u-nav-link u-radius-5 u-text-active-palette-5-dark-2 u-text-hover-palette-2-base u-text-palette-5-dark-2 u-white" href=# style="padding: 10px 36px;">全部</a><div class="u-nav-popup"><ul class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2"><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-palette-5-light-2 u-nav-link u-white" href="<%= request.getContextPath() %>/backend/ordernotice">訂單通知</a>
 </li><li class="u-nav-item"><a class="u-active-white u-button-style u-hover-palette-5-light-2 u-nav-link u-white" href="<%= request.getContextPath() %>/backend/systemnotice">系統公告</a>
 </li></ul>
 </div>
@@ -221,7 +221,7 @@
                             </div>
                           </div>
                           
-                          <p class="u-large-text u-text u-text-default u-text-variant u-text-3"><%= request.getAttribute("noticesort") %></p>
+                          <p class="u-large-text u-text u-text-default u-text-variant u-text-3">公告</p>
                           
                           <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-8">
                             <div class="u-container-layout u-container-layout-11">

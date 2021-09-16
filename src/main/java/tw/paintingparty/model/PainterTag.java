@@ -2,6 +2,7 @@ package tw.paintingparty.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,9 +27,11 @@ public class PainterTag implements Serializable{
 	private Integer painter_tag_id;
 	
 	@Transient
+//	@Column
 	private Integer tag_id;
 	
 	@Transient
+//	@Column
 	private Integer member_id;
 	
 	
