@@ -25,12 +25,18 @@ import org.springframework.transaction.annotation.Transactional;
   Session session = sessionfactory.getCurrentSession();
   
   
-  String hql = "from SystemNotice where system_notice_id=:snid >= 1";
-  Query<SystemNotice> query = session.createQuery(hql, SystemNotice.class);
+//  String hql = "from SystemNotice where system_notice_id=:snid >= 1";
+//  Query<SystemNotice> query = session.createQuery(hql, SystemNotice.class);
+//  
+//  
+//  return query.list();
   
   
-  return query.list();
-  
+	String hql = "from SystemNotice s where s.system_notice_id >= 1";
+	Query<SystemNotice> query1 = session.createQuery(hql, SystemNotice.class);
+	List<SystemNotice> list1 = query1.getResultList();
+	return list1;
+
   }
   
   public List<OrderNotice> order() { 

@@ -28,6 +28,7 @@ import tw.paintingparty.service.SystemNoticeService;
  
   public String systemnotice(Model m) { 
 	  List<SystemNotice> systemAll = snService.systemAll();
+	  
   
     return "SystemNotice";
   
