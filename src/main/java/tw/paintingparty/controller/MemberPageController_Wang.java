@@ -48,7 +48,7 @@ public class MemberPageController_Wang {
 			PainterTag painterTag=tagId.get(i);
 			String tag_content = painterTag.getTagbean().getTag_content();
 //			String x = "tag_content"+i;
-			Map<K, V> map = new HashMap<K, V>();
+//			Map<K, V> map = new HashMap<K, V>();
 			m.addAttribute("tag_content"+i, tag_content);
 		}
 		m.addAttribute("tagIdSize", tagId.size());
