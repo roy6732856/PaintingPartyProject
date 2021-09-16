@@ -350,7 +350,8 @@ $(function() {
         	   	  		$( "#dialog-casemanagepage #budget" ).html(""); //清空預算區間
         	   	  	    //以上固定內容設置
         	   	  		
-                    	let casemanage_caseid = $("#casemanage_caseid").val();
+        	   	  		$( "#whoapply .applymember" ).remove(); //清空變動區塊
+                    	let casemanage_caseid = $("#casemanage_caseid").val(); 
         	   	  		
         	   	  		
         	   	  	    
@@ -360,7 +361,7 @@ $(function() {
      					dataType: 'json',
      					success: function(data2) { //data2取值，記得從x+1開始取，跳過第0筆資料
      						//alert("連線成功!!");
-     						console.log(JSON.stringify(data2));
+     						//console.log(JSON.stringify(data2));
      						$("#dialog-casemanagepage").prepend(`<div id="democasemanagepage">\${JSON.stringify(data2)}</div>`); //DEMO用資料
      						$( "#dialog-casemanagepage .casetitle" ).html(`\${data2[0].case_title}`); //清空案件標題的文字
             	   	  		$( "#dialog-casemanagepage #casedate" ).html(`\${data2[0].upload_date}`); //清空發布日期
@@ -368,9 +369,82 @@ $(function() {
             	   	  		$( "#dialog-casemanagepage #budget" ).html(`\${data2[0].price_min}~\${data2[0].price_max} (NTD)`); //清空預算區間
      						//以上設置固定值
      						
+     						//變動區塊APPEND
+     						if(data2.length>1){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
+     							for( let x=1 ; x<data2.length ; x++ ){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
+     								$("#whoapply").append(`
+     										
+     							              <div style="margin:30px 10px 2px 10px;box-shadow:3px 3px 5px ; " class="applymember" >
+
+     						                <div class="bmemberinfo" style="display: flex;">
+
+     						                  <div style="width: 30%;">
+
+     						                    <div id="casemanage_col" style="display:flex; justify-content: center;margin: 10px;">
+     						                      <div id="casemanage_col-1" >
+     						                
+     						                        <a href="####" id="casemanage_headshot" target="_blank"> 
+     						                          <img src="<%= request.getContextPath() %>/backend/headshotdownloader/\${ data2[x].bmember_id }" style="display:block; margin:auto; height:100px;" class="headshotimg" />
+     						                        
+     						                          <div style="text-align: center">
+     						                          <b style="font-size:medium;" id="casemanage_bmembername">\${ data2[x].bmember_name }</b></div>
+     						                        </a>
+     						                
+     						                      </div>
+     						                      
+     						                    </div>
+
+     						                  </div>
+
+
+     						                  <div id="applyinfo" style="margin-top:20px ;width:50%;">
+
+     						                    <div style="display: flex;font-size: 115%;">
+     						                      <div><b>期望稿酬：</b></div>
+     						                      <div class="applybuget">\${ data2[x].price_expected }(NTD)</div>
+     						                    </div>
+
+     						                    <div style="display: flex;font-size: 115%;">
+     						                      <div><b>預估需時：</b></div>
+     						                      <div class="applydays">\${ data2[x].case_time }(日)</div>
+     						                    </div>
+
+     						                    <div style="display: flex;font-size: 115%;">
+     						                      <div><b>應徵日期：</b></div>
+     						                      <div class="applydate">\${ data2[x].apply_date }</div>
+     						                    </div>
+
+     						                  </div>
+
+     						  
+     						                  
+     						                  <div style="width: 20%;">
+     						                    <button id="caseoff" style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
+     						                  </div>
+
+
+     						                </div>
+
+     						                
+     						              
+     						              </div>
+     										
+     										`);//append end
+     								
+     								
+     							}// for end
+     							
+     							
+     							
+     						}//if end
      						
      						
-     					},
+     						
+     						
+     						
+     						
+     					}, //data2 success end
+     					
      					error: function(XMLHttpRequest, textStatus, errorThrown) {
      						alert("發生錯誤");
      						
@@ -440,7 +514,7 @@ $(function() {
  
    <div id="casemanagepage" style="width:650px;padding: 20px;">
 
-        <input type="text" name="casemanage_caseid" id="casemanage_caseid" />            
+        <input type="text" name="casemanage_caseid" id="casemanage_caseid" style="display:none;"/>            
 
             <div id="caseinfo" style="display:flex;justify-content:space-between">
 
@@ -467,7 +541,7 @@ $(function() {
               </div>
 
               <div style="margin-top:15px ;">
-                <button class="btn btn-primary">下架案件</button>
+                <button id="offthiscase" class="btn btn-primary">下架案件</button>
               </div>
 
 
@@ -481,60 +555,7 @@ $(function() {
               <div style="text-align: center;font-size: large; background-color:rgb(103, 175, 243); color: white;">誰來應徵此案件</div>
               
               <!-- 替換的  -->
-              <div style="margin:30px 10px 2px 10px;box-shadow:3px 3px 5px ; " class="applymember" >
 
-                <div class="bmemberinfo" style="display: flex;">
-
-                  <div style="width: 30%;">
-
-                    <div id="casemanage_col" style="display:flex; justify-content: center;margin: 10px;">
-                      <div id="casemanage_col-1" >
-                
-                        <a href="####" id="casemanage_headshot" target="_blank"> 
-                          <img src="../resources/images/Patrick.png" style="display:block; margin:auto; height:100px;" class="headshotimg" />
-                        
-                          <div style="text-align: center">
-                          <b style="font-size:medium;" id="casemanage_bmembername">會員暱稱</b></div>
-                        </a>
-                
-                      </div>
-                      
-                    </div>
-
-                  </div>
-
-
-                  <div id="applyinfo" style="margin-top:20px ;width:50%;">
-
-                    <div style="display: flex;font-size: 115%;">
-                      <div><b>期望稿酬：</b></div>
-                      <div class="applybuget">4000~8000(NTD)</div>
-                    </div>
-
-                    <div style="display: flex;font-size: 115%;">
-                      <div><b>預估需時：</b></div>
-                      <div class="applydays">123(日)</div>
-                    </div>
-
-                    <div style="display: flex;font-size: 115%;">
-                      <div><b>應徵日期：</b></div>
-                      <div class="applydate">2021-08-19</div>
-                    </div>
-
-                  </div>
-
-  
-                  
-                  <div style="width: 20%;">
-                    <button id="caseoff" style="margin-top:50px;margin-left:10px ;" class="btn btn-primary">錄用畫師</button>
-                  </div>
-
-
-                </div>
-
-                
-              
-              </div>
               <!-- 替換的  -->
 
 
