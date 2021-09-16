@@ -195,23 +195,18 @@
 					}
 					
 					
-					k = 4;
-					y = 4;
-					h = 8 ;
+					k = 4+j;
+					y = 8+j;
+					h = y + 4;
 					
 					
-					if(data.length%4 ==0){
-						k = (data.length%4);
-					}else{
-						k = 4+j;
-						y = 4+j;
-						if(data.length%8 ==0){
-							h = (data.length%8)+4;							
-						}else{
-							h = 8+j;
-						}
-						
-					}
+					//if(data.length%4 ==0){
+					//	k = 4+j;
+					//	y = 4+j;
+					//	h = y + 4;
+					//	}
+					
+					
 					
 					
 					for(var j;j<k;j++){
