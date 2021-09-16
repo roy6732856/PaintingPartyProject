@@ -58,11 +58,13 @@ public class MemberPageController_Wang {
 		
 		//讀取空閒狀態
 		String member_status = memberForVisited.getMember_status();
+		String schedule = memberForVisited.getSchedule();
 		m.addAttribute("member_status", member_status);
-		String session_member_status = request.getSession().getAttribute("session_member_status").toString();// 得到會員身分
-		
-		
-		
+		m.addAttribute("schedule", schedule);
+
+		//自我介紹
+		String profile_content = memberForVisited.getProfile_content();
+		m.addAttribute("profile_content", profile_content);
 		
 		
 		return "MemberPage";

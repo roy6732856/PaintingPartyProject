@@ -179,18 +179,17 @@
                                                 </a>
                                             </div>
                                             <div class="bg-light p-3 my-3 rounded-lg">
-                                                <div class="text-muted font-weight-bold"> 委託暫停中 </div>
+                                                <div class="text-muted font-weight-bold"> ${schedule} </div>
                                                 <div class="mt-1 ql-show-container">
-                                                    <P>
-                                                        "8月/"
-                                                        <span style="color: rgb(136,136,136);"> 已滿單 </span>
-                                                    </P>
+<!--                                                     <P> -->
+<!--                                                         "8月/" -->
+<!--                                                         <span style="color: rgb(136,136,136);"> 已滿單 </span> -->
+<!--                                                     </P> -->
                                                 </div>
                                             </div>
                                             <div class="mt-4 mx-2 mb-2 text-muted q1-show container">
-                                                <p>大家好 我是新來的畫師!</p>
-                                                <p>喜歡畫可愛的插圖及Q版的人物</p>
-                                                <p>有興趣的人請私訊我唷!</p>
+                                                <p>${profile_content}</p>
+
                                             </div>
                                         </div>
                                     </div>
