@@ -216,7 +216,7 @@
                 <div class="u-container-layout u-container-layout-2">
                     <a href="139992805"
                         class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                    <a href="139992805"
+                    <a href="<%= request.getContextPath() %>/backend/accountmanager"
                         class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
                 </div>
             </div>
