@@ -155,7 +155,7 @@
 							class="u-container-style u-layout-cell u-size-18 u-layout-cell-1">
 							<div class="u-container-layout u-container-layout-1">
 								<div
-									class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-1">
+									class="u-container-style u-group  u-shape-round u-white u-group-1">
 									<div class="u-container-layout u-container-layout-2">
 										<div class="u-align-left u-container-style u-group u-group-2" style="min-height:auto;">
 											<div class="u-container-layout u-container-layout-2">
@@ -169,7 +169,7 @@
 									</div>
 								</div>
 								<div
-									class="u-container-style u-group u-radius-10 u-shape-round u-white u-group-4">
+									class="u-container-style u-group u-shape-round u-white u-group-4">
 									<div
 										class="u-container-layout u-valign-top u-container-layout-5">
 										<div
@@ -223,14 +223,14 @@
 											<p style="font-size: 50px; font-weight: bold;">${caseTitle}</p>
 										</div>
 										<div class="form-group u-container-layout">
-											<div style="color: darkblue; font-weight: bold;">發案者需求</div>
+											<div style="color: darkblue; font-weight: bold; font-size: 30px;">描述需求</div>
 											<br />
 											<section class="input-group">
 												<div>${demand }</div>
 											</section>
 										</div>
 										<div>
-											<p style="color: darkblue; font-weight: bold;">發案者圖案圖例</p>
+											<p style="color: darkblue; font-weight: bold; font-size: 30px;">參考圖例</p>
 											<div
 												class="u-container-layout u-container-layout-21 ">
 												<div class="container"  

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-Success <br/>
+您以成功應徵此案件，請等待發案方的回覆 <br/>
 </body>
 </html>
