@@ -17,18 +17,25 @@ public class PainterListService {
 	@Autowired
 	private PainterListDAO plDAO;
 	
+	@Autowired
+	private PainterListDAO painterListDAO;
+	
 	public Member getMember(int id) {
 		return plDAO.getMember(id);
 	}
 	
-	public List<Member>FindAll() {
-		return plDAO.FindAll();
+	public List<Member>SelectAllMember() {
+		return plDAO.SelectAllMember();
 	}
 	
-	public Member selectOne(int memId) {
+	public Member selectId(int memId) {
 		
-		Member oneMem = plDAO.selectOne(memId);
+		Member oneMem = plDAO.selectId(memId);
 		return oneMem;
+	}
+
+	public List<Member> search(String select1 , String select2){
+		return painterListDAO.search(select1, select2);
 	}
 
 
