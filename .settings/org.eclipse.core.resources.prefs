@@ -1,7 +1,8 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=feature01_test
 eclipse.preferences.version=1
-encoding//src/main/java/tw/paintingparty/casemanage/controller/TestDemoController_01.java=UTF-8
-encoding//src/main/java/tw/paintingparty/controller/LoginController_forWang.java=UTF-8
-encoding//src/main/webapp/WEB-INF/PaintingPage/CaseManage.jsp=UTF-8
+encoding//src/main/java/tw/paintingparty/config=UTF-8
+encoding//src/main/java/tw/paintingparty/controller=UTF-8
+encoding//src/main/java/tw/paintingparty/controller/SystemNoticeController.java=UTF-8
+encoding//src/main/java/tw/paintingparty/model=UTF-8
+encoding//src/main/java/tw/paintingparty/service=UTF-8
+encoding//src/main/java/tw/paintingparty/util=UTF-8
+encoding//src/main/java/tw/teamUtil=UTF-8

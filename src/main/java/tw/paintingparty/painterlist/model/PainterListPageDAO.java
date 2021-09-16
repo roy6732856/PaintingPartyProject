@@ -19,7 +19,7 @@ public class PainterListPageDAO {
 	@Autowired
 	private SessionFactory factory;
 	
-	public Long TotalPage() {
+	public Long Pagetotal () {
 		
 		Session session = factory.getCurrentSession();
 		
@@ -33,7 +33,7 @@ public class PainterListPageDAO {
 		
 	}
 	
-	public List<Member> QueryByPage(int pageNo){
+	public List<Member> QueryPage(int pageNo){
 		
 		Session session = factory.getCurrentSession();
 		

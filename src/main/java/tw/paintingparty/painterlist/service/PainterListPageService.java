@@ -17,13 +17,13 @@ public class PainterListPageService {
 	
 	
 	
-	public Long TotalPage() {
-		return plpDAO.TotalPage();
+	public Long Pagetotal() {
+		return plpDAO.Pagetotal();
 	}
 	
 	
-	public List<Member> QueryByPage(int pageNo){
-		return plpDAO.QueryByPage(pageNo);
+	public List<Member> QueryPage(int pageNo){
+		return plpDAO.QueryPage(pageNo);
 	}
 
 
