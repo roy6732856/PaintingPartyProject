@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
@@ -34,7 +35,7 @@ public class MemberPageController_Wang {
 //	}
 	
 	@RequestMapping(path="/memberpage/{id}")
-	public String Memberpage(@PathVariable("id") int memberId,Model m) {
+	public String Memberpage(@PathVariable("id") int memberId,Model m,HttpServletRequest request) {
 		//this for 右上角username
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
@@ -56,6 +57,11 @@ public class MemberPageController_Wang {
 		
 		
 		//讀取空閒狀態
+		String member_status = memberForVisited.getMember_status();
+		m.addAttribute("member_status", member_status);
+		String session_member_status = request.getSession().getAttribute("session_member_status").toString();// 得到會員身分
+		
+		
 		
 		
 		
