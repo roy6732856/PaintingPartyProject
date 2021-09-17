@@ -318,8 +318,8 @@
                                        class="u-container-layout u-container-layout-34">
                                        <h5
                                            class="u-text u-text-default u-text-font u-text-23">
-                                           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-22"
-                                               href="####">\${ data[i].case_title }</a>
+                                           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-22" target="_blank"
+                                               href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
                                        </h5>
                                        <a href="/\${ data[i].order_id }"
                                            class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-23"
@@ -328,7 +328,8 @@
                                            class="u-container-style u-group u-shape-rectangle u-group-25">
                                            <div
                                                class="u-container-layout u-container-layout-35">
-                                           <div><b>發案者：</b><a href="####" target="_blank">\${ data[i].amember_name }</a></div>
+                                           <!--會員頁面 -->
+                                           <div><b>發案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].amember_id }" target="_blank">\${ data[i].amember_name }</a></div>
                                            
                                            
                                            </div>

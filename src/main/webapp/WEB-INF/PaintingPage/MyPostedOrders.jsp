@@ -321,12 +321,13 @@ function ajaxreq (){
                        class="u-container-style u-group u-palette-5-light-2 u-group-10" style="margin-bottom:50px">
                        <div class="u-container-layout u-container-layout-17">
                            <h5 class="u-text u-text-default u-text-font u-text-9">
-                               <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-12"
-                                   href="####">\${ data[i].case_title }</a>
+                               <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-12" target="_blank"
+                                   href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
                            </h5>
                            <div class="u-container-style u-group u-shape-rectangle u-group-11">
                                <div class="u-container-layout u-container-layout-18">
-                                   <div><b>接案者：</b><a href="####" target="_blank">\${ data[i].bmember_name }</a></div>
+                               <!-- 會員頁面 -->
+                                   <div><b>接案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].bmember_id }" target="_blank">\${ data[i].bmember_name }</a></div>
                                </div>
                            </div>
                            <div
@@ -544,6 +545,8 @@ function ajaxreq (){
 	             error: function (xhr) { $("#MyPostedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
 	             success: function (data) { 
 	            	 //$("#dialog-payINFO").prepend(JSON.stringify(data));
+	            	 //會員頁面
+	            	 $("#payINFO_headshot").attr("href",`<%= request.getContextPath() %>/memberpage/\${data.member_id}`); //設定大頭照(SRC都是GET請求)
 	            	 $("#payheadshot").attr("src",`headshotdownloader/\${data.member_id}`); //設定大頭照(SRC都是GET請求)
 	            	 $("#paymembername").html(`\${ data.member_name }`);//設定會員名稱
 	            	 $("#payINFO_row2").html(` 感謝您的錄用！匯款資訊如下：

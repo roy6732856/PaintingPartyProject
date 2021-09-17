@@ -194,8 +194,8 @@
                                          
                                          <h5 class="u-text u-text-default u-text-font u-text-16">
                                              
-                                             <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-19"
-                                                 href="####">\${ data[i].case_title }</a>
+                                             <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-19" target="_blank"
+                                                 href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
                                          </h5>
                                          
                                          
@@ -222,8 +222,8 @@
                                              	<div><b>預估需時：</b>\${ data[i].case_time }天</div>
                                              </div>
                                          </div>
-                                         
-                                         <div style="display:flex;margin-left:50px;margin-top:-50px;"><b>發案者：</b><a href="####" target="_blank">\${ data[i].amember_name }</a></div>
+                                         <!-- 會員頁面 -->
+                                         <div style="display:flex;margin-left:50px;margin-top:-50px;"><b>發案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].amember_id }" target="_blank">\${ data[i].amember_name }</a></div>
                                          
                                       
                                      </div>

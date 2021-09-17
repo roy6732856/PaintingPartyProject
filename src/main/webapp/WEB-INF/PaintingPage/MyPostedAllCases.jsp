@@ -278,8 +278,8 @@ $(function() {
                                     	<div class="u-container-layout u-container-layout-9">
                                         
                                         <h5 class="u-text u-text-default u-text-font u-text-2">
-                                            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-8"
-                                                href="####">\${ data[i].case_title }</a>
+                                            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-8" target="_blank"
+                                                href="<%= request.getContextPath() %>/casepagemainpage.controller/\${data[i].case_id}">\${ data[i].case_title }</a>
                                         </h5>
                                         
                                         
@@ -421,7 +421,7 @@ $(function() {
             <div id="caseinfo" style="display:flex;justify-content:space-between">
 
               <div>
-                <a href="####"><div class="casetitle" style="font-size:large; color:rgb(103, 175, 243);"><b>案件標題</b></div></a>
+                <a id="casepagelink" href="####" target="_blank"><div class="casetitle" style="font-size:large; color:rgb(103, 175, 243);"><b>案件標題</b></div></a>
                 
                 <div style="display: flex;">
                   <div><b>發布日期：</b></div>
@@ -485,6 +485,8 @@ $(function() {
    	  		
    	  		$( "#whoapply .applymember" ).remove(); //清空變動區塊
         	let casemanage_caseid = $("#casemanage_caseid").val(); 
+        	$( "#casepagelink" ).attr("href",`<%= request.getContextPath() %>/casepagemainpage.controller/\${casemanage_caseid}`);
+   	  		
    	  		
    	  		//代做
    	  	  //~~~~~~~~~ 
@@ -521,8 +523,8 @@ $(function() {
 
 					                    <div id="casemanage_col" style="display:flex; justify-content: center;margin: 10px;">
 					                      <div id="casemanage_col-1" >
-					                
-					                        <a href="####" id="casemanage_headshot" target="_blank"> 
+					                <!-- 會員頁面 -->
+					                        <a href="<%= request.getContextPath() %>/memberpage/\${ data2[x].bmember_id }" id="casemanage_headshot" target="_blank"> 
 					                          <img src="<%= request.getContextPath() %>/backend/headshotdownloader/\${ data2[x].bmember_id }" style="display:block; margin:auto; height:100px;" class="headshotimg" />
 					                        
 					                          <div style="text-align: center">
