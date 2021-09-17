@@ -21,11 +21,7 @@
 	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
 <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
-<script
-	src="https://www.itxst.com/package/bootstrap-4.5.0/js/bootstrap.min.js"></script>
-<link
-	href="https://www.itxst.com/package/bootstrap-4.5.0/css/bootstrap.css"
-	rel="stylesheet">
+
 <script
 	src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script
@@ -95,9 +91,7 @@
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -125,7 +119,7 @@
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-	                        <a href="<%= request.getContextPath() %>/caseformapplypage"
+	                        <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
 	                        <a href="<%= request.getContextPath() %>/backend/accountmanager"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
@@ -315,7 +309,7 @@
     //登入狀態與登出狀態功能列表
     //透過AllFilter 傳過來的session
 //     <h1>${sessionScope.login}</h1>
-    console.log(${sessionScope.login})
+   
     if(${sessionScope.login}==1){ //代表有登入狀態
     	$("[name=issue_case]").show()
     	$("[name=account_manager]").show()
@@ -332,9 +326,16 @@
     
     var s = '畫師';
     var a = '${attr}';
+    var whoOwnThisCase = '${memId}';
+    var whoLogin = '${member_id}';
+	var whoApply = '${whoApply}';
+
     
-    if(a==s){//判斷身分=畫師
-    	$("[name=applyCase]").show()
+    
+    if(a==s && whoOwnThisCase != whoLogin ){//判斷身分=畫師
+    	if(whoLogin != whoApply){
+    			$("[name=applyCase]").show()
+    	}
     }
     //登出
     function logout(){
