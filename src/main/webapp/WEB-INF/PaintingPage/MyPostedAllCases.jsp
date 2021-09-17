@@ -321,6 +321,15 @@ $(function() {
                                         
                                     </div>
                                 </div>`); //append end
+                                
+                                
+                                
+                            //判斷案件，若上架，就給按管理案件，若下架，就不給按
+                            if(data[i].case_status === "下架"){
+	            				//$("#MyPostedOrdersPage .u-btn-15 ").eq(i).attr("style","visibility:hidden");
+	            				$("#MyPostedAllCasesPage .u-btn-9 ").eq(i).attr("href","javascript:").attr("disabled","disabled").html("已下架");
+	            				
+	            			}
 	                    	
 	                    	
 	                    }//for end
@@ -334,184 +343,21 @@ $(function() {
                        
                        //------------------打開管理案件的框框---------------- 
                        
-                       
-                       
-                       $("#MyPostedAllCasesPage .u-btn-9").click(function () {
+                       $("#MyPostedAllCasesPage .u-btn-9").click(function () { //按下管理案件
+                    	   
+                    	   if( $(this).attr("disabled") ==='disabled' ){ //如果是下架狀態，管理案件下去就不反應
+                    		   
+                    		   return false;
+                    		   
+                    	   }
         	   	  		
                     	//console.log($(this).attr("href").split("/")[$(this).attr("href").split("/").length-1]);
-        	   	  		
-        	   	  	    //當打開管理案件頁時，要做的事(清空與設值)
-        	   	  	    
-        	   	  		$("#democasemanagepage").remove(); //清掉DEMO字串
-        	   	  	    $("#casemanage_caseid").val($(this).attr("href").split("/")[$(this).attr("href").split("/").length-1]);//取得案件ID放進INPUT
-        	   	  		$( "#dialog-casemanagepage .casetitle" ).html(""); //清空案件標題的文字
-        	   	  		$( "#dialog-casemanagepage #casedate" ).html(""); //清空發布日期
-        	   	  		$( "#dialog-casemanagepage #casetag" ).html(""); //清空標籤
-        	   	  		$( "#dialog-casemanagepage #budget" ).html(""); //清空預算區間
-        	   	  	    //以上固定內容設置
-        	   	  		
-        	   	  		$( "#whoapply .applymember" ).remove(); //清空變動區塊
-                    	let casemanage_caseid = $("#casemanage_caseid").val(); 
-        	   	  		
-        	   	  		//代做
-        	   	  	  //~~~~~~~~~ 
-        	   	  	  
-        	   	  	  
-        	   	  	  
-        	   	  	  
-        	   	  	$.ajax({
-     					url: `<%= request.getContextPath() %>/backend/casebackstage/\${casemanage_caseid}`,
-     					type: 'get',
-     					dataType: 'json',
-     					success: function(data2) { //data2取值，記得從x+1開始取，跳過第0筆資料
-     						//alert("連線成功!!");
-     						//console.log(JSON.stringify(data2));
-     						$("#dialog-casemanagepage").prepend(`<div id="democasemanagepage">\${JSON.stringify(data2)}</div>`); //DEMO用資料
-     						$( "#dialog-casemanagepage .casetitle" ).html(`\${data2[0].case_title}`); //清空案件標題的文字
-            	   	  		$( "#dialog-casemanagepage #casedate" ).html(`\${data2[0].upload_date}`); //清空發布日期
-            	   	  		$( "#dialog-casemanagepage #casetag" ).html(`\${data2[0].case_tag}`); //清空標籤
-            	   	  		$( "#dialog-casemanagepage #budget" ).html(`\${data2[0].price_min}~\${data2[0].price_max} (NTD)`); //清空預算區間
-     						//以上設置固定值
-     						
-     						//變動區塊APPEND
-     						if(data2.length>1){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
-     							
-     							
-     							for( let x=1 ; x<data2.length ; x++ ){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
-     								$("#whoapply").append(`
-     										
-     							              <div style="margin:30px 10px 2px 10px;box-shadow:3px 3px 5px ; " class="applymember" >
-
-     						                <div class="bmemberinfo" style="display: flex;">
-
-     						                  <div style="width: 30%;">
-
-     						                    <div id="casemanage_col" style="display:flex; justify-content: center;margin: 10px;">
-     						                      <div id="casemanage_col-1" >
-     						                
-     						                        <a href="####" id="casemanage_headshot" target="_blank"> 
-     						                          <img src="<%= request.getContextPath() %>/backend/headshotdownloader/\${ data2[x].bmember_id }" style="display:block; margin:auto; height:100px;" class="headshotimg" />
-     						                        
-     						                          <div style="text-align: center">
-     						                          <b style="font-size:medium;" id="casemanage_bmembername">\${ data2[x].bmember_name }</b></div>
-     						                        </a>
-     						                
-     						                      </div>
-     						                      
-     						                    </div>
-
-     						                  </div>
-
-
-     						                  <div id="applyinfo" style="margin-top:20px ;width:50%;">
-
-     						                    <div style="display: flex;font-size: 115%;">
-     						                      <div><b>期望稿酬：</b></div>
-     						                      <div class="applybuget">\${ data2[x].price_expected }(NTD)</div>
-     						                    </div>
-
-     						                    <div style="display: flex;font-size: 115%;">
-     						                      <div><b>預估需時：</b></div>
-     						                      <div class="applydays">\${ data2[x].case_time }(日)</div>
-     						                    </div>
-
-     						                    <div style="display: flex;font-size: 115%;">
-     						                      <div><b>應徵日期：</b></div>
-     						                      <div class="applydate">\${ data2[x].apply_date }</div>
-     						                    </div>
-
-     						                  </div>
-
-     						  
-     						                  
-     						                  <div style="width: 20%;">
-     						                  <a class="hire" href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
-     						                    <button style="margin-top:50px;margin-left:10px ;" class="btn btn-primary btn-hire">錄用畫師</button>
-     						                  </a>
-     						                  </div>
-
-
-     						                </div>
-
-     						                
-     						              
-     						              </div>
-     										
-     										`);//append end
-     								
-     								if(data2[x].apply_status === "是"){
-     									
-     		           					$("#whoapply .hire ").eq(x-1).attr("href","javascript:");
-     		           				 	$("#whoapply .btn-hire ").eq(x-1).attr("disabled","disabled").attr("style","background-color:gray;margin-top:50px;margin-left:10px ;").html("已錄用")//代做3  
-     		           				
-     		           				}
-     										
-     										
-     								
-     										
-     										
-     							}// for end
-     							
-     							
-     	        	     		//錄用畫師按鈕預設行為取消 代做2
-     		           			$("#whoapply .hire").click(function(){
-     		           			
-     		           			let hireinfolist = $(this).attr("href").split("/");
-     		           			console.log(hireinfolist.length);
-     							let hirebmemid = hireinfolist[hireinfolist.length-3];
-     							let hirecase_id = hireinfolist[hireinfolist.length-2];
-     							let hireexpected = hireinfolist[hireinfolist.length-1];
-     		           				
-     		           				
-     							$.ajax({
-     		     					url: `<%= request.getContextPath() %>/backend/hire/\${ hirecase_id }/\${ hirebmemid }/\${ hireexpected }`,
-     		     					type: 'post',
-     		     					success: function(data) {
-     		     						alert("成功錄用!");
-     		     						
-     		     						
-     		     						
-     		     						//---------
-     		     					
-     		     
-     		     						
-     		     					}, //錄用畫師 success end
-     		     					error: function(XMLHttpRequest, textStatus, errorThrown) {
-     		     						alert("發生錯誤");
-     		     						
-     		     					} //錄用畫師 error end
-     		     				}); //錄用畫師 ajax end
-     							
-     							
-     		           				
-     		           				//---------
-     		           				
-     		           	return false; //取消錄用畫師這顆按鈕的預設行為
-     		           				
-     		           				
-     		           	});
-     							
-     							
-     							
-     							
-     						}//if end
-     						
-     						
-     						
-     					}, //data2 success end
-     					
-     					error: function(XMLHttpRequest, textStatus, errorThrown) {
-     						alert("發生錯誤");
-     						
-     					}
-     				}); //ajax end
-        	   	  			
-        	   	  //~~~~~~		
-        	   	  		
-        	   	  		
-        	   	  		
-        	   	  		
-        	   	  		
+                    	
+        	   	  		//當打開管理案件頁時，要做的事(清空與設值)
+        	   	  		$("#casemanage_caseid").val($(this).attr("href").split("/")[$(this).attr("href").split("/").length-1]);//取得案件ID放進INPUT
+    
+							whoapplyinfo(); //可變動區域設置
+ 
         	   	 			$( "#dialog-casemanagepage" ).dialog( "open" ); //打開區塊
         	        		return false;//把預設行為取消，若沒這行，按下上面的按鈕，會被捲到最上面，因為預設行為是超連結
         	   	  		
@@ -622,6 +468,227 @@ $(function() {
 
 </div>
           <!--------------------------->
+
+          
+  <script>
+   
+  function whoapplyinfo(){ //當按下管理案件時要做的事
+	  
+	  
+	  		$("#democasemanagepage").remove(); //清掉DEMO字串
+   	  	    
+   	  		$( "#dialog-casemanagepage .casetitle" ).html(""); //清空案件標題的文字
+   	  		$( "#dialog-casemanagepage #casedate" ).html(""); //清空發布日期
+   	  		$( "#dialog-casemanagepage #casetag" ).html(""); //清空標籤
+   	  		$( "#dialog-casemanagepage #budget" ).html(""); //清空預算區間
+   	  	    //以上固定內容設置
+   	  		
+   	  		$( "#whoapply .applymember" ).remove(); //清空變動區塊
+        	let casemanage_caseid = $("#casemanage_caseid").val(); 
+   	  		
+   	  		//代做
+   	  	  //~~~~~~~~~ 
+   	  	  
+   	  	  
+   	  	  
+   	  	  
+   	  	$.ajax({
+				url: `<%= request.getContextPath() %>/backend/casebackstage/\${casemanage_caseid}`,
+				type: 'post',
+				dataType: 'json',
+				success: function(data2) { //data2取值，記得從x+1開始取，跳過第0筆資料
+					//alert("連線成功!!");
+					//console.log(JSON.stringify(data2));
+					$("#dialog-casemanagepage").prepend(`<div id="democasemanagepage">\${JSON.stringify(data2)}</div>`); //DEMO用資料
+					$( "#dialog-casemanagepage .casetitle" ).html(`\${data2[0].case_title}`); //清空案件標題的文字
+	   	  		$( "#dialog-casemanagepage #casedate" ).html(`\${data2[0].upload_date}`); //清空發布日期
+	   	  		$( "#dialog-casemanagepage #casetag" ).html(`\${data2[0].case_tag}`); //清空標籤
+	   	  		$( "#dialog-casemanagepage #budget" ).html(`\${data2[0].price_min}~\${data2[0].price_max} (NTD)`); //清空預算區間
+					//以上設置固定值
+					
+					//變動區塊APPEND
+					if(data2.length>1){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
+						
+						
+						for( let x=1 ; x<data2.length ; x++ ){ //因為預設一定會有地靈筆資料，所以從第一筆開始是變動區塊
+							$("#whoapply").append(`
+									
+						              <div style="margin:30px 10px 2px 10px;box-shadow:3px 3px 5px ; " class="applymember" >
+
+					                <div class="bmemberinfo" style="display: flex;">
+
+					                  <div style="width: 30%;">
+
+					                    <div id="casemanage_col" style="display:flex; justify-content: center;margin: 10px;">
+					                      <div id="casemanage_col-1" >
+					                
+					                        <a href="####" id="casemanage_headshot" target="_blank"> 
+					                          <img src="<%= request.getContextPath() %>/backend/headshotdownloader/\${ data2[x].bmember_id }" style="display:block; margin:auto; height:100px;" class="headshotimg" />
+					                        
+					                          <div style="text-align: center">
+					                          <b style="font-size:medium;" id="casemanage_bmembername">\${ data2[x].bmember_name }</b></div>
+					                        </a>
+					                
+					                      </div>
+					                      
+					                    </div>
+
+					                  </div>
+
+
+					                  <div id="applyinfo" style="margin-top:20px ;width:50%;">
+
+					                    <div style="display: flex;font-size: 115%;">
+					                      <div><b>期望稿酬：</b></div>
+					                      <div class="applybuget">\${ data2[x].price_expected }(NTD)</div>
+					                    </div>
+
+					                    <div style="display: flex;font-size: 115%;">
+					                      <div><b>預估需時：</b></div>
+					                      <div class="applydays">\${ data2[x].case_time }(日)</div>
+					                    </div>
+
+					                    <div style="display: flex;font-size: 115%;">
+					                      <div><b>應徵日期：</b></div>
+					                      <div class="applydate">\${ data2[x].apply_date }</div>
+					                    </div>
+
+					                  </div>
+
+					  
+					                  
+					                  <div style="width: 20%;">
+					                  <a class="hire" href="<%= request.getContextPath() %>/\${data2[x].bmember_id}/\${data2[x].case_id}/\${data2[x].price_expected}">
+					                    <button style="margin-top:50px;margin-left:10px ;" class="btn btn-primary btn-hire">錄用畫師</button>
+					                  </a>
+					                  </div>
+
+
+					                </div>
+
+					                
+					              
+					              </div>
+									
+									`);//append end
+							
+							if(data2[x].apply_status === "是"){
+								
+	           					$("#whoapply .hire ").eq(x-1).attr("href","javascript:");
+	           				 	$("#whoapply .btn-hire ").eq(x-1).attr("disabled","disabled").attr("style","background-color:gray;margin-top:50px;margin-left:10px ;").html("已錄用")//代做3  
+	           				
+	           				}
+									
+									
+							
+									
+									
+						}// for end
+						
+						
+     	     		//錄用畫師按鈕預設行為取消 
+	           			$("#whoapply .hire").click(function(){ //當按下錄取畫師要做的事
+	           			
+	           			let hireinfolist = $(this).attr("href").split("/");
+	           			console.log(hireinfolist.length);
+						let hirebmemid = hireinfolist[hireinfolist.length-3];
+						let hirecase_id = hireinfolist[hireinfolist.length-2];
+						let hireexpected = hireinfolist[hireinfolist.length-1];
+	           				
+	           				
+						$.ajax({
+	     					url: `<%= request.getContextPath() %>/backend/hire/\${ hirecase_id }/\${ hirebmemid }/\${ hireexpected }`,
+	     					type: 'post',
+	     					success: function(data) {
+	     						alert("成功錄用!");
+	     						whoapplyinfo();
+	     						
+	     						
+	     						//---------
+	     					
+	     
+	     						
+	     					}, //錄用畫師 success end
+	     					error: function(XMLHttpRequest, textStatus, errorThrown) {
+	     						alert("發生錯誤");
+	     						
+	     						
+	     					} //錄用畫師 error end
+	     				}); //錄用畫師 ajax end
+						
+						
+	           				
+	           				//---------
+	           				
+	           	return false; //取消錄用畫師這顆按鈕的預設行為
+	           				
+	           				
+	           	});
+						
+						
+						
+						
+					}//if end
+					
+					
+					
+				}, //data2 success end
+				
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("發生錯誤");
+					
+				}
+			}); //ajax end
+	  
+	  
+	  
+	  
+	  
+  }
+  
+  
+  </script>
+  
+  <script>
+  
+  $("#offthiscase").click(function (){ //下架案件被點下去
+	  
+	  let offcase_id = $("#casemanage_caseid").val(); 
+	  
+	  $.ajax({
+			url: `<%= request.getContextPath() %>/backend/offthiscase/\${ offcase_id }`,
+			type: 'post',
+			success: function() {
+				alert("案件已成功下架!");
+				$( "#dialog-casemanagepage" ).dialog( "close" );
+				ajaxreqc();
+				$('html,body').animate({ scrollTop: 0 }, 'slow'); 
+				
+				
+				//---------
+			
+
+				
+			}, //下架案件 success end
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("發生錯誤");
+				
+				
+			} //下架案件 error end
+		}); //下架案件 ajax end
+	  
+	  
+	  
+	  
+  }); //offthiscase click end
+  
+  
+  
+  
+  </script>
+          
+          
+          
 
 
 </body>

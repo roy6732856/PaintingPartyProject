@@ -120,9 +120,9 @@ public class TestDemoController_01 {
 	
 	
 	
-	@GetMapping(path = "/backend/casebackstage/{caseid}") //案件管理頁面
+	@PostMapping(path = "/backend/casebackstage/{case_id}") //按下案件管理
 	@ResponseBody
-	public List<CaseBackStageBean> test10_3(@PathVariable("caseid") Integer caseid , HttpServletRequest request ) {
+	public List<CaseBackStageBean> test10_3(@PathVariable("case_id") Integer caseid ) {
 		System.out.println("接收成功!");
 //		String welcom = "casebackstage: " + caseid;
 //		System.out.println(welcom);
@@ -134,7 +134,7 @@ public class TestDemoController_01 {
 	
 
 	
-	//代做
+
 	@PostMapping(path = "/backend/hire/{case_id}/{bmember_id}/{price_expected}") //錄取畫師
 	@ResponseBody
 	public String test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
@@ -148,6 +148,20 @@ public class TestDemoController_01 {
 		return "OK";
 		
 	}
+	
+	@PostMapping(path = "/backend/offthiscase/{offcase_id}") //錄取畫師
+	@ResponseBody
+	public void test10_5( @PathVariable("offcase_id") Integer offcaseid  ) {
+		System.out.println("接收成功!");
+//		System.out.println("case:" + caseid);
+//		System.out.println("bmemid:" + bmemberid);
+//		System.out.println("price_expected:" + expected);
+		cmDao.OffThisCase(offcaseid);
+		
+		
+		
+	}
+	
 	
 	
 	//-----------------------------------------------

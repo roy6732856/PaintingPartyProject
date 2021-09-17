@@ -478,6 +478,19 @@ public class CaseManageDAO {
 	
 	
 	
+	public void OffThisCase( Integer offcaseid ) {
+//    	下架案件
+		
+		Session session = sessionfactory.getCurrentSession();
+		
+		String hql = "update Cases as c set c.case_status = '下架' where c.case_id = :caseid";
+
+		Query query = session.createQuery(hql).setParameter("caseid", offcaseid);
+		query.executeUpdate();
+		
+		
+	}
+	
 	
 	
 	
