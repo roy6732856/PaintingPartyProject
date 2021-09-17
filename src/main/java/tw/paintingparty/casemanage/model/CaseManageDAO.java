@@ -51,6 +51,121 @@ public class CaseManageDAO {
 	
 	}
 	
+	
+	
+	public List<MyPostedAllCasesBean> selectMyPostedCases2( Integer myId , Integer sort , Integer condition ,Integer noepage ) { //加上條件查詢
+		//我發布的 => 所有案件
+		//	var myposted_sort = 1; //0=由舊到新、1=由新到舊 預設1
+		//  var myposted_condition = 0; //0=全部、1=上架、2=下架 預設0
+		
+		Session session = sessionfactory.getCurrentSession();
+		System.out.println("進來了");
+		
+//		SELECT TOP 4 * --頁大小
+//		FROM
+//		        (
+//		        SELECT ROW_NUMBER() OVER (ORDER BY case_id desc) AS RowNumber,* FROM cases where member_id = 1 and case_status = '上架'--ID=自己的
+//		        ) A
+//		WHERE RowNumber > 4*(0)
+		
+		String sqltotalrecord = "select * from cases where member_id = ? "; //總頁數
+		Integer totalRecord;
+		Integer finalPage;
+		
+		if(sort==0) { //升冪 代做			
+			System.out.println("進入IF");
+			
+			String sqlup = "SELECT TOP 4 * FROM ( "+
+			        "SELECT ROW_NUMBER() OVER (ORDER BY case_id) AS RowNumber,"
+			        + "case_title , upload_date , price_min , price_max , case_status "
+			        + "FROM cases where member_id = ? ";
+			
+			if(condition==1) {
+				sqltotalrecord+=" and case_status = '上架' ";
+				sqlup+=" and case_status = '上架' ";
+			}
+			
+			if(condition==2) {
+				sqltotalrecord+=" and case_status = '下架' ";
+				sqlup+=" and case_status = '下架' ";
+			}
+			
+			sqlup+= ") A WHERE RowNumber > 4*(?) "; //?=頁數減1
+		
+			System.out.println("升冪字串: " + sqlup);
+		
+			//NativeQuery createSQLQueryUp = session.createSQLQuery(sqlup);
+			
+			NativeQuery addEntity = session.createSQLQuery(sqlup).setParameter(1, myId).setParameter(2, noepage-1);
+			List resultList = addEntity.getResultList();
+			System.out.println("階段111111111");
+
+			Object[] row = (Object[]) resultList.get(0);
+			System.out.println( row[0].toString() ); //做到這裡
+			
+			Query query2 = session.createSQLQuery(sqltotalrecord).addEntity(Cases.class).setParameter("1", myId);//查出所有
+			totalRecord = query2.list().size();//共幾筆資料
+			finalPage = totalRecord/4;
+			if(totalRecord%4 != 0) {
+				finalPage++;
+			}
+			
+			//resultList.get(0).setFinal_page(finalPage);
+			
+			
+			return resultList;
+		
+		}//升冪END
+		
+		
+		
+
+		
+//		if(sort==1) { //降冪
+//			
+//			
+//			
+//		}
+//		
+//		
+//		
+//		
+//		
+//		String where = "where c.postedmemberbean.member_id=:memid";
+//		
+//		if(condition==1) {
+//			where+=" and c.case_status = '上架'";
+//		}
+//		
+//		if(condition==2) {
+//			where+=" and c.case_status = '下架'";
+//		}
+//		
+//		if(sort==1) {
+//			where+=" order by c.case_id desc";
+//			
+//		}
+//		
+//		String hql = "select new tw.paintingparty.casemanage.model.MyPostedAllCasesBean"
+//				+ "(c.case_id , c.case_title , c.upload_date , c.price_min , c.price_max , c.case_status) from Cases as c "
+//				+ where;
+//		Query query = session.createQuery(hql).setParameter("memid", myId);
+//		List<MyPostedAllCasesBean> list = query.list();
+		
+//		for(MyPostedAllCasesBean mpacb : list){  
+//		int id = mpacb.getCase_id();  
+//		String name = mpacb.getCase_title();  
+//		System.out.println(id + " : " + name); 
+//		}
+
+		
+		return null;
+	
+	}
+	
+	
+	
+	
 //---------------------------------------------
 	
 	public List<MyPostedOrdersBean> selectMyPostedOrders( int myId ) {
@@ -68,7 +183,7 @@ public class CaseManageDAO {
     	List<Orders> resultList = addEntity.getResultList();
     	List<MyPostedOrdersBean> mpoblist = new ArrayList<MyPostedOrdersBean>();
 
-    	//以下手動封裝(因為是用createSQLQuery)
+    	//以下手動封裝(因為是用createSQLQuery) 參考
     	for( Orders o : resultList ) {
     		MyPostedOrdersBean mpob = new MyPostedOrdersBean();
     		mpob.setOrder_id(o.getOrder_id());

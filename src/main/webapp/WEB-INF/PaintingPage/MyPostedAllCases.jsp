@@ -18,6 +18,87 @@ $(function() {
 </script>
 
 
+	<script>
+	//-----------排序與條件-----------------
+	var myposted_sort = 1; //0=由舊到新、1=由新到舊 
+	var myposted_condition = 0; //0=全部、1=上架、2=下架
+	var myposted_nowpage = 1; //當前頁數
+	var myposted_finalpage ; //總頁數
+	
+	console.log("原始sort: " + myposted_sort);
+	console.log("原始condition: " + myposted_condition);
+	
+	//代做
+	$("#mypostedallcasesort .new2old").click(function(){
+		
+		myposted_sort=1;
+		console.log("改變後sort: " + myposted_sort);
+		ajaxreqc();
+		
+	});//由新到舊點下去 end
+	
+	
+	$("#mypostedallcasesort .old2new").click(function(){
+		
+		myposted_sort=0;
+		console.log("改變後sort: " + myposted_sort);
+		ajaxreqc();
+		
+	});//由舊到新點下去 end
+	
+	//--------------------以上排序，以下條件--------------
+	
+	
+	$("#mypostedallcasecondition .mypostall").click(function(){
+		
+		myposted_condition=0;
+		console.log("改變後condition: " + myposted_condition);
+		ajaxreqc();
+		
+	});//全部 end
+
+	$("#mypostedallcasecondition .onquest").click(function(){
+		
+		myposted_condition=1;
+		console.log("改變後condition: " + myposted_condition);
+		ajaxreqc();
+		
+	});//上架中 end
+	
+	$("#mypostedallcasecondition .notonquest").click(function(){
+		
+		myposted_condition=2;
+		console.log("改變後condition: " + myposted_condition);
+		ajaxreqc();
+		
+	});//已下架 end
+	
+	
+	//-----------------------------以下頁數
+	
+	$("#myposted_page .preppagebtn").click(function(){
+		
+		if(myposted_nowpage!=1){
+			myposted_nowpage--;
+		}
+		console.log("改變後nowpage: " + myposted_nowpage);
+		ajaxreqc();
+		
+	});//上一頁 end
+	
+	
+	$("#myposted_page .nextpagebtn").click(function(){
+
+		myposted_nowpage++; //這邊還要多加判斷式，不能大於最高頁數
+		console.log("改變後nowpage: " + myposted_nowpage);
+		ajaxreqc();
+		
+	});//下一頁 end
+
+	</script>
+
+
+
 </head>
 
 
@@ -71,25 +152,25 @@ $(function() {
         </a>
     </div>
     <div
-        class="u-custom-menu u-nav-container">
+        class="u-custom-menu u-nav-container" id="mypostedallcasesort">
         <ul
             class="u-nav u-unstyled u-nav-1">
             <li class="u-nav-item"><a
                     class="u-border-2 u-border-grey-75 u-button-style u-hover-palette-5-light-1 u-nav-link"
-                    href="####">排序</a>
+                    href="javascript:">排序</a>
                 <div
                     class="u-nav-popup">
                     <ul
                         class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由新到舊</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 new2old"
+                                href="javascript:">由新到舊</a>
                         </li>
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由舊到新</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 old2new"
+                                href="javascript:">由舊到新</a>
                         </li>
                     </ul>
                 </div>
@@ -173,25 +254,30 @@ $(function() {
                         </a>
                     </div>
                     <div
-                        class="u-custom-menu u-nav-container">
+                        class="u-custom-menu u-nav-container" id="mypostedallcasecondition">
                         <ul
                             class="u-nav u-unstyled u-nav-5">
                             <li class="u-nav-item"><a
                                     class="u-border-2 u-border-grey-75 u-button-style u-hover-palette-5-light-1 u-nav-link"
-                                    href="####">案件狀態</a>
+                                    href="javascript:">案件狀態</a>
                                 <div
                                     class="u-nav-popup">
                                     <ul
                                         class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-6">
                                         <li
                                             class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">上架中</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 mypostall"
+                                                href="javascript:">全部</a>
                                         </li>
                                         <li
                                             class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">已下架</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 onquest"
+                                                href="javascript:">上架中</a>
+                                        </li>
+                                        <li
+                                            class="u-nav-item">
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 notonquest"
+                                                href="javascript:">已下架</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -251,8 +337,9 @@ $(function() {
         class="u-container-layout u-container-layout-8" id="MyPostedAllCasesPage">  <!-- 新增的元素，放在此區塊裡面 -->
         
         
+        
                <script>
-               
+               //代做
                $(document).ready(ajaxreqc);
 
                function ajaxreqc (){
@@ -260,11 +347,13 @@ $(function() {
                	//-------
                	
                	$.ajax({
-                       url: `<%= request.getContextPath() %>/backend/mypostedallcases2`,                        // url位置
+                       url: `<%= request.getContextPath() %>/backend/mypostedallcases2/\${myposted_sort}/\${myposted_condition}/\${myposted_nowpage}`,  // url位置
                        type: 'post',                   // post/get
                        error: function (xhr) { $("#MyPostedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                        success: function (data) {
                       	 $("#MyPostedAllCasesPage").html(JSON.stringify(data));
+                      	 
+                      	$("#myposted_page .nowpage").html(myposted_nowpage + "頁");
 
                        //----------------------------------
                     var i;
@@ -394,16 +483,16 @@ $(function() {
      <!-- 以上空白區塊，以下頁數  -->
 
      <div
-     class="u-container-style u-group u-white u-group-7">
+     class="u-container-style u-group u-white u-group-7" id="myposted_page">
      <div
          class="u-container-layout u-container-layout-13">
-         <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10">上一頁</a>
-         <p class="u-text u-text-default u-text-6">X頁</p>
-         <p class="u-text u-text-default u-text-7">／</p>
-         <p class="u-text u-text-default u-text-8">X頁</p>
-         <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11">下一頁</a>
+         <a href="javascript:"
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10 preppagebtn">上一頁</a>
+         <div class="u-text u-text-default u-text-6 nowpage">X頁</div>
+         <div class="u-text u-text-default u-text-7">／</div>
+         <div class="u-text u-text-default u-text-8 finalpage">X頁</div>
+         <a href="javascript:"
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11 nextpagebtn">下一頁</a>
      </div>
  </div>
 
@@ -411,7 +500,7 @@ $(function() {
 
 
 
- <!----------------以下管理案件 代做----------->
+ <!----------------以下管理案件 ----------->
  <div id="dialog-casemanagepage" title="管理案件">
  
    <div id="casemanagepage" style="width:650px;padding: 20px;">
@@ -488,7 +577,7 @@ $(function() {
         	$( "#casepagelink" ).attr("href",`<%= request.getContextPath() %>/casepagemainpage.controller/\${casemanage_caseid}`);
    	  		
    	  		
-   	  		//代做
+   	  		
    	  	  //~~~~~~~~~ 
    	  	  
    	  	  
@@ -577,7 +666,7 @@ $(function() {
 							if(data2[x].apply_status === "是"){
 								
 	           					$("#whoapply .hire ").eq(x-1).attr("href","javascript:");
-	           				 	$("#whoapply .btn-hire ").eq(x-1).attr("disabled","disabled").attr("style","background-color:gray;margin-top:50px;margin-left:10px ;").html("已錄用")//代做3  
+	           				 	$("#whoapply .btn-hire ").eq(x-1).attr("disabled","disabled").attr("style","background-color:gray;margin-top:50px;margin-left:10px ;").html("已錄用")  
 	           				
 	           				}
 									

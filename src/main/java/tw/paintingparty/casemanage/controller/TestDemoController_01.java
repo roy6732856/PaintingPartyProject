@@ -102,20 +102,34 @@ public class TestDemoController_01 {
 		m.addAttribute("userid", writeValueAsString );
 		
 		return "MyPostedAllCases";
-	}
+	}//棄用
 	
 	
 	
 	
-	@PostMapping(path = "/backend/mypostedallcases2") //AJAX請求處理，回應JSON
+//	@PostMapping(path = "/backend/mypostedallcases2") //AJAX請求處理，回應JSON
+//	@ResponseBody
+//	public List<MyPostedAllCasesBean> test10_2( HttpServletRequest request ) {
+//		
+//		Object myid = request.getSession().getAttribute("session_member_id");
+//		List<MyPostedAllCasesBean> selectAllMyPostedCases = cmDao.selectMyPostedCases( (Integer)myid );
+//		
+//		return selectAllMyPostedCases ;
+//	}
+
+	@PostMapping(path = "/backend/mypostedallcases2/{sort}/{condition}/{nowpage}") //AJAX請求處理，回應JSON，加上條件和排序
 	@ResponseBody
-	public List<MyPostedAllCasesBean> test10_2( HttpServletRequest request ) {
+	public List<MyPostedAllCasesBean> test10_2(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) {
+		//	var myposted_sort = 1; //0=由舊到新、1=由新到舊 預設1
+		//  var myposted_condition = 0; //0=全部、1=上架、2=下架 預設0
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyPostedAllCasesBean> selectAllMyPostedCases = cmDao.selectMyPostedCases( (Integer)myid );
+		List<MyPostedAllCasesBean> selectMyPostedCases2 = cmDao.selectMyPostedCases2( (Integer)myid ,sort , condition, nowpage);
 		
-		return selectAllMyPostedCases ;
+		return selectMyPostedCases2 ;
 	}
+	
+	
 	
 	
 	
