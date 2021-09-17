@@ -11,7 +11,8 @@
   <meta name="page_type" content="np-template-header-footer-from-plugin">
   <title>發布案件</title>
   <link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
-  <link rel="stylesheet" href="../resources/css/CaseForm(DataEntry).css" media="screen">
+  <link rel="stylesheet" href="../resources/css/CaseForm.css" media="screen">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <script class="u-script" type="text/javascript" src="../resources/js/jquery.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="../resources/js/nicepage.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
@@ -24,8 +25,7 @@
 
 
   <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
-  <script src="https://www.itxst.com/package/bootstrap-4.5.0/js/bootstrap.min.js"></script>
-  <link href="https://www.itxst.com/package/bootstrap-4.5.0/css/bootstrap.css" rel="stylesheet">
+
   <script src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
   <script src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/locales/bootstrap-datepicker.zh-CN.min.js">
   </script>
@@ -129,28 +129,28 @@
             </div>-->
             <div class="form-group">
               <label for="CategorySelect">作品類別</label>
-              <select class="form-control" id="CategorySelect">
-                <option selected>插畫委託</option>
-                <option>人物設計委託</option>
-                <option>貼圖委託</option>
-                <option>頭貼委託</option>
-                <option>漫畫委託</option>
-                <option>UI委託</option>
-                <option>風景委託</option>
+              <select class="form-control" id="CategorySelect" name="categorySelect">
+                <option selected  value="1" name="categorySelect">插畫委託</option>
+                <option value="6">人物設計委託</option>
+                <option value="2">貼圖委託</option>
+                <option value="3">頭貼委託</option>
+                <option value="4">漫畫委託</option>
+                <option value="5">UI委託</option>
+                <option value="7">風景委託</option>
               </select>
             </div>
             <div class="form-group">
               <label for="StyleSelect">作品風格</label>
-              <select class="form-control" id="StyleSelect">
-                <option selected>日系風格</option>
-                <option>歐美風格</option>
-                <option>武俠風格</option>
-                <option>寫實風格</option>
-                <option>水墨風格</option>
-                <option>水彩風格</option>
-                <option>像素風格</option>
-                <option>Q版風格</option>
-                <option>3D風格</option>
+              <select class="form-control" id="StyleSelect" name="styleSelect">
+                <option selected  value="8">日系風格</option>
+                <option value="9">歐美風格</option>
+                <option value="10">武俠風格</option>
+                <option value="12">寫實風格</option>
+                <option value="14">水墨風格</option>
+                <option value="15">水彩風格</option>
+                <option value="16">像素風格</option>
+                <option value="11">Q版風格</option>
+                <option value="13">3D風格</option>
               </select>
             </div>
             <!--  <div class="form-group">
@@ -170,12 +170,13 @@
                 <input id="upload_img" style="display:none;" type="file">
                 <i class="fa fa-photo"></i> 上傳圖片
               </label>
-              <img id="preview_progressbarTW_img" class="img-thumbnail"
+              <img id="preview_progressbarTW_img" class="img-thumbnail" name="imgname"
                 src="https://th.bing.com/th/id/OIP.Dl3J0Zt1TOsgg9TxNa9AQQHaHa?pid=ImgDet&w=480&h=480&rs=1"
                 style="max-height:inherit;" />
             </div>
             <button type="submit" id="success" class="btn btn-warning btn-lg btn-block">送出</button>
-            
+           
+	
           </form>
         </div>
       </div>

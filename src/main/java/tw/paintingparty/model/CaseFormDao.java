@@ -1,10 +1,14 @@
 package tw.paintingparty.model;
 
+import java.util.List;
+
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +44,31 @@ public class CaseFormDao {
 		addEntity.executeUpdate();
 
 		
-		
+		return bean;
+	}
+
+}
+//	public List<Cases> search(String select1 , String select2){
+//
+//		List<Cases> listCases = null;
+//		Session session = factory.getCurrentSession();
+//		String sql1 = "SELECT * from Cases where case_tag like '%1% ' or case_tag like '%2%'";
+////		String hql = "FROM Member m WHERE m.tag_personal like :select1 and tag_personal like :select2";
+//			try {
+//				NativeQuery addEntity = session.createSQLQuery(sql1);
+//				addEntity.setParameter("select1", "%"+ select1 + "%");
+//				addEntity.setParameter("select2", "%"+ select2 + "%");
+//				listCases = addEntity.list();
+//			} catch(NoResultException e) {
+//				listCases = null;
+//			} 
+//		return listCases;
+//	}
+	
+
+
+
+
 //		String sql = "insert into cases (memeber_id , case_title , price_min , price_max , publics , case_tag , demand , case_status )  "
 //				+ "values( ? , ? , ? , ? , ? , ? , ? ,? )";
 //			
@@ -65,8 +93,4 @@ public class CaseFormDao {
 //
 //		addEntity.executeUpdate();
 		
-		return bean;
-	}
 
-	
-}

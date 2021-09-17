@@ -1,9 +1,23 @@
 package tw.paintingparty.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.model.Cases;
+import tw.paintingparty.model.Member;
 import tw.paintingparty.service.CaseFormService;
 
 @Controller
@@ -35,7 +51,10 @@ public class CaseFormApplyController {
 	public String processCaseFormInsertAction(@RequestParam("inputCaseName") String inputcaseName,
 			@RequestParam("inputLowBudget")Integer inputLowBudget,
 			@RequestParam("inputHighBudget")Integer inputHighBudget,
-			@RequestParam("commissionExplain")String commissionExplain,HttpSession session) {
+			@RequestParam("commissionExplain")String commissionExplain,
+			@RequestParam("categorySelect")Integer categorySelect,
+			@RequestParam("styleSelect")Integer styleSelect,
+			HttpSession session) {
 			
 		
 		int memberid = (int) session.getAttribute("memberid");
@@ -43,7 +62,7 @@ public class CaseFormApplyController {
 		//測試
 //		String publics = (String) session.getAttribute("publics");
 //		String demand = (String) session.getAttribute("demand");
-		String case_tag = (String) session.getAttribute("case_tag");
+//		String case_tag = (String) session.getAttribute("case_tag");
 		
 		System.out.println("顯示執行表單送出時的memberid: "+ memberid);
 		
@@ -52,18 +71,25 @@ public class CaseFormApplyController {
 		System.out.println("inputLowBudget：" + inputLowBudget);
 		System.out.println("inputHighBudget：" + inputHighBudget);
 		
+		
+		
 		Cases cf1 = new Cases();
 		cf1.setCase_title(inputcaseName);
 		cf1.setPrice_min(inputLowBudget);
 		cf1.setPrice_max(inputHighBudget);
+		
 		cf1.setDemand(commissionExplain);
 		
+		cf1.setCase_tag(categorySelect + "," + styleSelect);
+		
 		cf1.setMember_id(2);
+		
+
 		
 		//測試
 //		cf1.setPublics("是");
 //		cf1.setDemand("長頭髮");
-		cf1.setCase_tag("1,8");
+//		cf1.setCase_tag("1,8");
 		
 		//將util.Date轉成sql.Date
 				Date utilDate = new Date();
@@ -74,16 +100,25 @@ public class CaseFormApplyController {
 				
 		
 				cfService.addForm(cf1);
-		
-
-				
+							
 		return "success";
 	}
+
 	
 	
+	@RequestMapping(method = RequestMethod.POST)
+	public String getSearchResourcesProfiles(HttpServletResponse response,@PathVariable("listCases")String lstCases) {
+		String searchValue1 = ((ServletRequest) response).getParameter("Select1");
+		String searchValue2 = ((ServletRequest) response).getParameter("Select2");
+		String sv = (searchValue1 + "," + searchValue2 );
+		System.out.println(sv);
+		Cases cf2 = new Cases();
+		cf2.setCase_tag(sv);
+		return lstCases;
+	}
 	
-	
-	
+}
+
 	
 	
 	
@@ -100,4 +135,4 @@ public class CaseFormApplyController {
 //	public String quotation2() {
 //		return "Quotation2";
 //	}
-}
+

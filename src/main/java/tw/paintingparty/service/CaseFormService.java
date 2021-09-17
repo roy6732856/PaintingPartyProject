@@ -2,6 +2,8 @@ package tw.paintingparty.service;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,4 +23,12 @@ public class CaseFormService {
 		
 		return cfDAO.addForm(bean);
 	}
+	
 }
+	//選擇兩種類型
+//	public List<Cases> search(String select1 , String select2) {
+//		
+//		return cfDAO.search(select1, select2);
+//	}
+	
+
