@@ -357,7 +357,7 @@ $(function() {
                	
                	$.ajax({
                        url: `<%= request.getContextPath() %>/backend/mypostedallcases2/\${myposted_sort}/\${myposted_condition}/\${myposted_nowpage}`,  // url位置
-                       type: 'post',                   // post/get
+                       type: 'post',                  
                        error: function (xhr) { $("#MyPostedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                        success: function (data) {
                       	$("#MyPostedAllCasesPage").html(JSON.stringify(data)); //DEMO用
@@ -453,6 +453,7 @@ $(function() {
                        }else{
                        	
                        	$("#MyPostedAllCasesPage").html("暫無資料"); 
+                       	$("#myposted_page").attr("style","visibility:hidden");
                        	
                        	
                        }//if end
