@@ -26,8 +26,6 @@ public class MyPostedAllCasesBean implements Serializable{
 	private Integer final_page;
 	
 	
-	
-	
 	public MyPostedAllCasesBean() {
 		super();
 	}

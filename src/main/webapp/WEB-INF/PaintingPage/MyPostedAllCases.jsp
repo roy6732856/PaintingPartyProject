@@ -32,6 +32,7 @@ $(function() {
 	$("#mypostedallcasesort .new2old").click(function(){
 		
 		myposted_sort=1;
+		myposted_nowpage = 1;
 		console.log("改變後sort: " + myposted_sort);
 		ajaxreqc();
 		
@@ -41,6 +42,7 @@ $(function() {
 	$("#mypostedallcasesort .old2new").click(function(){
 		
 		myposted_sort=0;
+		myposted_nowpage = 1;
 		console.log("改變後sort: " + myposted_sort);
 		ajaxreqc();
 		
@@ -52,6 +54,7 @@ $(function() {
 	$("#mypostedallcasecondition .mypostall").click(function(){
 		
 		myposted_condition=0;
+		myposted_nowpage = 1;
 		console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
@@ -60,6 +63,7 @@ $(function() {
 	$("#mypostedallcasecondition .onquest").click(function(){
 		
 		myposted_condition=1;
+		myposted_nowpage = 1;
 		console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
@@ -68,6 +72,7 @@ $(function() {
 	$("#mypostedallcasecondition .notonquest").click(function(){
 		
 		myposted_condition=2;
+		myposted_nowpage = 1;
 		console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
@@ -78,9 +83,11 @@ $(function() {
 	
 	$("#myposted_page .preppagebtn").click(function(){
 		
-		if(myposted_nowpage!=1){
-			myposted_nowpage--;
+		if( $(this).attr("disabled")==="disabled" ){
+			return false;
 		}
+
+		myposted_nowpage--;
 		console.log("改變後nowpage: " + myposted_nowpage);
 		ajaxreqc();
 		
@@ -88,8 +95,10 @@ $(function() {
 	
 	
 	$("#myposted_page .nextpagebtn").click(function(){
-
-		myposted_nowpage++; //這邊還要多加判斷式，不能大於最高頁數
+		if( $(this).attr("disabled")==="disabled" ){
+			return false;
+		}
+		myposted_nowpage++; 
 		console.log("改變後nowpage: " + myposted_nowpage);
 		ajaxreqc();
 		
@@ -351,9 +360,28 @@ $(function() {
                        type: 'post',                   // post/get
                        error: function (xhr) { $("#MyPostedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                        success: function (data) {
-                      	 $("#MyPostedAllCasesPage").html(JSON.stringify(data));
-                      	 
+                      	$("#MyPostedAllCasesPage").html(JSON.stringify(data)); //DEMO用
+
+                      	if(data.length !=0){
+                      	myposted_finalpage = data[0].final_page;
+                    	}
+                      	$("#myposted_page .finalpage").html(myposted_finalpage + "頁");
                       	$("#myposted_page .nowpage").html(myposted_nowpage + "頁");
+                      	//設置頁數
+                      	
+                      	if(myposted_nowpage===1){
+                      		$("#myposted_page .preppagebtn").attr("disabled","disabled");
+                      	}else{
+                      		$("#myposted_page .preppagebtn").removeAttr("disabled");
+                      	} //設置上一頁按鈕特效
+                      	
+                      	if(myposted_nowpage===myposted_finalpage){
+                      		$("#myposted_page .nextpagebtn").attr("disabled","disabled");
+                      	}else{
+                      		$("#myposted_page .nextpagebtn").removeAttr("disabled");
+                      	} //設置下一頁按鈕特效
+                      	
+                      	
 
                        //----------------------------------
                     var i;
@@ -488,9 +516,9 @@ $(function() {
          class="u-container-layout u-container-layout-13">
          <a href="javascript:"
              class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10 preppagebtn">上一頁</a>
-         <div class="u-text u-text-default u-text-6 nowpage">X頁</div>
-         <div class="u-text u-text-default u-text-7">／</div>
-         <div class="u-text u-text-default u-text-8 finalpage">X頁</div>
+         <div class="u-text u-text-default u-text-6 nowpage" style="right:3px;">X頁</div>
+         <div class="u-text u-text-default u-text-7" style="left:2px;">｜</div>
+         <div class="u-text u-text-default u-text-8 finalpage" style="left:3px;">X頁</div>
          <a href="javascript:"
              class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11 nextpagebtn">下一頁</a>
      </div>

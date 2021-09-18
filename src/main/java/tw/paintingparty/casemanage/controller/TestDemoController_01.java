@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -119,7 +120,7 @@ public class TestDemoController_01 {
 
 	@PostMapping(path = "/backend/mypostedallcases2/{sort}/{condition}/{nowpage}") //AJAX請求處理，回應JSON，加上條件和排序
 	@ResponseBody
-	public List<MyPostedAllCasesBean> test10_2(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) {
+	public List<MyPostedAllCasesBean> test10_2(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) throws ParseException {
 		//	var myposted_sort = 1; //0=由舊到新、1=由新到舊 預設1
 		//  var myposted_condition = 0; //0=全部、1=上架、2=下架 預設0
 		
