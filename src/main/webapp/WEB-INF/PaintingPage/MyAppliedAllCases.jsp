@@ -1,6 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<head>
+
+<script>
+
+var myappliedcase_sort = 1; //0=由舊到新、1=由新到舊 
+var myappliedcase_nowpage = 1; //當前頁數
+var myappliedcase_finalpage ; //總頁數
+
+console.log("原始sort: " + myappliedcase_sort);
+//代做
+
+$("#myapplied_allcase_sort .new2old").click(function(){
+	
+	myappliedcase_sort=1;
+	myappliedcase_nowpage = 1;
+	console.log("改變後sort: " + myappliedcase_sort);
+	ajaxreqmaac ();
+	
+});//由新到舊點下去 end
+
+
+$("#myapplied_allcase_sort .old2new").click(function(){
+	
+	myappliedcase_sort=0;
+	myappliedcase_nowpage = 1;
+	console.log("改變後sort: " + myappliedcase_sort);
+	ajaxreqmaac ();
+	
+});//由舊到新點下去 end
+
+
+//-----------------------------以下頁數
+
+$("#myapplied_page .preppagebtn").click(function(){
+	
+	if( $(this).attr("disabled")==="disabled" ){
+		return false;
+	}
+
+	myappliedcase_nowpage--;
+	console.log("改變後nowpage: " + myappliedcase_nowpage);
+	ajaxreqmaac ();
+	
+});//上一頁 end
+
+
+$("#myapplied_page .nextpagebtn").click(function(){
+	if( $(this).attr("disabled")==="disabled" ){
+		return false;
+	}
+	myappliedcase_nowpage++; 
+	console.log("改變後nowpage: " + myappliedcase_nowpage);
+	ajaxreqmaac ();
+	
+});//下一頁 end
+
+</script>
+
+
+
+</head>
+
+
+
+
 <html>
 
 <body>
@@ -50,25 +116,25 @@
 
 
     <div
-        class="u-custom-menu u-nav-container">
+        class="u-custom-menu u-nav-container" id="myapplied_allcase_sort">
         <ul
             class="u-nav u-unstyled u-nav-1">
             <li class="u-nav-item"><a
                     class="u-border-2 u-border-grey-75 u-button-style u-hover-palette-5-light-1 u-nav-link"
-                    href="####">排序</a>
+                    href="javascript:">排序</a>
                 <div
                     class="u-nav-popup">
                     <ul
                         class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由新到舊</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 new2old"
+                                href="javascript:">由新到舊</a>
                         </li>
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由舊到新</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 old2new"
+                                href="javascript:">由舊到新</a>
                         </li>
                     </ul>
                 </div>
@@ -172,81 +238,115 @@
         
          <script>
                 
-                    
-	             $.ajax({
-	                 url: `<%= request.getContextPath() %>/backend/myappliedallcases2`,                        // url位置
-	                 type: 'post',                   // post/get
-	                 error: function (xhr) { $("#MyAppliedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
-	                 success: function (data) { 
-	                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));
-	                 
-	                 let i = 0; 
-	  					
-                     if(data[0]!=null){
-                    	 for(i=0;i<data.length;i++){
-                    		 
-                    		 $("#MyAppliedAllCasesPage").append(`                                                                        
-                    				 <div class="u-container-style u-group u-palette-5-light-2 u-group-17" >
+         
+         $(document).ready(ajaxreqmaac);
+         
+         function ajaxreqmaac (){
+        	 
+             $.ajax({ //代做
+                 url: `<%= request.getContextPath() %>/backend/myappliedallcases2/\${myappliedcase_sort}/\${myappliedcase_nowpage}`,                        // url位置
+                 type: 'post', 
+                 error: function (xhr) { $("#MyAppliedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
+                 success: function (data) { 
+                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));//demo
+                	 
+                	 if(data.length !=0){
+                		 myappliedcase_finalpage = data[0].final_page;
+                 	}
+                		
+                	console.log("myappliedcase_finalpage: " + myappliedcase_finalpage);
+                   	
+                	$("#myapplied_page .finalpage").html(myappliedcase_finalpage + "頁");
+                   	$("#myapplied_page .nowpage").html(myappliedcase_nowpage + "頁");
+                   	//設置頁數
+                   	
+                   	if(myappliedcase_nowpage===1){
+                   		$("#myapplied_page .preppagebtn").attr("disabled","disabled");
+                   	}else{
+                   		$("#myapplied_page .preppagebtn").removeAttr("disabled");
+                   	} //設置上一頁按鈕特效
+                   	
+                   	if(myappliedcase_nowpage===myappliedcase_finalpage){
+                   		$("#myapplied_page .nextpagebtn").attr("disabled","disabled");
+                   	}else{
+                   		$("#myapplied_page .nextpagebtn").removeAttr("disabled");
+                   	} //設置下一頁按鈕特效
+                	 
+                 
+                 let i = 0; 
+  					
+                 if(data[0]!=null){
+                	 for(i=0;i<data.length;i++){
+                		 
+                		 $("#MyAppliedAllCasesPage").append(`                                                                        
+                				 <div class="u-container-style u-group u-palette-5-light-2 u-group-17" >
+                                 
+                                 <div class="u-container-layout u-container-layout-26" >
+                                 
+                                 
                                      
-                                     <div class="u-container-layout u-container-layout-26" >
+                                     <h5 class="u-text u-text-default u-text-font u-text-16">
+                                         
+                                         <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-19" target="_blank"
+                                             href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
+                                     </h5>
                                      
                                      
-                                         
-                                         <h5 class="u-text u-text-default u-text-font u-text-16">
-                                             
-                                             <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-19" target="_blank"
-                                                 href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
-                                         </h5>
-                                         
-                                         
+                                     <div
+                                         class="u-container-style u-group u-shape-rectangle u-group-18">
                                          <div
-                                             class="u-container-style u-group u-shape-rectangle u-group-18">
-                                             <div
-                                                 class="u-container-layout u-container-layout-27" >
-                                                     
-                                                     <div><b>應徵日期：</b>\${ data[i].apply_date }</div>
-                                                     
-                                             </div>
+                                             class="u-container-layout u-container-layout-27" >
+                                                 
+                                                 <div><b>應徵日期：</b>\${ data[i].apply_date }</div>
+                                                 
                                          </div>
-                                         <div
-                                             class="u-container-style u-group u-shape-rectangle u-group-19">
-                                             <div
-                                                 class="u-container-layout u-container-layout-28" >
-                                             	<div style="padding-left:30px"><b>期望稿酬：</b>\${ data[i].price_expected } (NTD)</div>
-                                             </div>
-                                         </div>
-                                         <div
-                                             class="u-container-style u-group u-shape-rectangle u-group-20">
-                                             <div
-                                                 class="u-container-layout u-container-layout-29" >
-                                             	<div><b>預估需時：</b>\${ data[i].case_time }天</div>
-                                             </div>
-                                         </div>
-                                         <!-- 會員頁面 -->
-                                         <div style="display:flex;margin-left:50px;margin-top:-50px;"><b>發案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].amember_id }" target="_blank">\${ data[i].amember_name }</a></div>
-                                         
-                                      
                                      </div>
+                                     <div
+                                         class="u-container-style u-group u-shape-rectangle u-group-19">
+                                         <div
+                                             class="u-container-layout u-container-layout-28" >
+                                         	<div style="padding-left:30px"><b>期望稿酬：</b>\${ data[i].price_expected } (NTD)</div>
+                                         </div>
+                                     </div>
+                                     <div
+                                         class="u-container-style u-group u-shape-rectangle u-group-20">
+                                         <div
+                                             class="u-container-layout u-container-layout-29" >
+                                         	<div><b>預估需時：</b>\${ data[i].case_time }天</div>
+                                         </div>
+                                     </div>
+                                     <!-- 會員頁面 -->
+                                     <div style="display:flex;margin-left:50px;margin-top:-50px;"><b>發案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].amember_id }" target="_blank">\${ data[i].amember_name }</a></div>
+                                     
+                                  
                                  </div>
-`); //append end
-                    		 
-                    		 
-                    	 }//end for
-                    	 
-                    	 
-                    	 
-                     }else{
-                    	 
-                    	 $("#MyAppliedAllCasesPage").html("暫無資料"); 
-                    	 
-                     }//end if
-	                 
-	                 
-	                 
-	                 
-	                 
-	                 }// end success
-	             });//end ajax
+                             </div>
+						`); //append end
+                		 
+                		 
+                	 }//end for
+                	 
+                	 
+                	 
+                 }else{
+                	 
+                	 $("#MyAppliedAllCasesPage").html("暫無資料"); 
+                	 
+                 }//end if
+                 
+                 
+                 
+                 
+                 
+                 }// end success
+             });//end ajax
+        	 
+        	 
+        	 
+        	 
+         }//func end
+                    
+
                     
          </script>
         
@@ -259,16 +359,18 @@
      <!-- 以上空白區塊，以下頁數  -->
 
      <div
-     class="u-container-style u-group u-white u-group-7">
+     class="u-container-style u-group u-white u-group-7" id="myapplied_page">
      <div
          class="u-container-layout u-container-layout-13">
          <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10">上一頁</a>
-         <p class="u-text u-text-default u-text-6">X頁</p>
-         <p class="u-text u-text-default u-text-7">／</p>
-         <p class="u-text u-text-default u-text-8">X頁</p>
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10 preppagebtn">上一頁</a>
+
+         <div class="u-text u-text-default u-text-6 nowpage" style="right:3px;">X頁</div>
+         <div class="u-text u-text-default u-text-7" style="left:2px;">｜</div>
+         <div class="u-text u-text-default u-text-8 finalpage" style="left:3px;">X頁</div>
+         
          <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11">下一頁</a>
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11 nextpagebtn">下一頁</a>
      </div>
  </div>
 

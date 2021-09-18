@@ -191,7 +191,7 @@ public class TestDemoController_01 {
 //	}
 	
 	
-	@PostMapping(path = "/backend/mypostedorders2/{sort}/{condition}/{nowpage}") //代做
+	@PostMapping(path = "/backend/mypostedorders2/{sort}/{condition}/{nowpage}") 
 	@ResponseBody
 	public List<MyPostedOrdersBean> test11_10( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
@@ -270,14 +270,9 @@ public class TestDemoController_01 {
 	
 	//-------------------------------------------------
 	
-	@RequestMapping(path = "/backend/myappliedallcases", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/myappliedallcases", method = RequestMethod.GET) //.load用
 	public String test12(HttpServletRequest request , Model m) throws JsonProcessingException {
-		Object myid = request.getSession().getAttribute("session_member_id");
-		ObjectMapper om1 = new ObjectMapper();
-		
-		List<MyAppliedAllCasesBean> selectMyAppliedAllCases = cmDao.selectMyAppliedAllCases( (Integer)myid );
-		String writeValueAsString = om1.writeValueAsString( selectMyAppliedAllCases ); //BEAN轉JSON		
-		m.addAttribute("userid", writeValueAsString );
+
 		
 		return "MyAppliedAllCases";
 	}
@@ -285,16 +280,25 @@ public class TestDemoController_01 {
 	
 	
 	
-	@PostMapping(path = "/backend/myappliedallcases2")
+//	@PostMapping(path = "/backend/myappliedallcases2") //棄用
+//	@ResponseBody
+//	public List<MyAppliedAllCasesBean> test12_2( HttpServletRequest request ) {
+//		
+//		Object myid = request.getSession().getAttribute("session_member_id");
+//		List<MyAppliedAllCasesBean> selectMyPostedOrders = cmDao.selectMyAppliedAllCases( (Integer)myid );
+//		
+//		return selectMyPostedOrders ;
+//	}
+	
+	@PostMapping(path = "/backend/myappliedallcases2/{sort}/{nowpage}") //代做
 	@ResponseBody
-	public List<MyAppliedAllCasesBean> test12_2( HttpServletRequest request ) {
+	public List<MyAppliedAllCasesBean> test12_3(@PathVariable("sort") Integer sort , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyAppliedAllCasesBean> selectMyPostedOrders = cmDao.selectMyAppliedAllCases( (Integer)myid );
+		List<MyAppliedAllCasesBean> selectMyAppliedAllCases2 = cmDao.selectMyAppliedAllCases2( (Integer)myid , sort , nowpage );
 		
-		return selectMyPostedOrders ;
+		return selectMyAppliedAllCases2 ;
 	}
-	
 	
 	
 	

@@ -435,7 +435,7 @@ function ajaxreq (){
         type: 'post',                   // post/get
         error: function (xhr) { $("#MyPostedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
         success: function (data) {
-       	 $("#MyPostedOrdersPage").html(JSON.stringify(data));
+       	 $("#MyPostedOrdersPage").html(JSON.stringify(data)); //demo
        	 
        		if(data.length !=0){
        			mypostorders_finalpage = data[0].final_page;
