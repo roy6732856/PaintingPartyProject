@@ -362,14 +362,14 @@ $("#myapplied_page .nextpagebtn").click(function(){
      class="u-container-style u-group u-white u-group-7" id="myapplied_page">
      <div
          class="u-container-layout u-container-layout-13">
-         <a href="####"
+         <a href="javascript:"
              class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10 preppagebtn">上一頁</a>
 
          <div class="u-text u-text-default u-text-6 nowpage" style="right:3px;">X頁</div>
          <div class="u-text u-text-default u-text-7" style="left:2px;">｜</div>
          <div class="u-text u-text-default u-text-8 finalpage" style="left:3px;">X頁</div>
          
-         <a href="####"
+         <a href="javascript:"
              class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11 nextpagebtn">下一頁</a>
      </div>
  </div>
