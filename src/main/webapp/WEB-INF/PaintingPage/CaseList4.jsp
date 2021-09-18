@@ -375,7 +375,7 @@
 						<div class="row mt-5" id="mainRow">
 
 							<div class="col-md-2 mb-4 col-4"
-								style="padding: 20px; background-color: white; border-radius: 20px;">
+								style="padding: 20px; background-color: white; border-radius: 10px;border: 1px solid #b2bec3;">
 								<form>
 									<div class="form-group">
 										<label class="mb-3 col-md-12"
@@ -434,7 +434,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-sm offset-md-1" id="row1">
+							<div class="col-sm " id="row1" style="margin-left:40px;">
 								<!-- <div class="u-container u-white mb-3"
 									style="border-radius: 20px; padding: 10px;">
 									<div class="u-container-layout u-container-layout-4" >
@@ -454,7 +454,7 @@
 									</div>
 								</div>-->
 							</div>
-							<div class="col-sm offset-md-1" id="row2"></div>
+							<div class="col-sm " id="row2" style="margin-left:30px;"></div>
 
 						</div>
 					</div>
