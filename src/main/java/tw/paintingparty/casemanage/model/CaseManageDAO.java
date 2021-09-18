@@ -236,7 +236,7 @@ public class CaseManageDAO {
 //	
 //	}
 	
-	public List<MyPostedOrdersBean> selectMyPostedOrders2(  Integer myId , Integer sort , Integer condition ,Integer nowpage ) throws ParseException { //代做
+	public List<MyPostedOrdersBean> selectMyPostedOrders2(  Integer myId , Integer sort , Integer condition ,Integer nowpage ) throws ParseException { 
 //    	我發布的>已成立訂單
 //		利用自己ID茶案件表，查出來的是自己全部的案件，在用案件ID去查訂單表，相符的就是自己發過的案件有成例的所有訂單。
 //      印出案件表的案件標題、在印出訂單的任一欄位
@@ -254,6 +254,7 @@ public class CaseManageDAO {
 				+ "where c.member_id = :memid and c.case_id = o.case_id "; //算總頁數用
 		Integer totalRecord; //總筆數
 		Integer finalPage; //總頁數
+		
 		
 		if(sort==0) { //升冪		
 			
@@ -515,7 +516,7 @@ public class CaseManageDAO {
 					 + ") A WHERE RowNumber > 4*(?) ";
 			
 			
-			System.out.println("升冪字串: " + sqldown);
+			System.out.println("降冪字串: " + sqldown);
 			
 			//執行SQL語句
 			NativeQuery addEntity = session.createSQLQuery(sqldown).setParameter(1, myId).setParameter(2, nowpage-1);
@@ -562,30 +563,212 @@ public class CaseManageDAO {
 	
 	
 	
-	public List<MyAppliedOrdersBean> selectMyAppliedOrders( int myId ) {
+//	public List<MyAppliedOrdersBean> selectMyAppliedOrders( int myId ) { //棄用
+////    	我應徵的 > 已成立訂單
+//		
+//		Session session = sessionfactory.getCurrentSession();
+//		
+//		String hql = "select new tw.paintingparty.casemanage.model.MyAppliedOrdersBean"
+//				+ "(o.order_id , o.ocasesbean.case_id , o.ocasesbean.case_title , o.ocasesbean.postedmemberbean.member_name , o.order_status , o.order_date , o.price ,o.ocasesbean.postedmemberbean.member_id , o.evaluation_status_b2a ) "
+//				+ "from Orders as o"
+//				+ " where o.bmemberbean.member_id = :memid ";
+//		
+//		Query query = session.createQuery(hql).setParameter("memid", myId);
+//		List<MyAppliedOrdersBean> list = query.list();
+//		
+//		
+////		for(MyAppliedOrdersBean mob : list) {
+////			System.out.println("發案人名稱: " + mob.getAmember_name());
+////			System.out.println("案件標題: " +  mob.getCase_title() );
+////		}
+//		
+//		
+//		return list;
+//		
+//	}
+	
+	public List<MyAppliedOrdersBean> selectMyAppliedOrders2( Integer myId , Integer sort , Integer condition ,Integer nowpage  ) throws ParseException { //代做
 //    	我應徵的 > 已成立訂單
+//		var myappliedorder_sort = 1; //0=由舊到新、1=由新到舊 
+//		var myappliedorder_condition = 0; //0=全部、1~3=第一~三階段、4=已完成、5=已取消
+//		var myapplied_order_nowpage = 1; //當前頁數
+//		var myapplied_order_finalpage ; //總頁數
 		
 		Session session = sessionfactory.getCurrentSession();
+		Util01 util01 = new Util01();
 		
-		String hql = "select new tw.paintingparty.casemanage.model.MyAppliedOrdersBean"
-				+ "(o.order_id , o.ocasesbean.case_id , o.ocasesbean.case_title , o.ocasesbean.postedmemberbean.member_name , o.order_status , o.order_date , o.price ,o.ocasesbean.postedmemberbean.member_id , o.evaluation_status_b2a ) "
-				+ "from Orders as o"
-				+ " where o.bmemberbean.member_id = :memid ";
-		
-		Query query = session.createQuery(hql).setParameter("memid", myId);
-		List<MyAppliedOrdersBean> list = query.list();
-		
-		
-//		for(MyAppliedOrdersBean mob : list) {
-//			System.out.println("發案人名稱: " + mob.getAmember_name());
-//			System.out.println("案件標題: " +  mob.getCase_title() );
-//		}
+		String sqltotalrecord = "select o.* "
+				+ "from orders as o "
+				+ "where o.member_id = :memid "; //算總頁數用
+		Integer totalRecord; //總筆數
+		Integer finalPage; //總頁數
 		
 		
-		return list;
+		
+		if(sort==0) { //升冪
+			
+			
+			String sqlup = "SELECT TOP 4 * FROM ( SELECT ROW_NUMBER() OVER (ORDER BY o.order_id) "
+					 + "AS RowNumber, o.* , c.case_title , m.member_id as amember_id , m.member_name as amember_name "
+					 + " FROM orders as o , cases as c , member as m "
+					 + " where o.member_id = ? and o.case_id = c.case_id and c.member_id = m.member_id ";
+			
+			
+			if(condition==1) {
+				sqltotalrecord+=" and o.order_status = '第一階段' ";
+				sqlup+=" and o.order_status = '第一階段' ";
+			}
+			
+			if(condition==2) {
+				sqltotalrecord+=" and o.order_status = '第二階段' ";
+				sqlup+=" and o.order_status = '第二階段' ";
+			}
+			if(condition==3) {
+				sqltotalrecord+=" and o.order_status = '第三階段' ";
+				sqlup+=" and o.order_status = '第三階段' ";
+			}
+			if(condition==4) {
+				sqltotalrecord+=" and o.order_status = '已完成' ";
+				sqlup+=" and o.order_status = '已完成' ";
+			}
+			if(condition==5) {
+				sqltotalrecord+=" and o.order_status = '已取消' ";
+				sqlup+=" and o.order_status = '已取消' ";
+			}
+			
+			sqlup+= ") A WHERE RowNumber > 4*(?) "; //?=頁數減1
+
+			System.out.println("升冪字串: " + sqlup);
+			
+			//執行SQL語句
+			NativeQuery addEntity = session.createSQLQuery(sqlup).setParameter(1, myId).setParameter(2, nowpage-1);
+			List resultList = addEntity.getResultList();
+			List<MyAppliedOrdersBean> maobList = new ArrayList<MyAppliedOrdersBean>();
+
+			//得出共幾頁
+			Query query2 = session.createSQLQuery(sqltotalrecord).addEntity(Orders.class).setParameter("memid", myId);//查出所有
+			totalRecord = query2.list().size();//共幾筆資料
+			finalPage = totalRecord/4;
+			if(totalRecord%4 != 0) {
+				finalPage++;
+			}
+			
+			
+			//以下手動封裝
+			for(int i=0 ; i< resultList.size() ;i++) {
+				MyAppliedOrdersBean maob = new MyAppliedOrdersBean();
+				Object[] row = (Object[])resultList.get(i);
+				
+				maob.setOrder_id( Integer.parseInt(row[1].toString()) );
+				maob.setCase_id( Integer.parseInt(row[2].toString()) );
+				maob.setOrder_status(row[4].toString());
+				maob.setOrder_date(util01.StringFormatToDateYYYYMMDD(row[5].toString()));
+				maob.setPrice(Integer.parseInt(row[6].toString()));
+				maob.setEvaluation_status_b2a(row[8].toString());
+				maob.setCase_title(row[9].toString());
+				maob.setAmember_id(Integer.parseInt(row[10].toString()));
+				maob.setAmember_name(row[11].toString());
+				maob.setFinal_page(finalPage);
+				
+				
+				maobList.add(maob);
+			}
+			
+	
+			
+			return maobList;
+			
+			
+			
+			
+		}//升冪 end
+		
+		
+		
+		if(sort==1) { //降冪
+			
+			
+			
+			String sqldown = "SELECT TOP 4 * FROM ( SELECT ROW_NUMBER() OVER (ORDER BY o.order_id desc) "
+					 + "AS RowNumber, o.* , c.case_title , m.member_id as amember_id , m.member_name as amember_name "
+					 + " FROM orders as o , cases as c , member as m "
+					 + " where o.member_id = ? and o.case_id = c.case_id and c.member_id = m.member_id ";
+			
+			
+			if(condition==1) {
+				sqltotalrecord+=" and o.order_status = '第一階段' ";
+				sqldown+=" and o.order_status = '第一階段' ";
+			}
+			
+			if(condition==2) {
+				sqltotalrecord+=" and o.order_status = '第二階段' ";
+				sqldown+=" and o.order_status = '第二階段' ";
+			}
+			if(condition==3) {
+				sqltotalrecord+=" and o.order_status = '第三階段' ";
+				sqldown+=" and o.order_status = '第三階段' ";
+			}
+			if(condition==4) {
+				sqltotalrecord+=" and o.order_status = '已完成' ";
+				sqldown+=" and o.order_status = '已完成' ";
+			}
+			if(condition==5) {
+				sqltotalrecord+=" and o.order_status = '已取消' ";
+				sqldown+=" and o.order_status = '已取消' ";
+			}
+			
+			sqldown+= ") A WHERE RowNumber > 4*(?) "; //?=頁數減1
+
+			System.out.println("降冪字串: " + sqldown);
+			
+			//執行SQL語句
+			NativeQuery addEntity = session.createSQLQuery(sqldown).setParameter(1, myId).setParameter(2, nowpage-1);
+			List resultList = addEntity.getResultList();
+			List<MyAppliedOrdersBean> maobList = new ArrayList<MyAppliedOrdersBean>();
+
+			//得出共幾頁
+			Query query2 = session.createSQLQuery(sqltotalrecord).addEntity(Orders.class).setParameter("memid", myId);//查出所有
+			totalRecord = query2.list().size();//共幾筆資料
+			finalPage = totalRecord/4;
+			if(totalRecord%4 != 0) {
+				finalPage++;
+			}
+			
+			
+			//以下手動封裝
+			for(int i=0 ; i< resultList.size() ;i++) {
+				MyAppliedOrdersBean maob = new MyAppliedOrdersBean();
+				Object[] row = (Object[])resultList.get(i);
+				
+				maob.setOrder_id( Integer.parseInt(row[1].toString()) );
+				maob.setCase_id( Integer.parseInt(row[2].toString()) );
+				maob.setOrder_status(row[4].toString());
+				maob.setOrder_date(util01.StringFormatToDateYYYYMMDD(row[5].toString()));
+				maob.setPrice(Integer.parseInt(row[6].toString()));
+				maob.setEvaluation_status_b2a(row[8].toString());
+				maob.setCase_title(row[9].toString());
+				maob.setAmember_id(Integer.parseInt(row[10].toString()));
+				maob.setAmember_name(row[11].toString());
+				maob.setFinal_page(finalPage);
+				
+				
+				maobList.add(maob);
+			}
+			
+	
+			
+			return maobList;
+			
+			
+			
+		}//降冪 end
+		
+		
+
+		
+		return null;
 		
 	}
-	
 	
 	
 	

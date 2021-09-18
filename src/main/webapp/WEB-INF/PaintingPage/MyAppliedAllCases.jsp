@@ -276,6 +276,9 @@ $("#myapplied_page .nextpagebtn").click(function(){
                  let i = 0; 
   					
                  if(data[0]!=null){
+                	 
+                	  $("#myapplied_page").removeAttr("style"); //若有資料，就解除頁數隱藏
+                	  
                 	 for(i=0;i<data.length;i++){
                 		 
                 		 $("#MyAppliedAllCasesPage").append(`                                                                        
@@ -331,6 +334,7 @@ $("#myapplied_page .nextpagebtn").click(function(){
                  }else{
                 	 
                 	 $("#MyAppliedAllCasesPage").html("暫無資料"); 
+                	 $("#myapplied_page").attr("style","visibility:hidden");
                 	 
                  }//end if
                  

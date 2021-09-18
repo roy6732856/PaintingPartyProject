@@ -429,13 +429,15 @@ $(document).ready(ajaxreq);
 function ajaxreq (){
 
 	//代做
-	console.log("123");
+	
 	$.ajax({
         url: `<%= request.getContextPath() %>/backend/mypostedorders2/\${mypostorders_sort}/\${mypostorders_condition}/\${mypostorders_nowpage}`,  // url位置
         type: 'post',                   // post/get
         error: function (xhr) { $("#MyPostedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
         success: function (data) {
+        	
        	 $("#MyPostedOrdersPage").html(JSON.stringify(data)); //demo
+
        	 
        		if(data.length !=0){
        			mypostorders_finalpage = data[0].final_page;
@@ -465,7 +467,9 @@ function ajaxreq (){
         var i;
         
         if(data[0]!=null){
-  	  
+  	  		
+        	$("#mypostorder_page").removeAttr("style"); //若有資料，就解除頁數隱藏
+        	
             for(i=0;i<data.length;i++){
            	 
             	$("#MyPostedOrdersPage").append(`                                                                        <div
@@ -599,7 +603,7 @@ function ajaxreq (){
        	 
        	 $("#MyPostedOrdersPage").html("暫無資料"); 
        	 $("#mypostorder_page").attr("style","visibility:hidden");
-       	 
+
         }//if end 
         
         

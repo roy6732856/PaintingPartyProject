@@ -290,7 +290,7 @@ public class TestDemoController_01 {
 //		return selectMyPostedOrders ;
 //	}
 	
-	@PostMapping(path = "/backend/myappliedallcases2/{sort}/{nowpage}") //代做
+	@PostMapping(path = "/backend/myappliedallcases2/{sort}/{nowpage}") 
 	@ResponseBody
 	public List<MyAppliedAllCasesBean> test12_3(@PathVariable("sort") Integer sort , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
@@ -308,14 +308,8 @@ public class TestDemoController_01 {
 	
 	
 	
-	@RequestMapping(path = "/backend/myappliedorders", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/myappliedorders", method = RequestMethod.GET) //.load用
 	public String test13( HttpServletRequest request , Model m ) throws JsonProcessingException {
-		
-		Object myid = request.getSession().getAttribute("session_member_id");
-		ObjectMapper om1 = new ObjectMapper();
-		List<MyAppliedOrdersBean> selectMyAppliedOrders = cmDao.selectMyAppliedOrders( (Integer)myid );
-		String writeValueAsString = om1.writeValueAsString( selectMyAppliedOrders ); //BEAN轉JSON		
-		m.addAttribute("userid", writeValueAsString );
 		
 		return "MyAppliedOrders";
 	}
@@ -324,15 +318,28 @@ public class TestDemoController_01 {
 	
 
 	
-	@PostMapping(path = "/backend/myappliedorders2")
+//	@PostMapping(path = "/backend/myappliedorders2") //棄用
+//	@ResponseBody
+//	public List<MyAppliedOrdersBean> test13_2( HttpServletRequest request ) {
+//		
+//		Object myid = request.getSession().getAttribute("session_member_id");
+//		List<MyAppliedOrdersBean> selectMyPostedOrders = cmDao.selectMyAppliedOrders( (Integer)myid );
+//		
+//		return selectMyPostedOrders ;
+//	}
+	
+	@PostMapping(path = "/backend/myappliedorders2/{sort}/{condition}/{nowpage}") //代做
 	@ResponseBody
-	public List<MyAppliedOrdersBean> test13_2( HttpServletRequest request ) {
+	public List<MyAppliedOrdersBean> test13_2( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyAppliedOrdersBean> selectMyPostedOrders = cmDao.selectMyAppliedOrders( (Integer)myid );
+		List<MyAppliedOrdersBean> selectMyAppliedOrders2 = cmDao.selectMyAppliedOrders2((Integer)myid ,sort , condition, nowpage );
 		
-		return selectMyPostedOrders ;
+		return selectMyAppliedOrders2 ;
 	}
+	
+	
+	
 	
 	
 	
@@ -430,14 +437,14 @@ public class TestDemoController_01 {
 	
 	
 	//--------------------------------------------------------------
-	@RequestMapping(path = "/DEMO", method = RequestMethod.GET)
-	@ResponseBody
-	public List<MyAppliedOrdersBean> test15( HttpServletRequest request , Model m ) throws JsonProcessingException {
-		
-		List<MyAppliedOrdersBean> selectMyAppliedOrders = cmDao.selectMyAppliedOrders( 4 );
-		
-		return selectMyAppliedOrders;
-	}
+//	@RequestMapping(path = "/DEMO", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<MyAppliedOrdersBean> test15( HttpServletRequest request , Model m ) throws JsonProcessingException {
+//		
+//		List<MyAppliedOrdersBean> selectMyAppliedOrders = cmDao.selectMyAppliedOrders( 4 );
+//		
+//		return selectMyAppliedOrders;
+//	}
 	
 	
 	@RequestMapping(path = "/DEMO2", method = RequestMethod.GET)

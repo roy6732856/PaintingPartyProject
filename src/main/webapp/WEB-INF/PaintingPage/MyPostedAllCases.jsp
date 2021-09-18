@@ -387,6 +387,8 @@ $(function() {
                     var i;
   					
                        if(data[0]!=null){
+                    	   
+                    	   $("#myposted_page").removeAttr("style"); //若有資料，就解除頁數隱藏
                        	
 	                    for(i=0;i<data.length;i++){
 	                    	
