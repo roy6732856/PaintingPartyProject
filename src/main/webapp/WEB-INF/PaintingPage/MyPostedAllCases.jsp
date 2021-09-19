@@ -25,15 +25,15 @@ $(function() {
 	var myposted_nowpage = 1; //當前頁數
 	var myposted_finalpage ; //總頁數
 	
-	console.log("原始sort: " + myposted_sort);
-	console.log("原始condition: " + myposted_condition);
+	//console.log("原始sort: " + myposted_sort);
+	//console.log("原始condition: " + myposted_condition);
 	
 	//代做
 	$("#mypostedallcasesort .new2old").click(function(){
 		
 		myposted_sort=1;
 		myposted_nowpage = 1;
-		console.log("改變後sort: " + myposted_sort);
+		//console.log("改變後sort: " + myposted_sort);
 		ajaxreqc();
 		
 	});//由新到舊點下去 end
@@ -43,7 +43,7 @@ $(function() {
 		
 		myposted_sort=0;
 		myposted_nowpage = 1;
-		console.log("改變後sort: " + myposted_sort);
+		//console.log("改變後sort: " + myposted_sort);
 		ajaxreqc();
 		
 	});//由舊到新點下去 end
@@ -55,7 +55,7 @@ $(function() {
 		
 		myposted_condition=0;
 		myposted_nowpage = 1;
-		console.log("改變後condition: " + myposted_condition);
+		//console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
 	});//全部 end
@@ -64,7 +64,7 @@ $(function() {
 		
 		myposted_condition=1;
 		myposted_nowpage = 1;
-		console.log("改變後condition: " + myposted_condition);
+		//console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
 	});//上架中 end
@@ -73,7 +73,7 @@ $(function() {
 		
 		myposted_condition=2;
 		myposted_nowpage = 1;
-		console.log("改變後condition: " + myposted_condition);
+		//console.log("改變後condition: " + myposted_condition);
 		ajaxreqc();
 		
 	});//已下架 end
@@ -88,7 +88,7 @@ $(function() {
 		}
 
 		myposted_nowpage--;
-		console.log("改變後nowpage: " + myposted_nowpage);
+		//console.log("改變後nowpage: " + myposted_nowpage);
 		ajaxreqc();
 		
 	});//上一頁 end
@@ -99,7 +99,7 @@ $(function() {
 			return false;
 		}
 		myposted_nowpage++; 
-		console.log("改變後nowpage: " + myposted_nowpage);
+		//console.log("改變後nowpage: " + myposted_nowpage);
 		ajaxreqc();
 		
 	});//下一頁 end
@@ -200,7 +200,7 @@ $(function() {
                     <li
                         class="u-nav-item">
                         <a class="u-button-style u-nav-link"
-                            href="####">排序</a>
+                            href="javascript:">排序</a>
                         <div
                             class="u-nav-popup">
                             <ul
@@ -208,12 +208,12 @@ $(function() {
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由新到舊</a>
+                                        href="javascript:">由新到舊</a>
                                 </li>
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由舊到新</a>
+                                        href="javascript:">由舊到新</a>
                                 </li>
                             </ul>
                         </div>
@@ -307,7 +307,7 @@ $(function() {
                                     <li
                                         class="u-nav-item">
                                         <a class="u-button-style u-nav-link"
-                                            href="####">案件狀態</a>
+                                            href="javascript:">案件狀態</a>
                                         <div
                                             class="u-nav-popup">
                                             <ul
@@ -315,12 +315,12 @@ $(function() {
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">上架中</a>
+                                                        href="javascript:">上架中</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已下架</a>
+                                                        href="javascript:">已下架</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -360,8 +360,8 @@ $(function() {
                        type: 'post',                  
                        error: function (xhr) { $("#MyPostedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                        success: function (data) {
-                      	$("#MyPostedAllCasesPage").html(JSON.stringify(data)); //DEMO用
-
+                      	$("#MyPostedAllCasesPage").html(""); //DEMO用 改
+                      	//JSON.stringify(data)
                       	if(data.length !=0){
                       	myposted_finalpage = data[0].final_page;
                     	}
@@ -541,7 +541,7 @@ $(function() {
             <div id="caseinfo" style="display:flex;justify-content:space-between">
 
               <div>
-                <a id="casepagelink" href="####" target="_blank"><div class="casetitle" style="font-size:large; color:rgb(103, 175, 243);"><b>案件標題</b></div></a>
+                <a id="casepagelink" href="javascript:" target="_blank"><div class="casetitle" style="font-size:large; color:rgb(103, 175, 243);"><b>案件標題</b></div></a>
                 
                 <div style="display: flex;">
                   <div><b>發布日期：</b></div>
@@ -595,7 +595,7 @@ $(function() {
   function whoapplyinfo(){ //當按下管理案件時要做的事
 	  
 	  
-	  		$("#democasemanagepage").remove(); //清掉DEMO字串
+	  		//$("#democasemanagepage").remove(); //清掉DEMO字串
    	  	    
    	  		$( "#dialog-casemanagepage .casetitle" ).html(""); //清空案件標題的文字
    	  		$( "#dialog-casemanagepage #casedate" ).html(""); //清空發布日期
@@ -621,7 +621,7 @@ $(function() {
 				success: function(data2) { //data2取值，記得從x+1開始取，跳過第0筆資料
 					//alert("連線成功!!");
 					//console.log(JSON.stringify(data2));
-					$("#dialog-casemanagepage").prepend(`<div id="democasemanagepage">\${JSON.stringify(data2)}</div>`); //DEMO用資料
+					//$("#dialog-casemanagepage").prepend(`<div id="democasemanagepage">\${JSON.stringify(data2)}</div>`); //DEMO用資料 改
 					$( "#dialog-casemanagepage .casetitle" ).html(`\${data2[0].case_title}`); //清空案件標題的文字
 	   	  		$( "#dialog-casemanagepage #casedate" ).html(`\${data2[0].upload_date}`); //清空發布日期
 	   	  		$( "#dialog-casemanagepage #casetag" ).html(`\${data2[0].case_tag}`); //清空標籤
@@ -712,7 +712,7 @@ $(function() {
 	           			$("#whoapply .hire").click(function(){ //當按下錄取畫師要做的事
 	           			
 	           			let hireinfolist = $(this).attr("href").split("/");
-	           			console.log(hireinfolist.length);
+	           			//console.log(hireinfolist.length);
 						let hirebmemid = hireinfolist[hireinfolist.length-3];
 						let hirecase_id = hireinfolist[hireinfolist.length-2];
 						let hireexpected = hireinfolist[hireinfolist.length-1];

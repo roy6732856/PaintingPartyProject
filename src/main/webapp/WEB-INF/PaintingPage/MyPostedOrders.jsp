@@ -46,15 +46,15 @@
 	var mypostorders_nowpage = 1; //當前頁數
 	var mypostorders_finalpage ; //總頁數
 	
-	console.log("原始sort: " + mypostorders_sort);
-	console.log("原始condition: " + mypostorders_condition);
+	//console.log("原始sort: " + mypostorders_sort);
+	//console.log("原始condition: " + mypostorders_condition);
 	
 	//代做
 	$("#mypostorders_sort .new2old").click(function(){
 		
 		mypostorders_sort=1;
 		mypostorders_nowpage = 1;
-		console.log("改變後sort: " + mypostorders_sort);
+		//console.log("改變後sort: " + mypostorders_sort);
 		ajaxreq ();
 		
 	});//由新到舊點下去 end
@@ -64,7 +64,7 @@
 		
 		mypostorders_sort=0;
 		mypostorders_nowpage = 1;
-		console.log("改變後sort: " + mypostorders_sort);
+		//console.log("改變後sort: " + mypostorders_sort);
 		ajaxreq ();
 		
 	});//由舊到新點下去 end
@@ -78,7 +78,7 @@
 		
 		mypostorders_condition=0;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//全部 end
@@ -87,7 +87,7 @@
 		
 		mypostorders_condition=1;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//第一階段 end
@@ -96,7 +96,7 @@
 		
 		mypostorders_condition=2;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//第二階段 end
@@ -106,7 +106,7 @@
 		
 		mypostorders_condition=3;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//第三階段 end
@@ -116,7 +116,7 @@
 		
 		mypostorders_condition=4;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//已完成 end
@@ -126,7 +126,7 @@
 		
 		mypostorders_condition=5;
 		mypostorders_nowpage = 1;
-		console.log("改變後condition: " + mypostorders_condition);
+		//console.log("改變後condition: " + mypostorders_condition);
 		ajaxreq ();
 		
 	});//已取消 end
@@ -141,7 +141,7 @@
 		}
 
 		mypostorders_nowpage--;
-		console.log("改變後nowpage: " + mypostorders_nowpage);
+		//console.log("改變後nowpage: " + mypostorders_nowpage);
 		ajaxreq ();
 		
 	});//上一頁 end
@@ -152,7 +152,7 @@
 			return false;
 		}
 		mypostorders_nowpage++; 
-		console.log("改變後nowpage: " + mypostorders_nowpage);
+		//console.log("改變後nowpage: " + mypostorders_nowpage);
 		ajaxreq ();
 		
 	});//下一頁 end
@@ -254,7 +254,7 @@
                     <li
                         class="u-nav-item">
                         <a class="u-button-style u-nav-link"
-                            href="####">排序</a>
+                            href="javascript:">排序</a>
                         <div
                             class="u-nav-popup">
                             <ul
@@ -262,12 +262,12 @@
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由新到舊</a>
+                                        href="javascript:">由新到舊</a>
                                 </li>
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由舊到新</a>
+                                        href="javascript:">由舊到新</a>
                                 </li>
                             </ul>
                         </div>
@@ -365,7 +365,7 @@
                                     class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-15">
                                     <li class="u-nav-item"><a
                                             class="u-button-style u-nav-link"
-                                            href="####">訂單狀態</a>
+                                            href="javascript:">訂單狀態</a>
                                         <div
                                             class="u-nav-popup">
                                             <ul
@@ -373,27 +373,27 @@
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第一階段</a>
+                                                        href="javascript:">第一階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第二階段</a>
+                                                        href="javascript:">第二階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第三階段</a>
+                                                        href="javascript:">第三階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已完成</a>
+                                                        href="javascript:">已完成</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已取消</a>
+                                                        href="javascript:">已取消</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -436,14 +436,14 @@ function ajaxreq (){
         error: function (xhr) { $("#MyPostedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
         success: function (data) {
         	
-       	 $("#MyPostedOrdersPage").html(JSON.stringify(data)); //demo
+       	 $("#MyPostedOrdersPage").html(""); //demo
 
        	 
        		if(data.length !=0){
        			mypostorders_finalpage = data[0].final_page;
         	}
        		
-       		console.log("mypostorders_finalpage: " + mypostorders_finalpage);
+       		//console.log("mypostorders_finalpage: " + mypostorders_finalpage);
           	
        		$("#mypostorder_page .finalpage").html(mypostorders_finalpage + "頁");
           	$("#mypostorder_page .nowpage").html(mypostorders_nowpage + "頁");
@@ -689,7 +689,7 @@ function ajaxreq (){
 	      $("#MyPostedOrdersPage .u-icon-6").click(function () {
        	 //console.log($(this).attr("data-href")); 
        	 paybmemberid =JSON.stringify({"pmemid":$(this).attr("data-href").split("/")[$(this).attr("data-href").split("/").length-1]}); //得到BMEMBER的ID
-       	 console.log( paybmemberid ); 
+       	 //console.log( paybmemberid ); 
        	 
        	 	
        	 	$.ajax({
@@ -737,9 +737,9 @@ function ajaxreq (){
     	   
     	   //-------------------------
     	   
-	           	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); 
-    	    	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); 
-    	    	 console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3] ); 
+	           	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-1] ); 
+    	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-2] ); 
+    	    	 //console.log( $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3] ); 
  	    	 	
     	    	 var filecontentaorderid = $( this ).attr("href").split("/")[$(this).attr("href").split("/").length-3];//取該筆訂單的ID
     	    	 var filecontentamymemid = <%= request.getSession().getAttribute("session_member_id") %>; //取得自己ID
@@ -757,7 +757,7 @@ function ajaxreq (){
     	    	 $("#dialog-filecontenta .pricestage3").html(filecontentastage3+"(NTD)");
     	    	 
     	    	 filecontentajstr = JSON.stringify({"order_id":filecontentaorderid,"bmember_id":filecontentamymemid}); //這裡的CONTROLLER，用跟B一樣的CONTROLL，所以參數應該是AMEM，改用B
-  				 console.log(filecontentajstr);
+  				 //console.log(filecontentajstr);
   				 
   				//執行AJAX 
   				//這裡的CONTROLLER，用跟B一樣的CONTROLL，所以參數應該是AMEM，改用B

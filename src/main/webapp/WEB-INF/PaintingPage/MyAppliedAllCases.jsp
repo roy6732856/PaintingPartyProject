@@ -10,14 +10,14 @@ var myappliedcase_sort = 1; //0=由舊到新、1=由新到舊
 var myappliedcase_nowpage = 1; //當前頁數
 var myappliedcase_finalpage ; //總頁數
 
-console.log("原始sort: " + myappliedcase_sort);
+//console.log("原始sort: " + myappliedcase_sort);
 //代做
 
 $("#myapplied_allcase_sort .new2old").click(function(){
 	
 	myappliedcase_sort=1;
 	myappliedcase_nowpage = 1;
-	console.log("改變後sort: " + myappliedcase_sort);
+	//console.log("改變後sort: " + myappliedcase_sort);
 	ajaxreqmaac ();
 	
 });//由新到舊點下去 end
@@ -27,7 +27,7 @@ $("#myapplied_allcase_sort .old2new").click(function(){
 	
 	myappliedcase_sort=0;
 	myappliedcase_nowpage = 1;
-	console.log("改變後sort: " + myappliedcase_sort);
+	//console.log("改變後sort: " + myappliedcase_sort);
 	ajaxreqmaac ();
 	
 });//由舊到新點下去 end
@@ -42,7 +42,7 @@ $("#myapplied_page .preppagebtn").click(function(){
 	}
 
 	myappliedcase_nowpage--;
-	console.log("改變後nowpage: " + myappliedcase_nowpage);
+	//console.log("改變後nowpage: " + myappliedcase_nowpage);
 	ajaxreqmaac ();
 	
 });//上一頁 end
@@ -53,7 +53,7 @@ $("#myapplied_page .nextpagebtn").click(function(){
 		return false;
 	}
 	myappliedcase_nowpage++; 
-	console.log("改變後nowpage: " + myappliedcase_nowpage);
+	//console.log("改變後nowpage: " + myappliedcase_nowpage);
 	ajaxreqmaac ();
 	
 });//下一頁 end
@@ -155,7 +155,7 @@ $("#myapplied_page .nextpagebtn").click(function(){
                     <li
                         class="u-nav-item">
                         <a class="u-button-style u-nav-link"
-                            href="####">排序</a>
+                            href="javascript:">排序</a>
                         <div
                             class="u-nav-popup">
                             <ul
@@ -163,12 +163,12 @@ $("#myapplied_page .nextpagebtn").click(function(){
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由新到舊</a>
+                                        href="javascript:">由新到舊</a>
                                 </li>
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由舊到新</a>
+                                        href="javascript:">由舊到新</a>
                                 </li>
                             </ul>
                         </div>
@@ -248,13 +248,13 @@ $("#myapplied_page .nextpagebtn").click(function(){
                  type: 'post', 
                  error: function (xhr) { $("#MyAppliedAllCasesPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                  success: function (data) { 
-                	 $("#MyAppliedAllCasesPage").html(JSON.stringify(data));//demo
-                	 
+                	 $("#MyAppliedAllCasesPage").html("");//demo+重置
+                	 //JSON.stringify(data)
                 	 if(data.length !=0){
                 		 myappliedcase_finalpage = data[0].final_page;
                  	}
                 		
-                	console.log("myappliedcase_finalpage: " + myappliedcase_finalpage);
+                	//console.log("myappliedcase_finalpage: " + myappliedcase_finalpage);
                    	
                 	$("#myapplied_page .finalpage").html(myappliedcase_finalpage + "頁");
                    	$("#myapplied_page .nowpage").html(myappliedcase_nowpage + "頁");

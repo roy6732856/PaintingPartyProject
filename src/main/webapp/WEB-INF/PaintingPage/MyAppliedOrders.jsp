@@ -43,15 +43,15 @@
 	var myapplied_order_nowpage = 1; //當前頁數
 	var myapplied_order_finalpage ; //總頁數
 	
-	console.log("原始sort: " + myappliedorder_sort);
-	console.log("原始condition: " + myappliedorder_condition);
+	//console.log("原始sort: " + myappliedorder_sort);
+	//console.log("原始condition: " + myappliedorder_condition);
 	
 	//代做
 	$("#myapplied_order_sort .new2old").click(function(){
 		
 		myappliedorder_sort=1;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後sort: " + myappliedorder_sort);
+		//console.log("改變後sort: " + myappliedorder_sort);
 		ajaxreqb();
 		
 	});//由新到舊點下去 end
@@ -61,7 +61,7 @@
 		
 		myappliedorder_sort=0;
 		myapplied_order_nowpage = 1;
-		console.log("改變後sort: " + myappliedorder_sort);
+		//console.log("改變後sort: " + myappliedorder_sort);
 		ajaxreqb();
 		
 	});//由舊到新點下去 end
@@ -72,7 +72,7 @@
 		
 		myappliedorder_condition=0;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//全部 end
@@ -81,7 +81,7 @@
 		
 		myappliedorder_condition=1;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//第一階段 end
@@ -90,7 +90,7 @@
 		
 		myappliedorder_condition=2;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//第二階段 end
@@ -100,7 +100,7 @@
 		
 		myappliedorder_condition=3;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//第三階段 end
@@ -110,7 +110,7 @@
 		
 		myappliedorder_condition=4;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//已完成 end
@@ -120,7 +120,7 @@
 		
 		myappliedorder_condition=5;
 		myapplied_order_nowpage  = 1;
-		console.log("改變後condition: " + myappliedorder_condition);
+		//console.log("改變後condition: " + myappliedorder_condition);
 		ajaxreqb();
 		
 	});//已取消 end
@@ -135,7 +135,7 @@
 		}
 
 		myapplied_order_nowpage --;
-		console.log("改變後nowpage: " + myapplied_order_nowpage );
+		//console.log("改變後nowpage: " + myapplied_order_nowpage );
 		ajaxreqb();
 		
 	});//上一頁 end
@@ -146,7 +146,7 @@
 			return false;
 		}
 		myapplied_order_nowpage++; 
-		console.log("改變後nowpage: " + myapplied_order_nowpage);
+		//console.log("改變後nowpage: " + myapplied_order_nowpage);
 		ajaxreqb();
 		
 	});//下一頁 end
@@ -252,7 +252,7 @@
                     <li
                         class="u-nav-item">
                         <a class="u-button-style u-nav-link"
-                            href="####">排序</a>
+                            href="javascript:">排序</a>
                         <div
                             class="u-nav-popup">
                             <ul
@@ -260,12 +260,12 @@
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由新到舊</a>
+                                        href="javascript:">由新到舊</a>
                                 </li>
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由舊到新</a>
+                                        href="javascript:">由舊到新</a>
                                 </li>
                             </ul>
                         </div>
@@ -363,7 +363,7 @@
                                     class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-15">
                                     <li class="u-nav-item"><a
                                             class="u-button-style u-nav-link"
-                                            href="####">訂單狀態</a>
+                                            href="javascript:">訂單狀態</a>
                                         <div
                                             class="u-nav-popup">
                                             <ul
@@ -371,27 +371,27 @@
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第一階段</a>
+                                                        href="javascript:">第一階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第二階段</a>
+                                                        href="javascript:">第二階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第三階段</a>
+                                                        href="javascript:">第三階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已完成</a>
+                                                        href="javascript:">已完成</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已取消</a>
+                                                        href="javascript:">已取消</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -430,14 +430,14 @@
                type: 'post',  // post/get
                error: function (xhr) { $("#MyAppliedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                success: function (data) { 
-              	 $("#MyAppliedOrdersPage").html(JSON.stringify(data)); //demo
-              	 
+              	 $("#MyAppliedOrdersPage").html(""); //demo+重置
+              	 //JSON.stringify(data)
               	 
               	if(data.length !=0){
               		myapplied_order_finalpage = data[0].final_page;
             	}
            		
-           		console.log("myapplied_order_finalpage: " + myapplied_order_finalpage);
+           		//console.log("myapplied_order_finalpage: " + myapplied_order_finalpage);
               	
            		$("#myapplied_page .finalpage").html(myapplied_order_finalpage + "頁");
               	$("#myapplied_page .nowpage").html(myapplied_order_nowpage  + "頁");
@@ -544,8 +544,8 @@
                    
                    
            	 	$("#MyAppliedOrdersPage .u-btn-25").click(function () {
-        	   	  	console.log(123);
-        	   	 console.log( typeof($("#evaluationb_caseid").val() ));
+           	 		
+        	   	 //console.log( typeof($("#evaluationb_caseid").val() ));
         	   	  	if( $(this).attr("href") != "javascript:" ){ //判斷評價紐是不是為已評價
         	   	  		
         	   	  	//當打開評價頁時，要做的事
@@ -611,7 +611,7 @@
         	    	 $("#dialog-filecontentb .pricestage3").html(filecontentbstage3+"(NTD)");
         	    	 
      				filecontentbjstr = JSON.stringify({"order_id":filecontentborderid,"bmember_id":filecontentbmymemid});
-     				console.log(filecontentbjstr);
+     				//console.log(filecontentbjstr);
      				
      				
      				//執行AJAX 代做
@@ -913,7 +913,7 @@
     	
     $("#productupload").change(function() {
       $("#imgpreview").remove();
-      console.log(this.files);
+      //console.log(this.files);
         previewImg(this.files);			
     });
 
@@ -935,7 +935,7 @@
 
         //註冊當選檔被讀取完成後之事件處理器
         fileReaders[0].onload = function() {
-      	  console.log("預覽");
+      	  //console.log("預覽");
       	  
       	  
         let imgWrapperDiv = `

@@ -32,27 +32,6 @@ public class CaseManageDAO {
 	
 	//---------------------------------------------
 	
-//	public List<MyPostedAllCasesBean> selectMyPostedCases( int myId ) { //棄用
-//		//我發布的 => 所有案件
-//		Session session = sessionfactory.getCurrentSession();
-//		String hql = "select new tw.paintingparty.casemanage.model.MyPostedAllCasesBean"
-//				+ "(c.case_id , c.case_title , c.upload_date , c.price_min , c.price_max , c.case_status) from Cases as c "
-//				+ "where c.postedmemberbean.member_id=:memid";
-//		Query query = session.createQuery(hql).setParameter("memid", myId);
-//		List<MyPostedAllCasesBean> list = query.list();
-//		
-////		for(MyPostedAllCasesBean mpacb : list){  
-////		int id = mpacb.getCase_id();  
-////		String name = mpacb.getCase_title();  
-////		System.out.println(id + " : " + name); 
-////		}
-//
-//		
-//		return list;
-//	
-//	}
-	
-	
 	
 	public List<MyPostedAllCasesBean> selectMyPostedCases2( Integer myId , Integer sort , Integer condition ,Integer nowpage ) throws ParseException { //加上條件查詢
 		//我發布的 => 所有案件
@@ -201,40 +180,6 @@ public class CaseManageDAO {
 	
 //---------------------------------------------
 	
-//	public List<MyPostedOrdersBean> selectMyPostedOrders( int myId ) { //棄用
-////    	我發布的>已成立訂單
-////		利用自己ID茶案件表，查出來的是自己全部的案件，在用案件ID去查訂單表，相符的就是自己發過的案件有成例的所有訂單。
-////      印出案件表的案件標題、在印出訂單的任一欄位
-//		
-//		Session session = sessionfactory.getCurrentSession();
-//    	String sql = "select o.* "
-//    			+ "from cases as c , orders as o "
-//    			+ "where c.member_id = :memid and c.case_id = o.case_id ";
-//
-//    	
-//    	NativeQuery addEntity = session.createSQLQuery(sql).addEntity(Orders.class).setParameter("memid", myId);
-//    	List<Orders> resultList = addEntity.getResultList();
-//    	List<MyPostedOrdersBean> mpoblist = new ArrayList<MyPostedOrdersBean>();
-//
-//    	//以下手動封裝(因為是用createSQLQuery) 參考
-//    	for( Orders o : resultList ) {
-//    		MyPostedOrdersBean mpob = new MyPostedOrdersBean();
-//    		mpob.setOrder_id(o.getOrder_id());
-//    		mpob.setCase_id(o.getOcasesbean().getCase_id());
-//    		mpob.setCase_title(o.getOcasesbean().getCase_title());
-//    		mpob.setBmember_name(o.getBmemberbean().getMember_name());
-//    		mpob.setOrder_status(o.getOrder_status());
-//    		mpob.setOrder_date(o.getOrder_date());
-//    		mpob.setPrice(o.getPrice());
-//    		mpob.setEvaluation_status_a2b(o.getEvaluation_status_a2b());
-//    		mpob.setBmember_id(o.getBmemberbean().getMember_id());
-//    		
-//    		mpoblist.add(mpob);
-//    	}
-//
-//		return mpoblist;
-//	
-//	}
 	
 	public List<MyPostedOrdersBean> selectMyPostedOrders2(  Integer myId , Integer sort , Integer condition ,Integer nowpage ) throws ParseException { 
 //    	我發布的>已成立訂單
@@ -415,29 +360,6 @@ public class CaseManageDAO {
 	
 //---------------------------------------------
 	
-//	public List<MyAppliedAllCasesBean> selectMyAppliedAllCases( int myId ) { //棄用
-////    	我應徵的 > 所有案件
-//		
-//		Session session = sessionfactory.getCurrentSession();
-//		
-//		String hql = "select new tw.paintingparty.casemanage.model.MyAppliedAllCasesBean"
-//				+ "(ca.applycasesbean.case_id , ca.applycasesbean.case_title , ca.apply_date , ca.price_expected , ca.case_time , ca.applycasesbean.postedmemberbean.member_name , ca.applycasesbean.postedmemberbean.member_id ) "
-//				+ "from CaseApply as ca"
-//				+ " where ca.applymemberbean.member_id = :memid ";
-//		Query query = session.createQuery(hql).setParameter("memid", myId);
-//		List<MyAppliedAllCasesBean> list = query.list();
-//
-//		
-//		  	
-////		for(MyAppliedAllCasesBean ca : list) {
-////			System.out.println("發案人名稱: " + ca.getAmember_name());
-////			System.out.println("案件標題: " + ca.getCase_title());
-////		}
-//		
-//		
-//		return list;
-//		
-//	}
 	
 	public List<MyAppliedAllCasesBean> selectMyAppliedAllCases2( Integer myId , Integer sort ,Integer nowpage ) throws ParseException {
 //    	我應徵的 > 所有案件
@@ -560,32 +482,7 @@ public class CaseManageDAO {
 		
 	}
 	
-	
-	
-	
-//	public List<MyAppliedOrdersBean> selectMyAppliedOrders( int myId ) { //棄用
-////    	我應徵的 > 已成立訂單
-//		
-//		Session session = sessionfactory.getCurrentSession();
-//		
-//		String hql = "select new tw.paintingparty.casemanage.model.MyAppliedOrdersBean"
-//				+ "(o.order_id , o.ocasesbean.case_id , o.ocasesbean.case_title , o.ocasesbean.postedmemberbean.member_name , o.order_status , o.order_date , o.price ,o.ocasesbean.postedmemberbean.member_id , o.evaluation_status_b2a ) "
-//				+ "from Orders as o"
-//				+ " where o.bmemberbean.member_id = :memid ";
-//		
-//		Query query = session.createQuery(hql).setParameter("memid", myId);
-//		List<MyAppliedOrdersBean> list = query.list();
-//		
-//		
-////		for(MyAppliedOrdersBean mob : list) {
-////			System.out.println("發案人名稱: " + mob.getAmember_name());
-////			System.out.println("案件標題: " +  mob.getCase_title() );
-////		}
-//		
-//		
-//		return list;
-//		
-//	}
+
 	
 	public List<MyAppliedOrdersBean> selectMyAppliedOrders2( Integer myId , Integer sort , Integer condition ,Integer nowpage  ) throws ParseException { //代做
 //    	我應徵的 > 已成立訂單
@@ -1121,52 +1018,7 @@ public class CaseManageDAO {
 	
 	
 	
-	
-	//--------------------------------------------
-	
-	public String UpdateDemo( ) {
-//    	測試UPDATE
-		
-		Session session = sessionfactory.getCurrentSession();
-		
-		String hql = "update Member as m set m.member_name = :memname where m.member_id = :memid";
 
-		Query query = session.createQuery(hql).setParameter("memname", "jeff").setParameter("memid", 1);
-		query.executeUpdate();
-		
-		
-		return "update seccess!";
-		
-	}
-	
-	
-	
-	public void InsertDemo( ) {
-		
-		Session session = sessionfactory.getCurrentSession();
-		
-		
-		String sql = "insert into case_apply (member_id , case_id , price_expected , case_time , apply_date )  "
-				+ "values( ? , ? , ? , ? , ? )";
-    	
-    	NativeQuery addEntity = session.createSQLQuery(sql);
-    	addEntity.setParameter(1,1);
-    	addEntity.setParameter(2, 2);
-    	addEntity.setParameter(3, 400);
-    	addEntity.setParameter(4, 6);
-    	addEntity.setParameter(5, "2021-10-11");
-
-    	addEntity.executeUpdate();
-		
-		
-//		String hql = "update Orders as o set o.evaluation_status_a2b = :evaa2b where o.order_id = :orderid";
-//		Query query = session.createQuery(hql);
-//		query.setParameter("evaa2b", "已評價").setParameter("orderid", evaa2b.getOrder_id());
-//		
-//		query.executeUpdate();
-//		
-		
-	}
 	
 	
 	
