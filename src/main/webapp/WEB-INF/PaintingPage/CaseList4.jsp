@@ -68,8 +68,8 @@
 		$('#type').change(function(){
 			var s = $('#type').val();
 			tagAry[0] = s;
+			indexPage = 1;
 			sort(indexPage);
-			
 			
 		})
 		
@@ -78,6 +78,7 @@
 			var s = $('#style').val();
 			
 			tagAry[1] = s;
+			indexPage = 1;
 			sort(indexPage);
 			
 		})
@@ -87,6 +88,7 @@
 				var p = $(this).val();
 				
 				priceRan[0] = p;
+				indexPage = 1;
 				sort(indexPage);
 				
 		})
@@ -96,6 +98,7 @@
 				var p = $(this).val();
 				
 				priceRan[1] = p;
+				indexPage = 1;
 				sort(indexPage);
 				
 		})
@@ -103,8 +106,9 @@
 		$('#sort').change(function(){
 			var s = $(this).val();
 			newOld = s;
+			indexPage = 1;
 			sort(indexPage);
-			console.log(newOld);
+			
 			
 		})
 		
@@ -310,9 +314,7 @@
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -340,7 +342,7 @@
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-						<a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
+						<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
 							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
 							name="issue_case" style="display: none">發布案件</a> <a
 							href="<%= request.getContextPath() %>/backend/accountmanager"
