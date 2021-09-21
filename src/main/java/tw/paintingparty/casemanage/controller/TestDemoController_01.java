@@ -73,7 +73,6 @@ public class TestDemoController_01 {
 		Member mem1 = mService.showLoginUsername();
 		
 		m.addAttribute("member_name", mem1.getMember_name());
-		m.addAttribute("member_id",mem1.getMember_id());
 		
 		return "CaseManage2";
 		

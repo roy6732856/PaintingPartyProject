@@ -248,8 +248,9 @@
                 
                 
                     <div>
-	                        <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+	                       <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> 
 	                        <a href="/PaintPartyMvcProject/backend"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
                         	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
@@ -308,7 +309,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="<%= request.getContextPath() %>/backend/systemnotice"
+                                <a href="<%= request.getContextPath() %>/backend/systemnoticemainpage"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
                                     data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
