@@ -128,7 +128,7 @@ private MemberService mService;
 		    String dateString = dateformat.format(date).toString();
 		  
 		  String fileName = mf.getOriginalFilename(); 
-		  String dirPath="C:\\PaintingImg\\HeadShot";
+		  String dirPath="C:\\PaintingImg\\Example";
 		  String updateFileName= dateString + fileName;
 		  String allex = dirPath + "\\" + updateFileName;
 		  File imageHeadShot = new File(allex);	
