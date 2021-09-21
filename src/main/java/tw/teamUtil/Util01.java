@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,7 +74,14 @@ public class Util01 {
     	String date = formatter.format( LocalDateTime.now() ).toString();
     	return date;
 	}
+
 	
+	public Date StringFormatToDateYYYYMMDD ( String sqlDateResault ) throws ParseException {
+		//把字串的內容，去掉分秒，只剩下年月日，並轉成日期，分頁功能硬幹用
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date format = sdf.parse(sqlDateResault);
+		return format;
+	}
 	
 	public String dateFormatToStringYYYYMMDD ( Date date ) {
 		//把DATE的內容，去掉分秒，只剩下年月日，並轉成字串
