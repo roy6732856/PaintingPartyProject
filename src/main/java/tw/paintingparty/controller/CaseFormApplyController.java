@@ -137,7 +137,7 @@ private MemberService mService;
 		  Example e1 = new Example();
 		  e1.setCase_id(newId);
 		  e1.setExample_name(updateFileName);
-		  e1.setExample_path("C:\\PaintingImg\\HeadShot");
+		  e1.setExample_path("C:\\PaintingImg\\Example");
 		  cfService.addExamplePic(e1);
 		  
 
