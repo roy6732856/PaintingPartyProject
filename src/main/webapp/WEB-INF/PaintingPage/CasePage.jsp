@@ -424,9 +424,14 @@
     
     var s = '畫師';
     var a = '${attr}';
+   	var whoOwn = '${memId}'
+    var whoLogin = '${member_id}';
+    var whoApply = '${whoApply}';
     
-    if(a==s){//判斷身分=畫師
-    	$("[name=applyCase]").show()
+    if(a==s&&whoOwn != whoLogin){//判斷身分=畫師   登入者不能對自己的案件做申請
+    	if(whoLogin!=whoApply){ //判斷是否已經應徵過一次案件
+    		$("[name=applyCase]").show()
+    	}
     }
     //登出
     function logout(){
