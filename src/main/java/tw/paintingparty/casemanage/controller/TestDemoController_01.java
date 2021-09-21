@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.List;
 
 
@@ -34,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import tw.paintingparty.casemanage.model.CaseBackStageBean;
 import tw.paintingparty.casemanage.model.CaseManageDAO;
+import tw.paintingparty.casemanage.model.CaseManageService;
 import tw.paintingparty.casemanage.model.EvaluationA2BBean;
 import tw.paintingparty.casemanage.model.EvaluationB2ABean;
 import tw.paintingparty.casemanage.model.FileContentReceiveBeanB;
@@ -48,6 +50,7 @@ import tw.paintingparty.casemanage.model.PayInfoIdBean;
 import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.Product;
+import tw.paintingparty.service.MemberService;
 import tw.teamUtil.Util01;
 
 
@@ -56,77 +59,59 @@ import tw.teamUtil.Util01;
 public class TestDemoController_01 {
 	
 	@Autowired
-	private CaseManageDAO cmDao;
+	private CaseManageService cmService;
 	
+	@Autowired
+	private MemberService mService;
 	
-	@RequestMapping(path = "/backend/filecontent", method = RequestMethod.GET)
-	//測試後台的靜態資源引入
-	public String test4(Model m) {
-		return "FileContent";
-	}
-	
-	@RequestMapping(path = "/backend/caseapply", method = RequestMethod.GET)
-	//測試後台的靜態資源引入
-	public String test5(Model m) {
-		return "CaseApply";
-	}
-	
-
-	
-	@RequestMapping(path = "/backend/editcase", method = RequestMethod.GET)
-	//測試後台的靜態資源引入
-	public String test8(Model m) {
-		return "EditCase";
-	}
 	
 	//--------------------------------------------------------
 	
 	@RequestMapping(path = "/backend/casemanage", method = RequestMethod.GET)
-	//測試CASEMANAGE的靜態資源成功與否
+	//拜訪案件管理的頁面
 	public String test9(Model m) {
+		Member mem1 = mService.showLoginUsername();
+		
+		m.addAttribute("member_name", mem1.getMember_name());
+		
 		return "CaseManage2";
+		
 	}
 	
 	//------------------------------
 	
 	
-	@RequestMapping(path = "/backend/mypostedallcases", method = RequestMethod.GET)
-	public String test10(HttpServletRequest request, Model m ) throws JsonProcessingException {
-		
-		Object myid = request.getSession().getAttribute("session_member_id");
-		
-		List<MyPostedAllCasesBean> selectAllMyPostedCases = cmDao.selectMyPostedCases( (Integer)myid );
-		ObjectMapper om1 = new ObjectMapper();
-		String writeValueAsString = om1.writeValueAsString( selectAllMyPostedCases ); //BEAN轉JSON
-
-		m.addAttribute("userid", writeValueAsString );
+	@RequestMapping(path = "/backend/mypostedallcases", method = RequestMethod.GET) //.load用
+	public String test10( ) {
 		
 		return "MyPostedAllCases";
 	}
 	
-	
-	
-	
-	@PostMapping(path = "/backend/mypostedallcases2") //AJAX請求處理，回應JSON
+
+	@PostMapping(path = "/backend/mypostedallcases2/{sort}/{condition}/{nowpage}") //AJAX請求處理，回應JSON，加上條件和排序
 	@ResponseBody
-	public List<MyPostedAllCasesBean> test10_2( HttpServletRequest request ) {
+	public List<MyPostedAllCasesBean> test10_2(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) throws ParseException {
+		//	var myposted_sort = 1; //0=由舊到新、1=由新到舊 預設1
+		//  var myposted_condition = 0; //0=全部、1=上架、2=下架 預設0
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyPostedAllCasesBean> selectAllMyPostedCases = cmDao.selectMyPostedCases( (Integer)myid );
+		List<MyPostedAllCasesBean> selectMyPostedCases2 = cmService.selectMyPostedCases2( (Integer)myid ,sort , condition, nowpage);
 		
-		return selectAllMyPostedCases ;
+		return selectMyPostedCases2 ;
 	}
 	
 	
 	
 	
-	@GetMapping(path = "/backend/casebackstage/{caseid}") //案件管理頁面
+	
+	
+	@PostMapping(path = "/backend/casebackstage/{case_id}") //按下案件管理
 	@ResponseBody
-	public List<CaseBackStageBean> test10_3(@PathVariable("caseid") Integer caseid , HttpServletRequest request ) {
+	public List<CaseBackStageBean> test10_3(@PathVariable("case_id") Integer caseid ) {
 		System.out.println("接收成功!");
 //		String welcom = "casebackstage: " + caseid;
 //		System.out.println(welcom);
-		List<CaseBackStageBean> caseBackStageManage = cmDao.CaseBackStageManage( caseid );
+		List<CaseBackStageBean> caseBackStageManage = cmService.CaseBackStageManage( caseid );
 		
 		return caseBackStageManage;
 		
@@ -134,44 +119,54 @@ public class TestDemoController_01 {
 	
 
 	
-	//代做
+
 	@PostMapping(path = "/backend/hire/{case_id}/{bmember_id}/{price_expected}") //錄取畫師
-	public List<CaseBackStageBean> test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
-		System.out.println("接收成功!");
-//		String welcom = "casebackstage: " + caseid;
-//		System.out.println(welcom);
-		List<CaseBackStageBean> caseBackStageManage = cmDao.CaseBackStageManage( caseid );
+	@ResponseBody
+	public String test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
+//		System.out.println("接收成功!");
+//		System.out.println("case:" + caseid);
+//		System.out.println("bmemid:" + bmemberid);
+//		System.out.println("price_expected:" + expected);
+
+		cmService.hirePainter(caseid, bmemberid, expected);
 		
-		return caseBackStageManage;
+		return "OK";
+		
+	}
+	
+	@PostMapping(path = "/backend/offthiscase/{offcase_id}") //錄取畫師
+	@ResponseBody
+	public void test10_5( @PathVariable("offcase_id") Integer offcaseid  ) {
+		System.out.println("接收成功!");
+//		System.out.println("case:" + caseid);
+//		System.out.println("bmemid:" + bmemberid);
+//		System.out.println("price_expected:" + expected);
+		cmService.OffThisCase(offcaseid);
+		
+		
 		
 	}
 	
 	
+	
 	//-----------------------------------------------
-	@RequestMapping(path = "/backend/mypostedorders", method = RequestMethod.GET)
-	public String test11(HttpServletRequest request, Model m ) throws JsonProcessingException {
-		Object myid = request.getSession().getAttribute("session_member_id");
-		ObjectMapper om1 = new ObjectMapper();
-		
-		List<MyPostedOrdersBean> selectMyPostedOrders = cmDao.selectMyPostedOrders( (Integer)myid );
-		String writeValueAsString = om1.writeValueAsString( selectMyPostedOrders ); //BEAN轉JSON		
-		m.addAttribute("userid", writeValueAsString );
-		
+	@RequestMapping(path = "/backend/mypostedorders", method = RequestMethod.GET) //.load用
+	public String test11( ) {
+
 		return "MyPostedOrders";
 	}
 	
 	
 	
-	@PostMapping(path = "/backend/mypostedorders2")
+	@PostMapping(path = "/backend/mypostedorders2/{sort}/{condition}/{nowpage}") 
 	@ResponseBody
-	public List<MyPostedOrdersBean> test11_2( HttpServletRequest request ) {
+	public List<MyPostedOrdersBean> test11_10( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyPostedOrdersBean> selectMyPostedOrders = cmDao.selectMyPostedOrders( (Integer)myid );
+		List<MyPostedOrdersBean> selectMyPostedOrders2 = cmService.selectMyPostedOrders2( (Integer)myid , sort , condition, nowpage );
 		
-		return selectMyPostedOrders ;
+		return selectMyPostedOrders2 ;
 	}
-	
 	
 	
 	@GetMapping(path = "/backend/filecontent/{orderid}") //檔案內容
@@ -190,7 +185,7 @@ public class TestDemoController_01 {
 		
 		int orderInt = Integer.parseInt(orderid);
 		
-		cmDao.PassTheStage(orderInt);
+		cmService.PassTheStage(orderInt);
 		
 		
 			return "CaseManage2" ;
@@ -206,7 +201,7 @@ public class TestDemoController_01 {
 		
 		int orderInt = Integer.parseInt(orderid);
 		
-		cmDao.CancelTheOrder(orderInt);
+		cmService.CancelTheOrder(orderInt);
 		
 		return "CaseManage2" ;
 	}
@@ -215,7 +210,7 @@ public class TestDemoController_01 {
 	@PostMapping(path = "/backend/evaluationa2b") //給評價A給B
 	public void test11_6(@RequestBody EvaluationA2BBean evaa2b ) {
 		
-		cmDao.EvaluationA2B(evaa2b);
+		cmService.EvaluationA2B(evaa2b);
 		
 	}
 	
@@ -224,7 +219,7 @@ public class TestDemoController_01 {
 	public PayInfoBean test11_7(@RequestBody PayInfoIdBean pmemid ) {
 		
 //		System.out.println(pbmemid.getPmemid());
-		PayInfoBean getBmemberPayInfo = cmDao.GetBmemberPayInfo(pmemid.getPmemid());
+		PayInfoBean getBmemberPayInfo = cmService.GetBmemberPayInfo(pmemid.getPmemid());
 		
 		return getBmemberPayInfo;
 		
@@ -233,7 +228,7 @@ public class TestDemoController_01 {
 	@GetMapping(path = "/backend/headshotdownloader/{memid}")
 	public void test11_8(@PathVariable("memid") Integer memberid , HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println(memberid);
-		HeadShotBean headShotDownloader = cmDao.HeadShotDownloader(memberid);
+		HeadShotBean headShotDownloader = cmService.HeadShotDownloader(memberid);
 		String filePath = headShotDownloader.getProfile_pic_path() + "\\" + headShotDownloader.getProfile_pic();
 		FileInputStream fis = new FileInputStream(filePath);
 		IOUtils.copy(fis, response.getOutputStream()); //由IOUtils來幫我們讀寫，會自己幫我們用暫存、關串流，但檔案超出2G還5G似乎會出事(?)
@@ -242,31 +237,24 @@ public class TestDemoController_01 {
 	
 	//-------------------------------------------------
 	
-	@RequestMapping(path = "/backend/myappliedallcases", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/myappliedallcases", method = RequestMethod.GET) //.load用
 	public String test12(HttpServletRequest request , Model m) throws JsonProcessingException {
-		Object myid = request.getSession().getAttribute("session_member_id");
-		ObjectMapper om1 = new ObjectMapper();
-		
-		List<MyAppliedAllCasesBean> selectMyAppliedAllCases = cmDao.selectMyAppliedAllCases( (Integer)myid );
-		String writeValueAsString = om1.writeValueAsString( selectMyAppliedAllCases ); //BEAN轉JSON		
-		m.addAttribute("userid", writeValueAsString );
+
 		
 		return "MyAppliedAllCases";
 	}
 	
 	
 	
-	
-	@PostMapping(path = "/backend/myappliedallcases2")
+	@PostMapping(path = "/backend/myappliedallcases2/{sort}/{nowpage}") 
 	@ResponseBody
-	public List<MyAppliedAllCasesBean> test12_2( HttpServletRequest request ) {
+	public List<MyAppliedAllCasesBean> test12_3(@PathVariable("sort") Integer sort , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyAppliedAllCasesBean> selectMyPostedOrders = cmDao.selectMyAppliedAllCases( (Integer)myid );
+		List<MyAppliedAllCasesBean> selectMyAppliedAllCases2 = cmService.selectMyAppliedAllCases2( (Integer)myid , sort , nowpage );
 		
-		return selectMyPostedOrders ;
+		return selectMyAppliedAllCases2 ;
 	}
-	
 	
 	
 	
@@ -276,14 +264,8 @@ public class TestDemoController_01 {
 	
 	
 	
-	@RequestMapping(path = "/backend/myappliedorders", method = RequestMethod.GET)
+	@RequestMapping(path = "/backend/myappliedorders", method = RequestMethod.GET) //.load用
 	public String test13( HttpServletRequest request , Model m ) throws JsonProcessingException {
-		
-		Object myid = request.getSession().getAttribute("session_member_id");
-		ObjectMapper om1 = new ObjectMapper();
-		List<MyAppliedOrdersBean> selectMyAppliedOrders = cmDao.selectMyAppliedOrders( (Integer)myid );
-		String writeValueAsString = om1.writeValueAsString( selectMyAppliedOrders ); //BEAN轉JSON		
-		m.addAttribute("userid", writeValueAsString );
 		
 		return "MyAppliedOrders";
 	}
@@ -292,15 +274,18 @@ public class TestDemoController_01 {
 	
 
 	
-	@PostMapping(path = "/backend/myappliedorders2")
+	@PostMapping(path = "/backend/myappliedorders2/{sort}/{condition}/{nowpage}") //代做
 	@ResponseBody
-	public List<MyAppliedOrdersBean> test13_2( HttpServletRequest request ) {
+	public List<MyAppliedOrdersBean> test13_2( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyAppliedOrdersBean> selectMyPostedOrders = cmDao.selectMyAppliedOrders( (Integer)myid );
+		List<MyAppliedOrdersBean> selectMyAppliedOrders2 = cmService.selectMyAppliedOrders2((Integer)myid ,sort , condition, nowpage );
 		
-		return selectMyPostedOrders ;
+		return selectMyAppliedOrders2 ;
 	}
+	
+	
+	
 	
 	
 	
@@ -316,7 +301,7 @@ public class TestDemoController_01 {
 	@PostMapping(path = "/backend/evaluationb2a") //給評價A給B
 	public void test13_4(@RequestBody EvaluationB2ABean evab2a ) {
 		
-		cmDao.EvaluationB2A(evab2a);
+		cmService.EvaluationB2A(evab2a);
 		
 	}
 	
@@ -353,7 +338,7 @@ public class TestDemoController_01 {
 		product.setProduct_path(savePath);
 		product.setPainter_message(comments);
 		
-		cmDao.ProductUpload(product);
+		cmService.ProductUpload(product);
 		
 //		System.out.println(fileName);
 //		System.out.println(file);
@@ -374,7 +359,7 @@ public class TestDemoController_01 {
 		System.out.println("接收成功");
 		System.out.println(fcrbb.getOrder_id());
 		System.out.println(fcrbb.getBmember_id());
-		List<FileContentSendBeanB> fileContentB = cmDao.FileContentB(fcrbb);
+		List<FileContentSendBeanB> fileContentB = cmService.FileContentB(fcrbb);
 		
 		return fileContentB;
 	}
@@ -396,58 +381,13 @@ public class TestDemoController_01 {
 	
 	
 	
+
 	
-	//--------------------------------------------------------------
-	@RequestMapping(path = "/DEMO", method = RequestMethod.GET)
-	@ResponseBody
-	public List<MyAppliedOrdersBean> test15( HttpServletRequest request , Model m ) throws JsonProcessingException {
-		
-		List<MyAppliedOrdersBean> selectMyAppliedOrders = cmDao.selectMyAppliedOrders( 4 );
-		
-		return selectMyAppliedOrders;
-	}
-	
-	
-	@RequestMapping(path = "/DEMO2", method = RequestMethod.GET)
-	public String test16( HttpServletRequest request , Model m ) throws JsonProcessingException {
-		
-		
-		
-		return "sss哈哈";
-	}
+
 	
 	
 	
 	
-	
-	
-	//=======================================================
-	
-	@GetMapping(path = "/backend/updatedemo")
-	@ResponseBody
-	public String test14( Model m) {
-		
-		String resultStr = cmDao.UpdateDemo();	
-		m.addAttribute("userid", resultStr );
-		
-		return resultStr ;
-	}
-	
-	@GetMapping(path = "/backend/systemdemo")
-	public String test15( Model m) {
-		
-		
-		return "SystemNotice" ;
-	}
-	
-	
-	@GetMapping(path = "/backend/testinsert")
-	@ResponseBody
-	public String test16( Model m) {
-		
-		cmDao.InsertDemo();
-		return "success!" ;
-	}
 	
 	
 

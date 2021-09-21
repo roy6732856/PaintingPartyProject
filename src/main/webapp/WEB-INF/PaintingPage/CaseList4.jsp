@@ -67,11 +67,9 @@
 		
 		$('#type').change(function(){
 			var s = $('#type').val();
-			
 			tagAry[0] = s;
-			
+			indexPage = 1;
 			sort(indexPage);
-			
 			
 		})
 		
@@ -80,7 +78,7 @@
 			var s = $('#style').val();
 			
 			tagAry[1] = s;
-			
+			indexPage = 1;
 			sort(indexPage);
 			
 		})
@@ -90,7 +88,7 @@
 				var p = $(this).val();
 				
 				priceRan[0] = p;
-				
+				indexPage = 1;
 				sort(indexPage);
 				
 		})
@@ -100,7 +98,7 @@
 				var p = $(this).val();
 				
 				priceRan[1] = p;
-				
+				indexPage = 1;
 				sort(indexPage);
 				
 		})
@@ -108,8 +106,9 @@
 		$('#sort').change(function(){
 			var s = $(this).val();
 			newOld = s;
+			indexPage = 1;
 			sort(indexPage);
-			console.log(newOld);
+			
 			
 		})
 		
@@ -169,7 +168,7 @@
 				
 				if(data.length==0){
 					$('#row1').append(`<div class="u-container u-white mb-5"
-							style="border-radius: 10px; padding: 10px;">
+							style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 							<div class="u-container-layout u-container-layout-4" style="text-align:center;">
 								
 								<h3>暫無資料</h3>
@@ -181,6 +180,9 @@
 					var totalPages=1 ;
 					var y;
 					var j = (indexPage*8)-8;
+					//var p = indexPage;
+					//var maxPage = p + 4 ;
+					
 					
 					if(data.length%8==0){
 						totalPages = parseInt(data.length/8);
@@ -188,17 +190,23 @@
 						totalPages = parseInt(data.length/8)+1;
 					}
 					
+					//if(maxPage > totalPages){
+					//	maxPage = totalPages
+					//}else{
+					//	maxPage = p + 4 ;
+					//}
+					
 					
 					for(var p=1;p<=totalPages;p++){
-						$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})" value="\${p}">\${p}</button>`);
-						
+					$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})" value="\${p}">\${p}</button>`);
 					}
+				
+					
 					
 					
 					k = 4+j;
-					y = 8+j;
+					y = 4+j;
 					h = y + 4;
-					
 					
 					//if(data.length%4 ==0){
 					//	k = 4+j;
@@ -212,7 +220,7 @@
 					for(var j;j<k;j++){
 						$('#row1').append(
 								`<div class="u-container u-white mb-3"
-								style="border-radius: 10px; padding: 10px;">
+								style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 								<div class="u-container-layout u-container-layout-4" >
 									<div class="input-group mb-3">
 										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
@@ -236,7 +244,7 @@
 					for(var y;y<h;y++){
 						$('#row2').append(
 								`<div class="u-container u-white mb-3"
-								style="border-radius: 10px; padding: 10px;">
+								style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 								<div class="u-container-layout u-container-layout-4" >
 									<div class="input-group mb-3">
 										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
@@ -316,9 +324,7 @@
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -346,7 +352,7 @@
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-						<a href="<%= request.getContextPath() %>/caseformapplypage"
+						<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
 							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
 							name="issue_case" style="display: none">發布案件</a> <a
 							href="<%= request.getContextPath() %>/backend/accountmanager"
@@ -365,9 +371,7 @@
 					</div>
 				</div>
 				<div>
-					<a
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding"
-						name="logout" onclick="logout()">登出</a>
+					
 				</div>
 			</div>
 		</div>
@@ -381,7 +385,7 @@
 						<div class="row mt-5" id="mainRow">
 
 							<div class="col-md-2 mb-4 col-4"
-								style="padding: 20px; background-color: white; border-radius: 20px;">
+								style="padding: 20px; background-color: white; border-radius: 5px;border: 1px solid #ced6e0">
 								<form>
 									<div class="form-group">
 										<label class="mb-3 col-md-12"
@@ -440,7 +444,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-sm offset-md-1" id="row1">
+							<div class="col-sm " id="row1" style="margin-left:40px;">
 								<!-- <div class="u-container u-white mb-3"
 									style="border-radius: 20px; padding: 10px;">
 									<div class="u-container-layout u-container-layout-4" >
@@ -460,7 +464,7 @@
 									</div>
 								</div>-->
 							</div>
-							<div class="col-sm offset-md-1" id="row2"></div>
+							<div class="col-sm " id="row2" style="margin-left:30px;"></div>
 
 						</div>
 					</div>
