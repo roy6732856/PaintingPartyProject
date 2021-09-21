@@ -47,7 +47,44 @@ public class CaseFormDao {
 		return bean;
 	}
 
+		//上傳圖片
+		public Cases getNewCasebyCasesId() {
+		  
+		  Session session = factory.getCurrentSession();
+		  
+		  String hql = "from Cases c order by c.case_id desc";
+		  
+		  Query query = session.createQuery(hql);
+		  
+		  Cases result = (Cases) query.setMaxResults(1).getSingleResult();
+		  
+		  return result;
+		  
+		 }
+		 
+		 public Example addExamplePic(Example e1) {
+		  
+		  Session session = factory.getCurrentSession();
+		  
+		  String sql = "insert into example (case_id , example_name , example_path) values ( ? , ? , ?  )";
+		  
+		  NativeQuery addEntity = session.createSQLQuery(sql);
+		  
+		  addEntity.setParameter(1, e1.getCase_id());
+
+		  addEntity.setParameter(2, e1.getExample_name());
+
+		  addEntity.setParameter(3, e1.getExample_path());
+		  
+		  addEntity.executeUpdate();
+		  
+		  return e1;
+		  
+		 }
+		 
+			
 }
+
 //	public List<Cases> search(String select1 , String select2){
 //
 //		List<Cases> listCases = null;
