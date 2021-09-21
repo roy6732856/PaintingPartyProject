@@ -26,7 +26,7 @@ public class SystemNoticeDAO {
 
 		Session session = sessionfactory.getCurrentSession();
 
-		String hql = "from SystemNotice s where s.system_notice_id >= 1 ";
+		String hql = "from SystemNotice s order by s.notice_date desc";
 		Query<SystemNotice> query1 = session.createQuery(hql, SystemNotice.class);
 		List<SystemNotice> list1 = query1.getResultList();
 		return list1;
@@ -42,7 +42,6 @@ public class SystemNoticeDAO {
 
 		Session session = sessionfactory.getCurrentSession();
 
-		String hql = "from OrderNotice o where o.order_notice_id >= 1";
 		String hql = "from OrderNotice o order by o.notice_date desc";
 		Query<OrderNotice> query2 = session.createQuery(hql, OrderNotice.class);
 		List<OrderNotice> list2 = query2.getResultList();

@@ -90,7 +90,7 @@
 			                        <div class="u-container-layout u-container-layout-6">
 			                        <div class="u-container-style u-group u-shape-rectangle u-group-4">
 			                          <div class="u-container-layout u-valign-middle u-container-layout-7">
-			                            <img class="u-image u-image-default u-preserve-proportions u-image-1" src="../resources/images/letter.png" alt="" data-image-width="512" data-image-height="512">
+			                          <img class="u-image u-image-default u-preserve-proportions u-image-2" src="../resources/images/board.png" alt="" data-image-width="512" data-image-height="512">
 			                          </div>
 			                        </div>
 			                        
@@ -140,13 +140,12 @@
 								<li>共${sysTotalPages}頁</li> 
 								<li>共${sysTotalElements}則訊息</li> 
 								</ul>
-									<div>Previous </div>
+									
 								<div style="margin: 0px auto"> 
 									<c:forEach var="i" begin="1" end="${sysTotalPages}" step="1"> 
 										<button id="pageButton" value="${i}" onclick="change(${i})">${i}</button> 
 									</c:forEach> 
-								</div> 
-							 <div>Next</div>` 					            
+								</div>` 					            
 			            )
 
 		           },
@@ -231,14 +230,11 @@
 										<li>共${ordTotalPages}頁</li> 
 										<li>共${ordTotalElements}則訊息</li> 
 										</ul>
-											<div>Previous </div>
 											
 										<div style="margin: 0px auto"> 
 											<c:forEach var="i" begin="1" end="${ordTotalPages}" step="1"> 
 												<button id="pageButton" value="${i}" onclick="change(${i})">${i}</button> 
 											</c:forEach> 
-										</div> 
-									 <div>Next</div>` 					            
 										</div>` 					            
 					            )
       
