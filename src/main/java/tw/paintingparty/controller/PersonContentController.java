@@ -37,20 +37,15 @@ public class PersonContentController {
 		
 		HttpSession session = request.getSession();
 		int memOneId=(int) session.getAttribute("session_member_id");
-		System.out.println("login="+memOneId);
-
+		
 		Member oneMem = personContentService.selectOne(memOneId);
+				
 		if(oneMem.getMember_status().equals("畫師")!=true) {
 			m.addAttribute("memberStatusName", "委託者");
 		}else {
 			m.addAttribute("memberStatusName", "畫師");
-		}
-		
+		}		
 		m.addAttribute("oneMemProfile_content", oneMem.getProfile_content());
-//		m.addAttribute("memberStatusName", "委託者");
-		
-		System.out.println("oneMemProfile_content");
-		System.out.println("oneMemProfile_content="+oneMem.getProfile_content());
 		
 		return "PersonContent";
 	}
@@ -71,13 +66,11 @@ public class PersonContentController {
 		}else {
 			m.addAttribute("memberStatusName", "畫師");
 		}
-		System.out.println("login="+memOneId);
 
 		m.addAttribute("oneMemProfile_content", oneMem.getProfile_content());
 		System.out.println("oneMemProfile_content");
 		System.out.println("oneMemProfile_content="+oneMem.getProfile_content());
 		
-//		personContentService.updateOneMemberStatus(memOneId);
 		System.out.println("畫師");
 		
 		return "PersonContent";
@@ -129,6 +122,21 @@ public class PersonContentController {
 		personContentService.updateOneProfileContent(memOneId, oneMemProfile_content);
 		m.addAttribute("oneProfile_content", oneMemProfile_content);
 		
+		
+		//畫家自定義標籤
+		String sTag1=request.getParameter("tag1");
+		String sTag2=request.getParameter("tag2");
+		String tagPersonal=sTag1+","+sTag2;
+		
+		int tag1 = Integer.parseInt(request.getParameter("tag1"));
+		int tag2 = Integer.parseInt(request.getParameter("tag2"));
+				
+		m.addAttribute("tagContent1", personContentService.tagSelectOne(tag1).getTag_content());
+		m.addAttribute("tagContent2", personContentService.tagSelectOne(tag2).getTag_content());
+		
+		//Update tagPersonal from member table
+		personContentService.updateTagPersonal(memOneId, tagPersonal);
+				
 		return "PersonContent";
 	}
 	

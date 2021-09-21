@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.AccountManagerService;
@@ -34,6 +35,7 @@ public class AccountManagerController {
 	}
 	
 	@RequestMapping(path="/backend/accountmanagerchange", method=RequestMethod.POST)
+	@ResponseBody
 	public String processAccountManagerChange(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();

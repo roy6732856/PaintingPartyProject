@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.PersonContentDao;
+import tw.paintingparty.model.Tag;
 
 @Service(value="personContentService")
 @Transactional
@@ -43,4 +44,17 @@ public class PersonContentService {
 		String Result = personContentDao.updateOneMemberStatus(oneMemId);
 		return Result;
 	}
+	
+	public Tag tagSelectOne(int tagId) {
+		
+		Tag oneTag = personContentDao.tagSelectOne(tagId);
+		return oneTag;
+	}
+	
+	public String updateTagPersonal(int oneMemId, String tagPersonal) {
+		
+		String Result = personContentDao.updateTagPersonal(oneMemId, tagPersonal);
+		return Result;
+	}
+	
 }

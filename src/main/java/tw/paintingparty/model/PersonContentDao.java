@@ -69,5 +69,23 @@ public class PersonContentDao {
 		return "Success";
 	}
 	
+	public Tag tagSelectOne(int tagId) {
+		Session session = factory.getCurrentSession();
+		Tag oneTag = session.get(Tag.class, tagId);
+		return oneTag;		
+	}
+	
+	public String updateTagPersonal(int oneMemId, String tagPersonal) {
+
+		Session session = factory.getCurrentSession();
+		
+		String hql1="update Member as m set m.tag_personal = :tagPersonal where m.member_id = :memid";
+		Query query1 = session.createQuery(hql1).setParameter("tagPersonal", tagPersonal).setParameter("memid", oneMemId);
+		query1.executeUpdate();
+		
+		return "Success";
+	}
+	
+	
 	
 }
