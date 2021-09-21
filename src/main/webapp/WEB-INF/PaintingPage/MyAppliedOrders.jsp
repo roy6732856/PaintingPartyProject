@@ -31,8 +31,129 @@
   });
   
   
-  
   </script>
+
+
+
+
+	<script>
+				//代做
+	var myappliedorder_sort = 1; //0=由舊到新、1=由新到舊 
+	var myappliedorder_condition = 0; //0=全部、1~3=第一~三階段、4=已完成、5=已取消
+	var myapplied_order_nowpage = 1; //當前頁數
+	var myapplied_order_finalpage ; //總頁數
+	
+	//console.log("原始sort: " + myappliedorder_sort);
+	//console.log("原始condition: " + myappliedorder_condition);
+	
+	//代做
+	$("#myapplied_order_sort .new2old").click(function(){
+		
+		myappliedorder_sort=1;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後sort: " + myappliedorder_sort);
+		ajaxreqb();
+		
+	});//由新到舊點下去 end
+	
+	
+	$("#myapplied_order_sort .old2new").click(function(){
+		
+		myappliedorder_sort=0;
+		myapplied_order_nowpage = 1;
+		//console.log("改變後sort: " + myappliedorder_sort);
+		ajaxreqb();
+		
+	});//由舊到新點下去 end
+	
+	//--------------------以上排序，以下條件--------------
+	
+	$("#myapplied_order_condition .myapplied_order_all").click(function(){
+		
+		myappliedorder_condition=0;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//全部 end
+
+	$("#myapplied_order_condition .myapplied_order_1stage").click(function(){
+		
+		myappliedorder_condition=1;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//第一階段 end
+	
+	$("#myapplied_order_condition .myapplied_order_2stage").click(function(){
+		
+		myappliedorder_condition=2;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//第二階段 end
+	
+	
+	$("#myapplied_order_condition .myapplied_order_3stage").click(function(){
+		
+		myappliedorder_condition=3;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//第三階段 end
+	
+	
+	$("#myapplied_order_condition .myapplied_order_complete").click(function(){
+		
+		myappliedorder_condition=4;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//已完成 end
+	
+	
+	$("#myapplied_order_condition .myapplied_order_cancel").click(function(){
+		
+		myappliedorder_condition=5;
+		myapplied_order_nowpage  = 1;
+		//console.log("改變後condition: " + myappliedorder_condition);
+		ajaxreqb();
+		
+	});//已取消 end
+	
+	
+//-----------------------------以下頁數
+	
+	$("#myapplied_page .preppagebtn").click(function(){
+		
+		if( $(this).attr("disabled")==="disabled" ){
+			return false;
+		}
+
+		myapplied_order_nowpage --;
+		//console.log("改變後nowpage: " + myapplied_order_nowpage );
+		ajaxreqb();
+		
+	});//上一頁 end
+	
+	
+	$("#myapplied_page .nextpagebtn").click(function(){
+		if( $(this).attr("disabled")==="disabled" ){
+			return false;
+		}
+		myapplied_order_nowpage++; 
+		//console.log("改變後nowpage: " + myapplied_order_nowpage);
+		ajaxreqb();
+		
+	});//下一頁 end
+	
+	
+
+	</script>
 
 
 </head>
@@ -92,25 +213,25 @@
 
 
     <div
-        class="u-custom-menu u-nav-container">
+        class="u-custom-menu u-nav-container" id="myapplied_order_sort">
         <ul
             class="u-nav u-unstyled u-nav-1">
             <li class="u-nav-item"><a
                     class="u-border-2 u-border-grey-75 u-button-style u-hover-palette-5-light-1 u-nav-link"
-                    href="####">排序</a>
+                    href="javascript:">排序</a>
                 <div
                     class="u-nav-popup">
                     <ul
                         class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-2">
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由新到舊</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 new2old"
+                                href="javascript:">由新到舊</a>
                         </li>
                         <li
                             class="u-nav-item">
-                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                href="####">由舊到新</a>
+                            <a class="u-button-style u-nav-link u-palette-3-light-3 old2new"
+                                href="javascript:">由舊到新</a>
                         </li>
                     </ul>
                 </div>
@@ -131,7 +252,7 @@
                     <li
                         class="u-nav-item">
                         <a class="u-button-style u-nav-link"
-                            href="####">排序</a>
+                            href="javascript:">排序</a>
                         <div
                             class="u-nav-popup">
                             <ul
@@ -139,12 +260,12 @@
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由新到舊</a>
+                                        href="javascript:">由新到舊</a>
                                 </li>
                                 <li
                                     class="u-nav-item">
                                     <a class="u-button-style u-nav-link"
-                                        href="####">由舊到新</a>
+                                        href="javascript:">由舊到新</a>
                                 </li>
                             </ul>
                         </div>
@@ -195,33 +316,37 @@
                     </div>
 
 
-                    <div class="u-custom-menu u-nav-container">
+                    <div class="u-custom-menu u-nav-container" id="myapplied_order_condition">
                         <ul class="u-nav u-unstyled u-nav-13">
                             <li class="u-nav-item"><a
                                     class="u-border-2 u-border-grey-75 u-button-style u-hover-palette-5-light-1 u-nav-link"
-                                    href="####">訂單狀態</a>
+                                    href="javascript:">訂單狀態</a>
                                 <div class="u-nav-popup">
                                     <ul
                                         class="u-h-spacing-20 u-nav u-unstyled u-v-spacing-10 u-nav-14">
                                         <li class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">第一階段</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_all"
+                                                href="javascript:">全部</a>
                                         </li>
                                         <li class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">第二階段</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_1stage"
+                                                href="javascript:">第一階段</a>
                                         </li>
                                         <li class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">第三階段</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_2stage"
+                                                href="javascript:">第二階段</a>
                                         </li>
                                         <li class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">已完成</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_3stage"
+                                                href="javascript:">第三階段</a>
                                         </li>
                                         <li class="u-nav-item">
-                                            <a class="u-button-style u-nav-link u-palette-3-light-3"
-                                                href="####">已取消</a>
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_complete"
+                                                href="javascript:">已完成</a>
+                                        </li>
+                                        <li class="u-nav-item">
+                                            <a class="u-button-style u-nav-link u-palette-3-light-3 myapplied_order_cancel"
+                                                href="javascript:">已取消</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -238,7 +363,7 @@
                                     class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-15">
                                     <li class="u-nav-item"><a
                                             class="u-button-style u-nav-link"
-                                            href="####">訂單狀態</a>
+                                            href="javascript:">訂單狀態</a>
                                         <div
                                             class="u-nav-popup">
                                             <ul
@@ -246,27 +371,27 @@
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第一階段</a>
+                                                        href="javascript:">第一階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第二階段</a>
+                                                        href="javascript:">第二階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">第三階段</a>
+                                                        href="javascript:">第三階段</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已完成</a>
+                                                        href="javascript:">已完成</a>
                                                 </li>
                                                 <li
                                                     class="u-nav-item">
                                                     <a class="u-button-style u-nav-link"
-                                                        href="####">已取消</a>
+                                                        href="javascript:">已取消</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -297,29 +422,54 @@
                 
        $(document).ready(ajaxreqb);
 
-       function ajaxreqb (){    
+       function ajaxreqb (){    //代做
     	   
     	   
     	   $.ajax({
-               url: `<%= request.getContextPath() %>/backend/myappliedorders2`,                        // url位置
-               type: 'post',                   // post/get
+               url: `<%= request.getContextPath() %>/backend/myappliedorders2/\${myappliedorder_sort}/\${myappliedorder_condition}/\${myapplied_order_nowpage }`,   // url位置
+               type: 'post',  // post/get
                error: function (xhr) { $("#MyAppliedOrdersPage").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
                success: function (data) { 
-              	 $("#MyAppliedOrdersPage").html(JSON.stringify(data)); 
+              	 $("#MyAppliedOrdersPage").html(""); //demo+重置
+              	 //JSON.stringify(data)
               	 
+              	if(data.length !=0){
+              		myapplied_order_finalpage = data[0].final_page;
+            	}
+           		
+           		//console.log("myapplied_order_finalpage: " + myapplied_order_finalpage);
+              	
+           		$("#myapplied_page .finalpage").html(myapplied_order_finalpage + "頁");
+              	$("#myapplied_page .nowpage").html(myapplied_order_nowpage  + "頁");
+              	//設置頁數
+              	
+              	if(myapplied_order_nowpage ===1){
+              		$("#myapplied_page .preppagebtn").attr("disabled","disabled");
+              	}else{
+              		$("#myapplied_page .preppagebtn").removeAttr("disabled");
+              	} //設置上一頁按鈕特效
+              	
+              	if(myapplied_order_nowpage ===myapplied_order_finalpage){
+              		$("#myapplied_page .nextpagebtn").attr("disabled","disabled");
+              	}else{
+              		$("#myapplied_page .nextpagebtn").removeAttr("disabled");
+              	} //設置下一頁按鈕特效
               	 
   					
                    if(data[0]!=null){
+                	   
+                	   $("#myapplied_page").removeAttr("style"); //若有資料，就解除頁數隱藏
+                	   
                   	 for(let i = 0;i<data.length;i++){
-                  		 console.log(i);
+
                   		 $("#MyAppliedOrdersPage").append(`                                                                        <div
                                    class="u-container-style u-group u-palette-5-light-2 u-group-24" style="margin-bottom:50px;">
                                    <div
                                        class="u-container-layout u-container-layout-34">
                                        <h5
                                            class="u-text u-text-default u-text-font u-text-23">
-                                           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-22"
-                                               href="####">\${ data[i].case_title }</a>
+                                           <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-22" target="_blank"
+                                               href="<%= request.getContextPath() %>/casepagemainpage.controller/\${ data[i].case_id }">\${ data[i].case_title }</a>
                                        </h5>
                                        <a href="/\${ data[i].order_id }"
                                            class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-50 u-btn-23"
@@ -328,7 +478,8 @@
                                            class="u-container-style u-group u-shape-rectangle u-group-25">
                                            <div
                                                class="u-container-layout u-container-layout-35">
-                                           <div><b>發案者：</b><a href="####" target="_blank">\${ data[i].amember_name }</a></div>
+                                           <!--會員頁面 -->
+                                           <div><b>發案者：</b><a href="<%= request.getContextPath() %>/memberpage/\${ data[i].amember_id }" target="_blank">\${ data[i].amember_name }</a></div>
                                            
                                            
                                            </div>
@@ -384,6 +535,7 @@
                    }else{
                   	 
                   	 $("#MyAppliedOrdersPage").html("暫無資料"); 
+                  	 $("#myapplied_page").attr("style","visibility:hidden");
                   	 
                    }//end if
               	 
@@ -392,8 +544,8 @@
                    
                    
            	 	$("#MyAppliedOrdersPage .u-btn-25").click(function () {
-        	   	  	console.log(123);
-        	   	 console.log( typeof($("#evaluationb_caseid").val() ));
+           	 		
+        	   	 //console.log( typeof($("#evaluationb_caseid").val() ));
         	   	  	if( $(this).attr("href") != "javascript:" ){ //判斷評價紐是不是為已評價
         	   	  		
         	   	  	//當打開評價頁時，要做的事
@@ -459,7 +611,7 @@
         	    	 $("#dialog-filecontentb .pricestage3").html(filecontentbstage3+"(NTD)");
         	    	 
      				filecontentbjstr = JSON.stringify({"order_id":filecontentborderid,"bmember_id":filecontentbmymemid});
-     				console.log(filecontentbjstr);
+     				//console.log(filecontentbjstr);
      				
      				
      				//執行AJAX 代做
@@ -761,7 +913,7 @@
     	
     $("#productupload").change(function() {
       $("#imgpreview").remove();
-      console.log(this.files);
+      //console.log(this.files);
         previewImg(this.files);			
     });
 
@@ -783,7 +935,7 @@
 
         //註冊當選檔被讀取完成後之事件處理器
         fileReaders[0].onload = function() {
-      	  console.log("預覽");
+      	  //console.log("預覽");
       	  
       	  
         let imgWrapperDiv = `
@@ -813,16 +965,16 @@
      <!-- 以上空白區塊，以下頁數  -->
 
      <div
-     class="u-container-style u-group u-white u-group-7">
+     class="u-container-style u-group u-white u-group-7" id="myapplied_page">
      <div
          class="u-container-layout u-container-layout-13">
-         <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10">上一頁</a>
-         <p class="u-text u-text-default u-text-6">X頁</p>
-         <p class="u-text u-text-default u-text-7">／</p>
-         <p class="u-text u-text-default u-text-8">X頁</p>
-         <a href="####"
-             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11">下一頁</a>
+         <a href="javascript:"
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-10 preppagebtn">上一頁</a>
+         <div class="u-text u-text-default u-text-6 nowpage" style="right:3px;">X頁</div>
+         <div class="u-text u-text-default u-text-7" style="left:2px;">｜</div>
+         <div class="u-text u-text-default u-text-8 finalpage" style="left:3px;">X頁</div>
+         <a href="javascript:"
+             class="u-active-palette-1-light-1 u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-base u-palette-1-base u-radius-6 u-btn-11 nextpagebtn">下一頁</a>
      </div>
  </div>
 
