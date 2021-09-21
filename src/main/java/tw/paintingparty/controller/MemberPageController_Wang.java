@@ -96,8 +96,7 @@ public class MemberPageController_Wang {
 	public String Memberpage(@PathVariable("id") int memberId,Model m,HttpServletRequest request) {
 		//this for 右上角username
 		Member mem1 = mService.showLoginUsername();
-		m.addAttribute("member_name", mem1.getMember_name());
-		
+		m.addAttribute("member_name_login", mem1.getMember_name());
 		//有可能我登入a帳號, 但拜訪b帳號的memberpage
 		m.addAttribute("member_id",memberId ); //這是url傳送過來的id
 		Member memberForVisited = mService.SelectMemberById(memberId); // 拜訪的member
