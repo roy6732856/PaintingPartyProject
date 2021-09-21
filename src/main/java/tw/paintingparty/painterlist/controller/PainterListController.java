@@ -43,20 +43,24 @@ public class PainterListController {
 	@RequestMapping(path = "/painterlist", method = RequestMethod.GET)
 	public String painterListAction(Model m) {
 
-		Long Member = plpService.Pagetotal();
-
-		Long totalPages;
-
-		if (Member % 8 == 0) {
-			Long total = (Member / 8);
-			totalPages = total;
-		} else {
-			Long total = (Member / 8) + 1;
-			totalPages = total;
-		}
-
-		m.addAttribute("totalCases", Member);
-		m.addAttribute("totalPages", totalPages);
+//		Long Member = plpService.Pagetotal();
+//
+//		Long totalPages;
+//
+//		if (Member % 8 == 0) {
+//			Long total = (Member / 8);
+//			totalPages = total;
+//		} else {
+//			Long total = (Member / 8) + 1;
+//			totalPages = total;
+//		}
+//
+//		m.addAttribute("totalCases", Member);
+//		m.addAttribute("totalPages", totalPages);
+		
+		  Member mem1 = mService.showLoginUsername();
+		  
+		  m.addAttribute("member_name", mem1.getMember_name());
 
 		return "PainterList";
 	}

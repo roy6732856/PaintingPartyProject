@@ -58,7 +58,7 @@
 <body class="u-body">
     <header class="u-clearfix u-header u-header" id="sec-4c0b">
         <div class="u-clearfix u-sheet u-sheet-1">
-            <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+            <a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                 data-image-height="410">
                 <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
             </a>
@@ -85,16 +85,13 @@
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                href="javascript::" style="padding: 10px 20px;">畫師列表</a>
+                                href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                style="padding: 10px 20px;">案件列表</a>
+                                href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a>
                         </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                style="padding: 10px 20px;">公開畫廊</a>
-                        </li>
+ 
                     </ul>
                 </div>
                 <div class="u-custom-menu u-nav-container-collapse">
@@ -107,9 +104,6 @@
                                 </li>
                                 <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                         style="padding: 10px 20px;">案件列表</a>
-                                </li>
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                        style="padding: 10px 20px;">公開畫廊</a>
                                 </li>
                             </ul>
                         </div>
@@ -125,8 +119,9 @@
             <div class="u-container-style u-group u-white u-group-2">
                 <div class="u-container-layout u-container-layout-2">
                     	<div>
-	                        <a href="/PaintPartyMvcProject/backend/accountmanager"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+							<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> 
 	                        <a href="/PaintPartyMvcProject/backend"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
                         	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
@@ -390,13 +385,13 @@
                                 <button id="btnPrev" type="button" class="btn btn-outline-secondary"> 上一頁 </button>
                             </li>
                             <li class="page-item">
-                                <h6 id="nowPage">X頁</h6>
+                                <h6 id="nowPage">頁</h6>
                             </li>
                             <li class="page-item">
                                 <h6>／</h6>
                             </li>
                             <li class="page-item">
-                                <h6 id="totalPage">X頁</h6>
+                                <h6 id="totalPage">頁</h6>
                             </li>
                             <li class="page-item">
                                 <button id="btnNext" type="button" class="btn btn-outline-secondary"> 下一頁 </button>
@@ -478,7 +473,7 @@
 		var lstData = []; // 所有資料
 		var totalPage = 0; // 所有頁數
 		var pageIndex = -1; // 目前頁數
-		var pageCount = 8; // 預設，之後可以調
+		var pageCount = 8; // 預設筆，之後可以調
 		
 		var indexPage = 1;
 		//load(indexPage);
@@ -587,17 +582,13 @@
 	    		endIndex = lstData.length; 
 	    	}
 	    	
-	    	console.log("起始位置 : " + startIndex);
-	    	console.log("結束位置 : " + endIndex )
+	
 	    	var lenData = endIndex - pageIndex * pageCount;
-	    	console.log("Len : " + lenData);
-	    	
 	    	for(i = 0; i < lenData ; i++ ){
 	    		showData[i] = lstData[startIndex + i];
 	    	}
 	    	
-	    	console.log("showData() => ");
-	    	console.log(showData)
+
 	    	
 	    	return showData;
 	    }
