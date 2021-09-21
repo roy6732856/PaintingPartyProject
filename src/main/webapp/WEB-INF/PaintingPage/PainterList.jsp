@@ -26,10 +26,6 @@
     
     <script src="/PaintPartyMvcProject/resources/js/jquery-3.5.1.min.js"></script>
     
-    <script src="resources/plugin/datatable/datatables.min.js"></script>
-    <link rel="stylesheet"
-	href="resources/plugin/datatable/datatables.min.css">
-    <script src="resources/plugin/datatable/DataTableUtil.js"></script>
 	<link rel="stylesheet" type="text/css" href="/PaintPartyMvcProject/resources/css/jquery-ui.min.css"></link>
     <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet"
@@ -155,6 +151,7 @@
             <div class="left sele-set">
                 <label for="type">創作類別</label>
                 <select id="Select1" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;" >
+                	<option value="">請選擇</option>
                     <option value="1">插畫委託</option>
                     <option value="2">貼圖委託</option>
                     <option value="3">頭貼委託</option>
@@ -167,6 +164,7 @@
             <div class="right sele-set mb-3 mt-3">
                 <label for="type">創作風格</label>
                 <select id="Select2" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;">
+                	<option value="">請選擇</option>
                     <option value="8">日系風格</option>
                     <option value="9">歐美風格</option>
                     <option value="10">武俠風格</option>
@@ -386,29 +384,28 @@
             </div>
             <div class="page-wrap">
                 <div class="page-wrap">
-                    <div class="pager" style="display:none">
-           <!--               <ul class="pages">
+                    <div class="pager">
+                          <ul class="pages">
                             <li class="page-item">
-                                <button type="button" class="btn btn-outline-secondary"> 上一頁 </button>
+                                <button id="btnPrev" type="button" class="btn btn-outline-secondary"> 上一頁 </button>
                             </li>
                             <li class="page-item">
-                                <h6>X頁</h6>
+                                <h6 id="nowPage">X頁</h6>
                             </li>
                             <li class="page-item">
                                 <h6>／</h6>
                             </li>
                             <li class="page-item">
-                                <h6>X頁</h6>
+                                <h6 id="totalPage">X頁</h6>
                             </li>
                             <li class="page-item">
-                                <button type="button" class="btn btn-outline-secondary"> 下一頁 </button>
+                                <button id="btnNext" type="button" class="btn btn-outline-secondary"> 下一頁 </button>
                             </li>
-                        </ul>    -->
+                        </ul>
                  		<nav aria-label="Page navigation example">
 							<ul class="pagination justify-content-center" id="page">
 								<c:forEach var="i" begin="1" end="${totalPages}" step="1">
-										<button class="page-item page-link" id="pageBtn" value="${i}"
-									onclick="change(${i})">${i}</button>
+										<button class="page-item page-link" id="pageBtn" name="pageBtn" value="${i}">${i}</button>
 								</c:forEach>
 							</ul>
 						</nav>
@@ -468,9 +465,20 @@
         </nav>
     </footer>
     
+    
     <script type="text/javascript">
 	$(document).ready(function() {
 		var $btnSearch = $('#btnSearch');
+		var $nowPage = $('#nowPage');
+		var $totalPage = $('#totalPage');
+		var $btnPrev = $('#btnPrev');
+		var $btnNext = $('#btnNext');
+		var $pageBtn = $('[name = pageBtn]');
+		
+		var lstData = []; // 所有資料
+		var totalPage = 0; // 所有頁數
+		var pageIndex = -1; // 目前頁數
+		var pageCount = 8; // 預設，之後可以調
 		
 		var indexPage = 1;
 		//load(indexPage);
@@ -496,6 +504,11 @@
 	    $btnSearch.off('click').on('click' , search)
 	    
 	    function search(){
+	    	lstData = [];
+			totalPage = 0; 
+			pageIndex = -1;
+			
+	    	
 			$.ajax({
 				type : 'post',
 				url : "/PaintPartyMvcProject/search",
@@ -503,142 +516,129 @@
 				data : {Select1:$('#Select1').val() , Select2:$('#Select2').val()},
 		//		contentType : 'application/json',
 				success : function(data) {	
-							console.log(data);
-							$('#row1').empty();
-							for (var i = 0 ; i<data.length; i++)
-							{  // var path=data[i].profile_pic_path + "/" + data[i].profile_pic ;
-									$('#row1').append(
-							                 `<div class="col-lg-3 col-4 mb-4">
-					                            <div class="creators-item shadow-sm p-3 bg-white rounded-1g h-100">
-					                                <div class="text-center pb-1">
-					                                    <a href="#" target="_blank">
-					                                        <div
-					                                            class="text-center rounded-1g d-flex justify-content-center overflow-hidden">
-					                                            <img src= "resources/images/HeadShot/\${data[i].profile_pic}"    alt="avator" class="comisstion-cover">
-					                                        </div>
-					                                    </a>
-					                                    <div class="portfolio-caption text-center">
-					                                        <div class="heading font-weight-bold text-truncate display-6 p-4" id="memberName">
-					                                        \${data[i].member_name}  
-					                                        </div>
-					                                        <div class="text-truncate">
-					                                            <a href="#">
-					                                                <button type="button" class="btn btn-light"
-					                                                    style="background-color: #D3D3D3 ">私人訊息</button>
-					                                            </a>
-					                                        </div>
-					                                        <div class="text-muted my-2" id="sc">
-					                                        \${data[i].schedule} 
-					                                        </div>
-					                                    </div>
-					                                </div>
-					                            </div>
-					                        </div>`														
-								        	)
-							           }
+							//console.log(data);
+							lstData = data;
+							totalPage = lstData.length / pageCount;
+							totalPage = parseInt(totalPage);
+							
+							if(lstData.length % pageCount > 0){
+								totalPage ++;	
+							}
+							
+							console.log(lstData);
+							console.log("total Page : " + totalPage);
+							pageIndex = 0;
+							
+							setPageCount(pageIndex , totalPage);
+							
+							let show = convertPageData(lstData , totalPage , pageIndex);
+							showData(show);
 				}			
 			})
-	    } 
-
+	    }
 	    
-	    // 未完成 : Start
-	    $mTable = $('#mTable');
-
-	    var mTableColumns = [
-	        {
-	            title: '序號',
-	            width: '100px',
-	            render: function (data, type, row, meta) {
-	                return meta.row + 1;
-	            }
-	        },
-	        {
-	            title: '欄位A',
-	            data: 'typeA',
-	            render: function (data, type, row, meta) {
-	                let typeA = row.typeA;
-	                let text = '';
-	                if (typeA == 'typeA') {
-	                    text = 'typeA.1';
-	                } else {
-	                    text = 'typeA.2';
-	                }
-	                return text;
-	            }
-	        },
-	        {
-	            title: '欄位B',
-	            data: 'typeB',
-	            className: 'text-left'
-	        },
-	        {
-	            title: '欄位C',
-	            data: 'typeC',
-	            className: 'text-left'
-	        },
-	        {
-	            title: '執行<br/>動作',
-	            width: '100px',
-	            render: function (data, type, row, meta) {
-	                var showHtml = '';
-	                showHtml += '<button type="button" class="btn btn-primary" id="showBtn" >明細</button>&nbsp&nbsp';
-	                return showHtml;
-	            }
-	        }];
-
-	    var config = {
-	        searching: false,
-	        paging: false,
-	        info: false,
-	        ordering: false,
-	        data: []
-	    };
-
-	    TableUtil.DataTableInitByCustomConfig("#mTable", mTableColumns, config);
-
-	    var showTable = function () {
-	        var lstShow = [
-	            {
-	                typeA: 'typeA',
-	                typeB: 'typeB',
-	                typeC: 'typeC'
-	            },
-	            {
-	                typeA: 'typeA1',
-	                typeB: 'typeB1',
-	                typeC: 'typeC1'
-	            },
-	            {
-	                typeA: 'typeA2',
-	                typeB: 'typeB2',
-	                typeC: 'typeC3'
-	            }
-	        ];
-
-	        //TableUtil.DataTableClear('#mTable');
-	        //$mTable.DataTable().rows.add(lstShow).draw();
-	        //$mTable.DataTable().columns.adjust().draw();
+	    var setPageCount = function(now , total){
+	    	$nowPage.text((now + 1));
+	    	$totalPage.text(total);
+	    }
+	    
+	    $btnPrev.off('click').on('click',function(){
+			pageIndex --;
+			
+	    	if(pageIndex < 0){
+	    		pageIndex = 0;
+	    	}else{
+	    		setPageCount(pageIndex , totalPage);
+		    	let show = convertPageData(lstData , totalPage , pageIndex);
+				showData(show);
+	    	}
+	    })
+	    
+	    $btnNext.off('click').on('click',function(){
+	    	pageIndex ++;
+	    	
+	    	if(pageIndex >= totalPage){
+	    		pageIndex = totalPage - 1;
+	    	}else{
+	    		setPageCount(pageIndex , totalPage);
+		    	let show = convertPageData(lstData , totalPage , pageIndex);
+				showData(show);
+	    	}
+	    	
+	    });
+	    
+	    $pageBtn.off('click').on('click',function(){
+	    	changePage($(this).val());
+	    });
+	    
+	    var changePage = function(page){
+	    	pageIndex = (page - 1);
+	    	setPageCount(pageIndex , totalPage);
+	    	let show = convertPageData(lstData , totalPage , pageIndex);
+			showData(show);
+		}
+	    
+	    var convertPageData = function(lstData , totalPage , pageIndex){
+	    	var showData = [];
+	    	var startIndex =  pageIndex * pageCount;
+	    	var endIndex = pageIndex * pageCount + pageCount;
+	    	
+	    	if(endIndex > lstData.length){ // 結束位置以資料表的長度為基準
+	    		endIndex = lstData.length; 
+	    	}
+	    	
+	    	console.log("起始位置 : " + startIndex);
+	    	console.log("結束位置 : " + endIndex )
+	    	var lenData = endIndex - pageIndex * pageCount;
+	    	console.log("Len : " + lenData);
+	    	
+	    	for(i = 0; i < lenData ; i++ ){
+	    		showData[i] = lstData[startIndex + i];
+	    	}
+	    	
+	    	console.log("showData() => ");
+	    	console.log(showData)
+	    	
+	    	return showData;
 	    }
 
-	   // $mTable.find('tbody').on('click', '#showBtn', function (event) {
-	   //     var table = $mTable.DataTable();
-	   //     var row = table.row($(this).parents('tr')).data();
-	   //     alert('row : ' + row.typeA);
-	   // });
-
-	    //showTable();
-	    
-	    // 未完成 : End
-	    
-	    function change(page){
-			indexPage = page;
-			//load(indexPage);
-		}
-		
-	    
-	// DEL 
+	   var showData = function(data){
+		   $('#row1').empty();
+			for (var i = 0 ; i<data.length; i++)
+			{  // var path=data[i].profile_pic_path + "/" + data[i].profile_pic ;
+					$('#row1').append(
+			                 `<div class="col-lg-3 col-4 mb-4">
+	                            <div class="creators-item shadow-sm p-3 bg-white rounded-1g h-100">
+	                                <div class="text-center pb-1">
+	                                    <a href="memberpage/\${data[i].member_id}" target="_blank">
+	                                        <div
+	                                            class="text-center rounded-1g d-flex justify-content-center overflow-hidden">
+	                                            <!--<img src= "resources/images/HeadShot/\${data[i].profile_pic}"    alt="avator" class="comisstion-cover">-->
+                                                <img src= "painterimage/\${data[i].member_id}" alt="avator" class="comisstion-cover">
+	                                        </div>
+	                                    </a>
+	                                    <div class="portfolio-caption text-center">
+	                                        <div class="heading font-weight-bold text-truncate display-6 p-4" id="memberName">
+	                                        \${data[i].member_name}  
+	                                        </div>
+	                                        <div class="text-truncate">
+	                                            <a href="#">
+	                                                <button type="button" class="btn btn-light"
+	                                                    style="background-color: #D3D3D3 ">私人訊息</button>
+	                                            </a>
+	                                        </div>
+	                                        <div class="text-muted my-2" id="sc">
+	                                        \${data[i].schedule} 
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>`														
+				        	)
+			           }
+	   }
 	
-	search();
+		search();
 
 	});
 	
@@ -669,5 +669,33 @@
     
     </script>
 
+     <!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
 </body>
 </html>
