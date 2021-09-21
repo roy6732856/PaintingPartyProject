@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     
@@ -83,7 +84,7 @@
     <div class="container-fluid">
         <header class="u-clearfix u-header u-header" id="sec-4c0b">
             <div class="u-clearfix u-sheet u-sheet-1">
-                <a href="index.jsp" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+                <a href="/PaintPartyMvcProject/Index" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                     data-image-height="410">
                     <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
                 </a>
@@ -110,16 +111,14 @@
                         <ul class="u-nav u-unstyled u-nav-1">
                             <li class="u-nav-item"><a
                                     class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                    href="javascript::" style="padding: 10px 20px;">畫師列表</a>
+                                    href="/PaintPartyMvcProject/painterlist" style="padding: 10px 20px;">畫師列表</a>
                             </li>
                             <li class="u-nav-item"><a
                                     class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                    href="/PaintPartyMvcProject/caselistpage.controller"
                                     style="padding: 10px 20px;">案件列表</a>
                             </li>
-                            <li class="u-nav-item"><a
-                                    class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                    style="padding: 10px 20px;">公開畫廊</a>
-                            </li>
+
                         </ul>
                     </div>
                     <div class="u-custom-menu u-nav-container-collapse">
@@ -134,9 +133,7 @@
                                     <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                             style="padding: 10px 20px;">案件列表</a>
                                     </li>
-                                    <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                            style="padding: 10px 20px;">公開畫廊</a>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -926,7 +923,7 @@
     				return content + `
     				<div class="commissions-item shadow-sm p-3 bg-white rounded-lg">
                     <div class="media">
-                        <a href="#" target="_blank">
+                        <a href="/PaintPartyMvcProject/memberpage/\${evaObj.memIdS}" target="_blank">
                             <div class="w-3 mr-3">
                                 <div
                                     class="text center rounded-circle square-cover">
@@ -997,7 +994,7 @@
 
                     <div class="commissions-item shadow-sm p-3 bg-white rounded-lg">
                         <div class="media">
-                            <a href="#" target="_blank">
+                            <a href="/PaintPartyMvcProject/memberpage/\${evab2aObj.memIdR}" target="_blank">
                                 <div class="w-3 mr-3">
                                     <div
                                         class="text center rounded-circle square-cover">
