@@ -43,6 +43,7 @@ public class SystemNoticeDAO {
 		Session session = sessionfactory.getCurrentSession();
 
 		String hql = "from OrderNotice o where o.order_notice_id >= 1";
+		String hql = "from OrderNotice o order by o.notice_date desc";
 		Query<OrderNotice> query2 = session.createQuery(hql, OrderNotice.class);
 		List<OrderNotice> list2 = query2.getResultList();
 		return list2;

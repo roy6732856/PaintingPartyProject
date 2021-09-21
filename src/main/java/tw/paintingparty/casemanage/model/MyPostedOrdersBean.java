@@ -29,6 +29,8 @@ public class MyPostedOrdersBean implements Serializable{
 
 	private Integer bmember_id;
 	
+	private Integer final_page;
+	
 	public MyPostedOrdersBean() {
 		super();
 	}
@@ -50,6 +52,17 @@ public class MyPostedOrdersBean implements Serializable{
 	
 	
 	
+	
+
+	public Integer getFinal_page() {
+		return final_page;
+	}
+
+
+	public void setFinal_page(Integer final_page) {
+		this.final_page = final_page;
+	}
+
 
 	public Integer getOrder_id() {
 		return order_id;

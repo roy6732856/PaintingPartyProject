@@ -99,6 +99,28 @@ public class CasePageDisplayDAO {
 		return result;
 		
 	}
+	
+	public CaseApply getCaseApplyByCaseId(int caseId,int memId) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		String hql = "from CaseApply ca where ca.applycasesbean.case_id = :caseid and ca.applymemberbean.member_id = :memid";
+		
+		try {
+			Query<CaseApply> query = session.createQuery(hql,CaseApply.class);
+		
+			query.setParameter("caseid", caseId);
+			query.setParameter("memid", memId);
+			
+			CaseApply result = query.getSingleResult();
+			
+			return result;
+		}catch (NoResultException  e) {
+			return null;
+		}
+		
+		
+	}
 
 	
 }

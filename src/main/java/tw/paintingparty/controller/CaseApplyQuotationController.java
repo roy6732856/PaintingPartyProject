@@ -36,6 +36,7 @@ public class CaseApplyQuotationController {
 		
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
+		m.addAttribute("member_id",mem1.getMember_id());
 		
 		return "Quotation";
 	}
@@ -53,6 +54,7 @@ public class CaseApplyQuotationController {
 		int memid = (int)session.getAttribute("session_member_id");
 		System.out.println("顯示執行表單送出時的caseid: "+ caseid);
 		System.out.println("顯示執行表單送出時的memberid: "+ memid);
+		
 		
 		
 		//一個新的apply 先設定case_time   還有setprice_expected

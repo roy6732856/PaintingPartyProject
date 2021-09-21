@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Example;
 import tw.paintingparty.model.Member;
@@ -95,8 +96,24 @@ public class CasePageDisplayController {
 		m.addAttribute("uploadDate",datestr);
 		
 		
+		
+		
+		
+		//判斷Session的member_id  以登入之會員的ID
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
+		m.addAttribute("member_id",mem1.getMember_id());
+		
+		//判斷有對這之Case做Apply的應徵表
+		if(mem1.getMember_id()!=null) {
+			CaseApply ca1 = capdService.getCaseApplyByCaseId(caseid,mem1.getMember_id());
+			if(ca1!=null) {
+				m.addAttribute("whoApply",mem1.getMember_id());
+			}
+		}
+		
+		
+		
 		return "CasePage";
 		
 	}

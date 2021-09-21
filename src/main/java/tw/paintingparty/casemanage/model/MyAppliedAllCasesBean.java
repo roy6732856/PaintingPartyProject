@@ -25,6 +25,7 @@ public class MyAppliedAllCasesBean implements Serializable{
 	
 	private Integer amember_id;//發案人名稱
 	
+	private Integer final_page;
 	
 	
 	
@@ -46,6 +47,20 @@ public class MyAppliedAllCasesBean implements Serializable{
 		this.case_time = case_time;
 		this.amember_name = amember_name;
 		this.amember_id = amember_id;
+	}
+
+
+
+
+	public Integer getFinal_page() {
+		return final_page;
+	}
+
+
+
+
+	public void setFinal_page(Integer final_page) {
+		this.final_page = final_page;
 	}
 
 

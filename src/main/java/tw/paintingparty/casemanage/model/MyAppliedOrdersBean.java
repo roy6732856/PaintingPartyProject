@@ -28,6 +28,8 @@ public class MyAppliedOrdersBean implements Serializable{
 	
 	private String evaluation_status_b2a;
 	
+	private Integer final_page;
+	
 	
 	public MyAppliedOrdersBean() {
 		super();
@@ -47,6 +49,18 @@ public class MyAppliedOrdersBean implements Serializable{
 		this.price = price;
 		this.amember_id = amember_id;
 		this.evaluation_status_b2a = evaluation_status_b2a;
+	}
+
+	
+	
+
+	public Integer getFinal_page() {
+		return final_page;
+	}
+
+
+	public void setFinal_page(Integer final_page) {
+		this.final_page = final_page;
 	}
 
 
