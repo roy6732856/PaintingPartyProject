@@ -109,7 +109,7 @@ public class CaseManageController {
 	@PostMapping(path = "/backend/casebackstage/{case_id}") //按下案件管理
 	@ResponseBody
 	public List<CaseBackStageBean> CaseBackStage(@PathVariable("case_id") Integer caseid ) {
-		System.out.println("接收成功!");
+//		System.out.println("接收成功!");
 //		String welcom = "casebackstage: " + caseid;
 //		System.out.println(welcom);
 		List<CaseBackStageBean> caseBackStageManage = cmService.CaseBackStageManage( caseid );
