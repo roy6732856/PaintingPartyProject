@@ -168,7 +168,7 @@
 				
 				if(data.length==0){
 					$('#row1').append(`<div class="u-container u-white mb-5"
-							style="border-radius: 10px; padding: 10px;">
+							style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 							<div class="u-container-layout u-container-layout-4" style="text-align:center;">
 								
 								<h3>暫無資料</h3>
@@ -220,7 +220,7 @@
 					for(var j;j<k;j++){
 						$('#row1').append(
 								`<div class="u-container u-white mb-3"
-								style="border-radius: 10px; padding: 10px;">
+								style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 								<div class="u-container-layout u-container-layout-4" >
 									<div class="input-group mb-3">
 										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
@@ -244,7 +244,7 @@
 					for(var y;y<h;y++){
 						$('#row2').append(
 								`<div class="u-container u-white mb-3"
-								style="border-radius: 10px; padding: 10px;">
+								style="border-radius: 10px; padding: 10px; border: 1px solid #ced6e0">
 								<div class="u-container-layout u-container-layout-4" >
 									<div class="input-group mb-3">
 										<span class="m-1"></span> <div id="caseName" style="color: #4a4a4a; font-size: 20px;">
@@ -371,9 +371,7 @@
 					</div>
 				</div>
 				<div>
-					<a
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding"
-						name="logout" onclick="logout()">登出</a>
+					
 				</div>
 			</div>
 		</div>
@@ -387,7 +385,7 @@
 						<div class="row mt-5" id="mainRow">
 
 							<div class="col-md-2 mb-4 col-4"
-								style="padding: 20px; background-color: white; border-radius: 10px;border: 1px solid #b2bec3;">
+								style="padding: 20px; background-color: white; border-radius: 5px;border: 1px solid #ced6e0">
 								<form>
 									<div class="form-group">
 										<label class="mb-3 col-md-12"

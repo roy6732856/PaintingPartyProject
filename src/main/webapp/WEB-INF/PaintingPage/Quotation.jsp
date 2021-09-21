@@ -71,6 +71,35 @@
 <meta property="og:type" content="website">
 </head>
 <body class="u-body">
+
+<!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
@@ -145,7 +174,8 @@
 					<div>
 						<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
 							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
-							name="issue_case" style="display: none">發布案件</a> <a
+							name="issue_case" style="display: none">發布案件</a>
+							<a
 							href="<%= request.getContextPath() %>/backend/accountmanager"
 							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
 							name="account_manager" style="display: none">帳號管理</a> <span
@@ -162,9 +192,7 @@
 					</div>
 				</div>
 				<div>
-					<a
-						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding"
-						name="logout" onclick="logout()">登出</a>
+					
 				</div>
 
 			</div>
@@ -237,27 +265,14 @@
 				</a>
 			</div>
 			<div class="u-custom-menu u-nav-container">
-				<ul class="u-nav u-unstyled u-nav-1">
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">聯絡我們</a></li>
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">常見問題</a></li>
-				</ul>
+				
 			</div>
 			<div class="u-custom-menu u-nav-container-collapse">
 				<div
 					class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
 					<div class="u-sidenav-overflow">
 						<div class="u-menu-close"></div>
-						<ul
-							class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">聯絡我們</a></li>
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">常見問題</a></li>
-						</ul>
+						
 					</div>
 				</div>
 				<div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>

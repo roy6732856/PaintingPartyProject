@@ -52,7 +52,7 @@ public class CaseListDisplayController {
 //		}
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
-		m.addAttribute("member_id",mem1.getMember_id());
+	
 //		
 //		m.addAttribute("totalCases",cases);
 //		m.addAttribute("totalPages",totalPages);
