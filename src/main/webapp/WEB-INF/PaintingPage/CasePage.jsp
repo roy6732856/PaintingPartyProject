@@ -130,9 +130,7 @@
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							href="<%=request.getContextPath()%>/caselistpage.controller"
 							style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -146,8 +144,7 @@
 									href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
 									style="padding: 10px 20px;">案件列表</a></li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link"
-									style="padding: 10px 20px;">公開畫廊</a></li>
+								
 							</ul>
 						</div>
 					</div>
