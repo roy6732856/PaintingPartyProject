@@ -56,6 +56,15 @@
     		width: 390px;
     	}
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#demoClick').click(function(){
+			$('#spendDay').attr("value",'5');
+			$('#inputBudget').attr("value",'2000');
+		})
+	})
+
+</script>
 <meta name="theme-color" content="#478ac9">
 <meta property="og:title" content="Quotation">
 <meta property="og:description" content="">
@@ -99,7 +108,9 @@
 									class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 									href="<%=request.getContextPath()%>/caselistpage.controller"
 									style="padding: 10px 20px;">案件列表</a></li>
-						
+						<li class="u-nav-item"><a
+							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+							style="padding: 10px 20px;">公開畫廊</a></li>
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -167,8 +178,8 @@
 				style="margin-bottom: 30px;">
 				<h1
 					class="u-custom-font u-font-oswald u-text u-text-black u-text-default u-text-1">案件報價單</h1>
-				<a href="####"
-					class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1">DEMO</a>
+				<button 
+					class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1" id="demoClick">DEMO</button>
 			</h2>
 
 			<div
@@ -179,12 +190,12 @@
 						method="post">
 						<div class="form-group">
 							<label>花費天數</label> <input type="input" class="form-control"
-								placeholder="請輸入預計花費天數" name="spendDay">
+								placeholder="請輸入預計花費天數" name="spendDay" id="spendDay">
 						</div>
 						<div class="form-row d-flex">
 							<div class="form-group col-md-12">
 								<label for="inputLowBudget">酬勞預算</label> <input type="text"
-									class="form-control" id="inputLowBudget" placeholder="(必填)"
+									class="form-control" id="inputBudget" placeholder="(必填)"
 									name="expectedBudget">
 							</div>
 

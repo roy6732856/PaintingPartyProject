@@ -180,6 +180,9 @@
 					var totalPages=1 ;
 					var y;
 					var j = (indexPage*8)-8;
+					//var p = indexPage;
+					//var maxPage = p + 4 ;
+					
 					
 					if(data.length%8==0){
 						totalPages = parseInt(data.length/8);
@@ -187,11 +190,18 @@
 						totalPages = parseInt(data.length/8)+1;
 					}
 					
+					//if(maxPage > totalPages){
+					//	maxPage = totalPages
+					//}else{
+					//	maxPage = p + 4 ;
+					//}
+					
 					
 					for(var p=1;p<=totalPages;p++){
-						$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})" value="\${p}">\${p}</button>`);
-						
+					$('#page').append(`<button class="page-item page-link"  onclick="change(\${p})" value="\${p}">\${p}</button>`);
 					}
+				
+					
 					
 					
 					k = 4+j;

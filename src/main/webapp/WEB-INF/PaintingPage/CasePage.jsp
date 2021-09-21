@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="zh-Hant">
@@ -10,8 +11,10 @@
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
 <title>CasePage</title>
-<link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
-<link rel="stylesheet" href="../resources/css/CasePage.css" media="screen">
+<link rel="stylesheet" href="../resources/css/nicepage.css"
+	media="screen">
+<link rel="stylesheet" href="../resources/css/CasePage.css"
+	media="screen">
 <script class="u-script" type="text/javascript"
 	src="../resources/js/jquery.js" defer=""></script>
 <script class="u-script" type="text/javascript"
@@ -21,7 +24,11 @@
 	href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
 <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
-
+<script
+	src="https://www.itxst.com/package/bootstrap-4.5.0/js/bootstrap.min.js"></script>
+<link
+	href="https://www.itxst.com/package/bootstrap-4.5.0/css/bootstrap.css"
+	rel="stylesheet">
 <script
 	src="https://www.itxst.com/package/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script
@@ -42,12 +49,13 @@
 </script>
 
 <style type="text/css">
-   		.fix-padding {
-    		padding: 10px 46px;
-    	}
-    	.u-header .u-group-2 {
-    		width: 390px;
-    	}
+.fix-padding {
+	padding: 10px 46px;
+}
+
+.u-header .u-group-2 {
+	width: 390px;
+}
 </style>
 
 <meta name="theme-color" content="#478ac9">
@@ -87,11 +95,15 @@
 					<ul class="u-nav u-unstyled u-nav-1">
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a></li>
+							href="<%=request.getContextPath()%>/painterlist"
+							style="padding: 10px 20px;">畫師列表</a></li>
 						<li class="u-nav-item"><a
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a></li>
-						
+							href="<%=request.getContextPath()%>/caselistpage.controller"
+							style="padding: 10px 20px;">案件列表</a></li>
+						<li class="u-nav-item"><a
+							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+							style="padding: 10px 20px;">公開畫廊</a></li>
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -105,37 +117,44 @@
 									href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
 									style="padding: 10px 20px;">案件列表</a></li>
-								
+								<li class="u-nav-item"><a class="u-button-style u-nav-link"
+									style="padding: 10px 20px;">公開畫廊</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
 				</div>
 			</nav>
-			<div class="u-container-style u-group u-white u-group-1">
-				
-			</div>
+			<div class="u-container-style u-group u-white u-group-1"></div>
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-	                        <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
-	                        <a href="<%= request.getContextPath() %>/backend/accountmanager"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
-                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
-                        </div>
-                        <div>
-	                        <a href="/PaintPartyMvcProject/login"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
-	                        <a href="/PaintPartyMvcProject/register"
-	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
-                    	</div>
-                    </div>
-                    <div>
-                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                    </div>
+						<a
+							href="<%=request.getContextPath()%>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> <a
+							href="<%=request.getContextPath()%>/backend/accountmanager"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
+							name="account_manager" style="display: none">帳號管理</a> <span
+							class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4"
+							name="member_name" style="display: none"><%=request.getAttribute("member_name")%></span>
+					</div>
+					<div>
+						<a href="/PaintPartyMvcProject/login"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="header_login" style="display: none">登入</a> <a
+							href="/PaintPartyMvcProject/register"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
+							name="header_register" style="display: none">註冊</a>
+					</div>
+				</div>
+				<div>
+					<a
+						class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding"
+						name="logout" onclick="logout()">登出</a>
 				</div>
 			</div>
+		</div>
 		</div>
 	</header>
 	<section class="u-align-left u-clearfix u-grey-10 u-section-1"
@@ -148,21 +167,29 @@
 							class="u-container-style u-layout-cell u-size-18 u-layout-cell-1">
 							<div class="u-container-layout u-container-layout-1">
 								<div
-									class="u-container-style u-group  u-shape-round u-white u-group-1">
+									class="u-container-style u-group u-radius-3 u-shape-round u-white u-group-1"
+									style="border: 1px solid #ced6e0">
 									<div class="u-container-layout u-container-layout-2">
-										<div class="u-align-left u-container-style u-group u-group-2" style="min-height:auto;">
+										<div class="u-align-left u-container-style u-group u-group-2"
+											style="min-height: auto;">
 											<div class="u-container-layout u-container-layout-2">
-												
+
 												<div class="">
-													<a href="<%= request.getContextPath() %>/memberpage/${memId}"><img src="<%= request.getContextPath() %>/casepagedisplaymemId" class="rounded-3 border border-2 mx-auto d-block" style="display: block;max-width: 100%;height: 120px;"></a>
+													<a
+														href="<%= request.getContextPath() %>/memberpage/${memId}"><img
+														src="<%=request.getContextPath()%>/casepagedisplaymemId"
+														class="rounded-3 border border-2 mx-auto d-block"
+														style="display: block; max-width: 100%; height: 120px;"></a>
 												</div>
 											</div>
 										</div>
-										<h3 class="u-align-center" style="margin-top:20px;color: #4a4a4a;">${caseOwner}</h3>
+										<h3 class="u-align-center"
+											style="margin-top: 20px; color: #4a4a4a;">${caseOwner}</h3>
 									</div>
 								</div>
 								<div
-									class="u-container-style u-group u-shape-round u-white u-group-4">
+									class="u-container-style u-group u-radius-3 u-shape-round u-white u-group-4"
+									style="min-height: auto; border: 1px solid #ced6e0;">
 									<div
 										class="u-container-layout u-valign-top u-container-layout-5">
 										<div
@@ -171,7 +198,7 @@
 
 												<div class="form-row d-flex">
 													<div class="form-group col-md-12 p-2">
-														<label for="inputLowBudget" style="color:#4a4a4a;">單張稿酬預算</label><br />
+														<label for="inputLowBudget" style="color: #4a4a4a;">單張稿酬預算</label><br />
 														<div class="" style="color: burlywood; font-size: 30px">$
 															${lowBudget} ~ ${highBudget}</div>
 													</div>
@@ -181,13 +208,14 @@
 										<div
 											class="u-border-1 u-border-white u-container-style u-expanded-width u-group u-radius-20 u-shape-round u-group-6">
 											<div class="u-container-layout u-container-layout-8">
-												<p class="u-text u-text-default u-text-7" style="color:#4a4a4a;">上架日期：</p>
+												<p class="u-text u-text-default u-text-7"
+													style="color: #4a4a4a;">企劃發布日期：</p>
 												<div class="u-container-style u-group u-group-8">
 													<h3 style="color: burlywood; font-size: 30px">${uploadDate}</h3>
 												</div>
 											</div>
 										</div>
-										<div
+										<!-- <div
 											class="u-border-2 u-border-white u-container-style u-radius-20 u-shape-round ">
 											<div class="form-group col-md-6 p-2">
 												<label for="inputLowBudget" style="color:#4a4a4a;">畫作風格：</label><br /><div class="" style="color: burlywood; font-size: 25px">
@@ -197,58 +225,117 @@
 												<label for="inputLowBudget" style="color:#4a4a4a;">創作類型：</label><br /><div class="" style="color: burlywood; font-size: 25px">
 															${type}</div><br /> 
 											</div>
+										</div> -->
+										<div style="text-align: center;">
+											<a
+												href="<%=request.getContextPath()%>/caselistpage.controller"><button
+													class="btn btn-secondary" style="margin-top: 5px;">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16"
+														height="16" fill="currentColor"
+														class="bi bi-arrow-90deg-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+															d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z" />
+</svg>
+													<i class="bi bi-arrow-90deg-up"></i>返回列表
+												</button></a>
 										</div>
 									</div>
+
 								</div>
-								
-								 
-								<a href="<%= request.getContextPath() %>/caseapplymainpage.controller/${caseid}"
-									class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-10 u-btn-1" name="applyCase" style="display:none" >應徵此案件</a>
+									<a
+										href="<%= request.getContextPath() %>/caseapplymainpage.controller/${caseid}"
+										class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-5 u-btn-1"
+										name="applyCase" style="display: none">應徵此案件</a>
+								</div>
 							</div>
-						</div>
-						<div
-							class="u-container-style u-layout-cell u-shape-rectangle u-size-42 u-layout-cell-2">
-							<div class="u-container-layout u-container-layout-15">
-								<div
-									class="u-container-style u-group u-radius-20 u-shape-round u-white u-group-14">
-									<div class="u-container-layout u-container-layout-16">
-										<div class="form-group u-container-layout">
-											<p style="font-size: 50px; font-weight: bold;">${caseTitle}</p>
-										</div>
-										<div class="form-group u-container-layout">
-											<div style="color: darkblue; font-weight: bold; font-size: 30px;">描述需求</div>
-											<br />
-											<section class="input-group">
-												<div>${demand }</div>
-											</section>
-										</div>
-										<div>
-											<p style="color: darkblue; font-weight: bold; font-size: 30px;">參考圖例</p>
-											<div
-												class="u-container-layout u-container-layout-21 ">
-												<div class="container"  
-													><img src="<%= request.getContextPath() %>/casepagedisplayexImg" class="img-thumbnail img-polaroid" style="display: block;max-width: 100%;height: 300px;"/></div> 
-												<!-- data-image-width="1500" data-image-height="1000"<div class="u-container-style u-group u-group-20">
+							<div
+								class="u-container-style u-layout-cell u-shape-rectangle u-size-42 u-layout-cell-2">
+								<div class="u-container-layout u-container-layout-15">
+									<div
+										class="u-container-style u-group u-radius-3 u-shape-round u-white u-group-14">
+										<div class="u-container-layout u-container-layout-16"
+											style="border: 1px solid #ced6e0">
+											<div class="form-group u-container-layout">
+												<p style="font-size: 50px; font-weight: bold;">${caseTitle}</p>
+											</div>
+											<div class="form-group u-container-layout">
+												<div
+													style="color: burlywood; font-weight: bold; font-size: 30px;">需求描述</div>
+												<br />
+												<section class="input-group">
+													<div style="font-size: 23px;">${demand }</div>
+												</section>
+											</div>
+											<div>
+												<p
+													style="color: burlywood; font-weight: bold; font-size: 30px;">參考圖例</p>
+												<div class="u-container-layout u-container-layout-21 ">
+													<div class="container">
+														<img
+															src="<%=request.getContextPath()%>/casepagedisplayexImg"
+															class="img-thumbnail img-polaroid"
+															style="display: block; max-width: 100%; height: 300px;" />
+													</div>
+													<!-- data-image-width="1500" data-image-height="1000"<div class="u-container-style u-group u-group-20">
 													<div class="u-container-layout u-container-layout-22"></div>
 												</div>
 												 <p class="u-text u-text-default u-text-19">畫師暱稱</p>-->
+												</div>
+											</div>
+											<br />
+											<div>
+												<div
+													style="color: burlywood; font-weight: bold; font-size: 30px;">稿件要求</div>
+												<br />
+												<div class="row">
+													<div class="col">
+														<span style="margin-right: 20px; color: burlywood;">風格：</span><span
+															style="color: #4a4a4a;">${style}</span>
+													</div>
+													<div class="col">
+														<span style="margin-right: 20px; color: burlywood;">類型：</span><span
+															style="color: #4a4a4a;">${type }</span>
+													</div>
+
+												</div>
+												<br />
+												<div class="row">
+													<div class="col">
+														<span style="margin-right: 20px; color: burlywood;">顏色模式：</span><span
+															style="color: #4a4a4a;">RGB</span>
+													</div>
+													<div class="col">
+														<span style="margin-right: 20px; color: burlywood;">試稿需求：</span><span
+															style="color: #4a4a4a;">不須試稿</span>
+													</div>
+												</div>
+												<hr />
+
+											</div>
+											<div>
+												<div
+													style="color: burlywood; font-weight: bold; font-size: 30px;">案件流程</div>
+												<div style="background-color: #ffeaa7; border-radius: 2px;">
+													<p style="padding: 15px; color: #f39c12; font-size: 15px;">
+														送出應徵並非代表交易訂單已成立，確認發案方是否與畫師合作再行下個步驟，<br />
+														交易流程方式，視創作進度不同使用轉帳方式完成階段工作。
+													</p>
+
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 
 
-								<div
-									class="u-container-style u-group u-radius-20 u-shape-round u-white "
-									style="margin-top: 20px;">
-									
+									<div
+										class="u-container-style u-group u-radius-20 u-shape-round u-white "
+										style="margin-top: 20px;"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 
 
@@ -308,7 +395,7 @@
     //登入狀態與登出狀態功能列表
     //透過AllFilter 傳過來的session
 //     <h1>${sessionScope.login}</h1>
-   
+    console.log(${sessionScope.login})
     if(${sessionScope.login}==1){ //代表有登入狀態
     	$("[name=issue_case]").show()
     	$("[name=account_manager]").show()
@@ -325,16 +412,9 @@
     
     var s = '畫師';
     var a = '${attr}';
-    var whoOwnThisCase = '${memId}';
-    var whoLogin = '${member_id}';
-	var whoApply = '${whoApply}';
-
     
-    
-    if(a==s && whoOwnThisCase != whoLogin ){//判斷身分=畫師
-    	if(whoLogin != whoApply){
-    			$("[name=applyCase]").show()
-    	}
+    if(a==s){//判斷身分=畫師
+    	$("[name=applyCase]").show()
     }
     //登出
     function logout(){
