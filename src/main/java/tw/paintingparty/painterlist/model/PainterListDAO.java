@@ -56,7 +56,7 @@ public class PainterListDAO {
 		List<Member> listMemberInfo = null;
 		Session session = sessionFactory.getCurrentSession(); 
 		// SELECT * from member where tag_personal like '%1% ' or tag_personal like '%2%'
-		String hql = "FROM Member m WHERE m.tag_personal like :select1 and tag_personal like :select2";
+		String hql = "FROM Member m WHERE m.tag_personal like :select1 and tag_personal like :select2 and member_status = '畫師'";
 			try {
 				Query<Member> query  = session.createQuery(hql,Member.class)
 								.setParameter("select1", "%"+ select1 + "%")
