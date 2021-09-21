@@ -69,7 +69,7 @@ public class TestDemoController_01 {
 	
 	@RequestMapping(path = "/backend/casemanage", method = RequestMethod.GET)
 	//拜訪案件管理的頁面
-	public String test9(Model m) {
+	public String CaseManage(Model m) {
 		Member mem1 = mService.showLoginUsername();
 		
 		m.addAttribute("member_name", mem1.getMember_name());
@@ -82,7 +82,7 @@ public class TestDemoController_01 {
 	
 	
 	@RequestMapping(path = "/backend/mypostedallcases", method = RequestMethod.GET) //.load用
-	public String test10( ) {
+	public String MyPostedAllCasesView( ) {
 		
 		return "MyPostedAllCases";
 	}
@@ -90,7 +90,7 @@ public class TestDemoController_01 {
 
 	@PostMapping(path = "/backend/mypostedallcases2/{sort}/{condition}/{nowpage}") //AJAX請求處理，回應JSON，加上條件和排序
 	@ResponseBody
-	public List<MyPostedAllCasesBean> test10_2(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) throws ParseException {
+	public List<MyPostedAllCasesBean> MyPostedAllCasesData(@PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage ,HttpServletRequest request ) throws ParseException {
 		//	var myposted_sort = 1; //0=由舊到新、1=由新到舊 預設1
 		//  var myposted_condition = 0; //0=全部、1=上架、2=下架 預設0
 		
@@ -107,7 +107,7 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/casebackstage/{case_id}") //按下案件管理
 	@ResponseBody
-	public List<CaseBackStageBean> test10_3(@PathVariable("case_id") Integer caseid ) {
+	public List<CaseBackStageBean> CaseBackStage(@PathVariable("case_id") Integer caseid ) {
 		System.out.println("接收成功!");
 //		String welcom = "casebackstage: " + caseid;
 //		System.out.println(welcom);
@@ -122,7 +122,7 @@ public class TestDemoController_01 {
 
 	@PostMapping(path = "/backend/hire/{case_id}/{bmember_id}/{price_expected}") //錄取畫師
 	@ResponseBody
-	public String test10_4( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
+	public String Hire( @PathVariable("case_id") Integer caseid , @PathVariable("bmember_id") Integer bmemberid , @PathVariable("price_expected") Integer expected  ) {
 //		System.out.println("接收成功!");
 //		System.out.println("case:" + caseid);
 //		System.out.println("bmemid:" + bmemberid);
@@ -136,8 +136,8 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/offthiscase/{offcase_id}") //錄取畫師
 	@ResponseBody
-	public void test10_5( @PathVariable("offcase_id") Integer offcaseid  ) {
-		System.out.println("接收成功!");
+	public void OffThisCase( @PathVariable("offcase_id") Integer offcaseid  ) {
+//		System.out.println("接收成功!");
 //		System.out.println("case:" + caseid);
 //		System.out.println("bmemid:" + bmemberid);
 //		System.out.println("price_expected:" + expected);
@@ -151,7 +151,7 @@ public class TestDemoController_01 {
 	
 	//-----------------------------------------------
 	@RequestMapping(path = "/backend/mypostedorders", method = RequestMethod.GET) //.load用
-	public String test11( ) {
+	public String MyPostedOrdersView( ) {
 
 		return "MyPostedOrders";
 	}
@@ -160,7 +160,7 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/mypostedorders2/{sort}/{condition}/{nowpage}") 
 	@ResponseBody
-	public List<MyPostedOrdersBean> test11_10( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
+	public List<MyPostedOrdersBean> MyPostedOrdersData( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
 		List<MyPostedOrdersBean> selectMyPostedOrders2 = cmService.selectMyPostedOrders2( (Integer)myid , sort , condition, nowpage );
@@ -169,19 +169,8 @@ public class TestDemoController_01 {
 	}
 	
 	
-	@GetMapping(path = "/backend/filecontent/{orderid}") //檔案內容
-	@ResponseBody
-	public String test11_3(@PathVariable("orderid") String orderid , HttpServletRequest request ) {
-		String welcom = "filecontent: " + orderid;
-		
-		return welcom ;
-	}
-	
-	
-	
-	
 	@PostMapping(path = "/backend/passthestage/{orderid}") //過稿
-	public String test11_7(@PathVariable("orderid") String orderid , HttpServletRequest request ) {
+	public String PassTheStage(@PathVariable("orderid") String orderid  ) {
 		
 		int orderInt = Integer.parseInt(orderid);
 		
@@ -197,7 +186,7 @@ public class TestDemoController_01 {
 	
 	
 	@PostMapping(path = "/backend/cancelorder/{orderid}") //終止交易
-	public String test11_5(@PathVariable("orderid") String orderid , HttpServletRequest request ) {
+	public String CancelOrder(@PathVariable("orderid") String orderid ) {
 		
 		int orderInt = Integer.parseInt(orderid);
 		
@@ -208,7 +197,7 @@ public class TestDemoController_01 {
 	
 	
 	@PostMapping(path = "/backend/evaluationa2b") //給評價A給B
-	public void test11_6(@RequestBody EvaluationA2BBean evaa2b ) {
+	public void EvaluationA2B(@RequestBody EvaluationA2BBean evaa2b ) {
 		
 		cmService.EvaluationA2B(evaa2b);
 		
@@ -216,7 +205,7 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/payInfo") //查看對方的匯款資訊
 	@ResponseBody
-	public PayInfoBean test11_7(@RequestBody PayInfoIdBean pmemid ) {
+	public PayInfoBean PayInfo(@RequestBody PayInfoIdBean pmemid ) {
 		
 //		System.out.println(pbmemid.getPmemid());
 		PayInfoBean getBmemberPayInfo = cmService.GetBmemberPayInfo(pmemid.getPmemid());
@@ -226,8 +215,8 @@ public class TestDemoController_01 {
 	}
 	
 	@GetMapping(path = "/backend/headshotdownloader/{memid}")
-	public void test11_8(@PathVariable("memid") Integer memberid , HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println(memberid);
+	public void HeadShotDownloader(@PathVariable("memid") Integer memberid , HttpServletRequest request, HttpServletResponse response) throws IOException {
+//		System.out.println(memberid);
 		HeadShotBean headShotDownloader = cmService.HeadShotDownloader(memberid);
 		String filePath = headShotDownloader.getProfile_pic_path() + "\\" + headShotDownloader.getProfile_pic();
 		FileInputStream fis = new FileInputStream(filePath);
@@ -238,7 +227,7 @@ public class TestDemoController_01 {
 	//-------------------------------------------------
 	
 	@RequestMapping(path = "/backend/myappliedallcases", method = RequestMethod.GET) //.load用
-	public String test12(HttpServletRequest request , Model m) throws JsonProcessingException {
+	public String MyAppliedAllCasesView()  {
 
 		
 		return "MyAppliedAllCases";
@@ -248,7 +237,7 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/myappliedallcases2/{sort}/{nowpage}") 
 	@ResponseBody
-	public List<MyAppliedAllCasesBean> test12_3(@PathVariable("sort") Integer sort , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
+	public List<MyAppliedAllCasesBean> MyAppliedAllCasesData(@PathVariable("sort") Integer sort , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
 		List<MyAppliedAllCasesBean> selectMyAppliedAllCases2 = cmService.selectMyAppliedAllCases2( (Integer)myid , sort , nowpage );
@@ -265,7 +254,7 @@ public class TestDemoController_01 {
 	
 	
 	@RequestMapping(path = "/backend/myappliedorders", method = RequestMethod.GET) //.load用
-	public String test13( HttpServletRequest request , Model m ) throws JsonProcessingException {
+	public String MyAppliedOrdersView( ) {
 		
 		return "MyAppliedOrders";
 	}
@@ -276,7 +265,7 @@ public class TestDemoController_01 {
 	
 	@PostMapping(path = "/backend/myappliedorders2/{sort}/{condition}/{nowpage}") //代做
 	@ResponseBody
-	public List<MyAppliedOrdersBean> test13_2( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
+	public List<MyAppliedOrdersBean> MyAppliedOrdersData( @PathVariable("sort") Integer sort ,@PathVariable("condition") Integer condition , @PathVariable("nowpage") Integer nowpage , HttpServletRequest request ) throws ParseException {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
 		List<MyAppliedOrdersBean> selectMyAppliedOrders2 = cmService.selectMyAppliedOrders2((Integer)myid ,sort , condition, nowpage );
@@ -286,20 +275,8 @@ public class TestDemoController_01 {
 	
 	
 	
-	
-	
-	
-	@GetMapping(path = "/backend/uploadfile/{orderid}") //畫家上傳成品檔案
-	@ResponseBody
-	public String test13_3(@PathVariable("orderid") String orderid , HttpServletRequest request ) {
-		String welcom = "uploadfile: " + orderid;
-		
-		return welcom ;
-	}
-	
-	
 	@PostMapping(path = "/backend/evaluationb2a") //給評價A給B
-	public void test13_4(@RequestBody EvaluationB2ABean evab2a ) {
+	public void EvaluationB2A(@RequestBody EvaluationB2ABean evab2a ) {
 		
 		cmService.EvaluationB2A(evab2a);
 		
@@ -307,17 +284,9 @@ public class TestDemoController_01 {
 	
 	
 	
-	@PostMapping(path = "/backend/productuploader") //給評價A給B
+	@PostMapping(path = "/backend/productuploader") //上傳檔案
 	@ResponseBody
-	public void test13_5(@RequestParam(value="productupload") MultipartFile file,@RequestParam(value="proorderid") Integer orderid,@RequestParam(value="procomment") String comments) throws IOException {
-//		BufferedReader br;
-//		String line;
-//		InputStream is = multipart.getInputStream();
-//		br = new BufferedReader(new InputStreamReader(is));
-//		//讀取檔案並印出
-//		while ((line = br.readLine()) != null) {
-//			System.out.println("line="+line);
-//		}
+	public void ProductUploader(@RequestParam(value="productupload") MultipartFile file,@RequestParam(value="proorderid") Integer orderid,@RequestParam(value="procomment") String comments) throws IOException {
 		
 		Util01 util01 = new Util01();
 		String fileName = util01.fileNameUtil( file.getOriginalFilename());
@@ -352,13 +321,13 @@ public class TestDemoController_01 {
 	}
 	
 	
-	@PostMapping(path = "/backend/filecontentb") //檔案內容(AB共用)
+	@PostMapping(path = "/backend/filecontentb") //檔案內容(AB方共用)
 	@ResponseBody
-	public List<FileContentSendBeanB> test13_6(@RequestBody FileContentReceiveBeanB fcrbb) {
+	public List<FileContentSendBeanB> FileContent(@RequestBody FileContentReceiveBeanB fcrbb) {
 		
-		System.out.println("接收成功");
-		System.out.println(fcrbb.getOrder_id());
-		System.out.println(fcrbb.getBmember_id());
+		//System.out.println("接收成功");
+//		System.out.println(fcrbb.getOrder_id());
+//		System.out.println(fcrbb.getBmember_id());
 		List<FileContentSendBeanB> fileContentB = cmService.FileContentB(fcrbb);
 		
 		return fileContentB;
@@ -369,9 +338,9 @@ public class TestDemoController_01 {
 	
 	@GetMapping(path = "/backend/productimg/{imgfilename}") //檔案內容的圖片(AB共用)
 	@ResponseBody
-	public void test13_7(@PathVariable("imgfilename") String imgFileName , HttpServletRequest request, HttpServletResponse response ) throws IOException {
+	public void ProductImg(@PathVariable("imgfilename") String imgFileName , HttpServletRequest request, HttpServletResponse response ) throws IOException {
 		
-		System.out.println(imgFileName);
+//		System.out.println(imgFileName);
 		String filePath = "C:\\PaintingImg\\Product" + "\\" + imgFileName;
 	
 		FileInputStream fis = new FileInputStream(filePath);
