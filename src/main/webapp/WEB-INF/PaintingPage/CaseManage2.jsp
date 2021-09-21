@@ -9,7 +9,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>CaseManage2</title>
+    <title>案件管理</title>
     <link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
     <link rel="stylesheet" href="../resources/css/CaseManage.css" media="screen">
     <script class="u-script" type="text/javascript" src="../resources/js/jquery.js" defer=""></script>
@@ -131,21 +131,63 @@
 
     /* 以上表單按鈕的BS */
     
+    
 </style>
  
  
+    <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+    	.u-header .u-group-2 {
+    		width: 390px;
+    	}
+   	</style>
+
+
+ <script>
+ 
 
  
+ </script>
  
  
 </head>
 
 <body class="u-body">
 
+<!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 
     <header class="u-clearfix u-header u-header" id="sec-4c0b">
         <div class="u-clearfix u-sheet u-sheet-1">
-            <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+            <a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                 data-image-height="410">
                 <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
             </a>
@@ -172,16 +214,13 @@
                     <ul class="u-nav u-unstyled u-nav-1">
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                href="javascript::" style="padding: 10px 20px;">畫師列表</a>
+                                href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a>
                         </li>
                         <li class="u-nav-item"><a
                                 class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                style="padding: 10px 20px;">案件列表</a>
+                                href="<%= request.getContextPath() %>/caselistpage.controller" style="padding: 10px 20px;">案件列表</a>
                         </li>
-                        <li class="u-nav-item"><a
-                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                style="padding: 10px 20px;">公開畫廊</a>
-                        </li>
+ 
                     </ul>
                 </div>
                 <div class="u-custom-menu u-nav-container-collapse">
@@ -189,14 +228,11 @@
                         <div class="u-sidenav-overflow">
                             <div class="u-menu-close"></div>
                             <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::"
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                         style="padding: 10px 20px;">畫師列表</a>
                                 </li>
                                 <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                         style="padding: 10px 20px;">案件列表</a>
-                                </li>
-                                <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                        style="padding: 10px 20px;">公開畫廊</a>
                                 </li>
                             </ul>
                         </div>
@@ -205,19 +241,28 @@
                 </div>
             </nav>
             <div class="u-container-style u-group u-white u-group-1">
-                <div class="u-container-layout u-container-layout-1">
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1">登入</a>
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2">註冊</a>
-                </div>
+                
             </div>
             <div class="u-container-style u-group u-white u-group-2">
                 <div class="u-container-layout u-container-layout-2">
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                    <a href="<%= request.getContextPath() %>/backend/accountmanager"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+                
+                
+                    <div>
+	                       <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> 
+	                        <a href="/PaintPartyMvcProject/backend"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
+                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
+                        </div>
+                        <div>
+	                        <a href="/PaintPartyMvcProject/login"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
+	                        <a href="/PaintPartyMvcProject/register"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
+                    	</div>
+                    </div>
+                
                 </div>
             </div>
         </div>
@@ -264,7 +309,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="<%= request.getContextPath() %>/backend/systemnotice"
+                                <a href="<%= request.getContextPath() %>/backend/systemnoticemainpage"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
                                     data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
@@ -626,6 +671,43 @@
             </div>
         </nav>
     </footer>
+    
+    
+        <script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    //console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+
+    
+    </script>
+    
+    
+    <script>
+    	
+    var my_status = "<%= session.getAttribute("session_member_status") %>";
+    //console.log(my_status);
+    if(my_status === "一般會員"){
+    	$("#link-tab-14b7").attr("style","display:none");
+    	  	
+    }
+    
+    
+    </script>
+    
+    
+    
+    
 </body>
 
 </html>

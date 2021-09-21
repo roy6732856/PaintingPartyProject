@@ -53,22 +53,7 @@ public class Cases implements Serializable{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="member_id") //發布人ID
 	private Member postedmemberbean;
-	
 
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "ocasesbean") 
-//	Set<Orders> allordersbean = new LinkedHashSet<Orders>(); //所有此案件所成立的訂單
-	
-
-//
-//	public Set<Orders> getAllordersbean() {
-//		return allordersbean;
-//	}
-//
-//	public void setAllordersbean(Set<Orders> allordersbean) {
-//		this.allordersbean = allordersbean;
-//	}
-	
-	
 	public Integer getMember_id() {
 		return member_id;
 	}

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Member;
+import tw.paintingparty.model.PainterTag;
 import tw.paintingparty.painterlist.model.PainterListDAO;
 import tw.paintingparty.painterlist.service.PainterListPageService;
 import tw.paintingparty.painterlist.service.PainterListService;
@@ -38,24 +39,28 @@ public class PainterListController {
 	
 	@Autowired
 	private PainterListPageService plpService;
-
+	
 	@RequestMapping(path = "/painterlist", method = RequestMethod.GET)
 	public String painterListAction(Model m) {
 
-		Long Member = plpService.Pagetotal();
-
-		Long totalPages;
-
-		if (Member % 8 == 0) {
-			Long total = (Member / 8);
-			totalPages = total;
-		} else {
-			Long total = (Member / 8) + 1;
-			totalPages = total;
-		}
-
-		m.addAttribute("totalCases", Member);
-		m.addAttribute("totalPages", totalPages);
+//		Long Member = plpService.Pagetotal();
+//
+//		Long totalPages;
+//
+//		if (Member % 8 == 0) {
+//			Long total = (Member / 8);
+//			totalPages = total;
+//		} else {
+//			Long total = (Member / 8) + 1;
+//			totalPages = total;
+//		}
+//
+//		m.addAttribute("totalCases", Member);
+//		m.addAttribute("totalPages", totalPages);
+		
+		  Member mem1 = mService.showLoginUsername();
+		  
+		  m.addAttribute("member_name", mem1.getMember_name());
 
 		return "PainterList";
 	}
@@ -78,19 +83,16 @@ public class PainterListController {
 
 	}
 
-	@RequestMapping(path = "/painterimage", method = RequestMethod.GET)
+	@RequestMapping(path = "/painterimage/{memberId}", method = RequestMethod.GET)
 	// 畫師照片顯示
-	public void prosessPainterImgById(HttpServletRequest request, HttpServletResponse response, Model m)
+	public void prosessPainterImgById(@PathVariable("memberId") int memberId , HttpServletRequest request, HttpServletResponse response, Model m)
 			throws IOException {
-		HttpSession session = request.getSession();
-		int memOneId = (int) session.getAttribute("session_member_id");
-
-		Member oneMem = plService.selectId(memOneId);
-		// m.addAttribute("member_id", oneMem.getMember_id());
-		// m.addAttribute("Profile_pic_path", oneMem.getProfile_pic_path());
+		Member oneMem = plService.selectId(memberId);
 		String profilePicPath = oneMem.getProfile_pic_path();
 		String profilePic = oneMem.getProfile_pic();
 		String imagePath = profilePicPath + "\\" + profilePic;
+		
+		System.out.println("imagePath : " + imagePath);
 
 		InputStream in = new FileInputStream(new File(imagePath));
 		IOUtils.copy(in, response.getOutputStream());
