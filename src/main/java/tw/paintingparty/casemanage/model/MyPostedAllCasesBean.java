@@ -23,6 +23,8 @@ public class MyPostedAllCasesBean implements Serializable{
 
 	private String case_status;
 	
+	private Integer final_page;
+	
 	
 	public MyPostedAllCasesBean() {
 		super();
@@ -41,6 +43,27 @@ public class MyPostedAllCasesBean implements Serializable{
 		this.price_max = price_max;
 		this.case_status = case_status;
 	}
+
+
+
+
+
+	
+
+
+
+
+	public Integer getFinal_page() {
+		return final_page;
+	}
+
+
+
+
+	public void setFinal_page(Integer final_page) {
+		this.final_page = final_page;
+	}
+
 
 
 

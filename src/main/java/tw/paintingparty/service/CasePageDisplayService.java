@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tw.paintingparty.model.CaseApply;
 import tw.paintingparty.model.CasePageDisplayDAO;
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Example;
@@ -37,6 +38,10 @@ public class CasePageDisplayService {
 	
 	public Example getExampleByCaseId(int caseId){
 		return cpdDAO.getExampleByCaseId(caseId);
+	}
+	
+	public CaseApply getCaseApplyByCaseId(int caseId,int memId) {
+		return cpdDAO.getCaseApplyByCaseId(caseId,memId);
 	}
 	
 }
