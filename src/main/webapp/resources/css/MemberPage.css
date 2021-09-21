@@ -285,3 +285,19 @@ footer {
 .border-left-1-light {
     border-left: .5rem solid #dee2e6;
 }
+.haha{
+    order: 1;
+    display: none;
+    width: 100%;
+    border-bottom: 3px solid #ddd;
+    line-height: 1.6;
+    font-size: .9em;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    border-style: none;
+}
+
+.tab_css input:checked+label+.haha {
+    display: initial;
+}
