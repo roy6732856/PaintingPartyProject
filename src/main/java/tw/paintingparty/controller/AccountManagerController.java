@@ -43,7 +43,7 @@ public class AccountManagerController {
 	}
 	
 	@RequestMapping(path="/backend/accountmanagerchange", method=RequestMethod.POST)
-	@ResponseBody
+
 	public String processAccountManagerChange(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
