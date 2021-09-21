@@ -50,6 +50,35 @@
    	</style>
 </head>
 <body class="u-body">
+
+	<!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 	<div class="container-fluid">
 
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
@@ -119,7 +148,7 @@
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-	                        <a href="/PaintPartyMvcProject/backend/accountmanager"
+	                        <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
 	                        <a href="/PaintPartyMvcProject/backend"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
