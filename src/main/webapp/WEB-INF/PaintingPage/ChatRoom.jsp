@@ -120,6 +120,7 @@
     		  
  			
     	  	if( result.from_user_id === myuser_id ){
+    	  		console.log(result.current_time);
     		  
     		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
     		  

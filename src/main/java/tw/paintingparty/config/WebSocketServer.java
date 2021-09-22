@@ -169,6 +169,7 @@ public class WebSocketServer {
     	ms2cb.setSend_message(	mc2sb.getSend_message()  );
     	ms2cb.setCurrent_time(	util01.getCurrentTime_second()  );
     	
+    	System.out.println("現在時間: " + ms2cb.getCurrent_time());
     	
         //Integer to_memid  = mc2sb.getTo_user_id();
         
