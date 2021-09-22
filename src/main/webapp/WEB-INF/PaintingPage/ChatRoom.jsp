@@ -371,28 +371,58 @@
 <!-- 以下開發區塊 -->
 
 
-<div class="container mt-5">
-	<div class="row" >
-		<div class="offset-sm-2 col-sm-8 border shadow p-5"  style="height:500px;">
-			<h4 class="text-center pb-3">即時聊天室<span class="badge badge-light float-right" id="connect-status">離線中</span></h4>			
-			<form id="form1">
-			  <div class="form-group">				
-				<div class="form-control" style="height:250px;overflow:auto;" id="msg-io"></div>
-			  </div>
-			  <div class="form-group">			  	
-			  	<input class="form-control" type="text" name="msg-input" id="msg-input" placeholder="請輸入訊息"/>
-			  </div>			 
-			  <button type="submit" class="btn btn-primary">送出</button>
-			  <!--<button type="button" class="btn btn-danger float-right" id="disconnect-btn">離線</button> -->
-			</form>
-		</div>
-	</div>
-</div>
+      <div class="u-container-style u-group u-white u-group-1" style="margin-top:27px;">
+        <div class="u-container-layout u-container-layout-1">
+
+
+
+          <!--開發用-->
+          <div style="font-size: large; margin-left:50px;"><b>訊息</b></div>
+          <div style="background-color:#f2f2f2;height:20px;"></div>
+
+          <div id="chat_main_block" style="display:flex;">
+
+            <div class="mt-5 col-md-3" id="conn_container">11111</div>
+
+            <!----------------------->
+
+            <div class="container mt-5 " id="chat_room_container">
+              <div class="row" style="padding-right:40px;">
+                <div class="col-md-12 border shadow p-5" style="height:500px;">
+                  <h4 class="text-center pb-3">即時聊天室<span class="badge badge-light float-right"
+                      id="connect-status">離線中</span></h4>
+                  <form id="form1">
+                    <div class="form-group">
+                      <div class="form-control" style="height:250px;overflow:auto;" id="msg-io"></div>
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" type="text" name="msg-input" id="msg-input" placeholder="請輸入訊息" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">送出</button>
+                    <!--<button type="button" class="btn btn-danger float-right" id="disconnect-btn">離線</button> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
 
 
 
 
 
+
+
+          <!--開發用-->
+
+
+
+
+
+        </div>
+      </div>
 
  
 <!-- 以上開發區塊 -->
