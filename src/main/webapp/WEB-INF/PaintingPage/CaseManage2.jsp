@@ -669,12 +669,12 @@
     <script>
     	
     var my_status = "<%= session.getAttribute("session_member_status") %>";
-    //console.log(my_status);
+    console.log(my_status);
     if(my_status === "一般會員"){
     	$("#link-tab-14b7").attr("style","display:none");
     	  	
     }
-    
+    //因為有用COOKIE來做記住我的功能，所以關掉瀏覽器，再進來本網頁時，會因沒經過LOGIN的流程，導致SESSION的會員狀態沒東西，有時間再改
     
     </script>
     

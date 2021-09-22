@@ -47,6 +47,14 @@ public class Util01 {
 	}
 	
 	
+	public String getCurrentTime_second ( ) {
+//		得到現在的日期，格式為yyyy-MM-dd
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
+    	String nowTimeing = formatter.format( LocalDateTime.now() ).toString();
+		return nowTimeing;
+	}
+	
+	
 	
 	public String[] CaseTagSplit( String CaseTag ) { 
 		//把案件的TAG欄位，以,為切割點，得出數字的陣列，去搜尋標籤表
