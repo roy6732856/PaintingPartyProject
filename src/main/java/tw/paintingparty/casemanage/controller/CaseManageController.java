@@ -315,7 +315,7 @@ public class CaseManageController {
 //		System.out.println(orderid);
 //		System.out.println(comments);
 		
-		System.out.println("接收成功");
+//		System.out.println("接收成功");
 		
 		
 		
