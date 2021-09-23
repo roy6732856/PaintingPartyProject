@@ -199,6 +199,13 @@
 	            		var change_bmember_name = $(this).attr("href").split("/")[$(this).attr("href").split("/").length-2];
 	            		//console.log( change_bmember_id ); //得出典籍的BMEMBER ID
 	           			//console.log( change_bmember_name ); //得出典籍的BMEMBER name
+	           			$("#chat_title").html( "即時聊天室(to " + change_bmember_name + ")" ); //換掉聊天室上方的標題
+	           			
+	           			if( parseInt(change_bmember_id) != parseInt(to_user_id)){ //如果我點選的，跟我上一個連接的對象不同，那就清空內容，並且下面會再連接
+	           				
+	           				$("#msg-io").html("");
+	           				
+	           			}
 	           			
 	           			console.log("原本to_user_id: " + to_user_id);
 	           			console.log("原本opposite_user_name: " + opposite_user_name);
@@ -209,7 +216,7 @@
 	           			console.log("改變後to_user_id: " + to_user_id);
 	           			console.log("改變後opposite_user_name: " + opposite_user_name);
 						
-	           			if(ws != null){
+	           			if(ws != null){ //如果有WS沒關，那就關掉
 	           				ws.close();
 	           				
 	           			}
@@ -541,7 +548,9 @@
             <div class="container mt-5 " id="chat_room_container">
               <div class="row" style="padding-right:40px;">
                 <div class="col-md-12 border shadow p-5 chat_content" style="height:500px;">
-                  <h4 class="text-center pb-3">即時聊天室<span class="badge badge-light float-right"
+                  <h4 class="text-center pb-3">
+                  <div id="chat_title">即時聊天室</div>
+                  <span class="badge badge-light float-right"
                       id="connect-status">離線中</span></h4>
                   <form id="form1">
                     <div class="form-group">
