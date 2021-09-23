@@ -30,9 +30,8 @@ public class AccountManagerController {
 		int memOneId=(int) session.getAttribute("session_member_id");
 		System.out.println("login="+memOneId);
 		
-		  Member mem1 = mService.showLoginUsername();
-		  
-		  m.addAttribute("member_name", mem1.getMember_name());
+		Member mem1 = mService.showLoginUsername();		  
+		m.addAttribute("member_name", mem1.getMember_name());
 
 		Member oneMem = accountManagerService.selectOne(memOneId);
 		m.addAttribute("oneMemEmail", oneMem.getEmail());
@@ -48,6 +47,9 @@ public class AccountManagerController {
 		
 		HttpSession session = request.getSession();
 		int memOneId=(int) session.getAttribute("session_member_id");
+		
+		Member mem1 = mService.showLoginUsername();		  
+		m.addAttribute("member_name", mem1.getMember_name());
 		
 		System.out.println("login="+memOneId);
 		

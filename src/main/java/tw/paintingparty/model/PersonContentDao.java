@@ -2,6 +2,7 @@ package tw.paintingparty.model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -86,6 +87,28 @@ public class PersonContentDao {
 		return "Success";
 	}
 	
+	public String deletePainterTag(int oneMemId) {
+
+		Session session = factory.getCurrentSession();
+		
+		String hql1="delete PainterTag where member_id = :memid";
+		Query query1 = session.createQuery(hql1).setParameter("memid", oneMemId);
+		query1.executeUpdate();
+		
+		return "Success";
+	}
 	
+	public String insertPainterTag(int oneMemId, int tag) {
+		
+		Session session = factory.getCurrentSession();
+		String sql = "insert into painter_tag (tag_id , member_id) values( ? , ?)";
+		
+		NativeQuery addEntity = session.createSQLQuery(sql);
+		addEntity.setParameter(1, tag);
+		addEntity.setParameter(2, oneMemId);		
+		addEntity.executeUpdate();
+				
+		return "Success";
+	}
 	
 }
