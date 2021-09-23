@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +45,39 @@ public class Util01 {
 //		String finalhql2 = hql2 + selectStr;
 //		System.out.println(finalhql2);
     	
+	}
+	
+	
+	public String selectMyNameInWebSocket( Integer myid ) {
+		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
+		String user="sa";
+		String password="as";
+		String sql = "select * from member where member_id = ? ;";
+		
+		String myname = ""; 
+		try (Connection conn = DriverManager.getConnection(url,user,password)){ //try with resource可以不用自己關
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,myid );
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			myname = rs.getString("member_name");
+			
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return myname;
+
+	}
+	
+	
+	public String getCurrentTime_second ( ) {
+//		得到現在的日期時間，格式為yyyy-MM-dd HH:mm:ss
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd  HH:mm:ss");
+    	String nowTimeing = formatter.format( LocalDateTime.now() ).toString();
+		return nowTimeing;
 	}
 	
 	
