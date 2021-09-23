@@ -1,7 +1,14 @@
 package tw.paintingparty.painterlist.model;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
@@ -14,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Member;
+import tw.paintingparty.model.PainterTag;
 
 
 @Repository("painterListDAO")
@@ -53,22 +61,57 @@ public class PainterListDAO {
 	
 	public List<Member> search(String select1 , String select2){
 
-		List<Member> listMemberInfo = null;
+		
 		Session session = sessionFactory.getCurrentSession(); 
-		// SELECT * from member where tag_personal like '%1% ' or tag_personal like '%2%'
-		String hql = "FROM Member m WHERE m.tag_personal like :select1 and tag_personal like :select2 and member_status = '畫師'";
+		// step 01 : select distinct member_id from painter_tag where tag_id=1 or tag_id =2;
+
+		List<PainterTag> lstPainterTag = null;
+		List<Integer> lstmemberId = null;
+	//	int select1 = 1;
+	//	int select2 = 2;
+		
+		if("".equals(select1) && "".equals(select2)) {// 預設起始是全部的資料
+			String hql1="from PainterTag";
 			try {
-				Query<Member> query  = session.createQuery(hql,Member.class)
-								.setParameter("select1", "%"+ select1 + "%")
-								.setParameter("select2", "%"+ select2 + "%");
-				
-				listMemberInfo = query.list();
+				Query<PainterTag> query  = session.createQuery(hql1,PainterTag.class);
+				lstPainterTag = query.getResultList();
 			} catch(NoResultException e) {
-				listMemberInfo = null;
+				lstPainterTag = null;
 			} 
+		}else {// 點擊按鈕查條件
+			String hql1="from PainterTag where tag_id=:select1 or tag_id = :select2";
+			try {
+				Query<PainterTag> query  = session.createQuery(hql1,PainterTag.class)
+								.setParameter("select1", select1 )
+								.setParameter("select2", select2 );
+				lstPainterTag = query.getResultList();
+			} catch(NoResultException e) {
+				lstPainterTag = null;
+			} 
+		}
+		
+		
+	//	System.out.println("lstPainterTag.size() => " + lstPainterTag.size());
+		
+		// 過濾重複的物件
+		Map<Integer, Member> map = new HashMap<Integer,Member>();
+		for(int i = 0 ;i<lstPainterTag.size();i++) {
+			System.out.println("lstPainterTag.memberBean => " + lstPainterTag.get(i).getMemberbean().getMember_id());
+			Integer key = lstPainterTag.get(i).getMemberbean().getMember_id();
+			if(map.get(key) == null) { // 判斷是否已經儲存
+				// 未存在
+				if("畫師".equals(lstPainterTag.get(i).getMemberbean().getMember_status())) {
+					map.put(key , lstPainterTag.get(i).getMemberbean());
+				}
+			}
+		}
+		System.out.println("map.size() => " + map.size());
+		List<Member> listMemberInfo = new ArrayList<Member>(map.values());
 		return listMemberInfo;
 	}
 	
+	
+	//---------------------------------------------	
 	
 	public Member selectId(int memberid) {
 		Session session = sessionFactory.getCurrentSession();
