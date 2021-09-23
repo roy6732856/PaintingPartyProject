@@ -242,7 +242,9 @@
 	           	    	  //console.log("收到");
 	           	    	  console.log(event.data);
 	           	    	  console.log(typeof(event.data));
+	           	    	  //console.log("type: " + typeof( parseInt(to_user_id) ));
 	           	    	  eval("var result=" + event.data); //eval=將()內的字串當成JS來執行
+	           	    	  //console.log("type2: " + typeof( parseInt(result.from_user_id) ) );
 	           	    	  
 	           	    	  //console.log(typeof( result.from_user_id ) );
 	           	    	  //console.log(typeof( myuser_id ) );
@@ -259,7 +261,7 @@
 	           	    		  
 	           	    		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
 	           	    		  
-	           	    	  }else{
+	           	    	  }else if( parseInt(result.from_user_id) === parseInt(to_user_id) ){
 	           	    		  console.log("SEMD的對方名字: " + opposite_user_name);
 	           	    		  $("#msg-io").append(`<h6 style="color:black;">【\${opposite_user_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
 	           	    		  

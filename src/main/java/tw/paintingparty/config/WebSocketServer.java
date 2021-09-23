@@ -64,11 +64,11 @@ import tw.teamUtil.Util01;
 @ServerEndpoint("/endpoint")
 public class WebSocketServer {    
     	
-		//定義一個全域性變數集合sockets,使用者存放每個登入使用者的通訊管道
+		//定義一個全域性變數集合sockets,使用者存放每個登入使用者的通訊管道，再線使用者有幾個，就有幾個
 	   private  static  Set<WebSocketServer>  sockets=new HashSet<WebSocketServer>();
 	    //定義一個全域性變數Session,用於存放登入使用者的使用者名稱
 	    private  Session  session;
-	    //定義一個全域性變數map，key為使用者名稱，該使用者對應的session為value
+	    //定義一個全域性變數map，key為使用者名稱，該使用者對應的session為value，放在線使用者的會話物件用，每個MEMBER_ID若進來，就會有一個會話物件
 	    private  static  Map<Integer, Session>  map=new HashMap<Integer, Session>();
 	    
 	    private HttpSession httpsession = null;
@@ -153,7 +153,6 @@ public class WebSocketServer {
     }
     
     @OnMessage //當從客戶端收到訊息時，做 
-//可以用IF，決定讓誰的SEND上推播，但一樣都會接收到資料	
     public void onMessage(Session session,String message)  throws IOException {    
     	
     	Util01 util01 = new Util01();
