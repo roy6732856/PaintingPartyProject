@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.AccountManagerService;
+import tw.paintingparty.service.MemberService;
 
 @Controller
 public class AccountManagerController {
@@ -18,12 +20,19 @@ public class AccountManagerController {
 	@Autowired
 	private AccountManagerService accountManagerService;
 	
+	@Autowired
+	private MemberService mService;
+	
 	@RequestMapping(path="/backend/accountmanager", method=RequestMethod.GET)
 	public String processAccountManager(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
 		int memOneId=(int) session.getAttribute("session_member_id");
 		System.out.println("login="+memOneId);
+		
+		  Member mem1 = mService.showLoginUsername();
+		  
+		  m.addAttribute("member_name", mem1.getMember_name());
 
 		Member oneMem = accountManagerService.selectOne(memOneId);
 		m.addAttribute("oneMemEmail", oneMem.getEmail());
@@ -34,6 +43,7 @@ public class AccountManagerController {
 	}
 	
 	@RequestMapping(path="/backend/accountmanagerchange", method=RequestMethod.POST)
+
 	public String processAccountManagerChange(HttpServletRequest request, Model m) {
 		
 		HttpSession session = request.getSession();
