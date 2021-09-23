@@ -27,6 +27,15 @@
 		"name": "框架final project",
 		"logo": "images/LOGO-TEST-22.png"
 }</script>
+
+	    <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+    	.u-header .u-group-2 {
+    		width: 390px;
+    	}
+   	</style>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="AccoutManager">
     <meta property="og:description" content="">
@@ -37,7 +46,42 @@
     <!-- JavaScript Bundle with Popper -->
     <script src="bootstrap-5.0.0-dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
+  <body class="u-body">
+  
+  
+  
+  <!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+  
+  
+  
+    
+  <header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570" data-image-height="410">
           <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
         </a>
@@ -51,19 +95,21 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a>
-</li><li class="u-nav-item"><a href="<%= request.getContextPath() %>/caselistpage.controller" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a>
-</li></ul>
+            <ul class="u-nav u-unstyled u-nav-1">
+			<li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a></li>
+            <li class="u-nav-item"><a href="<%= request.getContextPath() %>/caselistpage.controller" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a></li>
+<!--             <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a></li> -->
+            </ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::" style="padding: 10px 20px;">畫師列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">案件列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">公開畫廊</a>
-</li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
+				<li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">案件列表</a></li>
+<!-- 				<li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">公開畫廊</a></li> -->
+				</ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -76,12 +122,18 @@
           </div>
         </div>
         <div class="u-container-style u-group u-white u-group-2">
-          <div class="u-container-layout u-container-layout-2">
-            <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
-          </div>
+          <div class="u-container-layout u-container-layout-2">          
+<!--             <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a> --!>
+<!--             <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a> -->
+
+			<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+                class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" >發布案件</a>
+            <a href="<%= request.getContextPath() %>/backend/accountmanager"
+                class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" >帳號管理</a>
+           	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" ><%= request.getAttribute("member_name") %></span>
+
         </div>
-      </div></header>
+       </div></header>
     <section class="u-align-left u-clearfix u-grey-5 u-section-1" id="sec-8eb0">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
@@ -121,8 +173,8 @@
 <!--                         <form action="accountmanagerchange" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;"> -->
                        <form action="accountmanagerchange" method="post"  style="padding: 10px;">   
                           <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">編輯信箱</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="oneMemEmail">
+                            <label for="email" class="form-label">編輯信箱</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1" name="oneMemEmail">
                           </div>
                           <div class="mb-3">
                               <label for="exampleFormControlInput2" class="form-label">銀行帳號</label>
@@ -168,6 +220,7 @@
           </div>
         </div>
       </div>
+    </div>  
     </section>
     
     
@@ -180,22 +233,45 @@
 </defs></svg>
           </a>
         </div>
-        <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">聯絡我們</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">常見問題</a>
-</li></ul>
-        </div>
-        <div class="u-custom-menu u-nav-container-collapse">
-          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-            <div class="u-sidenav-overflow">
-              <div class="u-menu-close"></div>
-              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">聯絡我們</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">常見問題</a>
-</li></ul>
-            </div>
-          </div>
-          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
+<!--         <div class="u-custom-menu u-nav-container"> -->
+<!--           <ul class="u-nav u-unstyled u-nav-1"> -->
+<!--           <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">聯絡我們</a></li> -->
+<!-- 		  <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">常見問題</a></li> -->
+<!-- 		  </ul> -->
+<!--         </div> -->
+<!--         <div class="u-custom-menu u-nav-container-collapse"> -->
+<!--           <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav"> -->
+<!--             <div class="u-sidenav-overflow"> -->
+<!--               <div class="u-menu-close"></div> -->
+<!--               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"> -->
+<!--               <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">聯絡我們</a></li> -->
+<!--               <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">常見問題</a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div> -->
+<!--         </div> -->
       </nav></footer>
+          <script type="text/javascript">
+    //登入狀態與登出狀態功能列表
+    //透過AllFilter 傳過來的session
+//     <h1>${sessionScope.login}</h1>
+    console.log(${sessionScope.login})
+    if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    }else{
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
+    }
+    //登出
+    function logout(){
+    	
+    	window.location.href = '/PaintPartyMvcProject/logout'
+    }
+    
+    </script>
   </body>
 </html>
