@@ -99,6 +99,7 @@ public class WebSocketServer {
     	System.out.println("近來2");
     	
     	
+    	
     	//取得當前登入聊天室的使用者ID
     	String queryString = session.getQueryString();
     	System.out.println("近來3");
@@ -137,7 +138,7 @@ public class WebSocketServer {
     		
     	}
     	
-    	
+    	System.out.println("共長: " + sockets.size());
     	
     }
     
@@ -146,6 +147,8 @@ public class WebSocketServer {
     	
     	//移除退出登入使用者的通訊管道
     	sockets.remove(this);
+    	System.out.println("有人close了");
+    	System.out.println("共長: " + sockets.size());
 //        broadCast(String.format("【#會員ID: %s】%s", this.my_userid , "Connection 關閉了..."));        
     }
     

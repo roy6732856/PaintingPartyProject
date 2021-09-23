@@ -67,105 +67,7 @@
  <script>
  //代做
     $(function(){
-    	//以下WS用
-    	var host = window.location.host;
-		//var host2 = document.domain; //不包括PORT，假設localhost:8080，那就會只拿到localhost
-		var myuser_id = parseInt("<%= session.getAttribute("session_member_id") %>");
-		
-		//以下客戶端傳送訊息包裝用
-		var send_message;
-		var to_user_id = 4; //先寫死
-		
-		var url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
-
-		
-		var ws;
-		
-		
-		//以下獲取自己與對方的姓名(對方的要配合CLICK事件)，不用每次傳訊息都對資料庫搜索一次，只為了得到對方姓名
-		var myuser_name = $("[name=member_name]").html();
-		var opposite_user_name = "jack"; // 先寫死
-		console.log(opposite_user_name);
-		
-      	ws = new WebSocket(url);//開啟ws
-      	
-      	ws.onopen = function(){
-        console.log('Connection 開啟了...');
-        
-        $("#connect-status").text("連線中"); 
-        
-      	}
-      	
-      ws.onclose = function(){
-        console.log('Connection 關閉了...');
-        
-        $("#connect-status").text("離線中"); 
-      }
-      
-      
-      ws.onmessage = function(event) { //接收到伺服端推下來的資料時，要做
-    	  //console.log("收到");
-    	  console.log(event.data);
-    	  console.log(typeof(event.data));
-    	  eval("var result=" + event.data); //eval=將()內的字串當成JS來執行
-    	  
-    	  //console.log(typeof( result.from_user_id ) );
-    	  //console.log(typeof( myuser_id ) );
-    	  
-    	  if( result.message_status === 0 ){ //若是系統訊息
-    		
-    		  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`);
-    	  
-    	  }else{ //若是私人訊息
-    		  
- 			
-    	  	if( result.from_user_id === myuser_id ){
-    	  		console.log(result.current_time);
-    		  
-    		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
-    		  
-    	  }else{
-    		  
-    		  $("#msg-io").append(`<h6 style="color:black;">【\${opposite_user_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
-    		  
-    	 	 } // 比較是不是自己else end
-    	  
-    	  
-    	  }//若是私人訊息 else end
-    	  
-    	  
-    	 
-    	  
-          var msgIoDiv = $("#msg-io")[0];	   //因為#msg-io是INPUT，所以後面要加[0]，才娶的到所要的DIV元素
-          msgIoDiv.scrollTo(0,msgIoDiv.scrollHeight);	  //決定當滾輪出現時，要預設滾到哪裡，這裡預設Y軸要滾到那個DIV的最上方，我們看見就會是最下方
-          //element.scrollTo(x-coord, y-coord)
-          //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
-          //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
-      }	
-      
-      
-      
-      $("#form1").submit(function(){ //送出訊息
-    	  
-  		//to_user_id = 4; // 先寫死
-		send_message = $("#msg-input").val();
-		var jsonobject = null;
-		jsonobject = {
-				"to_user_id":to_user_id,
-	                "send_message":send_message,
-	            };
-		//把訊息變成JSON字串，傳到伺服端
-		var json = JSON.stringify(jsonobject);
-        
-        ws.send(json);
-        $("#msg-input").val(""); //清空訊息欄
-        
-        return false;
-      });
-      
-     	//$("#disconnect-btn").click(function(){		
-     	//	ws.close();			
-    // 	});
+    	
     
     });
     
@@ -210,9 +112,47 @@
     $(document).ready(ajaxreq_chat_conn);
     
     function ajaxreq_chat_conn (){
+ 
+    	
+    	console.log(321);
+    	//-------以下WS用 參數設置
+    	var host = window.location.host;
+		//var host2 = document.domain; //不包括PORT，假設localhost:8080，那就會只拿到localhost
+		var myuser_id = parseInt("<%= session.getAttribute("session_member_id") %>");
+		
+		//以下客戶端傳送訊息包裝用
+		var send_message;
+		var to_user_id = 0; //先寫死
+		
+		var url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+
+		
+		var ws;
+		
+		
+		//以下獲取自己與對方的姓名(對方的要配合CLICK事件)，不用每次傳訊息都對資料庫搜索一次，只為了得到對方姓名
+		var myuser_name = $("[name=member_name]").html();
+		var opposite_user_name = ""; // 先寫死
+		console.log(opposite_user_name);
+		
+    	//----以上WS用
+    	
+    	//chat_func(url , myuser_name , opposite_user_name , myuser_id , send_message , ws , to_user_id);
+    	
+    	
+		//ws = new WebSocket(url);
+    	
+    	
+    	
+
+    	
+    	
+    	//---------------------------------------------------
+
+    	
     	console.log(123);
         $("#conn_container").html("");//清空左邊conn
-        $("#chat_room_container .chat_content").html("");//清空右邊聊天室
+        //$("#chat_room_container .chat_content").html("");//清空右邊聊天室
    	 
         $.ajax({ //代做
             url: `<%= request.getContextPath() %>/backend/chatconnlist`,                        // url位置
@@ -230,7 +170,7 @@
 	           		 
 	           		$("#conn_container").append(`
 	           				
-	           			 <a href="javascript:" style="text-decoration:none;">
+	           			 <a href="/\${data[i].member_name_b}/\${data[i].member_id_b}" style="text-decoration:none;" class="conn_open" > 
 
 	                        <div class="conn_block mb-4 border shadow" >
 
@@ -247,12 +187,136 @@
 	           				
 	           				
 	           				`);
-	           		 
-	           		 
-	 
+
 	           		 
 	           	 }//end for
-           	 
+	           	 
+	           	
+	           	 
+	            	$("#conn_container .conn_open").click(function(){
+						
+	            		var change_bmember_id = $(this).attr("href").split("/")[$(this).attr("href").split("/").length-1];
+	            		var change_bmember_name = $(this).attr("href").split("/")[$(this).attr("href").split("/").length-2];
+	            		//console.log( change_bmember_id ); //得出典籍的BMEMBER ID
+	           			//console.log( change_bmember_name ); //得出典籍的BMEMBER name
+	           			
+	           			console.log("原本to_user_id: " + to_user_id);
+	           			console.log("原本opposite_user_name: " + opposite_user_name);
+	           			
+	           			to_user_id = change_bmember_id;
+	           			opposite_user_name = change_bmember_name;
+	           			
+	           			console.log("改變後to_user_id: " + to_user_id);
+	           			console.log("改變後opposite_user_name: " + opposite_user_name);
+						
+	           			if(ws != null){
+	           				ws.close();
+	           				
+	           			}
+	           			
+	           			url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+	           			console.log("12311111");
+	           			console.log(url);
+	           			
+	           			//----------------------------------
+	           			
+	           			console.log(ws);
+	           			
+	           			ws = new WebSocket(url);//開啟ws
+	           	      	
+	           	      	ws.onopen = function(){
+	           	        console.log('Connection 開啟了...');
+	           	        
+	           	        $("#connect-status").text("連線中"); 
+	           	        
+	           	      	}
+	           	      	
+	           	      ws.onclose = function (){
+	           	        console.log('Connection 關閉了...');
+	           	        
+	           	        $("#connect-status").text("離線中"); 
+	           	      }
+	           	      
+	           	      
+	           	      ws.onmessage = function(event) { //接收到伺服端推下來的資料時，要做
+	           	    	  //console.log("收到");
+	           	    	  console.log(event.data);
+	           	    	  console.log(typeof(event.data));
+	           	    	  eval("var result=" + event.data); //eval=將()內的字串當成JS來執行
+	           	    	  
+	           	    	  //console.log(typeof( result.from_user_id ) );
+	           	    	  //console.log(typeof( myuser_id ) );
+	           	    	  
+	           	    	  if( result.message_status === 0 ){ //若是系統訊息
+	           	    		
+	           	    		  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`);
+	           	    	  
+	           	    	  }else{ //若是私人訊息
+	           	    		  
+	           	 			
+	           	    	  	if( result.from_user_id === myuser_id ){
+	           	    	  		console.log(result.current_time);
+	           	    		  
+	           	    		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
+	           	    		  
+	           	    	  }else{
+	           	    		  console.log("SEMD的對方名字: " + opposite_user_name);
+	           	    		  $("#msg-io").append(`<h6 style="color:black;">【\${opposite_user_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
+	           	    		  
+	           	    	 	 } // 比較是不是自己else end
+	           	    	  
+	           	    	  
+	           	    	  }//若是私人訊息 else end
+	           	    	  
+	           	    	  
+	           	    	 
+	           	    	  
+	           	          var msgIoDiv = $("#msg-io")[0];	   //因為#msg-io是INPUT，所以後面要加[0]，才娶的到所要的DIV元素
+	           	          msgIoDiv.scrollTo(0,msgIoDiv.scrollHeight);	  //決定當滾輪出現時，要預設滾到哪裡，這裡預設Y軸要滾到那個DIV的最上方，我們看見就會是最下方
+	           	          //element.scrollTo(x-coord, y-coord)
+	           	          //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
+	           	          //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
+	           	      }	
+	           	      
+	           	      
+	           	      
+	           	     
+	           	      
+	           	     	//$("#disconnect-btn").click(function(){		
+	           	     	//	ws.close();			
+	           	    // 	});
+	           			
+	           			
+	           			
+	           			
+	           			//------------------------------
+	           			
+	           			
+	           			//chat_func(url , myuser_name , opposite_user_name , myuser_id , send_message , ws , to_user_id);
+	           			
+		           		return false;
+		           		
+		           	}); //conn_open click end	           	 
+	           	 
+	           	 
+	            	 $("#form1").submit(function(){ //送出訊息
+		           	    	console.log("---------Send------------");
+		           	  		//to_user_id = 4; // 先寫死
+		           			send_message = $("#msg-input").val();
+		           			var jsonobject = null;
+		           			jsonobject = {
+		           					"to_user_id":to_user_id,
+		           		                "send_message":send_message,
+		           		            };
+		           			console.log("TO ID: " + to_user_id);
+		           			//把訊息變成JSON字串，傳到伺服端
+		           			var json = JSON.stringify(jsonobject);
+		           	        
+		           	        ws.send(json);
+		           	        $("#msg-input").val(""); //清空訊息欄
+		           	        
+		           	        return false;
+		           	      });
            	 
            	 
             }else{
@@ -263,6 +327,8 @@
             }//end if
             
             
+            
+          
             
             
             
@@ -562,7 +628,18 @@
     
     </script>
   
+    <script>
     
+    
+	function chat_func(url , myuser_name , opposite_user_name , myuser_id , send_message , ws , to_user_id){
+		
+		
+		
+		
+	};
+    
+    
+    </script>
     
     
 </body>
