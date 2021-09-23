@@ -201,7 +201,7 @@
             type: 'post', 
             error: function (xhr) { $("#conn_container").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
             success: function (data) { 
-            	$("#conn_container").html( JSON.stringify(data) ); //demo
+            	//$("#conn_container").html( JSON.stringify(data) ); //demo
             	
             var i = 0; 
 					
