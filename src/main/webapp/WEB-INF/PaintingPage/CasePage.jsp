@@ -130,9 +130,7 @@
 							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 							href="<%=request.getContextPath()%>/caselistpage.controller"
 							style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -146,8 +144,7 @@
 									href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
 								<li class="u-nav-item"><a class="u-button-style u-nav-link"
 									style="padding: 10px 20px;">案件列表</a></li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link"
-									style="padding: 10px 20px;">公開畫廊</a></li>
+								
 							</ul>
 						</div>
 					</div>
@@ -271,7 +268,7 @@
 
 								</div>
 									<a
-										href="<%= request.getContextPath() %>/caseapplymainpage.controller/${caseid}"
+										href="<%= request.getContextPath() %>/caseapplycheck/${caseid}"
 										class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-5 u-btn-1"
 										name="applyCase" style="display: none">應徵此案件</a>
 								</div>
@@ -427,9 +424,14 @@
     
     var s = '畫師';
     var a = '${attr}';
+   	var whoOwn = '${memId}'
+    var whoLogin = '${member_id}';
+    var whoApply = '${whoApply}';
     
-    if(a==s){//判斷身分=畫師
-    	$("[name=applyCase]").show()
+    if(a==s&&whoOwn != whoLogin){//判斷身分=畫師   登入者不能對自己的案件做申請
+    	if(whoLogin!=whoApply){ //判斷是否已經應徵過一次案件
+    		$("[name=applyCase]").show()
+    	}
     }
     //登出
     function logout(){

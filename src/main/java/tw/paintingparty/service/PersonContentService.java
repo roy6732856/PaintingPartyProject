@@ -57,4 +57,16 @@ public class PersonContentService {
 		return Result;
 	}
 	
+	public String deletePainterTag(int oneMemId) {
+		
+		String Result = personContentDao.deletePainterTag(oneMemId);
+		return Result;
+	}
+	
+	public String insertPainterTag(int oneMemId, int tag) {
+		
+		String Result = personContentDao.insertPainterTag(oneMemId, tag);
+		return Result;
+	}
+
 }

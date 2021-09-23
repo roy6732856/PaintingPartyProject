@@ -1,7 +1,10 @@
 package tw.paintingparty.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +31,37 @@ public class CaseApplyQuotationController {
 	 @Autowired
 	 private MemberService mService;
 	
-	@RequestMapping(path = "/caseapplymainpage.controller/{caseid}",method = RequestMethod.GET)
-	public String processCaseApplyQuotationMainPage(HttpSession session,@PathVariable("caseid")int caseid,Model m) {
+	 @RequestMapping(path = "/caseapplycheck/{caseid}",method = RequestMethod.GET)
+	 public void processCheckStatus(HttpSession session,HttpServletRequest request, HttpServletResponse response,@PathVariable("caseid")int caseid) throws IOException {
+		 String status = (String)session.getAttribute("session_member_status");
+		 session.setAttribute("caseid", caseid);
+		 if(status.equals("畫師")) {
+			 response.sendRedirect( request.getContextPath() + "/caseapplymainpage.controller");
+		 }else {
+			 response.sendRedirect( request.getContextPath() + "/login");
+		 }
+	 }
+	 
+	@RequestMapping(path = "/caseapplymainpage.controller",method = RequestMethod.GET)
+	public String processCaseApplyQuotationMainPage(HttpSession session,Model m) {
 		//把收到的caseid 放進"caseid"這個參數中
-		session.setAttribute("caseid", caseid);
-		System.out.println("顯示報價單時的caseid:" + caseid);
+//		session.setAttribute("caseid", caseid);
+//		System.out.println("顯示報價單時的caseid:" + caseid);
 		
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
 		m.addAttribute("member_id",mem1.getMember_id());
 		
 		return "Quotation";
+		
 	}
 	
 	@Autowired
 	private CaseApplyQuotationService caqService;
 	
 	@RequestMapping(path = "/addapply.controller",method = RequestMethod.POST)
-	public String processCaseApplyQuotaitonInsertAction(@RequestParam("spendDay")int spendDay,
-			@RequestParam("expectedBudget")int expectedBudget,HttpSession session) {
+	public void processCaseApplyQuotaitonInsertAction(@RequestParam("spendDay")int spendDay,
+			@RequestParam("expectedBudget")int expectedBudget,HttpSession session,HttpServletResponse response,HttpServletRequest request) throws IOException {
 		
 		//由上一個controllerg收過來的caseid
 		//session等級較適合用在關掉瀏覽器之前都需要存在的物件  ex.登入的會員ID...
@@ -75,9 +90,9 @@ public class CaseApplyQuotationController {
 		
 		caqService.addApply(c1);
 		
-		
+		response.sendRedirect( request.getContextPath() + "/caselistpage.controller");
 //		
-		return "success";
+//		return "CaseList4";
 	}
 	
 	

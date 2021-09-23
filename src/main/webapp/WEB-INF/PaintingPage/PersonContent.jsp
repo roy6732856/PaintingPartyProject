@@ -32,8 +32,48 @@
     <meta property="og:title" content="PersonContent">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
+    
+    <style type="text/css">
+   		.fix-padding {
+    		padding: 10px 46px;
+    	}
+    	.u-header .u-group-2 {
+    		width: 390px;
+    	}
+   	</style>
   </head>
-  <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
+  <body class="u-body">
+  
+  <!-- Messenger 洽談外掛程式 Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your 洽談外掛程式 code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "109057744863042");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+  
+  
+  <header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
         <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570" data-image-height="410">
           <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
         </a>
@@ -47,19 +87,21 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a>
-</li><li class="u-nav-item"><a href="<%= request.getContextPath() %>/caselistpage.controller" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a>
-</li></ul>
+            <ul class="u-nav u-unstyled u-nav-1">
+            <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" href="<%= request.getContextPath() %>/painterlist" style="padding: 10px 20px;">畫師列表</a></li>
+            <li class="u-nav-item"><a href="<%= request.getContextPath() %>/caselistpage.controller" class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">案件列表</a></li>
+<!--             <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 20px;">公開畫廊</a></li> -->
+            </ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::" style="padding: 10px 20px;">畫師列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">案件列表</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">公開畫廊</a>
-</li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="javascript::" style="padding: 10px 20px;">畫師列表</a></li>
+				<li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">案件列表</a></li>
+<!-- 				<li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">公開畫廊</a></li> -->
+				</ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -73,8 +115,14 @@
         </div>
         <div class="u-container-style u-group u-white u-group-2">
           <div class="u-container-layout u-container-layout-2">
-            <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-            <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
+<!--             <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a> --!>
+<!--             <a href="139992805" class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a> -->
+            <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+                class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" >發布案件</a>
+            <a href="<%= request.getContextPath() %>/backend/accountmanager"
+                class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" >帳號管理</a>
+           	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" ><%= request.getAttribute("member_name") %></span>
+            
           </div>
         </div>
       </div></header>
@@ -114,7 +162,7 @@
                       <div class="u-container-style u-grey-15 u-group u-radius-5 u-shape-round u-group-2">
                         <div class="u-container-layout u-container-layout-5">
                           <h6 class="u-text u-text-default u-text-1">個人頁面網址</h6>
-                          <a href="<%= request.getContextPath() %>/memberpage" class="u-border-2 u-border-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-8"> 瀏覽 個​人頁面</a>
+                          <a href="http://localhost:8080/PaintPartyMvcProject/memberpage/${id}" class="u-border-2 u-border-palette-1-base u-btn u-button-style u-none u-text-palette-1-base u-btn-8"> 瀏覽 個​人頁面</a>
                         </div>
                       </div>
                       <div class="u-clearfix u-custom-html u-custom-html-1" style="margin-left:50px">
@@ -127,11 +175,11 @@
                               </form>
                           </div>
 							<form action="personcontentchange" method="post" enctype="multipart/form-data">
-							 <h5 style="font-weight:bold">畫家自定義標籤</h5>								
-                             <div class="left sele-set">
+							 <h5 style="font-weight:bold" id="painter2">畫家自定義標籤</h5>								
+                             <div class="left sele-set" id="painter3">
                                 <label for="type">創作類別</label>
                                 <select method="post" id="Select1" name="tag1" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;" >
-                                    <option selected>${tagContent1}</option>
+                                    <option selected value=${sTag1}>${tagContent1}</option>
                                     <option value="1">插畫</option>
                                     <option value="2">貼圖</option>
                                     <option value="3">頭貼</option>
@@ -141,10 +189,10 @@
                                     <option value="7">風景</option>
                                 </select>
                               </div>
-                              <div class="right sele-set mb-3 mt-3">
+                              <div class="right sele-set mb-3 mt-3" id="painter4">
                                   <label for="type">創作風格</label>
                                   <select method="post" id="Select2" name="tag2" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;">
-                                      <option selected>${tagContent2}</option>
+                                      <option selected value=${sTag2}>${tagContent2}</option>
                                       <option value="8">日系</option>
                                       <option value="9">歐美風</option>
                                       <option value="10">武俠風</option>
@@ -193,38 +241,38 @@
 </defs></svg>
           </a>
         </div>
-        <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">聯絡我們</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">常見問題</a>
-</li></ul>
-        </div>
-        <div class="u-custom-menu u-nav-container-collapse">
-          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-            <div class="u-sidenav-overflow">
-              <div class="u-menu-close"></div>
-              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">聯絡我們</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">常見問題</a>
-</li></ul>
-            </div>
-          </div>
-          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
+<!--         <div class="u-custom-menu u-nav-container"> -->
+<!--           <ul class="u-nav u-unstyled u-nav-1"> -->
+<!--           <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">聯絡我們</a></li> -->
+<!--           <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base" style="padding: 10px 96px;">常見問題</a></li> -->
+<!--           </ul> -->
+<!--         </div> -->
+<!--         <div class="u-custom-menu u-nav-container-collapse"> -->
+<!--           <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav"> -->
+<!--             <div class="u-sidenav-overflow"> -->
+<!--               <div class="u-menu-close"></div> -->
+<!--               <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">聯絡我們</a></li> -->
+<!--               <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 96px;">常見問題</a></li> -->
+<!--               </ul> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div> -->
+<!--         </div> -->
       </nav></footer>
+      
       <script type="text/javascript">
 
           let painter0=document.getElementById("painter0").innerText;
           console.log(painter0);
           if(painter0=="畫師"){
             painter1.style.display="none";
-          }	          
-	
-// 	      function changePainter(){
-// 	          let painter0=document.getElementById("painter0").innerText;
-// 	          console.log(painter0);
-// 	          if(painter0=="畫師"){
-// 	            painter1.style.display="none";
-// 	          }	          
-// 	        }      
+          }
+          if(painter0!="畫師"){
+        	  painter2.style.display="none";
+        	  painter3.style.display="none";
+        	  painter4.style.display="none";
+          }
+	  
       </script>
   </body>
 </html>

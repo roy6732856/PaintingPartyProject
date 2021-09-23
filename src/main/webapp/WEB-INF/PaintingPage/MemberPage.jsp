@@ -926,8 +926,10 @@
                         <a href="/PaintPartyMvcProject/memberpage/\${evaObj.memIdS}" target="_blank">
                             <div class="w-3 mr-3">
                                 <div
-                                    class="text center rounded-circle square-cover">
-                                    <img src="/PaintPartyMvcProject/memberpageshowpic/\${evaObj.memIdS}">
+                                    class="text center square-cover">
+                                    <img src="/PaintPartyMvcProject/memberpageshowpic/\${evaObj.memIdS}" 
+                                    	style="width: 100%; height: 120px"
+                                    	class="rounded-circle">
                                 </div>
                             </div>
                         </a>
@@ -998,7 +1000,9 @@
                                 <div class="w-3 mr-3">
                                     <div
                                         class="text center rounded-circle square-cover">
-                                        <img src="/PaintPartyMvcProject/memberpageshowpic/\${evab2aObj.memIdR}">
+                                        <img src="/PaintPartyMvcProject/memberpageshowpic/\${evab2aObj.memIdR}"
+                                        	style="width: 100%; height: 120px"
+                                            	class="rounded-circle">
                                     </div>
                                 </div>
                             </a>
