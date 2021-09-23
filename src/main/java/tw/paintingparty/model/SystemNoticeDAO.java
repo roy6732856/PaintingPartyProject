@@ -31,29 +31,28 @@ public class SystemNoticeDAO {
 		List<SystemNotice> list1 = query1.getResultList();
 		return list1;
 
-//  String hql = "from SystemNotice where system_notice_id=:snid >= 1";
-//  Query<SystemNotice> query = session.createQuery(hql, SystemNotice.class);
-//  
-//  
-//  return query.list();
+
 	}
 
-	public List<OrderNotice> order() {
+	public List<OrderNotice> orderAll() {
 
 		Session session = sessionfactory.getCurrentSession();
-
+		
 		String hql = "from OrderNotice o order by o.notice_date desc";
+
+		//String hql = "from OrderNotice o where o.notifiedmemberbean.member_id=:member_id order by o.notice_date desc";
+		
+		//Query<OrderNotice> query2 = session.createQuery(hql, OrderNotice.class).setParameter("member_id",4);
+		
 		Query<OrderNotice> query2 = session.createQuery(hql, OrderNotice.class);
+		
 		List<OrderNotice> list2 = query2.getResultList();
 		return list2;
 
-//  String hql = "from OrderNotice where order_notice_id >= 1";
-//  Query<OrderNotice> query = session.createQuery(hql, OrderNotice.class);
-//  
-//  
-//  return query.list();
 
 	}
+	
+	
 
 }
  

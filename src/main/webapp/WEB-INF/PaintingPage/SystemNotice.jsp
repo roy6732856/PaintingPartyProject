@@ -58,11 +58,15 @@
 	
 	function load(indexPage){
 		
-// 	console.log(indexPage);
+//	console.log(indexPage);
 // 	console.log(typetype);	
 
+
+
+ 
 		if(typetype=='Type0'){
-			$('#row1').empty();
+ 			$('#row1').empty();
+
 		}else if(typetype=='Type1'){			
 		    $.ajax({
 			       type:'post',
@@ -97,7 +101,7 @@
 			                        <div class="u-border-1 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-5">
 			                          <div class="u-container-layout u-container-layout-8">
 			                        
-			                           <!--  訂單 notice_content-->
+			                           <!--  公告 notice_content-->
 										\${data[i].notice_content}
 										
 			                          </div>
@@ -105,8 +109,6 @@
 			                        
 			                        <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-6">
 			                          <div class="u-container-layout u-container-layout-9">
-			                         <!--  放案件連結
-			<!--                           <input type="button" value="link" name="link1" style="width:50px;height:30px;"> -->
 			
 			                          </div>
 			                        </div>
@@ -114,7 +116,7 @@
 			                        <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-7">
 			                          <div class="u-container-layout u-container-layout-10">
 			                        
-			                        <!--  訂單  notice_title -->
+			                        <!--  公告  notice_title -->
 										 \${data[i].notice_title}
 										
 			                          </div>
@@ -125,7 +127,7 @@
 			                        <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-8">
 			                          <div class="u-container-layout u-container-layout-11">
 			                          
-			                          <!-- 訂單 notice_date -->
+			                          <!-- 公告 notice_date -->
 										 \${data[i].notice_date}
 																	
 			                          </div>
@@ -136,10 +138,7 @@
 			            }
 			            $('#row1').append(
 			            	`<div class="u-container-style u-group u-group-15">
-								<ul> 
-								<li>共${sysTotalPages}頁</li> 
-								<li>共${sysTotalElements}則訊息</li> 
-								</ul>
+ 							
 									
 								<div style="margin: 0px auto"> 
 									<c:forEach var="i" begin="1" end="${sysTotalPages}" step="1"> 
@@ -195,8 +194,12 @@
 				                        
 				                        <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-6">
 				                          <div class="u-container-layout u-container-layout-9">
-				                         <!--  放案件連結
-				<!--                           <input type="button" value="link" name="link1" style="width:50px;height:30px;"> -->
+				                         <!--  放案件連結 -->
+				                          <a href= "<%= request.getContextPath() %>/backend/casemanage">
+				                          <button type="button" style="width:80px;height:40px;border:none;background-color:#E7BD49;color:white;border-radius:4px;cursor:pointer;">
+				                          前往確認
+				                          </button>
+				                          </a>
 				
 				                          </div>
 				                        </div>
@@ -226,11 +229,7 @@
 				            }
 				            $('#row1').append(
 					            	`<div class="u-container-style u-group u-group-15">
-										<ul> 
-										<li>共${ordTotalPages}頁</li> 
-										<li>共${ordTotalElements}則訊息</li> 
-										</ul>
-											
+																					
 										<div style="margin: 0px auto"> 
 											<c:forEach var="i" begin="1" end="${ordTotalPages}" step="1"> 
 												<button id="pageButton" value="${i}" onclick="change(${i})">${i}</button> 
@@ -256,6 +255,8 @@
     <meta property="og:type" content="website">
   </head>
   <body class="u-body">
+  
+  
   
   <!-- Messenger 洽談外掛程式 Code -->
     <div id="fb-root"></div>
@@ -285,7 +286,7 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
   
- <header class="u-clearfix u-header u-header" id="sec-4c0b">
+  <header class="u-clearfix u-header u-header" id="sec-4c0b">
         <div class="u-clearfix u-sheet u-sheet-1">
             <a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                 data-image-height="410">
@@ -344,28 +345,28 @@
                 
             </div>
             <div class="u-container-style u-group u-white u-group-2">
-                <div class="u-container-layout u-container-layout-2">
+                <div class="u-container-layout">
                 
                 
                     <div>
-                        <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
-       class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
-       name="issue_case" style="display: none">發布案件</a> 
-                         <a href="/PaintPartyMvcProject/backend"
-                             class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
-                         <span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
+	                       <a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none;">發布案件</a> 
+	                        <a href="<%= request.getContextPath() %>/backend"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
+                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none;margin-right: -65px;"><%= request.getAttribute("member_name") %></span>
                         </div>
                         <div>
-                         <a href="/PaintPartyMvcProject/login"
-                             class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
-                         <a href="/PaintPartyMvcProject/register"
-                             class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
-                     </div>
+	                        <a href="/PaintPartyMvcProject/login"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="header_login" style="display:none">登入</a>
+	                        <a href="/PaintPartyMvcProject/register"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
+                    	</div>
                     </div>
                 
                 </div>
             </div>
-        </div>
+        
     </header>
  
  
@@ -411,9 +412,9 @@
 <!--                         <form  action="systemnoticemainpage" method="POST" id="form1"> -->
                         	<div class="form-group">
 								<label class="mb-3 col-md-12"
-									style="border-width: 3px; padding: 5px; text-align: center; ">篩選</label>
-								<select class="form-control col-md-12" style="left: 5%;" id="type" name="selectType">
-									<option selected value="Type0">請選擇</option>
+									style="border-width: 3px; padding: 5px; text-align: center; "></label>
+								<select class="form-control col-md-12" style="left: 5%;width:120px;height:32px;" id="type" name="selectType">
+									<option value="Type0" selected disabled hidden style='display: none'>請選擇</option>
 									<option value="Type1">系統公告</option>
 									<option value="Type2">訂單通知</option>
 								</select>
@@ -423,6 +424,102 @@
                         </div>
                       </div>
                       <div id="row1">
+                        
+                      
+                     <!-- ---------------------------- -->
+                      <h6 style="padding-left: 25px;background-color:#eeeaea;font-weight: 600;"> 最新公告</h6>
+                       <div class="u-border-1 u-border-palette-5-light-1 u-container-style u-group u-radius-5 u-shape-round u-white u-group-9">
+                        
+                        <div class="u-container-layout u-container-layout-12">
+                       
+                          <div class="u-container-style u-group u-shape-rectangle u-group-10">
+                            <div class="u-container-layout u-valign-middle u-container-layout-13">
+                               <img class="u-image u-image-default u-preserve-proportions u-image-2" src="../resources/images/board.png" alt="" data-image-width="512" data-image-height="512">
+                            </div>
+                          </div>
+                          
+                          <div class="u-border-1 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-11">
+                            <div class="u-container-layout u-container-layout-14">
+                            <!-- 公告 notice_content -->
+                            <%= request.getAttribute("noticecontent") %> 
+                              <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-12">
+                                <div class="u-container-layout u-container-layout-15">
+                                
+                               <!--  公告  notice_title -->
+                                <%= request.getAttribute("noticetitle") %>  
+                               </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-13">
+                            <div class="u-container-layout u-container-layout-16"></div> 
+                          </div>
+                          <p class="u-large-text u-text u-text-default u-text-variant u-text-4"><%= request.getAttribute("noticesort") %></p>
+                          
+                          <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-14">
+                            <div class="u-container-layout u-container-layout-17">
+                            
+                            <!-- 公告 notice_date -->
+                          <%= request.getAttribute("noticedate") %> 
+							
+							</div>
+                          </div>
+                        </div>
+                      </div>    
+				            
+				    <h6 style="padding-left: 25px;background-color:#eeeaea;font-weight: 600;"> 最新通知</h6>
+				              <div class="u-border-1 u-border-palette-5-light-1 u-container-style u-group u-radius-5 u-shape-round u-white u-group-9">
+                        <div class="u-container-layout u-container-layout-12">
+                       
+                          <div class="u-container-style u-group u-shape-rectangle u-group-10">
+                            <div class="u-container-layout u-valign-middle u-container-layout-13">
+                               <img class="u-image u-image-default u-preserve-proportions u-image-1" src="../resources/images/letter.png" alt="" data-image-width="512" data-image-height="512">
+                            </div>
+                          </div>
+                          
+                          <div class="u-border-1 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-11">
+                            <div class="u-container-layout u-container-layout-14">
+                            
+                            <!-- 訂單 notice_content -->
+                            <%= request.getAttribute("onoticecontent") %> 
+		            
+                              
+                              <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-12">
+                              
+                                <div class="u-container-layout u-container-layout-15">
+                                
+                               <!--  訂單  notice_title -->
+                                <%= request.getAttribute("onoticetitle") %> 
+                               
+                               </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-13">
+                            <div class="u-container-layout u-container-layout-16"></div>
+                           <!--  放案件連結 -->
+				                          <a href= "<%= request.getContextPath() %>/backend/casemanage">
+				                          <button type="button" style="width:80px;height:40px;border:none;background-color:#E7BD49;color:white;border-radius:4px;cursor:pointer;">
+				                          前往確認
+				                          </button>
+				                          </a>
+                          </div>
+                          
+                          <p class="u-large-text u-text u-text-default u-text-variant u-text-4"><%= request.getAttribute("onoticesort") %></p>
+                          
+                          <div class="u-border-0 u-border-grey-75 u-container-style u-group u-shape-rectangle u-group-14">
+                            <div class="u-container-layout u-container-layout-17">            
+                            <!-- 訂單 notice_date -->
+                          <%= request.getAttribute("onoticedate") %> 
+							
+							</div>
+                          </div>
+                        </div>
+                      </div>    
+		            
+                      
 
                       </div>
 <!-- 							<div class="u-container-style u-group u-group-15"> -->
@@ -478,26 +575,22 @@
       
       </footer>
 
-	<script type="text/javascript">
+	  <script type="text/javascript">
     //登入狀態與登出狀態功能列表
     //透過AllFilter 傳過來的session
 //     <h1>${sessionScope.login}</h1>
-    //console.log(${sessionScope.login})
-    if(${sessionScope.login}==1){ //代表有登入狀態
-     $("[name=issue_case]").show()
-     $("[name=account_manager]").show()
-
-     $("[name=member_name]").show()
+    console.log(${sessionScope.login})
+   if(${sessionScope.login}==1){ //代表有登入狀態
+    	$("[name=issue_case]").show()
+    	$("[name=account_manager]").show()
+    	$("[name=member_name]").show()
+    	console.log($("[name=abs]").val());
+    	
     }else{
-     $("[name=header_login]").show()
-     $("[name=header_register]").show()
-     
+    	$("[name=header_login]").show()
+    	$("[name=header_register]").show()
+    	
     }
-
-    </script>
-
-	<script type="text/javascript">
-
     //登出
     function logout(){
     	
