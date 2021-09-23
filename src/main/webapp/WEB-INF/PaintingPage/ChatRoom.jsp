@@ -135,14 +135,71 @@
 		var opposite_user_name = ""; // 先寫死
 		console.log(opposite_user_name);
 		
-    	//----以上WS用
-    	
-    	//chat_func(url , myuser_name , opposite_user_name , myuser_id , send_message , ws , to_user_id);
+    	//----以上WS用參數
     	
     	
-		//ws = new WebSocket(url);
     	
+		ws = new WebSocket(url); //第一次拜訪這頁面，開啟WS，預設對話者為會員ID_0。
     	
+	      	ws.onopen = function(){
+       	        console.log('Connection 開啟了...');
+       	        
+       	        $("#connect-status").text("連線中"); 
+       	        
+       	      	}
+       	      	
+       	      ws.onclose = function (){
+       	        console.log('Connection 關閉了...');
+       	        
+       	        $("#connect-status").text("離線中"); 
+       	      }
+       	      
+       	      
+       	      ws.onmessage = function(event) { //接收到伺服端推下來的資料時，要做
+       	    	  //console.log("收到");
+       	    	  console.log(event.data);
+       	    	  console.log(typeof(event.data));
+       	    	  //console.log("type: " + typeof( parseInt(to_user_id) ));
+       	    	  eval("var result=" + event.data); //eval=將()內的字串當成JS來執行
+       	    	  //console.log("type2: " + typeof( parseInt(result.from_user_id) ) );
+       	    	  
+       	    	  //console.log(typeof( result.from_user_id ) );
+       	    	  //console.log(typeof( myuser_id ) );
+       	    	  
+       	    	  if( result.message_status === 0 ){ //若是系統訊息
+       	    		
+       	    		  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`);
+       	    	  
+       	    	  }else{ //若是私人訊息
+       	    		  
+       	 			
+       	    	  	if( result.from_user_id === myuser_id ){
+       	    	  		console.log(result.current_time);
+       	    		  
+       	    		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
+       	    		  
+       	    	  }else if( parseInt(result.from_user_id) === parseInt(to_user_id) ){
+       	    		  console.log("SEMD的對方名字: " + opposite_user_name);
+       	    		  $("#msg-io").append(`<h6 style="color:black;">【\${opposite_user_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
+       	    		  
+       	    	 	 } // 比較是不是自己else end
+       	    	  
+       	    	  
+       	    	  }//若是私人訊息 else end
+       	    	  
+       	    	  
+       	    	 
+       	    	  
+       	          var msgIoDiv = $("#msg-io")[0];	   //因為#msg-io是INPUT，所以後面要加[0]，才娶的到所要的DIV元素
+       	          msgIoDiv.scrollTo(0,msgIoDiv.scrollHeight);	  //決定當滾輪出現時，要預設滾到哪裡，這裡預設Y軸要滾到那個DIV的最上方，我們看見就會是最下方
+       	          //element.scrollTo(x-coord, y-coord)
+       	          //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
+       	          //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
+       	      }	
+		
+		
+		
+
     	
 
     	

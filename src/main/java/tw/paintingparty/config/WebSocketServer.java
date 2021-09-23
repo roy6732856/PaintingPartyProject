@@ -109,42 +109,67 @@ public class WebSocketServer {
     	String str1 = queryString.substring( queryString.indexOf("myuser_id")) ; //myuser_id=2&to_user_id=4
     	String[] str1List = str1.split("&", 0);
     	
-    	System.out.println( "myuser_id= " + str1List[0].substring(str1List[0].indexOf("=")+1) ); //得出自己ID
-    	System.out.println( "to_user_id= " + str1List[1].substring(str1List[1].indexOf("=")+1) ); //得出對方ID
-    	this.my_userid = Integer.parseInt( str1List[0].substring(str1List[0].indexOf("=")+1) ); 
-    	this.to_user_id = Integer.parseInt( str1List[1].substring(str1List[1].indexOf("=")+1) ); 
-    	
-    	//將當前登入使用者以及對應的session(會話)存入到map中
+    	System.out.println( "myuser_id= " + str1List[0].substring(str1List[0].indexOf("=")+1) ); 
+    	System.out.println( "to_user_id= " + str1List[1].substring(str1List[1].indexOf("=")+1) ); 
+    	this.my_userid = Integer.parseInt( str1List[0].substring(str1List[0].indexOf("=")+1) ); //得出自己ID
+    	this.to_user_id = Integer.parseInt( str1List[1].substring(str1List[1].indexOf("=")+1) ); //得出對方ID
     	this.map.put(this.my_userid, this.session);
-    	MessageS2CBean ms2cb = new MessageS2CBean();//給我自己的
-    	MessageS2CBean ms2cb2 = new MessageS2CBean(); //給我連接的對象的
-    	ms2cb.setMessage_status(0); //0=系統訊息、1=私人訊息
-    	ms2cb2.setMessage_status(0); //0=系統訊息、1=私人訊息
     	
-    	if( this.map.get(to_user_id)!=null ) { //進到聊天室時，先判斷對方在不在，若在，通知我連接的對象我上線了，通知我，對方在線上
+    	
+    	if(to_user_id == 0) { //本網站沒有ID為0的會員，代表是第依次打開WS，還沒有點選與任何一人的私聊，這時要送提示給自己，如何使用這聊天室
     		
-    		 Session to_session_me = this.map.get(my_userid);//取得我的對話物件，若對方不在線上，就會是NULL
-    		 Session to_session_who = this.map.get(to_user_id);//取得對方的對話物件，若對方不在線上，就會是NULL
-    	     
-    		 String myname = util01.selectMyNameInWebSocket(my_userid);
-    		 String systemnotic = String.format("【系統通知】會員 %s 已開啟與您的連接，似乎有話想說!", myname);
-    		 System.out.println(systemnotic);
-    		 
-    		 ms2cb.setSend_message("【系統通知】對方正在線上!");
-    		 ms2cb2.setSend_message(systemnotic);    		 
-    		 
-    		 
-    		 to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
-    		 to_session_who.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb2) ); //對方(我開啟的對象)
+    		Session to_session_me = this.map.get(my_userid);//取得我的對話物件，若對方不在線上，就會是NULL
 
-    	}else {//若對方不在，通知我自己對方不在線上
+    		MessageS2CBean ms2cb_init = new MessageS2CBean();//給我自己的
+    		ms2cb_init.setMessage_status(0); //0=系統訊息、1=私人訊息
+    		ms2cb_init.setSend_message("【系統通知】歡迎使用聊天室，請點選左邊頭像，選擇與其中一位會員私聊。");
+    		ms2cb_init.setFrom_user_id(0); //本網站沒有ID為0的會員，代表是第依次打開WS，還沒有點選與任何一人的私聊，這時要送提示給自己，如何使用這聊天室
     		
-    		Session to_session_me = this.map.get(my_userid);//取得我的對話物件
+    		to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb_init) );
     		
-    		 ms2cb.setSend_message("【系統通知】對方尚未連接聊天室，請留言...");
-   		 	 to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
+    	}else { //有點選其中一個會員，進行私聊
+    		
+    		
+    		
+    		//將當前登入使用者以及對應的session(會話)存入到map中
+        	MessageS2CBean ms2cb = new MessageS2CBean();//給我自己的
+        	MessageS2CBean ms2cb2 = new MessageS2CBean(); //給我連接的對象的
+        	ms2cb.setMessage_status(0); //0=系統訊息、1=私人訊息
+        	ms2cb2.setMessage_status(0); //0=系統訊息、1=私人訊息
+        	
+        	if( this.map.get(to_user_id)!=null ) { //進到聊天室時，先判斷對方在不在，若在，通知我連接的對象我上線了，通知我，對方在線上
+        		
+        		 Session to_session_me = this.map.get(my_userid);//取得我的對話物件，若對方不在線上，就會是NULL
+        		 Session to_session_who = this.map.get(to_user_id);//取得對方的對話物件，若對方不在線上，就會是NULL
+        	     
+        		 String myname = util01.selectMyNameInWebSocket(my_userid);
+        		 String systemnotic = String.format("【系統通知】會員 %s 剛剛開啟了與您的連接，似乎有話想說!", myname);
+        		 System.out.println(systemnotic);
+        		 
+        		 ms2cb.setSend_message("【系統通知】對方正在線上!");
+        		 ms2cb2.setSend_message(systemnotic);    		 
+        		 
+        		 
+        		 to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
+        		 to_session_who.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb2) ); //對方(我開啟的對象)
+
+        	}else {//若對方不在，通知我自己對方不在線上
+        		
+        		Session to_session_me = this.map.get(my_userid);//取得我的對話物件
+        		
+        		 ms2cb.setSend_message("【系統通知】對方尚未連接聊天室，請留言...");
+       		 	 to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
+        		
+        	}
+        	
+    		
+    		
+    		
     		
     	}
+    	
+    	
+    	
     	
     	System.out.println("共長: " + sockets.size());
     	
