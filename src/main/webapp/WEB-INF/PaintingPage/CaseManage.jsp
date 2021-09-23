@@ -109,11 +109,16 @@
             </div>
             <div class="u-container-style u-group u-white u-group-2">
                 <div class="u-container-layout u-container-layout-2">
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3">發布案件</a>
-                    <a href="139992805"
-                        class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4">帳號管理</a>
-                </div>
+					<div>
+						<a href="<%= request.getContextPath() %>/backend/CaseFormApplyPage"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3"
+							name="issue_case" style="display: none">發布案件</a> <a
+							href="<%= request.getContextPath() %>/backend/accountmanager"
+							class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin"
+							name="account_manager" style="display: none">帳號管理</a> <span
+							class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4"
+							name="member_name" style="display: none"><%=request.getAttribute("member_name")%></span>
+					</div>
             </div>
         </div>
     </header>

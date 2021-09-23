@@ -24,10 +24,9 @@ public class SystemNoticeService {
 	}
 	
 	
-	public List<OrderNotice> order() {
-		return snDAO.order();
+	public List<OrderNotice> orderAll() {
+		return snDAO.orderAll();
 	}
-	
-	
+
 	
 }
