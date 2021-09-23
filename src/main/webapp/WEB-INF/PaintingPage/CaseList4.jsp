@@ -393,13 +393,13 @@
 										<select class="form-control col-md-12" style="left: 5%;"
 											id="type">
 											<option selected value="0">請選擇創作類型</option>
-											<option value="1">插畫類型</option>
-											<option value="2">貼圖類型</option>
-											<option value="3">頭貼類型</option>
-											<option value="4">漫畫類型</option>
-											<option value="5">風景類型</option>
-											<option value="6">人物設計類型</option>
-											<option value="7">UI類型</option>
+											<option value="1">插畫</option>
+											<option value="2">貼圖</option>
+											<option value="3">頭貼</option>
+											<option value="4">漫畫</option>
+											<option value="5">風景</option>
+											<option value="6">人物設計</option>
+											<option value="7">UI</option>
 										</select>
 									</div>
 									<hr>
@@ -409,15 +409,15 @@
 										<select class="form-control col-md-12" style="left: 5%;"
 											id="style" title="">
 											<option selected value="0">請選擇創作風格</option>
-											<option value="8">日系風格</option>
-											<option value="9">歐美風格</option>
-											<option value="10">武俠風格</option>
-											<option value="11">像素風格</option>
-											<option value="12">寫實風格</option>
-											<option value="13">水彩風格</option>
-											<option value="14">水墨風格</option>
-											<option value="15">3D風格</option>
-											<option value="16">Q版風格</option>
+											<option value="8">日系</option>
+											<option value="9">歐美</option>
+											<option value="10">武俠</option>
+											<option value="11">像素</option>
+											<option value="12">寫實</option>
+											<option value="13">水彩</option>
+											<option value="14">水墨</option>
+											<option value="15">3D</option>
+											<option value="16">Q版</option>
 										</select>
 									</div>
 									<hr>
@@ -521,12 +521,7 @@
 			</div>
 			<div class="u-custom-menu u-nav-container">
 				<ul class="u-nav u-unstyled u-nav-1">
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">聯絡我們</a></li>
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">常見問題</a></li>
+					
 				</ul>
 			</div>
 			<div class="u-custom-menu u-nav-container-collapse">
@@ -536,10 +531,7 @@
 						<div class="u-menu-close"></div>
 						<ul
 							class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">聯絡我們</a></li>
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">常見問題</a></li>
+							
 						</ul>
 					</div>
 				</div>

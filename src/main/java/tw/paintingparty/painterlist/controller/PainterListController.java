@@ -43,20 +43,20 @@ public class PainterListController {
 	@RequestMapping(path = "/painterlist", method = RequestMethod.GET)
 	public String painterListAction(Model m) {
 
-//		Long Member = plpService.Pagetotal();
-//
-//		Long totalPages;
-//
-//		if (Member % 8 == 0) {
-//			Long total = (Member / 8);
-//			totalPages = total;
-//		} else {
-//			Long total = (Member / 8) + 1;
-//			totalPages = total;
-//		}
-//
-//		m.addAttribute("totalCases", Member);
-//		m.addAttribute("totalPages", totalPages);
+		Long Member = plpService.Pagetotal();
+
+		Long totalPages;
+
+		if (Member % 8 == 0) {
+			Long total = (Member / 8);
+			totalPages = total;
+		} else {
+			Long total = (Member / 8) + 1;
+			totalPages = total;
+		}
+
+		m.addAttribute("totalCases", Member);
+		m.addAttribute("totalPages", totalPages);
 		
 		  Member mem1 = mService.showLoginUsername();
 		  
@@ -92,7 +92,7 @@ public class PainterListController {
 		String profilePic = oneMem.getProfile_pic();
 		String imagePath = profilePicPath + "\\" + profilePic;
 		
-		System.out.println("imagePath : " + imagePath);
+	//	System.out.println("imagePath : " + imagePath);
 
 		InputStream in = new FileInputStream(new File(imagePath));
 		IOUtils.copy(in, response.getOutputStream());
@@ -105,8 +105,8 @@ public class PainterListController {
 		String searchValue1 = request.getParameter("Select1");
 		String searchValue2 = request.getParameter("Select2");
 		List<Member> lstMember = plService.search(searchValue1, searchValue2);
-		System.out.println("lstMember.size() => " + lstMember.size());
-		System.out.println("lstMember[0] => " + lstMember.get(0).getMember_name());
+	//	System.out.println("lstMember.size() => " + lstMember.size());
+	//	System.out.println("lstMember[0] => " + lstMember.get(0).getMember_name());
 		return lstMember;
 	}
 }

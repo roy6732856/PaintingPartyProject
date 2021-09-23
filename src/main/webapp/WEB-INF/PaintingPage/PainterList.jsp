@@ -147,28 +147,28 @@
                 <label for="type">創作類別</label>
                 <select id="Select1" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;" >
                 	<option value="">請選擇</option>
-                    <option value="1">插畫委託</option>
-                    <option value="2">貼圖委託</option>
-                    <option value="3">頭貼委託</option>
-                    <option value="4">小漫畫委託</option>
-                    <option value="5">UI委託</option>
-                    <option value="6">人物設計委託</option>
-                    <option value="7">風景委託</option>
+                    <option value="1">插畫</option>
+                    <option value="2">貼圖</option>
+                    <option value="3">頭貼</option>
+                    <option value="4">小漫畫</option>
+                    <option value="5">UI</option>
+                    <option value="6">人物設計</option>
+                    <option value="7">風景</option>
                 </select>
             </div>
             <div class="right sele-set mb-3 mt-3">
                 <label for="type">創作風格</label>
                 <select id="Select2" class="form-select" aria-label="Default select example" style="margin-left: 5px;width: 215px;">
                 	<option value="">請選擇</option>
-                    <option value="8">日系風格</option>
-                    <option value="9">歐美風格</option>
-                    <option value="10">武俠風格</option>
-                    <option value="11">Q版風格</option>
-                    <option value="12">寫實風格</option>
-                    <option value="13">3D風格</option>
-                    <option value="14">水墨風格</option>
-                    <option value="15">水彩風格</option>
-                    <option value="16">像素風格</option>
+                    <option value="8">日系</option>
+                    <option value="9">歐美</option>
+                    <option value="10">武俠</option>
+                    <option value="11">Q版</option>
+                    <option value="12">寫實</option>
+                    <option value="13">3D</option>
+                    <option value="14">水墨</option>
+                    <option value="15">水彩</option>
+                    <option value="16">像素</option>
                 </select>
             </div>
             <button id="btnSearch" class="select-btn" type="button">查詢</button>
@@ -610,8 +610,12 @@
 	                                    </a>
 	                                    <div class="portfolio-caption text-center">
 	                                        <div class="heading font-weight-bold text-truncate display-6 p-4" id="memberName">
-	                                        \${data[i].member_name}  
+	                                        \${data[i].member_name}  	                                        
 	                                        </div>
+	                                    <!--    <div class="paintertag"> 
+                                            <span class="tag1"> 繪圖 </span>
+                                            <span class="badge badge-primary">Primary</span> 
+	                                        </div>  -->
 	                                        <div class="text-truncate">
 	                                            <a href="#">
 	                                                <button type="button" class="btn btn-light"

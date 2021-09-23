@@ -10,14 +10,14 @@
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
 <title>Quotation</title>
-<link rel="stylesheet" href="../resources/css/nicepage.css"
+<link rel="stylesheet" href="./resources/css/nicepage.css"
 	media="screen">
-<link rel="stylesheet" href="../resources/css/Quotation.css"
+<link rel="stylesheet" href="./resources/css/Quotation.css"
 	media="screen">
 <script class="u-script" type="text/javascript"
-	src="../resources/js/jquery.js" defer=""></script>
+	src="./resources/js/jquery.js" defer=""></script>
 <script class="u-script" type="text/javascript"
-	src="../resources/js/nicepage.js" defer=""></script>
+	src="./resources/js/nicepage.js" defer=""></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <meta name="generator" content="Nicepage 3.23.2, nicepage.com">
@@ -104,7 +104,7 @@
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
 				data-image-width="570" data-image-height="410"> <img
-				src="../resources/images/LOGO-TEST-22.png"
+				src="./resources/images/LOGO-TEST-22.png"
 				class="u-logo-image u-logo-image-1">
 			</a>
 			<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -137,9 +137,7 @@
 									class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 									href="<%=request.getContextPath()%>/caselistpage.controller"
 									style="padding: 10px 20px;">案件列表</a></li>
-						<li class="u-nav-item"><a
-							class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-							style="padding: 10px 20px;">公開畫廊</a></li>
+						
 					</ul>
 				</div>
 				<div class="u-custom-menu u-nav-container-collapse">
@@ -157,9 +155,8 @@
 									class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
 									href="<%=request.getContextPath()%>/caselistpage.controller"
 									style="padding: 10px 20px;">案件列表</a></li>
-								</li>
-								<li class="u-nav-item"><a class="u-button-style u-nav-link"
-									style="padding: 10px 20px;">公開畫廊</a></li>
+								
+								
 							</ul>
 						</div>
 					</div>
