@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.casemanage.model.MyPostedAllCasesBean;
+import tw.paintingparty.chatroom.model.ChatRoomDAO;
+import tw.paintingparty.chatroom.model.MyChatConnBean;
+import tw.paintingparty.model.ChatConn;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.MemberService;
 
@@ -23,6 +26,8 @@ public class ChatRoomController {
 	@Autowired
 	private MemberService mService;
 	
+	@Autowired
+	private ChatRoomDAO crDao;
 	
 	@GetMapping(path = "/backend/chatroom") 
 	public String ChatRoom(Model m) {
@@ -32,5 +37,25 @@ public class ChatRoomController {
 		
 		return "ChatRoom" ;
 	}
+	
+	
+	@PostMapping(path = "/backend/chatconnlist") 
+	@ResponseBody
+	public List<MyChatConnBean> ChatConnList( HttpServletRequest request ) { //得到我與誰連接
+		
+		
+		Object myid = request.getSession().getAttribute("session_member_id");
+		List<MyChatConnBean> selectAllMyConn = crDao.selectAllMyConn( (Integer)myid );
+		
+		return selectAllMyConn ;
+	}
+	
+	
+	//----------
+	
+	//下載大頭照的URL:/backend/headshotdownloader/{memid}，在CASEMANAGE的控制器
+	
+	//----------
+	
 
 }

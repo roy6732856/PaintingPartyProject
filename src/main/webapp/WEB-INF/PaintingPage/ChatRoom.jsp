@@ -200,6 +200,90 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+    
+    
+    
+    
+    <script>
+    //ajax請求出跟誰建立了連接
+    
+    $(document).ready(ajaxreq_chat_conn);
+    
+    function ajaxreq_chat_conn (){
+    	console.log(123);
+        $("#conn_container").html("");//清空左邊conn
+        $("#chat_room_container .chat_content").html("");//清空右邊聊天室
+   	 
+        $.ajax({ //代做
+            url: `<%= request.getContextPath() %>/backend/chatconnlist`,                        // url位置
+            type: 'post', 
+            error: function (xhr) { $("#conn_container").html('請求失敗，請重新整理'); },      // 錯誤後執行的函數
+            success: function (data) { 
+            	$("#conn_container").html( JSON.stringify(data) ); //demo
+            	
+            var i = 0; 
+					
+            if(data[0]!=null){
+           	 
+           	  
+	           	 for(i=0;i<data.length;i++){
+	           		 
+	           		$("#conn_container").append(`
+	           				
+	           			 <a href="javascript:" style="text-decoration:none;">
+
+	                        <div class="conn_block mb-4 border shadow" >
+
+	                          <div style="display: flex;margin:5px;">
+	                            <img src="headshotdownloader/\${data[i].member_id_b}" style="width: 40%;border-radius:50%" >
+	                          <div class="conn_bmem_name" style="text-align: center;font-size: medium;margin-left:5px;">\${data[i].member_name_b}</div>
+
+	                          </div>
+	                          
+	                          <div class="conn_date" style="text-align: center;color: darkgrey;">\${data[i].conn_date}</div>
+
+	                        </div>
+	                      </a>
+	           				
+	           				
+	           				`);
+	           		 
+	           		 
+	 
+	           		 
+	           	 }//end for
+           	 
+           	 
+           	 
+            }else{
+           	 
+           	 $("#conn_container").html("暫無資料"); 
+           	
+           	 
+            }//end if
+            
+            
+            
+            
+            
+            }// end success
+        });//end ajax
+   	 
+   	 
+   	 
+   	 
+    }//func end
+    
+    
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
 
 
     <header class="u-clearfix u-header u-header" id="sec-4c0b">
@@ -376,7 +460,7 @@
 
 
 
-          <!--開發用-->
+          <!--開發用 代做-->
           <div style="font-size: large; margin-left:50px;"><b>訊息</b></div>
           <div style="background-color:#f2f2f2;height:20px;"></div>
 
@@ -388,7 +472,7 @@
 
             <div class="container mt-5 " id="chat_room_container">
               <div class="row" style="padding-right:40px;">
-                <div class="col-md-12 border shadow p-5" style="height:500px;">
+                <div class="col-md-12 border shadow p-5 chat_content" style="height:500px;">
                   <h4 class="text-center pb-3">即時聊天室<span class="badge badge-light float-right"
                       id="connect-status">離線中</span></h4>
                   <form id="form1">

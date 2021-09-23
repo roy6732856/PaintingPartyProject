@@ -39,7 +39,7 @@ public class ChatConn implements Serializable{
 	private Date conn_date;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER) //連接人A_ID
+	@ManyToOne(fetch = FetchType.EAGER) //連接人A_ID(自己)
 	@JoinColumn(name ="member_id_a") 
 	private Member amemberbean;
 	
