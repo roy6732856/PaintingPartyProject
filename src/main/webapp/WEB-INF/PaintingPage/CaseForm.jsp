@@ -214,9 +214,11 @@
 		id="sec-3a5b">
 		<div class="u-align-left u-clearfix u-sheet u-sheet-1">
 			<h1
-				class="u-custom-font u-font-oswald u-text u-text-black u-text-default u-text-1">刊登委託</h1>
-			<a href="####"
-				class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1">DEMO</a>
+				class="u-custom-font u-font-oswald u-text u-text-black u-text-default u-text-1">刊登案件</h1>
+			<input type="button" id="button" value="DEMO"
+				class="u-border-2 u-border-grey-75 u-btn u-btn-round u-button-style u-hover-grey-40 u-radius-12 u-white u-btn-1"
+				onclick="javascript:getElementById('inputCaseName').value='測試刊登案件';javascript:getElementById('inputLowBudget').value='100';javascript:getElementById('inputHighBudget').value='200';javascript:getElementById('CommissionExplain').value='來點可愛的小圖案';">
+
 			<div
 				class="u-border-4 u-border-palette-3-light-1 u-line u-line-horizontal u-line-1"></div>
 			<div
@@ -229,45 +231,45 @@
 						<div class="form-group">
 							<label for="inputCaseName" >案件名稱</label> <input type="text"
 								class="form-control" id="inputCaseName" placeholder="(必填)"
-								name="inputCaseName"> <p></p> <span id="s1" style="color:red"></span>
+								name="inputCaseName" required="required"> <p></p> <span id="s1" style="color:red"></span>
 						</div>
 						<div class="form-row d-flex">
 							<div class="form-group col-md-6">
 								<label for="inputLowBudget">最低預算</label> <input type="text"
 									class="form-control" id="inputLowBudget" placeholder="(必填)"
-									name="inputLowBudget"> <p></p> <span id="s2" style="color:red"></span>
+									name="inputLowBudget" required="required"> <p></p> <span id="s2" style="color:red"></span>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="inputHighBudget">最高預算</label> <input type="text"
 									class="form-control" id="inputHighBudget" placeholder="(必填)"
-									name="inputHighBudget"> <p></p> <span id="s3" style="color:red"></span>
+									name="inputHighBudget" required="required"> <p></p> <span id="s3" style="color:red"></span>
 							</div>
 						</div>
    					 	
 						<div class="form-group">
 							<label for="CategorySelect">作品類別</label> <select
 								class="form-control" id="CategorySelect" name="categorySelect">
-								<option selected value="1" name="categorySelect">插畫委託</option>
-								<option value="6">人物設計委託</option>
-								<option value="2">貼圖委託</option>
-								<option value="3">頭貼委託</option>
-								<option value="4">漫畫委託</option>
-								<option value="5">UI委託</option>
-								<option value="7">風景委託</option>
+								<option selected value="1" name="categorySelect">插畫</option>
+								<option value="6">人物設計</option>
+								<option value="2">小貼圖</option>
+								<option value="3">頭貼</option>
+								<option value="4">小漫畫</option>
+								<option value="5">UI</option>
+								<option value="7">風景</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="StyleSelect">作品風格</label> <select
 								class="form-control" id="StyleSelect" name="styleSelect">
-								<option selected value="8">日系風格</option>
-								<option value="9">歐美風格</option>
-								<option value="10">武俠風格</option>
-								<option value="12">寫實風格</option>
-								<option value="14">水墨風格</option>
-								<option value="15">水彩風格</option>
-								<option value="16">像素風格</option>
-								<option value="11">Q版風格</option>
-								<option value="13">3D風格</option>
+								<option selected value="8">日系</option>
+								<option value="9">歐美風</option>
+								<option value="10">武俠風</option>
+								<option value="12">寫實風</option>
+								<option value="14">水墨風</option>
+								<option value="15">水彩風</option>
+								<option value="16">像素風</option>
+								<option value="11">Q版</option>
+								<option value="13">3D</option>
 							</select>
 						</div>
 						<!--  <div class="form-group">
@@ -279,9 +281,9 @@
               </div>
             </div>-->
 						<div class="form-group">
-							<label for="CommissionExplain">委託說明(必填)</label>
+							<label for="CommissionExplain">案件說明(必填)</label>
 							<textarea class="form-control" id="CommissionExplain" rows="4"
-								placeholder="請詳細描述需求" name="commissionExplain"></textarea> 
+								placeholder="請詳細描述需求" name="commissionExplain" required="required"></textarea> 
 								<p></p> <span id="s4" style="color:red"></span>
 						</div>	
 						<div class="col form-group" style="width: 200px;">
@@ -305,7 +307,7 @@
 							</div>
 						</div>
 						<button type="submit" id="submit"
-							class="btn btn-warning btn-lg btn-block" name="succ">送出</button>
+							class="btn btn-warning btn-lg btn-block" name="succ" >送出</button>
 
 
 						<!-- 上傳照片 -->
@@ -373,53 +375,8 @@
     
 	</script>
 	
-	 <script type="text/javascript">
-			  document.getElementById("inputCaseName").addEventListener("blur",checkinputCaseName);
-			  function checkinputCaseName() {
-			      let n1=document.getElementById("inputCaseName").value;
-			      if(n1==""){
-			          document.getElementById("s1").innerHTML="案件名稱不可空白";
-  				}else {
-          		 	  document.getElementById("s1").innerHTML="";
-        }
-	}
-			      document.getElementById("inputLowBudget").addEventListener("blur",checkinputLowBudget);
-				  function checkinputLowBudget() {
-				      let n2=document.getElementById("inputLowBudget").value;
-				      if(n2==""){
-				          document.getElementById("s2").innerHTML="最低預算不可空白";
-				}else {
-		 	  		  document.getElementById("s2").innerHTML="";
-		}
-	}	          
-				  document.getElementById("inputHighBudget").addEventListener("blur",checkinputHighBudget);
-					function checkinputHighBudget() {
-					   let n3=document.getElementById("inputHighBudget").value;
-					   if(n3==""){
-					      document.getElementById("s3").innerHTML="最高預算不可空白";
-				}else {
-		 	  		  document.getElementById("s3").innerHTML="";
-		}
-	}
-					  document.getElementById("CommissionExplain").addEventListener("blur",checkCommissionExplain);
-						function checkCommissionExplain() {
-						   let n4=document.getElementById("CommissionExplain").value;
-						   if(n4==""){
-						      document.getElementById("s4").innerHTML="委託說明不可空白";
-				}else {
-	 	  		  	document.getElementById("s4").innerHTML="";
-			}
-		}
 
-						function dosubmit(){
-							//獲取表單提交按鈕
-							var btnSubmit = document.getElementById("submit");
-							//將表單提交按鈕設置爲不可用，這樣就可以避免用戶再次點擊提交按鈕
-							btnSubmit.disabled= "disabled";
-							//返回true讓表單可以正常提交
-							return true;
-							}
-	</script>
-	
+						
+
 </body>
 </html>

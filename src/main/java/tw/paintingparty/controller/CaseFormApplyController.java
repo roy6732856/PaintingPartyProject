@@ -33,10 +33,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import tw.paintingparty.model.CaseTag;
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Example;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.CaseFormService;
+import tw.paintingparty.service.CaseTagService;
 import tw.paintingparty.service.MemberService;
 
 @Controller
@@ -56,15 +58,19 @@ private MemberService mService;
 	@Autowired
 	private CaseFormService cfService;
 	
+	@Autowired
+	private CaseTagService ctService;
+	
+	
 	@RequestMapping(path = "/addform.controller" , method = RequestMethod.POST)
-	public String processCaseFormInsertAction(@RequestParam("inputCaseName") String inputcaseName,
+	public void processCaseFormInsertAction(@RequestParam("inputCaseName") String inputcaseName,
 			@RequestParam("inputLowBudget")Integer inputLowBudget,
 			@RequestParam("inputHighBudget")Integer inputHighBudget,
 			@RequestParam("commissionExplain")String commissionExplain,
 			@RequestParam("categorySelect")Integer categorySelect,
 			@RequestParam("styleSelect")Integer styleSelect,
 			@RequestParam("examplePic") MultipartFile mf,
-			HttpSession session) throws IllegalStateException, IOException  {
+			HttpSession session,HttpServletResponse response,HttpServletRequest request) throws IllegalStateException, IOException  {
 			
 		
 		int memberid = (int) session.getAttribute("session_member_id");
@@ -82,7 +88,7 @@ private MemberService mService;
 		Cases cf1 = new Cases();
 		while(inputcaseName != null) {
 			if(inputcaseName.equals("")) {
-				return null;
+//				return null;
 			}	
 		cf1.setCase_title(inputcaseName);	
 		break;
@@ -91,7 +97,7 @@ private MemberService mService;
 		
 		while(commissionExplain != null) {
 			if(commissionExplain.equals("")) {	
-				return null;
+//				return null;
 			}	
 		cf1.setDemand(commissionExplain);	
 		break;
@@ -99,7 +105,7 @@ private MemberService mService;
 		
 		while(inputLowBudget != null) {
 			if(inputLowBudget >= inputHighBudget) {	
-				return null;
+//				return null;
 			}	
 		cf1.setPrice_min(inputLowBudget);	
 		break;
@@ -107,7 +113,7 @@ private MemberService mService;
 		
 		while(inputHighBudget != null) {
 			if(inputHighBudget <= inputLowBudget) {	
-				return null;
+//				return null;
 			}	
 		cf1.setPrice_max(inputHighBudget);	
 		break;
@@ -119,6 +125,16 @@ private MemberService mService;
 		
 		cf1.setMember_id(memberid);
 		
+		//將util.Date轉成sql.Date
+		Date utilDate = new Date();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		
+		cf1.setUpload_date(sqlDate);
+		//由於還沒法抓到這是第幾個member根第幾個case
+		
+
+		cfService.addForm(cf1);
+		
 		Cases caseId = cfService.getNewCasebyCasesId();
 		  Integer newId = caseId.getCase_id();
 		  
@@ -126,8 +142,9 @@ private MemberService mService;
 		  Date date = new Date();
 		    DateFormat dateformat = new SimpleDateFormat("yyyyMMddHHmmss");
 		    String dateString = dateformat.format(date).toString();
-		  
-		  String fileName = mf.getOriginalFilename(); 
+		    
+		    String fileName = mf.getOriginalFilename();
+		if(fileName!="") {
 		  String dirPath="C:\\PaintingImg\\Example";
 		  String updateFileName= dateString + fileName;
 		  String allex = dirPath + "\\" + updateFileName;
@@ -139,22 +156,23 @@ private MemberService mService;
 		  e1.setExample_name(updateFileName);
 		  e1.setExample_path("C:\\PaintingImg\\Example");
 		  cfService.addExamplePic(e1);
-		  
+		} 
 
+
+		CaseTag ct1 = new CaseTag();
+		ct1.setCase_id(newId);
+		ct1.setCase_tad_id(categorySelect);
 		
-		//將util.Date轉成sql.Date
-				Date utilDate = new Date();
-				java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-				
-				cf1.setUpload_date(sqlDate);
-				//由於還沒法抓到這是第幾個member根第幾個case
-				
+		CaseTag ct2 = new CaseTag();
+		ct2.setCase_id(newId);
+		ct2.setCase_tad_id(styleSelect);
 		
-				cfService.addForm(cf1);
+		ctService.insertTagWithCaseId(ct1);
+		ctService.insertTagWithCaseId(ct2);
+	
 				
-				
-							
-		return "success";
+		response.sendRedirect(request.getContextPath() + "/caselistpage.controller");					
+//		return "success";
 	}
 
 	
