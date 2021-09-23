@@ -46,4 +46,27 @@ public class ChatRoomDAO {
 		return resultList;
 	
 	}
+	
+	public String selectMyName( Integer myid ) { //我連接了誰
+		
+		Session session = sessionfactory.getCurrentSession();
+		
+		String hql = "from Member as m"
+				+ " where m.member_id = :myid ";
+		
+		
+		Query<Member> query = session.createQuery(hql,Member.class).setParameter("myid", myid);
+		Member memberBean = query.getSingleResult();
+		String my_name = memberBean.getMember_name();
+		
+//		Query<ChatConn> query = session.createQuery(hql,ChatConn.class).setParameter("myid", myid);
+//		List<ChatConn> resultList = query.getResultList();
+		
+		return my_name;
+		
+	}
+	
+	
+	
+	
 }

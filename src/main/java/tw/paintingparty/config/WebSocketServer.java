@@ -65,7 +65,7 @@ import tw.teamUtil.Util01;
 public class WebSocketServer {    
     	
 		//定義一個全域性變數集合sockets,使用者存放每個登入使用者的通訊管道，再線使用者有幾個，就有幾個
-	   private  static  Set<WebSocketServer>  sockets=new HashSet<WebSocketServer>();
+	    private  static  Set<WebSocketServer>  sockets=new HashSet<WebSocketServer>();
 	    //定義一個全域性變數Session,用於存放登入使用者的使用者名稱
 	    private  Session  session;
 	    //定義一個全域性變數map，key為使用者名稱，該使用者對應的session為value，放在線使用者的會話物件用，每個MEMBER_ID若進來，就會有一個會話物件
@@ -79,6 +79,7 @@ public class WebSocketServer {
 	    //得到目標的ID
 	    private Integer to_user_id ; 
 	    
+	    private Util01 util01 = new Util01(); 
 	    
 	    //轉JSON用
 	    ObjectMapper objectMapper = new ObjectMapper();
@@ -115,19 +116,26 @@ public class WebSocketServer {
     	
     	//將當前登入使用者以及對應的session(會話)存入到map中
     	this.map.put(this.my_userid, this.session);
-    	MessageS2CBean ms2cb = new MessageS2CBean();
+    	MessageS2CBean ms2cb = new MessageS2CBean();//給我自己的
+    	MessageS2CBean ms2cb2 = new MessageS2CBean(); //給我連接的對象的
     	ms2cb.setMessage_status(0); //0=系統訊息、1=私人訊息
+    	ms2cb2.setMessage_status(0); //0=系統訊息、1=私人訊息
     	
-    	if( this.map.get(to_user_id)!=null ) { //進到聊天室時，先判斷對方在不在，若在，通知對方我上線了，通知我對方在線上
+    	if( this.map.get(to_user_id)!=null ) { //進到聊天室時，先判斷對方在不在，若在，通知我連接的對象我上線了，通知我，對方在線上
     		
     		 Session to_session_me = this.map.get(my_userid);//取得我的對話物件，若對方不在線上，就會是NULL
     		 Session to_session_who = this.map.get(to_user_id);//取得對方的對話物件，若對方不在線上，就會是NULL
     	     
-    		 ms2cb.setSend_message("【系統通知】對方已連接聊天室!");
+    		 String myname = util01.selectMyNameInWebSocket(my_userid);
+    		 String systemnotic = String.format("【系統通知】會員 %s 已開啟與您的連接，似乎有話想說!", myname);
+    		 System.out.println(systemnotic);
+    		 
+    		 ms2cb.setSend_message("【系統通知】對方正在線上!");
+    		 ms2cb2.setSend_message(systemnotic);    		 
     		 
     		 
     		 to_session_me.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
-    		 to_session_who.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb) );
+    		 to_session_who.getBasicRemote().sendText( objectMapper.writeValueAsString(ms2cb2) ); //對方(我開啟的對象)
 
     	}else {//若對方不在，通知我自己對方不在線上
     		

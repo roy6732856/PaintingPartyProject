@@ -213,7 +213,7 @@
 	           				ws.close();
 	           				
 	           			}
-	           			
+	           			//myuser_name
 	           			url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 	           			console.log("12311111");
 	           			console.log(url);
