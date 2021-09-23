@@ -141,6 +141,8 @@
     	
 		ws = new WebSocket(url); //第一次拜訪這頁面，開啟WS，預設對話者為會員ID_0。
     	
+		//----------------------------------------------------以下可以寫成寒士
+		
 	      	ws.onopen = function(){
        	        console.log('Connection 開啟了...');
        	        
@@ -166,29 +168,12 @@
        	    	  //console.log(typeof( result.from_user_id ) );
        	    	  //console.log(typeof( myuser_id ) );
        	    	  
-       	    	  if( result.message_status === 0 ){ //若是系統訊息
        	    		
-       	    		  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`);
-       	    	  
-       	    	  }else{ //若是私人訊息
-       	    		  
-       	 			
-       	    	  	if( result.from_user_id === myuser_id ){
-       	    	  		console.log(result.current_time);
-       	    		  
-       	    		  $("#msg-io").append(`<h6 style="color:blue;">【\${myuser_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
-       	    		  
-       	    	  }else if( parseInt(result.from_user_id) === parseInt(to_user_id) ){
-       	    		  console.log("SEMD的對方名字: " + opposite_user_name);
-       	    		  $("#msg-io").append(`<h6 style="color:black;">【\${opposite_user_name}】(\${result.current_time})：<br/><div style="color:black;">　\${result.send_message}</div></h6>`);
-       	    		  
-       	    	 	 } // 比較是不是自己else end
+       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
        	    	  
        	    	  
-       	    	  }//若是私人訊息 else end
        	    	  
        	    	  
-       	    	 
        	    	  
        	          var msgIoDiv = $("#msg-io")[0];	   //因為#msg-io是INPUT，所以後面要加[0]，才娶的到所要的DIV元素
        	          msgIoDiv.scrollTo(0,msgIoDiv.scrollHeight);	  //決定當滾輪出現時，要預設滾到哪裡，這裡預設Y軸要滾到那個DIV的最上方，我們看見就會是最下方
@@ -199,7 +184,7 @@
 		
 		
 		
-
+       	 //----------------------------------------------------以上可以寫成寒士
     	
 
     	
@@ -251,7 +236,10 @@
 	           	
 	           	 
 	            	$("#conn_container .conn_open").click(function(){
-						
+	            		
+	            		$("#msg-input").removeAttr("disabled");//當選取私聊，取消INPUT的禁止輸入
+	            		$("#msg_submit").removeAttr("style");//當選取私聊，解除送出鈕的隱藏
+	            		
 	            		var change_bmember_id = $(this).attr("href").split("/")[$(this).attr("href").split("/").length-1];
 	            		var change_bmember_name = $(this).attr("href").split("/")[$(this).attr("href").split("/").length-2];
 	            		//console.log( change_bmember_id ); //得出典籍的BMEMBER ID
@@ -369,6 +357,12 @@
 		           	    	console.log("---------Send------------");
 		           	  		//to_user_id = 4; // 先寫死
 		           			send_message = $("#msg-input").val();
+		           	  		
+		           	  		if(send_message ===""){ //如果欄位沒輸入任何內容，就不給SEND
+		           	  			return false;
+		           	  			
+		           	  		}
+		           	  		
 		           			var jsonobject = null;
 		           			jsonobject = {
 		           					"to_user_id":to_user_id,
@@ -598,7 +592,7 @@
 
           <div id="chat_main_block" style="display:flex;">
 
-            <div class="mt-5 col-md-3" id="conn_container">11111</div>
+            <div class="mt-5 col-md-3" id="conn_container">讀取資料中</div>
 
             <!----------------------->
 
@@ -614,9 +608,9 @@
                       <div class="form-control" style="height:250px;overflow:auto;" id="msg-io"></div>
                     </div>
                     <div class="form-group">
-                      <input class="form-control" type="text" name="msg-input" id="msg-input" placeholder="請輸入訊息" />
+                      <input class="form-control" type="text" name="msg-input" id="msg-input" placeholder="請輸入訊息" disabled="disabled"/>
                     </div>
-                    <button type="submit" class="btn btn-primary">送出</button>
+                    <button type="submit" class="btn btn-primary" id="msg_submit" style="display:none;">送出</button>
                     <!--<button type="button" class="btn btn-danger float-right" id="disconnect-btn">離線</button> -->
                   </form>
                 </div>
