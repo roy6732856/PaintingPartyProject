@@ -268,7 +268,7 @@
 
 								</div>
 									<a
-										href="<%= request.getContextPath() %>/caseapplymainpage.controller/${caseid}"
+										href="<%= request.getContextPath() %>/caseapplycheck/${caseid}"
 										class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-5 u-btn-1"
 										name="applyCase" style="display: none">應徵此案件</a>
 								</div>

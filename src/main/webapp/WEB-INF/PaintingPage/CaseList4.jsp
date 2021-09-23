@@ -521,12 +521,7 @@
 			</div>
 			<div class="u-custom-menu u-nav-container">
 				<ul class="u-nav u-unstyled u-nav-1">
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">聯絡我們</a></li>
-					<li class="u-nav-item"><a
-						class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-						style="padding: 10px 96px;">常見問題</a></li>
+					
 				</ul>
 			</div>
 			<div class="u-custom-menu u-nav-container-collapse">
@@ -536,10 +531,7 @@
 						<div class="u-menu-close"></div>
 						<ul
 							class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">聯絡我們</a></li>
-							<li class="u-nav-item"><a class="u-button-style u-nav-link"
-								style="padding: 10px 96px;">常見問題</a></li>
+							
 						</ul>
 					</div>
 				</div>
