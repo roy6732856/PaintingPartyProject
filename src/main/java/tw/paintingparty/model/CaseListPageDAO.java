@@ -242,13 +242,13 @@ public class CaseListPageDAO {
 		int typeTag = arr[0];
 		int styleTag = arr[1];
 		
-		String hql = "from Cases c ";
+		String hql = "from Cases c where c.case_status like '上架'";
 
-		String hql1 = "from Cases c where c.case_tag like '" + typeTag + ",%'";
+		String hql1 = "from Cases c where c.case_status like '上架' and c.case_tag like '" + typeTag + ",%'";
 
-		String hql2 = "from Cases c where c.case_tag like '%," + styleTag + "'";
+		String hql2 = "from Cases c where c.case_status like '上架' and c.case_tag like '%," + styleTag + "'";
 
-		String hql3 = "from Cases c where c.case_tag like '" + typeTag + ",%'" + " and c.case_tag like " + "'%,"
+		String hql3 = "from Cases c where c.case_status like '上架' and c.case_tag like '" + typeTag + ",%'" + " and c.case_tag like " + "'%,"
 				+ styleTag + "'";
 
 		

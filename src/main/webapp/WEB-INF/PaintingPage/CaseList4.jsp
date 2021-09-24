@@ -377,7 +377,7 @@
 		</div>
 		</div>
 	</header>
-	<section class="u-clearfix u-grey-10 u-section-3" id="sec-8425">
+	<section class="u-clearfix u-grey-10 u-section-3" id="sec-8425" style="background-color:#f1f2f6; border-top:1px solid #dfe4ea;">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<div class="u-clearfix u-layout-wrap u-layout-wrap-1">
 				<div class="u-layout">
@@ -394,12 +394,12 @@
 											id="type">
 											<option selected value="0">請選擇創作類型</option>
 											<option value="1">插畫</option>
-											<option value="2">貼圖</option>
+											<option value="2">小貼圖</option>
 											<option value="3">頭貼</option>
-											<option value="4">漫畫</option>
-											<option value="5">風景</option>
+											<option value="4">小漫畫</option>
+											<option value="5">UI</option>
 											<option value="6">人物設計</option>
-											<option value="7">UI</option>
+											<option value="7">風景</option>
 										</select>
 									</div>
 									<hr>
@@ -412,12 +412,12 @@
 											<option value="8">日系</option>
 											<option value="9">歐美</option>
 											<option value="10">武俠</option>
-											<option value="11">像素</option>
+											<option value="11">Q版</option>
 											<option value="12">寫實</option>
-											<option value="13">水彩</option>
+											<option value="13">3D</option>
 											<option value="14">水墨</option>
-											<option value="15">3D</option>
-											<option value="16">Q版</option>
+											<option value="15">水彩</option>
+											<option value="16">像素</option>
 										</select>
 									</div>
 									<hr>

@@ -62,6 +62,10 @@
 			$('#spendDay').attr("value",'5');
 			$('#inputBudget').attr("value",'2000');
 		})
+		$('#send').click(function(){
+			alert("申請案件訂單已成功送出！");
+		})
+		
 	})
 
 </script>
@@ -197,7 +201,7 @@
 		</div>
 	</header>
 	<section class="u-align-center u-clearfix u-grey-10 u-section-1"
-		id="sec-6bb0">
+		id="sec-6bb0" style="background-color:#f1f2f6;border-top:1px solid #dfe4ea;">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<h2 class="u-text u-text-default u-text-1 u-align-center"
 				style="margin-bottom: 30px;">
@@ -208,7 +212,7 @@
 			</h2>
 
 			<div
-				class="u-align-left  u-radius-10 u-shape-round u-white u-group-2 ">
+				class="u-align-left  u-radius-5 u-shape-round u-white u-group-2 " style="border: 1px solid #ced6e0">
 				<div class=" u-container-layout-1 "
 					style="font-family: Arial, Helvetica, sans-serif;">
 					<form action="<%=request.getContextPath()%>/addapply.controller"
@@ -227,7 +231,7 @@
 						</div>
 
 
-						<button type="submit" class="btn btn-warning btn-lg btn-block">送出</button>
+						<button type="submit" class="btn btn-warning btn-lg btn-block" id="send">送出</button>
 
 
 					</form>
