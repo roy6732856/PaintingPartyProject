@@ -1,9 +1,11 @@
 package tw.paintingparty.chatroom.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import tw.paintingparty.chatroom.model.MyChatConnBean;
 import tw.paintingparty.model.ChatConn;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.service.MemberService;
+import tw.teamUtil.Util01;
 
 @Controller
 public class ChatRoomController {
@@ -32,11 +35,27 @@ public class ChatRoomController {
 	@GetMapping(path = "/backend/chatroom") 
 	public String ChatRoom(Model m) {
 		Member mem1 = mService.showLoginUsername();
-
 		m.addAttribute("member_name", mem1.getMember_name());
 		
 		return "ChatRoom" ;
 	}
+	
+	
+	@GetMapping(path = "/backend/gotochat/{toid}") //按下思訓，建立連結
+	public void GoToChat( @PathVariable("toid") Integer toid , HttpServletRequest request , HttpServletResponse response) throws IOException, ParseException {
+		
+		Util01 util01 = new Util01();
+		Member mem1 = mService.showLoginUsername();
+		Object myid = request.getSession().getAttribute("session_member_id");
+		util01.insertNewConnToDBToMe( (Integer) myid, toid);
+		
+		
+
+		response.sendRedirect( request.getContextPath() + "/backend/chatroom");
+		
+	}
+	
+	
 	
 	
 	@PostMapping(path = "/backend/chatconnlist") 
