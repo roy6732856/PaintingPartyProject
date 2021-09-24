@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import tw.paintingparty.model.Cases;
 import tw.paintingparty.model.Member;
 import tw.paintingparty.model.PainterTag;
+import tw.paintingparty.model.Tag;
 
 
 @Repository("painterListDAO")
@@ -66,10 +67,11 @@ public class PainterListDAO {
 		// step 01 : select distinct member_id from painter_tag where tag_id=1 or tag_id =2;
 
 		List<PainterTag> lstPainterTag = null;
-		List<Integer> lstmemberId = null;
-	//	int select1 = 1;
-	//	int select2 = 2;
 		
+		
+		boolean isBothSelect = false;
+		
+		// 第一種 查詢全部 > select * from  painter_tag;
 		if("".equals(select1) && "".equals(select2)) {// 預設起始是全部的資料
 			String hql1="from PainterTag";
 			try {
@@ -78,7 +80,29 @@ public class PainterListDAO {
 			} catch(NoResultException e) {
 				lstPainterTag = null;
 			} 
-		}else {// 點擊按鈕查條件
+		}else if("".equals(select1) && select2.length() > 0) {
+			// 第二種 條件一為空，條件二不為空 > select * from  painter_tag where tag_id = 1 
+			String hql1="from PainterTag where tag_id=:select2";
+			try {
+				Query<PainterTag> query  = session.createQuery(hql1,PainterTag.class)
+								.setParameter("select2", select2 );
+				lstPainterTag = query.getResultList();
+			} catch(NoResultException e) {
+				lstPainterTag = null;
+			} 
+		}else if( select1.length() > 0 && "".equals(select2)) {
+			// 第三種 條件二為空，條件一不為空 > select * from  painter_tag where tag_id = 8 
+			String hql1="from PainterTag where tag_id=:select1";
+			try {
+				Query<PainterTag> query  = session.createQuery(hql1,PainterTag.class)
+								.setParameter("select1", select1 );
+				lstPainterTag = query.getResultList();
+			} catch(NoResultException e) {
+				lstPainterTag = null;
+			} 
+		}else {// 第四種  兩個條件皆不為空 > select * from  painter_tag where tag_id = 1 or tag_id = 8;
+			isBothSelect = true;
+			
 			String hql1="from PainterTag where tag_id=:select1 or tag_id = :select2";
 			try {
 				Query<PainterTag> query  = session.createQuery(hql1,PainterTag.class)
@@ -90,23 +114,67 @@ public class PainterListDAO {
 			} 
 		}
 		
-		
-	//	System.out.println("lstPainterTag.size() => " + lstPainterTag.size());
+		List<Member> listMemberInfo = null ;
 		
 		// 過濾重複的物件
-		Map<Integer, Member> map = new HashMap<Integer,Member>();
-		for(int i = 0 ;i<lstPainterTag.size();i++) {
-			System.out.println("lstPainterTag.memberBean => " + lstPainterTag.get(i).getMemberbean().getMember_id());
-			Integer key = lstPainterTag.get(i).getMemberbean().getMember_id();
-			if(map.get(key) == null) { // 判斷是否已經儲存
-				// 未存在
+		if(isBothSelect) {
+			Map<Integer, List<PainterTag>> map = new HashMap<Integer,List<PainterTag>>();
+			
+			for(int i = 0 ;i<lstPainterTag.size();i++) {
+				Integer key = lstPainterTag.get(i).getMemberbean().getMember_id();
 				if("畫師".equals(lstPainterTag.get(i).getMemberbean().getMember_status())) {
-					map.put(key , lstPainterTag.get(i).getMemberbean());
+					
+					if(map.get(key) == null) { // 判斷是否已經儲存
+						// 未存在的話
+						List<PainterTag> lstInfo = new LinkedList<PainterTag>();
+						lstInfo.add(lstPainterTag.get(i));
+						map.put(key , lstInfo);
+					}else {
+						map.get(key).add(lstPainterTag.get(i));
+					}
+					
 				}
 			}
+			
+			List<Integer> lstMemberId = new LinkedList<Integer>();
+			listMemberInfo =  new LinkedList<Member>();
+			for(int memberId : map.keySet()) {
+				if(map.get(memberId).size() > 1) {
+					boolean isSelect1 = false;
+					boolean isSelect2 = false;
+					for(PainterTag info : map.get(memberId)) {
+						if (select1.equals(info.getTagbean().getTag_id() + "")) {
+							isSelect1 = true;
+						}
+						if (select2.equals(info.getTagbean().getTag_id() + "")) {
+							isSelect2 = true;
+						}
+						if(isSelect1 && isSelect2) {
+							lstMemberId.add(memberId);
+							listMemberInfo.add(info.getMemberbean());
+						}
+						
+					}
+				}
+			}
+			
+			for(Member m : listMemberInfo) {
+			}	
+		}else {
+			Map<Integer, Member> map = new HashMap<Integer,Member>();
+			for(int i = 0 ;i<lstPainterTag.size();i++) {
+				System.out.println("lstPainterTag.memberBean => " + lstPainterTag.get(i).getMemberbean().getMember_id());
+				Integer key = lstPainterTag.get(i).getMemberbean().getMember_id();
+				if(map.get(key) == null) { // 判斷是否已經儲存
+					// 未存在的話
+					if("畫師".equals(lstPainterTag.get(i).getMemberbean().getMember_status())) {
+						map.put(key , lstPainterTag.get(i).getMemberbean());
+					}
+				}
+			}
+			listMemberInfo = new ArrayList<Member>(map.values());
 		}
-		System.out.println("map.size() => " + map.size());
-		List<Member> listMemberInfo = new ArrayList<Member>(map.values());
+				
 		return listMemberInfo;
 	}
 	
