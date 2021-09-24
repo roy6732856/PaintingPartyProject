@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.casemanage.model.MyPostedAllCasesBean;
 import tw.paintingparty.chatroom.model.ChatRoomDAO;
+import tw.paintingparty.chatroom.model.MeAndWhoChatHistoryBean;
 import tw.paintingparty.chatroom.model.MyChatConnBean;
 import tw.paintingparty.model.ChatConn;
 import tw.paintingparty.model.Member;
@@ -56,8 +57,6 @@ public class ChatRoomController {
 	}
 	
 	
-	
-	
 	@PostMapping(path = "/backend/chatconnlist") 
 	@ResponseBody
 	public List<MyChatConnBean> ChatConnList( HttpServletRequest request ) { //得到我與誰連接
@@ -67,6 +66,18 @@ public class ChatRoomController {
 		List<MyChatConnBean> selectAllMyConn = crDao.selectAllMyConn( (Integer)myid );
 		
 		return selectAllMyConn ;
+	}
+	
+	
+	@PostMapping(path = "/backend/chathistory/{toid}") 
+	@ResponseBody
+	public List<MeAndWhoChatHistoryBean> ChatHistory( @PathVariable("toid") Integer toid , HttpServletRequest request ) { //得到我與那個連接者的歷史訊息
+		
+		Object myid = request.getSession().getAttribute("session_member_id");
+		
+		List<MeAndWhoChatHistoryBean> selectChatHistory = crDao.selectChatHistory( (Integer)myid , toid );
+		
+		return selectChatHistory ;
 	}
 	
 	
