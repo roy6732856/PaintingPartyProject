@@ -377,7 +377,7 @@
 		</div>
 		</div>
 	</header>
-	<section class="u-clearfix u-grey-10 u-section-3" id="sec-8425">
+	<section class="u-clearfix u-grey-10 u-section-3" id="sec-8425" style="background-color:#f1f2f6; border-top:1px solid #dfe4ea;">
 		<div class="u-clearfix u-sheet u-sheet-1">
 			<div class="u-clearfix u-layout-wrap u-layout-wrap-1">
 				<div class="u-layout">
