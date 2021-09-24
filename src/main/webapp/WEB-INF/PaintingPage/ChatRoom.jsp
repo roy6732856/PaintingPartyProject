@@ -124,7 +124,7 @@
 		var send_message;
 		var to_user_id = 0; //先寫死
 		
-		var url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+		var url = "wss://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 
 		
 		var ws;
@@ -168,8 +168,13 @@
        	    	  //console.log(typeof( result.from_user_id ) );
        	    	  //console.log(typeof( myuser_id ) );
        	    	  
+       	    	  if( result.message_status === 0 ){ //若是系統訊息才印
+       	    		  
+	       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
+       	    	  
+       	    	  
+       	    	  }
        	    		
-       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
        	    	  
        	    	  
        	    	  
@@ -266,7 +271,7 @@
 	           				
 	           			}
 	           			//myuser_name
-	           			url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+	           			url = "wss://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 	           			console.log("12311111");
 	           			console.log(url);
 	           			

@@ -36,6 +36,7 @@ These four methods are invoked by the container.
 package tw.paintingparty.config;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -186,9 +187,11 @@ public class WebSocketServer {
     }
     
     @OnMessage //當從客戶端收到訊息時，做 
-    public void onMessage(Session session,String message)  throws IOException {    
+    public void onMessage(Session session,String message)  throws IOException, ParseException {    
     	
     	Util01 util01 = new Util01();
+    	util01.insertNewConnToDB(my_userid, to_user_id); //若對方沒自己的連接，那就新增，若有，那就更新日期
+    	
     	MessageC2SBean mc2sb = new MessageC2SBean();
     	//將收到的訊息(JSON字串轉成BEAN)
     	mc2sb = objectMapper.readValue(message, MessageC2SBean.class);
