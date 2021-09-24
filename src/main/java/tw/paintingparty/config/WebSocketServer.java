@@ -140,6 +140,7 @@ public class WebSocketServer {
         	
         	if( this.map.get(to_user_id)!=null ) { //進到聊天室時，先判斷對方在不在，若在，通知我連接的對象我上線了，通知我，對方在線上
         		
+        		 System.out.println("map:" + this.map.get(to_user_id));
         		 Session to_session_me = this.map.get(my_userid);//取得我的對話物件，若對方不在線上，就會是NULL
         		 Session to_session_who = this.map.get(to_user_id);//取得對方的對話物件，若對方不在線上，就會是NULL
         	     
@@ -178,9 +179,14 @@ public class WebSocketServer {
     
     @OnClose //當客戶端離開時，做，關掉視窗也是執行這個，可以考慮把寫入資料庫坐在這裡
     public void onClose(Session session)  throws IOException {
+    	System.out.println("代刪除的通訊管道會員ID: " + sockets);
+    	
+    	//移除退出登入使用者的會話物件
+    	map.remove(this.my_userid);
     	
     	//移除退出登入使用者的通訊管道
     	sockets.remove(this);
+    	
     	System.out.println("有人close了");
     	System.out.println("共長: " + sockets.size());
 //        broadCast(String.format("【#會員ID: %s】%s", this.my_userid , "Connection 關閉了..."));        
