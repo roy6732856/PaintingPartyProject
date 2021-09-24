@@ -10,7 +10,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>PainterList</title>
+    <title>畫師列表</title>
 
     <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
     <link rel="stylesheet" href="resources/css/PainterList.css" media="screen">
@@ -139,7 +139,6 @@
                     	
                 </div>
             </div>
-        </div>
     </header>
     <div class="container-fluid" style="text-align: center;background-color: #f8f9fa; height: auto; padding-top: 40px">
         <form action="#">
