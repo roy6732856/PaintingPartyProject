@@ -168,8 +168,13 @@
        	    	  //console.log(typeof( result.from_user_id ) );
        	    	  //console.log(typeof( myuser_id ) );
        	    	  
+       	    	  if( result.message_status === 0 ){ //若是系統訊息才印
+       	    		  
+	       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
+       	    	  
+       	    	  
+       	    	  }
        	    		
-       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
        	    	  
        	    	  
        	    	  

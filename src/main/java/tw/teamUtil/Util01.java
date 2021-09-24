@@ -51,6 +51,61 @@ public class Util01 {
 	}
 	
 	
+	public void insertNewConnToDBToMe( Integer myid , Integer toid ) throws ParseException { //在前台按下私訊鈕時，若自己沒有與對方季戀連結，就建立，若有，就更新日期
+		
+		Util01 util01 = new Util01();
+		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
+		String user="sa";
+		String password="as";
+		String sql = "select * from chat_conn where member_id_a = ? and member_id_b = ? ;"; 
+		
+		try (Connection conn = DriverManager.getConnection(url,user,password)){ //try with resource可以不用自己關
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,myid ); //檢查我有沒有
+			pstmt.setInt(2,toid );
+			ResultSet rs = pstmt.executeQuery();
+			//	rs.next();
+			
+			if( rs.next() ) { //若有通西就是T，若無就F，此為若有
+				System.out.println("近來");
+				String currentDate = util01.getCurrentDate();
+				Date currentDateParse = new  SimpleDateFormat( "yyyy-MM-dd" ).parse(currentDate);  
+				java.sql.Date sqlDate = new java.sql.Date(currentDateParse.getTime());
+				
+				String sql2 = "update chat_conn set conn_date = ? where member_id_a = ? and member_id_b = ? ;";	
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setDate(1, sqlDate );
+				pstmt.setInt(2,myid ); //更新我連對方的連結
+				pstmt.setInt(3,toid );
+				pstmt.executeUpdate();
+				
+			}else {//若無資料，要新增
+				System.out.println("近來2");
+				
+				String currentDate = util01.getCurrentDate();
+				Date currentDateParse = new  SimpleDateFormat( "yyyy-MM-dd" ).parse(currentDate);  
+				java.sql.Date sqlDate = new java.sql.Date(currentDateParse.getTime());
+				
+				String sql3 = "insert into chat_conn (member_id_a , member_id_b , conn_date) values( ? , ? , ? ) ;";	
+				pstmt = conn.prepareStatement(sql3);
+				pstmt.setInt(1,myid ); //別人在抓時，會用自己ID抓這欄位，所以這裡要把A射程TOID
+				pstmt.setInt(2,toid );
+				pstmt.setDate(3, sqlDate );
+				pstmt.executeUpdate();
+				
+			} //if end
+			
+			
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
 	public void insertNewConnToDB( Integer myid , Integer toid ) throws ParseException { //傳送訊息時，若對方沒有與自己建立連結，那就建立
 		Util01 util01 = new Util01();
 		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
