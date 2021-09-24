@@ -75,9 +75,10 @@ public class PersonContentController {
 				m.addAttribute("tagContent2", personContentService.tagSelectOne(tag2).getTag_content());
 		
 			}		
-		m.addAttribute("oneMemProfile_content", oneMem.getProfile_content());
 			
 		}
+		
+		m.addAttribute("oneMemProfile_content", oneMem.getProfile_content());		
 		return "PersonContent";
 	}
 	
