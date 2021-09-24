@@ -13,7 +13,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
-<title>CaseList</title>
+<title>案件列表</title>
 <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
 <link rel="stylesheet" href="resources/css/CaseList.css" media="screen">
 <link rel="stylesheet"
@@ -498,7 +498,7 @@
 	<footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer"
 		id="sec-c7c8">
 		<p class="u-small-text u-text u-text-variant u-text-1">Copyright @
-			dodo 2021</p>
+			paintingparty 2021</p>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
 			<div class="menu-collapse"
 				style="font-size: 1rem; letter-spacing: 0px;">

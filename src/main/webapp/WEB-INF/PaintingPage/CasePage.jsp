@@ -10,7 +10,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
-<title>CasePage</title>
+<title>案件頁面</title>
 <link rel="stylesheet" href="../resources/css/nicepage.css"
 	media="screen">
 <link rel="stylesheet" href="../resources/css/CasePage.css"
@@ -193,17 +193,17 @@
 							<div class="u-container-layout u-container-layout-1">
 								<div
 									class="u-container-style u-group u-radius-3 u-shape-round u-white u-group-1"
-									style="border: 1px solid #ced6e0">
+									style="border: 1px solid #ced6e0;min-height: auto;">
 									<div class="u-container-layout u-container-layout-2">
-										<div class="u-align-left u-container-style u-group u-group-2"
+										<div class="u-align-left u-container-style u-group-2"
 											style="min-height: auto;">
-											<div class="u-container-layout u-container-layout-2">
-
+											<!--  <div class="u-container-layout u-container-layout-2">-->
+											<div class="text-center rounded-circle propic">
 												<div class="">
 													<a
 														href="<%= request.getContextPath() %>/memberpage/${memId}"><img
 														src="<%=request.getContextPath()%>/casepagedisplaymemId"
-														class="rounded-3 border border-2 mx-auto d-block"
+														class="rounded-circle border border-2 mx-auto d-block"
 														style="display: block; max-width: 100%; height: 120px;"></a>
 												</div>
 											</div>
@@ -293,7 +293,7 @@
 											</div>
 											<div>
 												<p
-													style="color: burlywood; font-weight: bold; font-size: 30px;">參考圖例</p>
+													style="color: burlywood; font-weight: bold; font-size: 30px;">參考例圖</p>
 												<div class="u-container-layout u-container-layout-21 ">
 													<div class="container">
 														<img
@@ -367,7 +367,7 @@
 	<footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer"
 		id="sec-c7c8">
 		<p class="u-small-text u-text u-text-variant u-text-1">Copyright @
-			dodo 2021</p>
+			paintingparty 2021</p>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
 			<div class="menu-collapse"
 				style="font-size: 1rem; letter-spacing: 0px;">
