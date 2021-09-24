@@ -114,6 +114,8 @@ public class WebSocketServer {
     	System.out.println( "to_user_id= " + str1List[1].substring(str1List[1].indexOf("=")+1) ); 
     	this.my_userid = Integer.parseInt( str1List[0].substring(str1List[0].indexOf("=")+1) ); //得出自己ID
     	this.to_user_id = Integer.parseInt( str1List[1].substring(str1List[1].indexOf("=")+1) ); //得出對方ID
+    	
+    	//將當前登入使用者以及對應的session(會話)存入到map中
     	this.map.put(this.my_userid, this.session);
     	
     	
@@ -132,7 +134,6 @@ public class WebSocketServer {
     		
     		
     		
-    		//將當前登入使用者以及對應的session(會話)存入到map中
         	MessageS2CBean ms2cb = new MessageS2CBean();//給我自己的
         	MessageS2CBean ms2cb2 = new MessageS2CBean(); //給我連接的對象的
         	ms2cb.setMessage_status(0); //0=系統訊息、1=私人訊息
@@ -145,7 +146,7 @@ public class WebSocketServer {
         		 Session to_session_who = this.map.get(to_user_id);//取得對方的對話物件，若對方不在線上，就會是NULL
         	     
         		 String myname = util01.selectMyNameInWebSocket(my_userid);
-        		 String systemnotic = String.format("【系統通知】會員 %s 剛剛開啟了與您的連接，似乎有話想說!", myname);
+        		 String systemnotic = String.format("【系統通知】會員 %s 上線中，剛剛開啟了與您的連接，似乎有話想說!", myname);
         		 System.out.println(systemnotic);
         		 
         		 ms2cb.setSend_message("【系統通知】對方正在線上!");
@@ -198,11 +199,13 @@ public class WebSocketServer {
     	Util01 util01 = new Util01();
     	util01.insertNewConnToDB(my_userid, to_user_id); //若對方沒自己的連接，那就新增，若有，那就更新日期
     	
+    	//----------收到訊息的封裝
     	MessageC2SBean mc2sb = new MessageC2SBean();
-    	//將收到的訊息(JSON字串轉成BEAN)
-    	mc2sb = objectMapper.readValue(message, MessageC2SBean.class);
+    	mc2sb = objectMapper.readValue(message, MessageC2SBean.class); //將收到的訊息(message)--JSON格式字串，以BEAN裝起來
     	System.out.println(mc2sb.getSend_message());
     	System.out.println("給誰:" + mc2sb.getTo_user_id());
+    	
+    	
     	
     	//封裝要推播的BEAN
     	MessageS2CBean ms2cb = new MessageS2CBean();
@@ -214,6 +217,12 @@ public class WebSocketServer {
     	ms2cb.setCurrent_time(	util01.getCurrentTime_second()  );
     	
     	System.out.println("現在時間: " + ms2cb.getCurrent_time());
+    	
+    	
+    	//--------將伺服端收到的訊息，存進DB的歷史訊息(封裝的東西(主要是時間)要跟伺服端送出的一樣)
+    	util01.insertChatHistoryToDB(ms2cb); //這種作法不好，詳情已筆記在util01裡面
+    	
+    	
     	
         //Integer to_memid  = mc2sb.getTo_user_id();
         

@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import tw.paintingparty.chatroom.model.MessageC2SBean;
+import tw.paintingparty.chatroom.model.MessageS2CBean;
+
 public class Util01 {
 
 	public static void main(String[] args) throws ParseException {
@@ -49,6 +52,37 @@ public class Util01 {
 
     	
 	}
+	
+	
+	public void insertChatHistoryToDB( MessageS2CBean ms2cb ) { //當伺服端收到訊息，就存入DB的歷史訊息
+//  ****此作法每當一個會員發一次訊息，就會對資料庫進行一次存取，且每筆資料存的訊息量都不多，即時聊天室又是操作量很大的功能，所以對資料庫負擔非常大，
+//		往後可考慮改成，做一個暫存(STATIC)，先把每個伺服端收到的訊息放進去，等到存到了500比，在一次寫進DB，成為一筆RECORD，暫存裡面的訊息，用JSON格式，但南點在於，取出資料時，要挑出A會員與B會員講的話...
+		
+		Util01 util01 = new Util01();
+		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
+		String user="sa";
+		String password="as";
+		String sql = "insert into chat_history (member_id_s , member_id_r , message_content , message_time) "
+				+ " values( ? , ? , ? , ? ) ; "; 
+		
+		try (Connection conn = DriverManager.getConnection(url,user,password)){ //try with resource可以不用自己關
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ms2cb.getFrom_user_id() );  //誰寄的訊息(當然是自己)
+			pstmt.setInt(2,ms2cb.getTo_user_id() );  //寄給誰(看連接誰)
+			pstmt.setString(3,ms2cb.getSend_message() ); //訊息內容 
+			pstmt.setString(4, ms2cb.getCurrent_time() ); //訊息的日期，我們在SQL直接給他設成NVARCHAR，沒用datetime，一樣可以排序 
+			
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	
 	
 	public void insertNewConnToDBToMe( Integer myid , Integer toid ) throws ParseException { //在前台按下私訊鈕時，若自己沒有與對方季戀連結，就建立，若有，就更新日期
