@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.paintingparty.casemanage.model.MyPostedAllCasesBean;
 import tw.paintingparty.chatroom.model.ChatRoomDAO;
+import tw.paintingparty.chatroom.model.ChatRoomService;
 import tw.paintingparty.chatroom.model.MeAndWhoChatHistoryBean;
 import tw.paintingparty.chatroom.model.MyChatConnBean;
 import tw.paintingparty.model.ChatConn;
@@ -31,7 +32,7 @@ public class ChatRoomController {
 	private MemberService mService;
 	
 	@Autowired
-	private ChatRoomDAO crDao;
+	private ChatRoomService crService;
 	
 	@GetMapping(path = "/backend/chatroom") 
 	public String ChatRoom(Model m) {
@@ -63,7 +64,7 @@ public class ChatRoomController {
 		
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
-		List<MyChatConnBean> selectAllMyConn = crDao.selectAllMyConn( (Integer)myid );
+		List<MyChatConnBean> selectAllMyConn = crService.selectAllMyConn( (Integer)myid );
 		
 		return selectAllMyConn ;
 	}
@@ -75,7 +76,7 @@ public class ChatRoomController {
 		
 		Object myid = request.getSession().getAttribute("session_member_id");
 		
-		List<MeAndWhoChatHistoryBean> selectChatHistory = crDao.selectChatHistory( (Integer)myid , toid );
+		List<MeAndWhoChatHistoryBean> selectChatHistory = crService.selectChatHistory( (Integer)myid , toid );
 		
 		return selectChatHistory ;
 	}
