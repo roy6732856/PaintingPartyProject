@@ -262,7 +262,7 @@ public class CaseListPageDAO {
 					List<Cases> list = query.getResultList();
 					return list;
 				}else {
-					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice ;
 					Query<Cases> query = session.createQuery(hql2, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
