@@ -590,7 +590,7 @@
                                 <a href="<%= request.getContextPath() %>/backend/systemnoticemainpage"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
-                                    data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/systemnoticemainpage"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use>
@@ -602,10 +602,10 @@
                                             d="m213.332031 512c38.636719 0 70.957031-27.542969 78.378907-64h-156.757813c7.425781 36.457031 39.746094 64 78.378906 64zm0 0">
                                         </path>
                                     </svg></span>
-                                <a href="https://nicepage.com/c/shapes-website-templates"
+                                <a href="<%= request.getContextPath() %>/backend/chatroom"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-6">訊息</a><span
                                     class="u-icon u-icon-circle u-icon-3"
-                                    data-href="https://nicepage.com/c/fashion-beauty-website-templates"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/chatroom"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 -67 380 380"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-de85"></use>
@@ -617,7 +617,7 @@
                                 <a href="<%= request.getContextPath() %>/logout"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span
                                     class="u-icon u-icon-circle u-icon-4"
-                                    data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link"
+                                    data-href="<%= request.getContextPath() %>/logout"><svg class="u-svg-link"
                                         preserveAspectRatio="xMidYMin slice" viewBox="0 0 511 512" style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5881"></use>
                                     </svg><svg class="u-svg-content" viewBox="0 0 511 512" id="svg-5881">
