@@ -54,7 +54,6 @@
 
 
  <script>
- 
 
  
  </script>
@@ -151,8 +150,8 @@
        	      	}//onopen end
        	      	
        	      ws.onclose = function (){
-       	        console.log('Connection 關閉了...');
-       	        
+
+       	      	console.log('Connection 關閉了...');
        	        $("#connect-status").text("離線中"); 
        	      }//onclose end
        	      
@@ -243,6 +242,7 @@
 	           	 
 	            	$("#conn_container .conn_open").click(function(){
 	            		
+	            		
 	            		$("#msg-input").removeAttr("disabled");//當選取私聊，取消INPUT的禁止輸入
 	            		$("#msg_submit").removeAttr("style");//當選取私聊，解除送出鈕的隱藏
 	            		
@@ -268,6 +268,7 @@
 	           				ws.close();
 	           				
 	           			}
+	           			
 						
 	           			console.log("--1");
 	           			//代做
@@ -342,6 +343,9 @@
 	           	      	} //onopen end
 	           	      	
 	           	      ws.onclose = function (){
+	           	      		
+	
+	           	      		
 	           	        console.log('Connection 關閉了...');
 	           	        
 	           	        $("#connect-status").text("離線中"); 

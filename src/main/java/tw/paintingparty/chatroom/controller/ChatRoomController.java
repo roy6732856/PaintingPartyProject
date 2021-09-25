@@ -81,6 +81,19 @@ public class ChatRoomController {
 	}
 	
 	
+	@PostMapping(path = "/backend/deletechatconnhavenotchat/{toid}") 
+	@ResponseBody
+	public void deleteChatConnHaveNotChat( @PathVariable("toid") Integer toid , HttpServletRequest request ) { 
+		//當外面點下思訓按鈕，會建立一個連結，但若彼此都沒說過話，那就在關掉WS十，刪除此連結，避免一直狂點，連結越來越長，但都是沒用的連結。
+		//不能寫在WS的ON CLOSE方法哩，因為我們一連近來，還沒跟任何人建立斯療時，TOID是0，但資料庫根本沒這資料，會造成錯誤，因此在前端ONCLOSER十，用AJAX呼叫此方法
+		//**暫無用到**
+		Util01 util01 = new Util01();
+		
+		Object myid = request.getSession().getAttribute("session_member_id");
+		util01.deleteChatConnNotChat((Integer)myid, toid);
+		
+	}
+	
 	//----------
 	
 	//下載大頭照的URL:/backend/headshotdownloader/{memid}，在CASEMANAGE的控制器

@@ -96,7 +96,7 @@ public class WebSocketServer {
     	System.out.println("近來");
     	
     	this.session = session;
-    	sockets.add(this);
+    	sockets.add(this); //把自己的通訊管道加入列表
     	
     	System.out.println("近來2");
     	
@@ -174,7 +174,7 @@ public class WebSocketServer {
     	
     	
     	
-    	System.out.println("共長: " + sockets.size());
+    	System.out.println("開始共長: " + sockets.size());
     	
     }
     
