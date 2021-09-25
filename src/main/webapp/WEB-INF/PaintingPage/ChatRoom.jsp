@@ -123,7 +123,7 @@
 		var send_message;
 		var to_user_id = 0; //先寫死
 		
-		var url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+		var url = "wss://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 
 		
 		var ws;
@@ -325,7 +325,7 @@
 	           			
 	           			
 	           			//以下開始為下一輪的WS連接做準備
-	           			url = "ws://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
+	           			url = "wss://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 	           			console.log("12311111");
 	           			console.log(url);
 	           			
