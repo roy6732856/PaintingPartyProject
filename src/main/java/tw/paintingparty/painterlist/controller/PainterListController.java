@@ -41,7 +41,7 @@ public class PainterListController {
 	private PainterListPageService plpService;
 	
 	@RequestMapping(path = "/painterlist", method = RequestMethod.GET)
-	public String painterListAction(Model m) {
+	public String painterListAction(Model m , HttpServletRequest request , HttpServletResponse response) {
 
 //		Long Member = plpService.Pagetotal();
 //
@@ -58,20 +58,20 @@ public class PainterListController {
 //		m.addAttribute("totalCases", Member);
 //		m.addAttribute("totalPages", totalPages);
 //		
-//		  Member mem1 = mService.showLoginUsername();
-//		  
-//		  m.addAttribute("member_name", mem1.getMember_name());
+		  Member mem1 = mService.showLoginUsername();
+		  
+		  m.addAttribute("member_name", mem1.getMember_name());
 
 		return "PainterList";
 	}
 
-	@RequestMapping(path = "/SelectAll", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Member> SelectAllMember() {
+//	@RequestMapping(path = "/SelectAll", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<Member> SelectAllMember() {
+//
+//		return plService.SelectAllMember();
 
-		return plService.SelectAllMember();
-
-	}
+//	}
 	
 
 
