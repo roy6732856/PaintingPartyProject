@@ -229,7 +229,7 @@ public class CaseListPageDAO {
 		Integer maxPrice = bean.getPrice_max();
 		String sort = bean.getSort();
 		
-		String ifItnew = " order by c.upload_date desc";
+		String ifItnew = " order by c.upload_date desc,c.case_id desc";
 		
 		
 		String[] ary = tagAry.split(",");
@@ -262,7 +262,7 @@ public class CaseListPageDAO {
 					List<Cases> list = query.getResultList();
 					return list;
 				}else {
-					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					hql2 = hql2 + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice ;
 					Query<Cases> query = session.createQuery(hql2, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
@@ -303,14 +303,14 @@ public class CaseListPageDAO {
 				}
 			}else {
 				if(sort.equals("new")) {
-					hql = hql + " where c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
+					hql = hql + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice + ifItnew;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
 					return list;
 				}else {
-					hql = hql + " where c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
+					hql = hql + " and c.price_min >= "+ minPrice + " and c.price_max <= "+maxPrice;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
@@ -373,14 +373,14 @@ public class CaseListPageDAO {
 				}
 			}else {
 				if(sort.equals("new")) {
-					hql = hql + " where c.price_min >= "+ minPrice + ifItnew;
+					hql = hql + "and c.price_min >= "+ minPrice + ifItnew;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
 					return list;
 				}else {
-					hql = hql + " where c.price_min >= "+ minPrice ;
+					hql = hql + " and c.price_min >= "+ minPrice ;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
@@ -438,13 +438,13 @@ public class CaseListPageDAO {
 				}
 			}else {
 				if(sort.equals("new")) {
-					hql = hql + " where c.price_max <= " + maxPrice + ifItnew;
+					hql = hql + "and c.price_max <= " + maxPrice + ifItnew;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
 					return list;
 				}else {
-					hql = hql + " where c.price_max <= " + maxPrice ;
+					hql = hql + "and c.price_max <= " + maxPrice ;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
@@ -458,7 +458,7 @@ public class CaseListPageDAO {
 			if (typeTag == 0 && styleTag > 0) {
 				if(sort.equals("new")) {
 					
-					hql2 = hql2 +  " order by c.upload_date desc";
+					hql2 = hql2 + ifItnew;
 					Query<Cases> query = session.createQuery(hql2, Cases.class);
 					
 //					List<Cases> list = query.setMaxResults(8).getResultList();
@@ -476,7 +476,7 @@ public class CaseListPageDAO {
 			} else if (typeTag > 0 && styleTag == 0) {
 				if(sort.equals("new")) {
 					
-					hql1 = hql1 +  " order by c.upload_date desc";
+					hql1 = hql1 + ifItnew;
 					Query<Cases> query = session.createQuery(hql1, Cases.class);
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
@@ -492,7 +492,7 @@ public class CaseListPageDAO {
 			} else if (typeTag != 0 && styleTag != 0) {
 				if(sort.equals("new")) {
 					
-					hql3 = hql3 +  " order by c.upload_date desc";
+					hql3 = hql3 +  ifItnew;
 					Query<Cases> query = session.createQuery(hql3, Cases.class);
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();
@@ -507,7 +507,7 @@ public class CaseListPageDAO {
 			} else {
 				if(sort.equals("new")) {
 					
-					hql = hql +  " order by c.upload_date desc";
+					hql = hql +  ifItnew;
 					Query<Cases> query = session.createQuery(hql, Cases.class);
 //					List<Cases> list = query.setMaxResults(8).getResultList();
 					List<Cases> list = query.getResultList();

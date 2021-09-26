@@ -34,6 +34,7 @@ public class CaseApplyQuotationController {
 	 @RequestMapping(path = "/caseapplycheck/{caseid}",method = RequestMethod.GET)
 	 public void processCheckStatus(HttpSession session,HttpServletRequest request, HttpServletResponse response,@PathVariable("caseid")int caseid) throws IOException {
 		 String status = (String)session.getAttribute("session_member_status");
+		 System.out.println(status);
 		 session.setAttribute("caseid", caseid);
 		 if(status.equals("畫師")) {
 			 response.sendRedirect( request.getContextPath() + "/caseapplymainpage.controller");
@@ -51,6 +52,8 @@ public class CaseApplyQuotationController {
 		Member mem1 = mService.showLoginUsername();
 		m.addAttribute("member_name", mem1.getMember_name());
 		m.addAttribute("member_id",mem1.getMember_id());
+		String status = (String)session.getAttribute("session_member_status");
+		m.addAttribute("status",status);
 		
 		return "Quotation";
 		
