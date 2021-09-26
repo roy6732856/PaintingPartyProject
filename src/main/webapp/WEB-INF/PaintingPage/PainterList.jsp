@@ -132,11 +132,7 @@
 	                        <a href="/PaintPartyMvcProject/register"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
                     	</div>
-                    </div>
-                    <div>
-                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                    </div>
-                    	
+                    </div>	
                 </div>
             </div>
     </header>
@@ -409,7 +405,7 @@
         </div>
     </section>
     <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8">
-        <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p>
+        <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ paintingparty 2021</p>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
             <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
                 <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -427,34 +423,6 @@
                         </defs>
                     </svg>
                 </a>
-            </div>
-            <div class="u-custom-menu u-nav-container">
-                <ul class="u-nav u-unstyled u-nav-1">
-                    <li class="u-nav-item"><a
-                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                            style="padding: 10px 96px;">聯絡我們</a>
-                    </li>
-                    <li class="u-nav-item"><a
-                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                            style="padding: 10px 96px;">常見問題</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="u-custom-menu u-nav-container-collapse">
-                <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-                    <div class="u-sidenav-overflow">
-                        <div class="u-menu-close"></div>
-                        <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                    style="padding: 10px 96px;">聯絡我們</a>
-                            </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                    style="padding: 10px 96px;">常見問題</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
             </div>
         </nav>
     </footer>
@@ -616,7 +584,7 @@
                                             <span class="badge badge-primary">Primary</span> 
 	                                        </div>  -->
 	                                        <div class="text-truncate">
-	                                            <a href="#">
+	                                            <a href="/PaintPartyMvcProject/backend/gotochat/\${data[i].member_id}">
 	                                                <button type="button" class="btn btn-light"
 	                                                    style="background-color: #D3D3D3 ">私人訊息</button>
 	                                            </a>
