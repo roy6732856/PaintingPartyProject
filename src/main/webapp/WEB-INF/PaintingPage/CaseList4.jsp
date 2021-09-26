@@ -13,7 +13,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
-<title>CaseList</title>
+<title>案件列表</title>
 <link rel="stylesheet" href="resources/css/nicepage.css" media="screen">
 <link rel="stylesheet" href="resources/css/CaseList.css" media="screen">
 <link rel="stylesheet"
@@ -291,7 +291,7 @@
 
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
-			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
+			<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁"
 				data-image-width="570" data-image-height="410"> <img
 				src="resources/images/LOGO-TEST-22.png"
 				class="u-logo-image u-logo-image-1">
@@ -498,7 +498,7 @@
 	<footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer"
 		id="sec-c7c8">
 		<p class="u-small-text u-text u-text-variant u-text-1">Copyright @
-			dodo 2021</p>
+			paintingparty 2021</p>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
 			<div class="menu-collapse"
 				style="font-size: 1rem; letter-spacing: 0px;">
