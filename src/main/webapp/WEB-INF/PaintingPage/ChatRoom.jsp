@@ -54,7 +54,6 @@
 
 
  <script>
- 
 
  
  </script>
@@ -148,13 +147,13 @@
        	        
        	        $("#connect-status").text("連線中"); 
        	        
-       	      	}
+       	      	}//onopen end
        	      	
        	      ws.onclose = function (){
-       	        console.log('Connection 關閉了...');
-       	        
+
+       	      	console.log('Connection 關閉了...');
        	        $("#connect-status").text("離線中"); 
-       	      }
+       	      }//onclose end
        	      
        	      
        	      ws.onmessage = function(event) { //接收到伺服端推下來的資料時，要做
@@ -169,7 +168,7 @@
        	    	  //console.log(typeof( myuser_id ) );
        	    	  
        	    	  if( result.message_status === 0 ){ //若是系統訊息才印
-       	    		  
+       	    		  //console.log("--3");
 	       	    	  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`); //因為是第一次近來，所以一定只會是系統提示
        	    	  
        	    	  
@@ -185,7 +184,8 @@
        	          //element.scrollTo(x-coord, y-coord)
        	          //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
        	          //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
-       	      }	
+       	      
+       	      }	//onmessage end
 		
 		
 		
@@ -194,7 +194,7 @@
 
     	
     	
-    	//---------------------------------------------------
+    	 //---------------------------------------------------
 
     	
     	console.log(123);
@@ -242,6 +242,7 @@
 	           	 
 	            	$("#conn_container .conn_open").click(function(){
 	            		
+	            		
 	            		$("#msg-input").removeAttr("disabled");//當選取私聊，取消INPUT的禁止輸入
 	            		$("#msg_submit").removeAttr("style");//當選取私聊，解除送出鈕的隱藏
 	            		
@@ -251,11 +252,8 @@
 	           			//console.log( change_bmember_name ); //得出典籍的BMEMBER name
 	           			$("#chat_title").html( "即時聊天室(to " + change_bmember_name + ")" ); //換掉聊天室上方的標題
 	           			
-	           			if( parseInt(change_bmember_id) != parseInt(to_user_id)){ //如果我點選的，跟我上一個連接的對象不同，那就清空內容，並且下面會再連接
-	           				
-	           				$("#msg-io").html("");
-	           				
-	           			}
+	           			
+	           			$("#msg-io").html(""); //只要按下，就統一清掉內容
 	           			
 	           			console.log("原本to_user_id: " + to_user_id);
 	           			console.log("原本opposite_user_name: " + opposite_user_name);
@@ -270,7 +268,63 @@
 	           				ws.close();
 	           				
 	           			}
-	           			//myuser_name
+	           			
+						
+	           			console.log("--1");
+	           			//代做
+	           			
+	           				
+	           			//------以下抽出與現在典籍的連接者之間的歷史訊息
+	           				
+			           		$.ajax({ //代做
+					            url: `<%= request.getContextPath() %>/backend/chathistory/\${to_user_id}`,                        // url位置
+					            type: 'post', 
+					            error: function (xhr) { $("#msg-io").html("歷史訊息讀取失敗，請重新整理"); },      // 錯誤後執行的函數
+					            success: function (data) { 
+					            	console.log("收到DATA"); //這邊請求得速度比較慢，所以變成歷史訊息跑在系統通知後面
+					            	//$("#msg-io").prepend( JSON.stringify(data) ); //demo 
+					            	if( data.length!=0 ){ // 有歷史訊息才做
+					            						      
+					            		$("#msg-io").prepend( `<br><hr><div style="display:flex;justify-content: center; "><div style="margin-top:-38px;border-style:double;background-color:white;padding:5px;"><b>歷史訊息</b></div></div><br>` ); //歷史訊息分界線
+					            		
+					            		for( var i=0 ; i<data.length ; i++){
+					            			
+					            			if( data[i].member_id_s === myuser_id ){ //若寄迅人是自己，那就藍色
+					            				
+					            				$("#msg-io").prepend( `<h6 style="color:blue;">【\${data[i].sender_name}】(\${data[i].message_time})：<br/><div style="color:black;">　\${data[i].message_content}</div></h6>` );
+					            				
+					            			}else{
+					            				
+					            				$("#msg-io").prepend( `<h6 style="color:black;">【\${data[i].sender_name}】(\${data[i].message_time})：<br/><div style="color:black;">　\${data[i].message_content}</div></h6>` ); //demo
+					            				
+					            			}
+					            			
+					            	
+					            		}//data[i] for end
+					            		
+					            		
+					            		
+					            	}else{ //若沒有，就啥都不要印
+					            		
+					            		//$("#msg-io").prepend( "暫無歷史訊息" );
+					            		
+					            	}//有歷史訊息 if end
+					            	
+					            	
+					            	var msgIoDiv = $("#msg-io")[0];	   //因為#msg-io是INPUT，所以後面要加[0]，才娶的到所要的DIV元素
+				           	        msgIoDiv.scrollTo(0,msgIoDiv.scrollHeight);
+					            
+					            }// end success
+					            
+					        });//end ajax
+	           				
+	           				
+	           				
+	           			
+	           			
+	           			
+	           			
+	           			//以下開始為下一輪的WS連接做準備
 	           			url = "wss://"+ host + `<%= request.getContextPath() %>/endpoint?myuser_id=\${myuser_id}&to_user_id=\${to_user_id}`;
 	           			console.log("12311111");
 	           			console.log(url);
@@ -286,17 +340,21 @@
 	           	        
 	           	        $("#connect-status").text("連線中"); 
 	           	        
-	           	      	}
+	           	      	} //onopen end
 	           	      	
 	           	      ws.onclose = function (){
+	           	      		
+	
+	           	      		
 	           	        console.log('Connection 關閉了...');
 	           	        
 	           	        $("#connect-status").text("離線中"); 
-	           	      }
+	           	      }//onclose end
 	           	      
 	           	      
 	           	      ws.onmessage = function(event) { //接收到伺服端推下來的資料時，要做
 	           	    	  //console.log("收到");
+	           	    	console.log("--2");
 	           	    	  console.log(event.data);
 	           	    	  console.log(typeof(event.data));
 	           	    	  //console.log("type: " + typeof( parseInt(to_user_id) ));
@@ -307,7 +365,7 @@
 	           	    	  //console.log(typeof( myuser_id ) );
 	           	    	  
 	           	    	  if( result.message_status === 0 ){ //若是系統訊息
-	           	    		
+	           	    		console.log("--2-2");
 	           	    		  $("#msg-io").append(`<h6 style="color:red;">\${result.send_message}</h6>`);
 	           	    	  
 	           	    	  }else{ //若是私人訊息
@@ -335,18 +393,9 @@
 	           	          //element.scrollTo(x-coord, y-coord)
 	           	          //The scrollTo() method of the Element interface scrolls to a particular set of coordinates inside a given element.
 	           	          //Element.scrollHeight是衡量元素包含因為overflow而沒顯示在螢幕上的內容高度的唯讀屬性.
-	           	      }	
 	           	      
+	           	      }//onmessage end	
 	           	      
-	           	      
-	           	     
-	           	      
-	           	     	//$("#disconnect-btn").click(function(){		
-	           	     	//	ws.close();			
-	           	    // 	});
-	           			
-	           			
-	           			
 	           			
 	           			//------------------------------
 	           			
@@ -389,13 +438,10 @@
            	 $("#conn_container").html("暫無資料"); 
            	
            	 
-            }//end if
+            }//data[0]!=null end if
             
             
-            
-          
-            
-            
+
             
             }// end success
         });//end ajax
@@ -544,7 +590,7 @@
                                 <a href="<%= request.getContextPath() %>/backend/systemnoticemainpage"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp;
                                     系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2"
-                                    data-href="<%= request.getContextPath() %>/backend/systemnotice"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/systemnoticemainpage"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use>
@@ -556,10 +602,10 @@
                                             d="m213.332031 512c38.636719 0 70.957031-27.542969 78.378907-64h-156.757813c7.425781 36.457031 39.746094 64 78.378906 64zm0 0">
                                         </path>
                                     </svg></span>
-                                <a href="https://nicepage.com/c/shapes-website-templates"
+                                <a href="<%= request.getContextPath() %>/backend/chatroom"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-6">訊息</a><span
                                     class="u-icon u-icon-circle u-icon-3"
-                                    data-href="https://nicepage.com/c/fashion-beauty-website-templates"><svg
+                                    data-href="<%= request.getContextPath() %>/backend/chatroom"><svg
                                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 -67 380 380"
                                         style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-de85"></use>
@@ -571,7 +617,7 @@
                                 <a href="<%= request.getContextPath() %>/logout"
                                     class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span
                                     class="u-icon u-icon-circle u-icon-4"
-                                    data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link"
+                                    data-href="<%= request.getContextPath() %>/logout"><svg class="u-svg-link"
                                         preserveAspectRatio="xMidYMin slice" viewBox="0 0 511 512" style="">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5881"></use>
                                     </svg><svg class="u-svg-content" viewBox="0 0 511 512" id="svg-5881">
@@ -610,7 +656,9 @@
                       id="connect-status">離線中</span></h4>
                   <form id="form1">
                     <div class="form-group">
-                      <div class="form-control" style="height:250px;overflow:auto;" id="msg-io"></div>
+                      <div class="form-control" style="height:250px;overflow:auto;" id="msg-io">
+                    
+                      </div>
                     </div>
                     <div class="form-group">
                       <input class="form-control" type="text" name="msg-input" id="msg-input" placeholder="請輸入訊息" disabled="disabled"/>

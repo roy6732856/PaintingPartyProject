@@ -32,7 +32,7 @@
     <meta property="og:type" content="website">
   </head>
   <body class="u-body"><header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                 data-image-height="410">
                 <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
             </a>
@@ -63,70 +63,32 @@
           </div>
         </nav>
         <div class="u-container-style u-group u-white u-group-1">
-          <div class="u-container-layout u-container-layout-1">
-          	            <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
-                        <a href="/xxx"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></a>
-                        <a href="/PaintPartyMvcProject/backend"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="account_manager" style="display:none">帳號管理</a>
-                        <a 
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                        
-                        <a href="/PaintPartyMvcProject/login"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-1" name="header_login" style="display:none">登入</a>
-                        <a href="/PaintPartyMvcProject/register"
-                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-2" name="header_register" style="display:none">註冊</a>
-          </div>
+          
         </div>
       </div></header>
     <section class="u-clearfix u-grey-10 u-section-1" id="sec-7cff">
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-align-center u-form u-form-1">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
-            <div class="u-form-group u-form-group-2">
-              <label for="text-c4fd" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="帳號" id="text-c4fd" name="member_account" blur="checkAccount()" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-              <div style="color:red ;display: none" name="member_account_error">帳號已註冊</div>
-            </div>
-            <div class="u-form-group u-form-group-3">
-              <label for="text-d6e6" class="u-form-control-hidden u-label"></label>
-              <input type="password" placeholder="密碼" id="text-d6e6" name="password" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-            </div>
-            <div class="u-form-group u-form-name">
-              <label for="name-7f03" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="名稱" id="name-7f03" name="member_name_for_register" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-            </div>
-            <div class="u-form-email u-form-group">
-              <label for="email-7f03" class="u-form-control-hidden u-label"></label>
-              <input type="email" placeholder="信箱" id="email-7f03" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-              
-            </div>
-            <div class="u-form-group u-form-phone u-form-group-5">
-              <label for="phone-d2ff" class="u-form-control-hidden u-label"></label>
-              <input type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="手機" id="phone-d2ff" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
-            </div>
-<!--             <div class="u-form-group"> -->
-<!--               <label for="message-7f03" class="u-form-control-hidden u-label"></label> -->
-<!--               <input placeholder="會員身分" rows="4" cols="50" id="message-7f03" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text"> -->
-<!--             </div> -->
-
-			<div class="u-form-group u-form-phone u-form-group-5">
-				<label for="email-7f03" class="u-form-control-hidden u-label"></label>
-				<select name="member_status" style="
-    						width: 100%;
-						    height: auto;
-						    padding: 10px;
-							" required="">
-					<option value="" disabled selected>請選擇會員身分</option>
-					<option >一般會員</option>
-					<option >畫師</option>
-				</select>
-				<div name="member_status_error" style="display:none; color:red">尚未選擇身分</div>
-			</div>
-            <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-btn u-btn-submit u-button-style">送出</a>
-              <input type="submit" value="submit" class="u-form-control-hidden" name="submit" onclick="registerCheckx()">
+          <form action="#" method="GET" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
+            <div style="padding-left: 310px">
+	            <div class="u-form-group u-form-group-2">
+	              <p name="Emailreminder">請輸入你已註冊的信箱，系統將會傳送重設密碼連結</p>
+	              <label for="text-c4fd" class="u-form-control-hidden u-label"></label>
+	              <input type="text" placeholder="請輸入您的信箱" id="text-c4fd" name="emailgetpwd" blur="checkAccount()" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="" style="width: 400px">
+	              <div style="color:red ;display: none" name="member_account_error">請輸入帳號</div>
+	              
+	            </div>
+	            
+	<!--             <div class="u-form-group"> -->
+	<!--               <label for="message-7f03" class="u-form-control-hidden u-label"></label> -->
+	<!--               <input placeholder="會員身分" rows="4" cols="50" id="message-7f03" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" type="text"> -->
+	<!--             </div> -->
+	
+				
+	            <div class="u-align-left u-form-group u-form-submit">
+	              <a href="#" class="u-btn u-btn-submit u-button-style">送出</a>
+	              <input type="submit" value="submit" class="u-form-control-hidden" name="submit" onclick="registerCheckx()">
+	            </div>
             </div>
 <!--             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div> -->
 <!--             <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div> -->
@@ -185,38 +147,33 @@
     	window.location.href = '/PaintPartyMvcProject/logout'
     }
     
-    //送出註冊資料
+    //送出信箱驗證是否有此帳號
     function registerCheckx(){
     			console.log("測試1");
-    			console.log($("[name=member_account]").val());
-    			console.log($("[name=member_status]").val());
+    			console.log($("[name=emailgetpwd]").val());
+//     			console.log($("[name=member_status]").val());
     	var data={
-    			"member_account":$("[name=member_account]").val(),
-    			"password":$("[name=password]").val(),
-    			"member_name":$("[name=member_name_for_register]").val(),
-     			"email":$("[name=email]").val(),
-    			"phone":$("[name=phone]").val(),
-    			"member_status":$("[name=member_status]").val(),
+    			"emailgetpwd":$("[name=emailgetpwd]").val()
+//     			"password":$("[name=password]").val(),
+//     			"member_name":$("[name=member_name_for_register]").val(),
+//      			"email":$("[name=email]").val(),
+//     			"phone":$("[name=phone]").val(),
+//     			"member_status":$("[name=member_status]").val(),
     			
     	}
     	
-    	if($("[name=member_status]").val()!=null){
+    	if($("[name=emailgetpwd]").val()!=null){
     	$.ajax({ //如果帳號,email已經使用會提醒顯示div
-    		url:"processRegister_memberAccount",
-    		method:"POST",
+    		url:"forgetpwd.controller",
+    		method:"GET",
     		data:data,
     		dataType:"json",
     		success:function(data){
     			console.log("進入success");
     			console.log(data.success);
-    			if(data.result){//無人註冊,下一步是寫入sql
+				alert("已傳送至您輸入的信箱")
+				
 
-					window.location.href = "./login";
-    				
-    			}else{
-    				
-    				$("[name=member_account_error]").show()
-    			}
     			
     		},
     		error:function(shit) {
@@ -227,7 +184,7 @@
     	})
     		
     	}else{
-    		$("[name=member_status_error]").show()
+    		$("[name=emailgetpwd]").show()
     		
     	}
     	

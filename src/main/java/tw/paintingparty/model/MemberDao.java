@@ -1,5 +1,7 @@
 package tw.paintingparty.model;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -90,6 +92,12 @@ public class MemberDao {
 		return member;
 	}
 	
+	public Member selectMemberByEmail(String email) {
+		Session session = sessionfactory.getCurrentSession();
+		Member member = session.get(Member.class, email);
+		return member;
+	}
+	
 	public List<PainterTag> selectTagIdByMemberId(int memberId) {
 		Session session = sessionfactory.getCurrentSession();
 		String hql="from PainterTag where member_id=:member_id";
@@ -104,6 +112,34 @@ public class MemberDao {
 		Tag singleResult = query.getSingleResult();
 //		Tag singleResult = query.uniqueResult()
 		return singleResult;
+	}
+	public Member selectEmail(String email) {
+		Session session = sessionfactory.getCurrentSession();
+		String hql="from Member where email=:email";
+		Query<Member> query = session.createQuery(hql,Member.class).setParameter("email", email);
+		Member singleResult = query.getSingleResult();
+		return singleResult;
+		
+	}
+	public String updateValidatacodeAndOutdate(String validatacode,Timestamp outdate,String email) {
+		Session session = sessionfactory.getCurrentSession();
+		String hql="update Member set "+
+				"validatacode=:validatacode, "+
+				"outdate=:outdate "+
+				"where email=:email";
+		Query query = session.createQuery(hql).setParameter("validatacode", validatacode).setParameter("outdate", outdate).setParameter("email", email);
+		query.executeUpdate();
+		return "儲存validatacode成功";
+	}
+	
+	public String updatepwdbyId(int member_id,String passwords) {
+		Session session = sessionfactory.getCurrentSession();
+		String hql="update Member set "+
+				"passwords=:passwords "+
+				"where member_id=:member_id";
+		Query query = session.createQuery(hql).setParameter("passwords", passwords).setParameter("member_id", member_id);
+		query.executeUpdate();
+		return "成功";
 	}
 	
 	
