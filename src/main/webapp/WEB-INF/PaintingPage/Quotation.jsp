@@ -9,7 +9,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="page_type" content="np-template-header-footer-from-plugin">
-<title>Quotation</title>
+<title>案件報價單</title>
 <link rel="stylesheet" href="./resources/css/nicepage.css"
 	media="screen">
 <link rel="stylesheet" href="./resources/css/Quotation.css"
@@ -57,6 +57,10 @@
     	}
 </style>
 <script type="text/javascript">
+	
+	var s = '${status}';
+	var t = '畫師';
+	
 	$(document).ready(function(){
 		$('#demoClick').click(function(){
 			$('#spendDay').attr("value",'5');
@@ -66,7 +70,17 @@
 			alert("申請案件訂單已成功送出！");
 		})
 		
+		check(s);
+			
+		
 	})
+	
+	function check(s){
+		if (s!=t){
+			alert("您並未持有畫師身分！");
+			window.location.href = '/PaintPartyMvcProject/caselistpage.controller';
+		}
+	}
 
 </script>
 <meta name="theme-color" content="#478ac9">
@@ -106,7 +120,7 @@
 
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
-			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
+			<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁"
 				data-image-width="570" data-image-height="410"> <img
 				src="./resources/images/LOGO-TEST-22.png"
 				class="u-logo-image u-logo-image-1">
@@ -244,7 +258,7 @@
 	<footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer"
 		id="sec-c7c8">
 		<p class="u-small-text u-text u-text-variant u-text-1">Copyright @
-			dodo 2021</p>
+			paintingparty 2021</p>
 		<nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
 			<div class="menu-collapse"
 				style="font-size: 1rem; letter-spacing: 0px;">
@@ -286,7 +300,7 @@
     //登入狀態與登出狀態功能列表
     //透過AllFilter 傳過來的session
 //     <h1>${sessionScope.login}</h1>
-    console.log(${sessionScope.login})
+   
     if(${sessionScope.login}==1){ //代表有登入狀態
     	$("[name=issue_case]").show()
     	$("[name=account_manager]").show()
