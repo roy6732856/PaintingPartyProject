@@ -1,5 +1,6 @@
 package tw.paintingparty.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +28,24 @@ public class MemberService {
 		return memberDao.selectMemberById(memberId);
 	}
 	
+	public Member SelectMemberByEmail(String email) {
+		return memberDao.selectMemberByEmail(email);
+	}
+	
 	public List<PainterTag> selectTagIdByMemberId(int memberId) {
 		return memberDao.selectTagIdByMemberId(memberId);
 	}
 	public Tag selectTagContentByTagId(int tagid) {
 		return memberDao.selectTagContentByTagId(tagid);
 	}
+	public Member selectEmail(String email) {
+		return memberDao.selectEmail(email);
+	}
+	public String updateValidatacodeAndOutdate(String validatacode,Timestamp outdate,String email) {
+		return memberDao.updateValidatacodeAndOutdate(validatacode, outdate, email);
+	}
+	public String updatepwdbyId(int member_id,String passwords) {
+		return memberDao.updatepwdbyId(member_id, passwords);
+	}
+	
 }
