@@ -95,7 +95,7 @@
 
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
-			<a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁"
+			<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁"
 				data-image-width="570" data-image-height="410"> <img
 				src="../resources/images/LOGO-TEST-22.png"
 				class="u-logo-image u-logo-image-1">
