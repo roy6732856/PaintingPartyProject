@@ -80,9 +80,9 @@ public class Forgetpwd {
 
 		String subject = "測試郵件926"; // 標題
 		String resetPassHref="http://localhost:1337/PaintPartyMvcProject/resetpassword?sid="+digitalSignature+"&memberId="+mem.getMember_id();
-		String txt = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="+resetPassHref +" target='_BLANK'>点击我重新设置密码</a>" +
-                "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'"+"<br/>tips:本链接可能被邮箱拦截，如链接无效，请复制下列链接到您的浏览器中。<br/>"+
-                "链接开始：<span style='color:#F00; font-weight:bold'>"+resetPassHref+"<span>链接结束";; // 內容
+		String txt = "點擊連結,重設密碼<br/><a href="+resetPassHref +" target='_BLANK'>點我重新設置密碼</a>" +
+                "<br/>請於30分鐘內重設密碼'"+"<br/>若連結無效請手動點擊下當網址<br/>"+
+                "<span style='color:#F00; font-weight:bold'>"+resetPassHref+"<span>";; // 內容
 		
 		javaMail.SendMail(txt,subject);
 		msg="已成功發送密碼至您的信箱，請在30分鐘內重設";
