@@ -130,15 +130,11 @@
 	                        <a href="/PaintPartyMvcProject/register"
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
                     	</div>
-                    </div>
-                    <div>
-                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                    </div>
-                    	
+                    </div>	
                 </div>
             </div>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -150,13 +146,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="resources/images/123.jpg" class="d-block w-100" style="height: 500px" alt="...">
+                    <img src="resources/images/carousel-1.png" class="d-block w-100" style="height: 750px" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="resources/images/456.jpg" class="d-block w-100" style="height: 500px" alt=" ...">
+                    <img src="resources/images/carousel-2.png" class="d-block w-100" style="height: 750px" alt=" ...">
                 </div>
                 <div class="carousel-item">
-                    <img src="resources/images/789.jpg" class="d-block w-100" style="height: 500px" alt=" ...">
+                    <img src="resources/images/carousel-3.png" class="d-block w-100" style="height: 750px" alt=" ...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -170,6 +166,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+     </div>
+     	<div class="container">   
         <section class="top-page-section page-seciotn pt-0" style="margin-top: 5cm;">
             <div class="container">
                 <h1 class="text-center section-title">
@@ -188,7 +186,7 @@
                     </div>
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="h-100 text-center">
-                            <img src="resources/images/Publish.png" alt="" style="height: 200px; width: 200px;">
+                            <img src="resources/images/publish.png" alt="" style="height: 200px; width: 200px;">
                             <div class="crad-body text-center">
                                 <h3 class="card-title"><strong>刊登委託的項目</strong></h3>
                                 <p class="card-text pb-5" style="font-size: 20px;">由會員刊登自己的需求，或著進入畫師列表，選擇自己喜歡的畫師聯絡。</p>
@@ -218,7 +216,7 @@
                     </div>
                 </div>
                 <div class="col text-center mt-2 mb-4">
-                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">前往畫師列表</a>
+                    <a href="<%= request.getContextPath() %>/painterlist" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">前往畫師列表</a>
                 </div>
             </div>
         </section>
@@ -249,7 +247,7 @@
                     </p>
                     <div class="px-2">
                         <h2 class="display-8 font-weight-bold py-2 text-muted">將需求填寫在刊登案件中!</h2>
-                        <p class="py-2">詳細的填寫委託單後點選送出,這樣畫師在收到需求後就能夠明確的製作唷!不僅方便更節省了溝通的時間!</p>
+                        <p class="py-2">詳細的填寫委託單後點選送出,這樣畫師在收到需求後就能夠明確的製作唷!不僅方便更節省了溝通的時間，發布成功後就會出現在案件列表中。</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 pt-5">
@@ -270,14 +268,13 @@
                     <img src="images/pic1.png" style="height: 400px; width: 550px;">
                 </div> -->
                 <div class="col text-center mt-2 mb-4">
-                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">前往案件列表</a>
+                    <a href="<%= request.getContextPath() %>/caselistpage.controller" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">前往案件列表</a>
                 </div>
             </div>
         </section>
     </div>
-    </div>
     <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8">
-        <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p>
+        <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ paintingparty 2021</p>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
             <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
                 <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -295,54 +292,6 @@
                         </defs>
                     </svg>
                 </a>
-            </div>
-    <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8">
-        <p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p>
-        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
-            <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-                <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-                    href="#">
-                    <svg>
-                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
-                    </svg>
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <defs>
-                            <symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;">
-                                <rect y="1" width="16" height="2"></rect>
-                                <rect y="7" width="16" height="2"></rect>
-                                <rect y="13" width="16" height="2"></rect>
-                            </symbol>
-                        </defs>
-                    </svg>
-                </a>
-            </div>
-            <div class="u-custom-menu u-nav-container">
-                <ul class="u-nav u-unstyled u-nav-1">
-                    <li class="u-nav-item"><a
-                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                            style="padding: 10px 96px;">聯絡我們</a>
-                    </li>
-                    <li class="u-nav-item"><a
-                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                            style="padding: 10px 96px;">常見問題</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="u-custom-menu u-nav-container-collapse">
-                <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-                    <div class="u-sidenav-overflow">
-                        <div class="u-menu-close"></div>
-                        <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                    style="padding: 10px 96px;">聯絡我們</a>
-                            </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                    style="padding: 10px 96px;">常見問題</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
             </div>
         </nav>
     </footer>
