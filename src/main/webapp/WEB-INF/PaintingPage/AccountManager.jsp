@@ -8,7 +8,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>AccountManager</title>
+    <title>帳號設定</title>
 	<link rel="stylesheet" href="../resources/css/nicepage.css" media="screen">
     <link rel="stylesheet" href="../resources/css/AccoutManager.css" media="screen">
 
@@ -82,7 +82,7 @@
   
     
   <header class="u-clearfix u-header u-header" id="sec-4c0b"><div class="u-clearfix u-sheet u-sheet-1">
-        <a href="2143501032" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570" data-image-height="410">
+        <a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570" data-image-height="410">
           <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
         </a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -158,7 +158,7 @@
                     </div>
                   </div>
                   <a href="<%= request.getContextPath() %>/backend/systemnoticemainpage" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-5">&nbsp; 系統通知</a><span class="u-icon u-icon-circle u-text-palette-5-dark-1 u-icon-2" data-href="https://nicepage.com/k/competition-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="-43 0 512 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-c580"></use></svg><svg class="u-svg-content" viewBox="-43 0 512 512" id="svg-c580"><path d="m413.417969 360.8125c-32.253907-27.265625-50.75-67.117188-50.75-109.335938v-59.476562c0-75.070312-55.765625-137.214844-128-147.625v-23.042969c0-11.796875-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.535156-21.332031 21.332031v23.042969c-72.257812 10.410156-128 72.554688-128 147.625v59.476562c0 42.21875-18.496094 82.070313-50.945312 109.503907-8.296876 7.105469-13.054688 17.429687-13.054688 28.351562 0 20.589844 16.746094 37.335938 37.332031 37.335938h352c20.589844 0 37.335938-16.746094 37.335938-37.335938 0-10.921875-4.757813-21.246093-13.25-28.519531zm0 0"></path><path d="m213.332031 512c38.636719 0 70.957031-27.542969 78.378907-64h-156.757813c7.425781 36.457031 39.746094 64 78.378906 64zm0 0"></path></svg></span>
-                  <a href="https://nicepage.com/c/shapes-website-templates" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-6">訊息</a><span class="u-icon u-icon-circle u-icon-3" data-href="https://nicepage.com/c/fashion-beauty-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 -67 380 380" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-de85"></use></svg><svg class="u-svg-content" viewBox="0 -67 380 380" id="svg-de85"><path d="m30 0h320c14.402344.0390625 26.761719 10.261719 29.5 24.398438l-189.5 105.601562-189.5-105.601562c2.738281-14.136719 15.097656-24.3593755 29.5-24.398438zm320 246.601562h-320c-16.546875-.050781-29.953125-13.453124-30-30v-169.601562l185.101562 103.199219c1.5.824219 3.183594 1.273437 4.898438 1.300781 1.722656.019531 3.414062-.429688 4.898438-1.300781l185.101562-103.199219v169.601562c-.011719 16.5625-13.4375 29.984376-30 30zm0 0"></path></svg></span>
+                  <a href="<%= request.getContextPath() %>/backend/chatroom" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-6">訊息</a><span class="u-icon u-icon-circle u-icon-3" data-href="https://nicepage.com/c/fashion-beauty-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 -67 380 380" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-de85"></use></svg><svg class="u-svg-content" viewBox="0 -67 380 380" id="svg-de85"><path d="m30 0h320c14.402344.0390625 26.761719 10.261719 29.5 24.398438l-189.5 105.601562-189.5-105.601562c2.738281-14.136719 15.097656-24.3593755 29.5-24.398438zm320 246.601562h-320c-16.546875-.050781-29.953125-13.453124-30-30v-169.601562l185.101562 103.199219c1.5.824219 3.183594 1.273437 4.898438 1.300781 1.722656.019531 3.414062-.429688 4.898438-1.300781l185.101562-103.199219v169.601562c-.011719 16.5625-13.4375 29.984376-30 30zm0 0"></path></svg></span>
                   <a href="<%= request.getContextPath() %>/logout" class="u-active-grey-15 u-border-none u-btn u-button-style u-grey-5 u-hover-grey-15 u-text-active-palette-1-light-1 u-text-hover-palette-1-light-1 u-btn-7">登出</a><span class="u-icon u-icon-circle u-icon-4" data-href="https://nicepage.com/c/video-website-templates"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 511 512" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-5881"></use></svg><svg class="u-svg-content" viewBox="0 0 511 512" id="svg-5881"><path d="m361.5 392v40c0 44.113281-35.886719 80-80 80h-201c-44.113281 0-80-35.886719-80-80v-352c0-44.113281 35.886719-80 80-80h201c44.113281 0 80 35.886719 80 80v40c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-40c0-22.054688-17.945312-40-40-40h-201c-22.054688 0-40 17.945312-40 40v352c0 22.054688 17.945312 40 40 40h201c22.054688 0 40-17.945312 40-40v-40c0-11.046875 8.953125-20 20-20s20 8.953125 20 20zm136.355469-170.355469-44.785157-44.785156c-7.8125-7.8125-20.476562-7.8125-28.285156 0-7.8125 7.808594-7.8125 20.472656 0 28.28125l31.855469 31.859375h-240.140625c-11.046875 0-20 8.953125-20 20s8.953125 20 20 20h240.140625l-31.855469 31.859375c-7.8125 7.808594-7.8125 20.472656 0 28.28125 3.90625 3.90625 9.023438 5.859375 14.140625 5.859375 5.121094 0 10.238281-1.953125 14.144531-5.859375l44.785157-44.785156c19.496093-19.496094 19.496093-51.214844 0-70.710938zm0 0"></path></svg></span>
                 </div>
               </div>
@@ -181,7 +181,7 @@
                               <input type="text" class="form-control" id="exampleFormControlInput2" name="oneMenBank_account">
                           </div>
                           <div class="mb-3">
-                              <label for="exampleFormControlInput3" class="form-label">PIVIX網址</label>
+                              <label for="exampleFormControlInput3" class="form-label">PIXIV網址</label>
                               <input type="text" class="form-control" id="exampleFormControlInput3" name="oneMemPixiv">
                           </div>
                           <div class="col-6">
@@ -224,7 +224,7 @@
     </section>
     
     
-    <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8"><p class="u-small-text u-text u-text-variant u-text-1">Copyright @ dodo 2021</p><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+    <footer class="u-align-center u-clearfix u-footer u-grey-70 u-footer" id="sec-c7c8"><p class="u-small-text u-text u-text-variant u-text-1">Copyright @ paintingparty 2021</p><nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
         <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
           <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
             <svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use></svg>
