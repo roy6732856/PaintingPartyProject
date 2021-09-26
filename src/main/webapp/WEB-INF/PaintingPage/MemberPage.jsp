@@ -84,10 +84,10 @@
     <div class="container-fluid">
         <header class="u-clearfix u-header u-header" id="sec-4c0b">
             <div class="u-clearfix u-sheet u-sheet-1">
-                <a href="/PaintPartyMvcProject/Index" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
-                    data-image-height="410">
-                    <img src="../resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
-                </a>
+<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+                data-image-height="410">
+                <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
+            </a>
                 <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
                     <div class="menu-collapse" style="font-size: 1.125rem; letter-spacing: 0px;">
                         <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
@@ -161,9 +161,7 @@
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
                     	</div>
                     </div>
-                    <div>
-                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
-                    </div>
+                    
                 </div>
             </div>
         </header>
@@ -199,7 +197,7 @@
 <%--                                                 <span class="badge badge-light">${tag_content+i}</span> --%>
                                             </div>
                                             <div class="text-center d-flex align-items-center justify-content-center">
-                                                <a href="#">
+                                                <a href="/PaintPartyMvcProject/backend/gotochat/${member_id}">
                                                     <button type="button" class="btn btn-secondary btn-lg">私人訊息</button>
                                                 </a>
                                             </div>

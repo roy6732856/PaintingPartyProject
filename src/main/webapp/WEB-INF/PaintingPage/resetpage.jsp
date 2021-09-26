@@ -83,7 +83,7 @@
 
 	<header class="u-clearfix u-header u-header" id="sec-4c0b">
 		<div class="u-clearfix u-sheet u-sheet-1">
-<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
+			<a href="<%= request.getContextPath() %>/" class="u-image u-logo u-image-1" title="網站首頁" data-image-width="570"
                 data-image-height="410">
                 <img src="resources/images/LOGO-TEST-22.png" class="u-logo-image u-logo-image-1">
             </a>
@@ -145,7 +145,11 @@
 			<div class="u-container-style u-group u-white u-group-2">
 				<div class="u-container-layout u-container-layout-2">
 					<div>
-	                        
+	                        <a href="<%= request.getContextPath() %>/CaseFormApplyPage/<%=request.getAttribute("member_id")%>"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-3" name="issue_case" style="display:none">發布案件</a>
+	                        <a href="/PaintPartyMvcProject/backend"
+	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="account_manager" style="display:none">帳號管理</a>
+                        	<span class="u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4" name="member_name" style="display:none"><%= request.getAttribute("member_name") %></span>
                         </div>
                         <div>
 	                        <a href="/PaintPartyMvcProject/login"
@@ -154,7 +158,9 @@
 	                            class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-4 fix-margin" name="header_register" style="display:none">註冊</a>
                     	</div>
                     </div>
-
+                    <div>
+                    	<a class="u-border-1 u-border-palette-3-light-1 u-btn u-btn-round u-button-style u-hover-palette-3-light-2 u-none u-radius-10 u-text-hover-white u-text-palette-3-light-1 u-btn-5 fix-padding" name="logout" onclick="logout()">登出</a>
+                    </div>
 				</div>	
 			</div>
 	</header>
@@ -164,43 +170,31 @@
 			<div
 				class="u-align-center u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
 				<div class="u-container-layout u-container-layout-1">
-					<h3 class="u-text u-text-default u-text-1">登入</h3>
+					<h3 class="u-text u-text-default u-text-1">請輸入新密碼</h3>
 					<div class="u-expanded-width u-form u-login-control u-form-1">
 						<form action="xxx" method="POST"
 							class="u-clearfix u-form-custom-backend u-form-spacing-35 u-form-vertical u-inner-form"
 							source="custom" name="form-2" style="padding: 10px;">
-							<div class="u-form-group u-form-name">
-								<div id="username-error" style="display: none; color:red">帳號或密碼錯誤，請重新輸入</div>
-								<label for="username-708d" class="u-form-control-hidden u-label"></label>
-								<input type="text" placeholder="輸入帳號" id="username-708d"
-									name="member_account" 
-									class="u-grey-5 u-input u-input-rectangle" required="">
-							</div>
+							
 							<div class="u-form-group u-form-password">
 								<label for="password-708d" class="u-form-control-hidden u-label"></label>
 								<input type="password" placeholder="輸入密碼" id="password-708d"
 									name="password1" class="u-grey-5 u-input u-input-rectangle"
 									required="">
 							</div>
-							<div class="u-form-checkbox u-form-group">
-								<input type="checkbox" id="checkbox-708d" name="keep">
-								<label for="checkbox-708d" class="u-label">記住我</label>
-							</div>
+							<input name=idfromEmail style="display: none" value="${memId}"></input>
+							
 							<div class="u-align-center u-form-group u-form-submit">
 								<!-- <a href="#" class="u-btn u-btn-round u-btn-submit u-button-style u-radius-17 u-btn-1">登入<br>
                   </a>-->
-								<input type="button" value="登入" name="submit"
+								<input type="button" value="送出" name="submit"
 									class="u-btn u-btn-round u-btn-submit u-button-style u-radius-17 u-btn-1"
 									onclick="sendData()">
 							</div>
 							<!--  <input type="hidden" value="" name="recaptchaResponse">-->
 						</form>
 					</div>
-					<a href="/PaintPartyMvcProject/register"
-						class="u-btn u-btn-round u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius-17 u-btn-2">註冊</a>
-					<a href="/PaintPartyMvcProject/forgetpwd"
-						class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-palette-1-base u-btn-3">Forgot
-						password?</a>
+					
 				</div>
 			</div>
 		</div>
@@ -281,51 +275,27 @@
 // 	    $("#username-error").hide();                    // 把div提示框隱藏起來
 // 	})
 	
+	console.log($("[name=idfromEmail]").val())
 	function sendData() {
         var user = { 
-				"username":$("[name=member_account]").val(), 
-        		"password":$("[name=password1]").val(), 
-        		"keep":$("[name=keep]").prop('checked') 
+
+        		"password":$("[name=password1]").val(),
+        		"idfromEmail":$("[name=idfromEmail]").val()
+
         	}; //變成json格式
         $.ajax({
-        	url:"validateLogin",
+        	url:"resetpwd",
         	method:"POST",
         	data:user,
         	dataType:"json",
        		success:function(data,status,xhr){
-        		if(data.success){
-	       		 	var prevLink = document.referrer;
-	       		 	if($.trim(prevLink)==''){  //來自空白頁
-	       		 	    location.href = 'Index';  
-	       		 	}else{
-	       		 		
-	       		 		if (prevLink.indexOf('PaintPartyMvcProject') == -1 || pageNotRedirect(prevLink)) {
-	       		 			//來自其它站點 or 來自注冊頁面
-	       		 			location.href = 'Index';
-	       		 		} else {
-	      		 	    	location.href = prevLink;  //來自站內
-	       		 	    }
-	       		 	}
-//        				window.location.href = "./Index";  //登入成功跳轉的頁面,未定
-        		}else{
-        			$("#username-error").show()
-        		}
+       			window.location.href = "./login";
         	},
         	error:function(shit) {
-        		//console.log(shit.res !ponseJSON.msg)
+        		//console.log(shit.responseJSON.msg)
         		$("#username-error").show()
         	}
         })
-	}
-	
-	function pageNotRedirect(prevLink) {
-		var pages = ['register','resetpassword']
-		for(var page of pages) {
-			if (prevLink.indexOf(page) != -1) {
-				return true
-			}
-		}
-		return false
 	}
 	
 // 	var prevLink = document.referrer;  

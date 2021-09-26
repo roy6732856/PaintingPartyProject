@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import tw.paintingparty.chatroom.model.MessageC2SBean;
+import tw.paintingparty.chatroom.model.MessageS2CBean;
+
 public class Util01 {
 
 	public static void main(String[] args) throws ParseException {
@@ -49,6 +52,81 @@ public class Util01 {
 
     	
 	}
+	
+	
+	public void deleteChatConnNotChat( Integer myid , Integer toid ) { 
+		//當外面點下思訓按鈕，會建立一個連結，但若彼此都沒說過話，那就在關掉WS十，刪除此連結，避免一直狂點，連結越來越長，但都是沒用的連結
+		//**暫無用到**
+		
+		System.out.println("UTIL做0");
+		
+		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
+		String user="sa";
+		String password="as";
+		String sql = "select * from chat_history where ( member_id_s = ? and member_id_r = ? ) or ( member_id_s = ? and member_id_r = ? ) ;"; 
+		
+		try (Connection conn = DriverManager.getConnection(url,user,password)){ //try with resource可以不用自己關
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,myid ); 
+			pstmt.setInt(2,toid );
+			pstmt.setInt(3,toid );
+			pstmt.setInt(4,myid );
+			ResultSet rs = pstmt.executeQuery();
+			//	rs.next();
+			System.out.println("UTIL做1");
+			if( !rs.next() ) { //若有通西就是T，若無就F，前面加驚嘆號，代表若沒東西才執行
+				System.out.println("UTIL做2");
+				
+				String sql2 = "delete from chat_conn where member_id_a = ? and member_id_b = ? "; //若建立連結，卻沒有和對方傳過訊息，就砍掉我自己跟他的連結	
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1,myid ); 
+				pstmt.setInt(2,toid );
+				pstmt.executeUpdate();
+				System.out.println("UTIL做3");
+				
+			} //end if
+			
+			
+		} catch (SQLException e) {
+			
+			System.out.println("UTIL錯誤");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	public void insertChatHistoryToDB( MessageS2CBean ms2cb ) { //當伺服端收到訊息，就存入DB的歷史訊息
+//  ****此作法每當一個會員發一次訊息，就會對資料庫進行一次存取，且每筆資料存的訊息量都不多，即時聊天室又是操作量很大的功能，所以對資料庫負擔非常大，
+//		往後可考慮改成，做一個暫存(STATIC)，先把每個伺服端收到的訊息放進去，等到存到了500比，在一次寫進DB，成為一筆RECORD，暫存裡面的訊息，用JSON格式，但南點在於，取出資料時，要挑出A會員與B會員講的話...
+		
+		Util01 util01 = new Util01();
+		String url = "jdbc:sqlserver://localhost:1433;databasename=paintingparty";
+		String user="sa";
+		String password="as";
+		String sql = "insert into chat_history (member_id_s , member_id_r , message_content , message_time) "
+				+ " values( ? , ? , ? , ? ) ; "; 
+		
+		try (Connection conn = DriverManager.getConnection(url,user,password)){ //try with resource可以不用自己關
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ms2cb.getFrom_user_id() );  //誰寄的訊息(當然是自己)
+			pstmt.setInt(2,ms2cb.getTo_user_id() );  //寄給誰(看連接誰)
+			pstmt.setString(3,ms2cb.getSend_message() ); //訊息內容 
+			pstmt.setString(4, ms2cb.getCurrent_time() ); //訊息的日期，我們在SQL直接給他設成NVARCHAR，沒用datetime，一樣可以排序 
+			
+			pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	
 	
 	public void insertNewConnToDBToMe( Integer myid , Integer toid ) throws ParseException { //在前台按下私訊鈕時，若自己沒有與對方季戀連結，就建立，若有，就更新日期
