@@ -10,11 +10,11 @@ public class CaseByTags {
 				case 1:
 					return "插畫";
 				case 2:
-					return "貼圖";
+					return "小貼圖";
 				case 3:
 					return "貼圖";
 				case 4:
-					return "漫畫";
+					return "小漫畫";
 				case 5:
 					return "UI";
 				case 6:
